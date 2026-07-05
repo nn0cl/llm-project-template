@@ -36,6 +36,8 @@ installed.
   new AI session after installation.
 - A **target-local adoption guide** that can be copied without replacing an
   existing product README.
+- A **project start and development guide** for moving from template adoption
+  to target-owned specifications, domain modeling, and phase-gated work.
 - A **lightweight cost/reasoning control ledger** for checking whether strong
   LLM reasoning was actually needed.
 

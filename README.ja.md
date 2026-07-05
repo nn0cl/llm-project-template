@@ -12,9 +12,9 @@
 このリポジトリは、Clean Architecture と AT-TDD を前提に、人間の Referee と
 複数の AI coding agent が協調するためのテンプレートです。
 
-アプリケーションの仕様、技術スタック、DB、外部 API、LLM provider、ドメイン
-モデルは決めません。それらは導入先リポジトリの仕様・ADR・アーキテクチャ文書
-で決めます。
+このテンプレート配布物は、アプリケーションの仕様、技術スタック、DB、外部 API、
+LLM provider、ドメインモデルを事前には決めません。それらは導入後に、導入先
+リポジトリの仕様・ADR・Referee 判断・アーキテクチャ文書に基づいて決めます。
 
 ## 大事な考え方
 
@@ -116,9 +116,38 @@ scripts/copy-ai-collaboration-files.sh --target /path/to/existing-repo --dry-run
 4. 必要になった architecture document。必要になるまで作りすぎない。
 5. 外部 resource 一覧。DB、settings、secret storage、外部 API、LLM provider など。
 
+## プロジェクトを始める・進める
+
+詳しい手順は `docs/collaboration/project-start-guide.md` にあります。
+
+最初の流れ:
+
+1. テンプレートを導入する。
+2. project 名、stack、境界、未決定事項を placeholder に記入する。
+3. 最初の仕様を `docs/specs/` に EARS/Gherkin で書く。
+4. 外部 resource を ports にする候補として列挙する。
+5. Feature Path の Phase 0 design intake で、必要な domain model 候補を整理する。
+6. Referee が Phase 1 Red を承認してから test を書く。
+
+開発中の流れ:
+
+1. issue または no-issue reason を確認する。
+2. `docs/architecture/agent-quickstart.md` を読んで path を選ぶ。
+3. Feature Path では target spec と関連 architecture document を読む。
+4. path に合った design note を出す。
+5. 承認された phase だけを実行する。
+6. deterministic verification を走らせる。
+7. 必要なら trace と cost/reasoning control を残す。
+8. phase gate で Referee review を受ける。
+
+ドメインモデルは、この流れの中で決めて構いません。むしろ導入後のプロジェクト
+では、仕様と review 済み test に基づいて domain model を育てることが想定されて
+います。
+
 ## やってはいけないこと
 
-- このテンプレートで導入先の domain model を決める。
+- テンプレート配布物や導入スクリプトに、導入先固有の domain model を含める。
+- 仕様・ADR・Referee 判断なしに、AI が domain model を推測で決める。
 - placeholder 例を、そのまま技術選定として扱う。
 - Feature Path で review 前に Phase 2 へ進む。
 - Fast Path で仕様変更、architecture 変更、agent instruction 変更をする。
