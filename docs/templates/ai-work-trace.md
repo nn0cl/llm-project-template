@@ -19,6 +19,16 @@
 - Reason:
 - Privacy constraints:
 
+## Cost / Reasoning Control
+
+- Operating path:
+- Files read:
+- Context intentionally omitted:
+- Deterministic checks used:
+- Escalation reason:
+- Avoided LLM work:
+- Rework caused by AI output:
+
 ## Referee Decisions
 
 - 

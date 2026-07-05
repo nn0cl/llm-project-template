@@ -37,6 +37,13 @@ The prompt instructs the agent to:
   without an accepted specification or ADR.
 - stop when the target specification or requested phase is missing.
 
+## Cost and Reasoning Control
+
+Use `docs/collaboration/llm-cost-reduction.md` to keep LLM cost control
+observable without adding heavy process. For substantial tasks, traces should
+record the selected operating path, omitted context, deterministic checks, and
+any escalation reason.
+
 ## Adoption Safety Rules
 
 - Do not use this template to replace target project architecture.

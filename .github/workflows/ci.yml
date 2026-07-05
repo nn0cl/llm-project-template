@@ -37,6 +37,7 @@ jobs:
             "docs/collaboration/process-gap-register.md"
             "docs/collaboration/ai-work-trace-log.md"
             "docs/collaboration/evaluation-and-golden-examples.md"
+            "docs/collaboration/llm-cost-reduction.md"
             "docs/collaboration/model-tool-capability-matrix.md"
             "docs/collaboration/privacy-context-budget-policy.md"
             "docs/collaboration/branch-commit-pr-discipline.md"

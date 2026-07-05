@@ -82,6 +82,8 @@ Referee approval:
 ## Escalation Rules
 
 Start with the cheapest safe route.
+When a trace is required, record the starting route and escalation reason using
+the cost/reasoning control fields in `docs/templates/ai-work-trace.md`.
 
 Escalate to a stronger reasoning agent when:
 

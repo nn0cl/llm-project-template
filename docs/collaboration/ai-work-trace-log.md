@@ -43,12 +43,16 @@ Each trace should include:
 - included context.
 - omitted context.
 - model, assistant, or deterministic tool routing.
+- operating path and cost/reasoning control signals.
 - Referee decisions.
 - assumptions.
 - open decisions.
 - verification run.
 - changed files.
 - next safe action.
+
+See `docs/collaboration/llm-cost-reduction.md` for the lightweight cost and
+reasoning control fields used in traces.
 
 ## Privacy Rules
 

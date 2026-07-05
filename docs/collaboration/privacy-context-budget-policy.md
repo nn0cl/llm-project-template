@@ -73,6 +73,8 @@ Default maximums unless the Referee approves more:
 ## Reasoning Budgets
 
 Use the smallest useful reasoning effort that can preserve correctness.
+Record the selected operating path and any escalation reason in the work trace
+when a trace is required.
 
 ### Fast Path Budget
 
@@ -109,6 +111,9 @@ When private or large context is considered, record:
 - what was omitted.
 - why the included context was necessary.
 - whether Referee approval was needed.
+
+For substantial tasks, also record the cost/reasoning control signals defined
+in `docs/collaboration/llm-cost-reduction.md`.
 
 ## Forbidden Payloads
 

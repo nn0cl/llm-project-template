@@ -22,6 +22,7 @@
 - Phase を飛ばさない。
 - 人間の Referee が phase transition、ADR、曖昧な判断を承認する。
 - AI に渡す context は最小限にする。
+- 高度な reasoning が本当に必要だったかを trace に軽く残す。
 - AI output は信頼済みデータとして扱わず、構造・根拠・review status を確認する。
 - 導入先の README、仕様、アーキテクチャをテンプレートで上書きしない。
 
@@ -29,6 +30,10 @@
 
 このテンプレートは、毎回 AI に重い reasoning をさせないために 3 つの path を
 使い分けます。
+
+大きめの作業では `docs/collaboration/llm-cost-reduction.md` に沿って、
+選んだ path、読んだファイル、あえて省いた context、deterministic check、
+強い reasoning へ escalation した理由を短く trace に残します。
 
 ### Fast Path
 
