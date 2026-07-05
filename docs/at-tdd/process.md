@@ -1,6 +1,22 @@
 # AT-TDD Process
 
-This project uses strict Acceptance Test-Driven Development.
+This project uses **AT-TDD** as a repository-local name for an
+**ATDD + TDD hybrid workflow**.
+
+AT-TDD is not treated here as a separate industry-standard method name. In this
+template, it means:
+
+- acceptance specifications drive the first tests.
+- reviewed failing tests drive the minimum implementation.
+- refactoring happens only after verified Green.
+- phase transitions require human Referee approval.
+
+The workflow combines:
+
+- **ATDD**: EARS/Gherkin acceptance behavior, external dependencies, data
+  ownership, and out-of-scope behavior are clarified before implementation.
+- **TDD**: Red, Green, and Refactor phases are kept separate and verified by
+  deterministic tools when available.
 
 ## Inputs
 

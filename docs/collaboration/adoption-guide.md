@@ -4,6 +4,9 @@ Use this guide after copying the collaboration template into a new or existing
 repository. It is intentionally separate from the target repository README so
 midway adoption does not overwrite product documentation.
 
+For the benefits and tradeoffs of using the template, see
+`docs/collaboration/template-benefits.md`.
+
 ## New Repository Adoption
 
 1. Run `scripts/copy-ai-collaboration-files.sh --target <repo>`.

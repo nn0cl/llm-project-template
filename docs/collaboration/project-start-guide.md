@@ -5,6 +5,9 @@ repository. It explains how to start a project and continue development without
 letting the template decide target-specific architecture or domain behavior in
 advance.
 
+For the rationale behind adopting this template, see
+`docs/collaboration/template-benefits.md`.
+
 ## Core Distinction
 
 The template distribution must not predefine the target project's domain model.

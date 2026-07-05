@@ -7,6 +7,12 @@ development workflow where a human architect (the "Referee") and one or more
 AI coding agents (Claude, Copilot, Codex, etc.) collaborate under a shared,
 written operating contract.
 
+In this repository, **AT-TDD** is a local shorthand for an **ATDD + TDD hybrid
+workflow**: acceptance specifications drive failing tests, reviewed tests drive
+minimal implementation, and refactoring happens only after verified Green. It
+is not used here as a claim that "AT-TDD" is a separate industry-standard
+method name.
+
 Everything here is process and collaboration scaffolding. It contains no
 application domain logic, stack decision, datastore decision, provider choice,
 or product specification. Those belong to the repository where this template is
@@ -40,6 +46,25 @@ installed.
   to target-owned specifications, domain modeling, and phase-gated work.
 - A **lightweight cost/reasoning control ledger** for checking whether strong
   LLM reasoning was actually needed.
+
+## Why use it?
+
+Use this template when you want AI-assisted development to be reviewable,
+phase-correct, and cheaper to reason about.
+
+It helps reduce:
+
+- guessed implementation before accepted specs.
+- AI agents skipping from vague requests to production code.
+- hidden business logic in adapters, UI, provider clients, or persistence.
+- oversized prompts and unnecessary strong-model reasoning.
+- dependency choices made without security, version, troubleshooting, test, or
+  POC evidence.
+- handoff gaps when another human or agent continues the work.
+
+The benefits depend on using the process consistently; the template is not an
+automatic productivity guarantee. See
+`docs/collaboration/template-benefits.md` for the detailed rationale.
 
 ## Install into another repository
 
