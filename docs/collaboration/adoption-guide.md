@@ -33,6 +33,8 @@ For the benefits and tradeoffs of using the template, see
 ## LLM Session Setup
 
 Use `scripts/init-llm-context.sh <repo>` to print a compact first prompt.
+For more detailed, project-neutral prompt examples, see
+`docs/templates/examples/adoption-prompts.md`.
 
 The prompt instructs the agent to:
 
