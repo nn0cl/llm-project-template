@@ -196,3 +196,7 @@ target project's accepted architecture or feature specifications.
   Path, full `[THOUGHT]` for Feature Path or Architecture Path.
 - Changing an agent operating contract file requires a stated reason, Referee
   review, and a trace under `docs/collaboration/traces/` (CI enforced).
+
+## License
+
+[MIT](LICENSE)
