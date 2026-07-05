@@ -14,6 +14,9 @@ Use this checklist before starting a coding task.
 - The touched area has a matching architecture rule document.
 - Unknown provider, DB, model, or folder decisions are listed as ambiguities or
   captured in an ADR.
+- New dependencies have a lightweight adoption note covering vulnerability
+  posture, version-specific examples, troubleshooting depth, minimal real-file
+  testing, POC feasibility, and Clean Architecture boundary fit.
 - Settings tasks separate normal settings, validation, and secrets.
 - Optional local infrastructure tasks (e.g. containerized services) keep that
   infrastructure outside domain and use-case unit test requirements.
@@ -50,6 +53,10 @@ Use this checklist before starting a coding task.
   evidence, confidence or uncertainty, and review status.
 - The task requires choosing a datastore, vector DB, embedding model, external
   layout, or provider API without an ADR or explicit Referee instruction.
+- A new dependency is adopted without checking known vulnerability reports for
+  the intended version, version-matched examples, troubleshooting evidence, a
+  minimal real-file test path, and POC feasibility when architecture risk is
+  present.
 - Saving settings triggers side-effecting external calls (writes, provider
   calls, projections) that the feature does not require.
 - Domain or use-case unit tests require optional infrastructure (containers,

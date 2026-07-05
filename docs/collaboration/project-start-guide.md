@@ -29,8 +29,10 @@ uses the template workflow to discover and implement its own domain model.
    document.
 5. Create the first target specification under `docs/specs/`.
 6. Identify external resources that must become ports.
-7. Start with Feature Path Phase 0 design intake.
-8. Ask the Referee to approve Phase 1 Red before writing tests.
+7. List early dependency candidates and apply the adoption checklist in
+   `docs/architecture/dependency-policy.md`.
+8. Start with Feature Path Phase 0 design intake.
+9. Ask the Referee to approve Phase 1 Red before writing tests.
 
 Do not create a full domain layer, persistence schema, provider adapter, or UI
 structure before a specification, ADR, or reviewed test requires it.
@@ -46,6 +48,8 @@ structure before a specification, ADR, or reviewed test requires it.
 6. Use Fast Path for mechanical adoption cleanup.
 7. Use Feature Path only for work backed by accepted target specifications.
 8. Use Architecture Path for boundary, prompt, privacy, or process decisions.
+9. Re-check dependency adoption notes before introducing new libraries or
+   upgrading major versions.
 
 ## Domain Modeling Flow
 
@@ -73,10 +77,12 @@ For each feature:
 3. Select Fast Path, Feature Path, or Architecture Path.
 4. For Feature Path, read the target spec and relevant architecture document.
 5. Produce the path-appropriate design note.
-6. Execute only the Referee-approved phase.
-7. Run deterministic verification when available.
-8. Record trace and cost/reasoning control signals when required.
-9. Stop at phase gates for Referee review.
+6. For new dependencies, check vulnerability reports, version-matched examples,
+   troubleshooting depth, minimal real-file tests, and POC feasibility.
+7. Execute only the Referee-approved phase.
+8. Run deterministic verification when available.
+9. Record trace and cost/reasoning control signals when required.
+10. Stop at phase gates for Referee review.
 
 ## Stop and Ask
 
@@ -86,6 +92,8 @@ Stop for Referee decision when:
 - the requested phase is unclear.
 - a domain concept is plausible but not supported by the spec.
 - persistence, provider, model, or external layout choices are needed.
+- dependency security, version suitability, troubleshooting evidence, or POC
+  feasibility cannot be confirmed.
 - existing target architecture conflicts with this template.
 - the agent would need broad private context.
 
