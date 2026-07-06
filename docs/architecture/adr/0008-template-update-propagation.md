@@ -55,6 +55,20 @@ service is introduced.
      has not changed it since, the deletion is respected silently. If the
      template *has* changed a file the target deleted, the situation is
      reported as needing a manual decision; the file is not auto-restored.
+     This also fires when the target renamed the file (for example, to its
+     own sequential ADR/local-issue number) rather than deleting it, since
+     the script diffs by path; the reported guidance tells reviewers to
+     check for a same-content match under a different filename before
+     assuming a real deletion.
+   - Numbered ADR (`docs/architecture/adr/NNNN-*`) and local issue
+     (`docs/issues/LISS-NNNN-*`) files are a distinct class: when the
+     template adds a new one, the script checks whether the target already
+     has a different file under the same number. A match is reported as a
+     `NUMBER COLLISION` requiring manual renumbering (with the next free
+     number in the target's own sequence suggested), separate from the
+     Added/Updated/Merged/Conflicts/Needs-decision categories, since a plain
+     path diff cannot otherwise tell two unrelated documents "at the same
+     number" apart.
 4. The update script never commits to the target's trunk branch. It creates
    a dedicated branch (`process/update-collab-template-<date>-<short-sha>`),
    commits the merge result and the updated marker there, and opens a pull
@@ -90,6 +104,14 @@ Negative:
 - Nothing runs this automatically; an adopting project that never re-runs the
   script simply never updates. Scheduling it (e.g., via a periodic CI job) is
   left to the adopting project.
+- A clean merge (no conflict markers) is not the same guarantee as "nothing
+  needs review": a hunk can merge cleanly purely because of where the
+  target's own edits fell relative to line boundaries, even immediately next
+  to a hunk that did conflict, and it can introduce a forward reference (for
+  example, to a file also being added by the same sync, or skipped via
+  `.collaboration-template-ignore`) with no visible signal. Reviewers should
+  diff the whole changed file against its pre-sync version, not only search
+  for conflict markers.
 
 ## Enforcement
 
