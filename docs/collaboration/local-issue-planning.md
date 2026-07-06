@@ -76,6 +76,11 @@ Allowed dependency meanings:
 Agents must not start work on an issue with unresolved `depends_on` entries
 unless the Referee explicitly waives the dependency.
 
+Agents must not implement issue work directly on `main` or the trunk branch.
+Every local issue or GitHub Issue requires a dedicated branch before any
+commit for that issue is made, per
+`docs/collaboration/branch-commit-pr-discipline.md`.
+
 ## Planning Flow
 
 Before starting feature work:

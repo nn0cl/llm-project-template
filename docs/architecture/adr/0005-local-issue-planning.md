@@ -36,6 +36,10 @@ and Referee decision points.
 Before feature work starts, agents should identify issue dependencies and create
 or update a work plan. Work should proceed from the next unblocked issue.
 
+Every local issue or GitHub Issue must be worked on a dedicated branch. Agents
+must not commit issue work directly to `main` or the trunk branch, regardless
+of change size.
+
 ## Consequences
 
 Positive:
@@ -59,3 +63,5 @@ Code review should reject:
 - work started on issues with unresolved dependencies.
 - local issue IDs reused for different work.
 - PRs that omit local issue or GitHub issue references when applicable.
+- issue work committed directly to `main` or the trunk branch instead of a
+  dedicated branch.
