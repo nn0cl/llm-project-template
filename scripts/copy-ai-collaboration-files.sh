@@ -82,27 +82,9 @@ fi
 
 target="$(cd "$target" && pwd)"
 
-paths=(
-  "AGENTS.md"
-  "CLAUDE.md"
-  "README.md"
-  "README.ja.md"
-  ".github/copilot-instructions.md"
-  ".github/dependabot.yml"
-  ".github/pull_request_template.md"
-  ".github/ISSUE_TEMPLATE"
-  ".github/workflows/ci.yml"
-  "docs/architecture"
-  "docs/at-tdd"
-  "docs/collaboration"
-  "docs/evaluation"
-  "docs/issues"
-  "docs/specs"
-  "docs/templates"
-  "docs/work-plans"
-  "scripts/copy-ai-collaboration-files.sh"
-  "scripts/init-llm-context.sh"
-)
+# shellcheck source=lib/collaboration-template-paths.sh
+source "$script_dir/lib/collaboration-template-paths.sh"
+paths=("${collaboration_template_paths[@]}")
 
 copied_files=()
 
@@ -184,19 +166,41 @@ replace_placeholders() {
   done
 }
 
+write_version_marker() {
+  [ "$dry_run" = true ] && return
+
+  local source_ref
+  source_ref="$(git -C "$repo_root" rev-parse HEAD 2>/dev/null || echo "unknown")"
+  local source_origin
+  source_origin="$(git -C "$repo_root" remote get-url origin 2>/dev/null || echo "$repo_root")"
+
+  cat > "$target/.collaboration-template-version" <<MARKER
+# Records which commit of the AI-human collaboration template this project
+# last synced against. Read by scripts/update-ai-collaboration-files.sh.
+# Do not edit by hand except to correct the source.
+source: $source_origin
+ref: $source_ref
+MARKER
+}
+
 for rel in "${paths[@]}"; do
   copy_path "$rel"
 done
 
 replace_placeholders
+write_version_marker
 
 cat <<SUMMARY
 
 Done.
 Target: $target
 Existing files were $([ "$force" = true ] && echo "overwritten when matched" || echo "left unchanged")
+Recorded sync point in .collaboration-template-version for future updates.
 
 Next:
   cd "$target"
   scripts/init-llm-context.sh .
+
+Later, to pull in template updates:
+  scripts/update-ai-collaboration-files.sh --target "$target"
 SUMMARY

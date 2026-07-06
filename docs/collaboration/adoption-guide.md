@@ -30,6 +30,31 @@ For the benefits and tradeoffs of using the template, see
 5. Use Fast Path for mechanical adoption cleanup, Feature Path for accepted
    feature work, and Architecture Path for process or boundary decisions.
 
+## Receiving Later Template Updates
+
+Adoption via `scripts/copy-ai-collaboration-files.sh` records a
+`.collaboration-template-version` marker at the target repository root. Use
+that marker to pull in later template improvements without losing target
+customizations:
+
+1. Update your local checkout of this template repository (`git pull` or
+   equivalent) so it has the commit you want to sync to.
+2. Optionally list paths the target has intentionally diverged from in
+   `.collaboration-template-ignore` (simple glob patterns, one per line).
+3. Run `scripts/update-ai-collaboration-files.sh --target <repo>`.
+4. Review the reported summary: files added, updated, merged, files with
+   conflict markers, and files flagged as "needs decision" (deleted in the
+   target but changed upstream since the last sync).
+5. Resolve any conflict markers or flagged items before merging the PR the
+   script opened. Never merge a sync PR with unresolved conflict markers.
+
+The script never commits to the target's trunk branch; it creates a
+dedicated branch and opens a PR, per
+`docs/collaboration/branch-commit-pr-discipline.md` and
+`docs/architecture/adr/0008-template-update-propagation.md`. It does not
+clone or register repositories on its own, and this template repository does
+not track which projects have adopted it.
+
 ## LLM Session Setup
 
 Use `scripts/init-llm-context.sh <repo>` to print a compact first prompt.
