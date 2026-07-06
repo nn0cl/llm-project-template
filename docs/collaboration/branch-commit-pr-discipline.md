@@ -33,6 +33,12 @@ Rules:
 - keep branches short-lived: merge or close a branch as soon as its reviewable
   unit (one Phase, one issue, one process change) is accepted, instead of
   accumulating multiple issues or phases on one long-running branch.
+- automated maintenance branches (for example, the
+  `process/update-collab-template-*` branches created by
+  `scripts/update-ai-collaboration-files.sh`, see
+  `docs/architecture/adr/0008-template-update-propagation.md`) are exempt from
+  the local/GitHub issue requirement above, but must still go through a PR and
+  the CI gate before merging; they must never commit to `main` directly.
 
 ## Continuous Integration Gate
 
