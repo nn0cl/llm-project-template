@@ -167,8 +167,85 @@ updated=()
 merged=()
 conflicts=()
 needs_decision=()
+collisions=()
 ignored=()
 unchanged_count=0
+
+# Classifies a relative path as a numbered ADR or local-issue file. On match,
+# sets numbered_class_dir/_num/_kind and returns 0; otherwise returns 1.
+# Two different files "at the same number" (e.g. an unrelated project ADR
+# 0007 and this template's own ADR 0007) diff as unrelated adds under plain
+# path comparison, so this class needs its own collision check.
+classify_numbered_file() {
+  local rel="$1"
+  numbered_class_dir=""
+  numbered_class_num=""
+  numbered_class_kind=""
+  case "$rel" in
+    docs/architecture/adr/[0-9][0-9][0-9][0-9]-*.md)
+      numbered_class_dir="docs/architecture/adr"
+      numbered_class_num="$(basename "$rel" | cut -c1-4)"
+      numbered_class_kind="adr"
+      return 0
+      ;;
+    docs/issues/LISS-[0-9][0-9][0-9][0-9]-*.md)
+      numbered_class_dir="docs/issues"
+      numbered_class_num="$(basename "$rel" | sed -n 's/^LISS-\([0-9][0-9][0-9][0-9]\)-.*/\1/p')"
+      numbered_class_kind="liss"
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+# Prints the basename of an existing target file with the same number but a
+# different slug, if any, and returns 0. Returns 1 if none is found.
+find_number_collision() {
+  local dir="$1" num="$2" kind="$3" own_basename="$4"
+  local f bn
+  [ -d "$target/$dir" ] || return 1
+  for f in "$target/$dir"/*; do
+    [ -f "$f" ] || continue
+    bn="$(basename "$f")"
+    [ "$bn" = "$own_basename" ] && continue
+    case "$kind" in
+      adr)
+        case "$bn" in
+          "$num"-*.md) echo "$bn"; return 0 ;;
+        esac
+        ;;
+      liss)
+        case "$bn" in
+          LISS-"$num"-*.md) echo "$bn"; return 0 ;;
+        esac
+        ;;
+    esac
+  done
+  return 1
+}
+
+# Prints the lowest unused number (zero-padded to 4 digits) in the target's
+# own sequence for the given numbered-file class.
+next_free_number() {
+  local dir="$1" kind="$2"
+  local max=0 f bn n
+  if [ -d "$target/$dir" ]; then
+    for f in "$target/$dir"/*; do
+      [ -f "$f" ] || continue
+      bn="$(basename "$f")"
+      case "$kind" in
+        adr) n="$(echo "$bn" | sed -n 's/^\([0-9][0-9][0-9][0-9]\)-.*/\1/p')" ;;
+        liss) n="$(echo "$bn" | sed -n 's/^LISS-\([0-9][0-9][0-9][0-9]\)-.*/\1/p')" ;;
+      esac
+      [ -z "$n" ] && continue
+      n=$((10#$n))
+      [ "$n" -gt "$max" ] && max=$n
+    done
+  fi
+  printf '%04d' $((max + 1))
+}
 
 list_files() {
   local base="$1"
@@ -206,6 +283,15 @@ process_file() {
   if [ ! -e "$ours_file" ]; then
     if [ "$base_missing" = true ]; then
       added+=("$rel")
+      if classify_numbered_file "$rel"; then
+        local own_bn collision_bn
+        own_bn="$(basename "$rel")"
+        if collision_bn="$(find_number_collision "$numbered_class_dir" "$numbered_class_num" "$numbered_class_kind" "$own_bn")"; then
+          local suggestion
+          suggestion="$(next_free_number "$numbered_class_dir" "$numbered_class_kind")"
+          collisions+=("$rel collides with existing $numbered_class_dir/$collision_bn (same number, different document) -- renumber one of them; next free number in target's sequence: $suggestion")
+        fi
+      fi
       if [ "$dry_run" != true ]; then
         mkdir -p "$(dirname "$ours_file")"
         cp "$theirs_file" "$ours_file"
@@ -299,7 +385,14 @@ print_list "Added (new upstream files):" "${added[@]+"${added[@]}"}"
 print_list "Updated (target had not customized):" "${updated[@]+"${updated[@]}"}"
 print_list "Merged cleanly (target customization preserved):" "${merged[@]+"${merged[@]}"}"
 print_list "CONFLICTS (manual resolution required, markers left in file):" "${conflicts[@]+"${conflicts[@]}"}"
+print_list "NUMBER COLLISIONS (manual renumbering required):" "${collisions[@]+"${collisions[@]}"}"
 print_list "NEEDS DECISION (deleted locally, changed upstream):" "${needs_decision[@]+"${needs_decision[@]}"}"
+if [ "${#needs_decision[@]}" -gt 0 ]; then
+  echo "  Hint: before restoring any item above, check whether the target already"
+  echo "  has the same content under a different filename (e.g. a renumbered ADR or"
+  echo "  local issue) elsewhere in the repository -- it may be a rename, not a"
+  echo "  real deletion."
+fi
 print_list "Ignored (per .collaboration-template-ignore):" "${ignored[@]+"${ignored[@]}"}"
 echo "Unchanged: $unchanged_count file(s)"
 
@@ -336,14 +429,14 @@ MARKER
 git -C "$target" add -A
 git -C "$target" commit -m "chore: sync collaboration template to ${new_ref:0:8}
 
-Added: ${#added[@]}, updated: ${#updated[@]}, merged: ${#merged[@]}, conflicts: ${#conflicts[@]}, needs decision: ${#needs_decision[@]}.
+Added: ${#added[@]}, updated: ${#updated[@]}, merged: ${#merged[@]}, conflicts: ${#conflicts[@]}, number collisions: ${#collisions[@]}, needs decision: ${#needs_decision[@]}.
 See PR description or this commit's file list for details." >/dev/null
 
 echo
 echo "Committed sync on branch $branch_name."
 
-if [ "${#conflicts[@]}" -gt 0 ] || [ "${#needs_decision[@]}" -gt 0 ]; then
-  echo "Manual resolution needed before merging (see CONFLICTS / NEEDS DECISION above)."
+if [ "${#conflicts[@]}" -gt 0 ] || [ "${#collisions[@]}" -gt 0 ] || [ "${#needs_decision[@]}" -gt 0 ]; then
+  echo "Manual resolution needed before merging (see CONFLICTS / NUMBER COLLISIONS / NEEDS DECISION above)."
 fi
 
 if [ "$no_pr" = true ]; then
@@ -371,12 +464,13 @@ Sync from collaboration template ${old_ref:0:8} -> ${new_ref:0:8}.
 - Updated: ${#updated[@]}
 - Merged (target customization preserved): ${#merged[@]}
 - Conflicts needing manual resolution: ${#conflicts[@]}
+- Number collisions needing manual renumbering: ${#collisions[@]}
 - Needs decision (deleted locally, changed upstream): ${#needs_decision[@]}
 - Ignored: ${#ignored[@]}
 
 This branch follows docs/collaboration/branch-commit-pr-discipline.md: it
 must pass CI before merge and should not be merged with unresolved conflict
-markers or unresolved NEEDS DECISION items.
+markers, unresolved NUMBER COLLISIONS, or unresolved NEEDS DECISION items.
 BODY
 )"
 
