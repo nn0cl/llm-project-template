@@ -11,7 +11,8 @@ For the benefits and tradeoffs of using the template, see
 
 1. Run `scripts/copy-ai-collaboration-files.sh --target <repo>`.
 2. Fill generic placeholders in `AGENTS.md`, `CLAUDE.md`,
-   `.github/copilot-instructions.md`, and `docs/architecture/README.md`.
+   `.github/copilot-instructions.md`, `.grok/rules/*.md`, and
+   `docs/architecture/README.md`.
 3. Add the first target feature specification under `docs/specs/`.
 4. Add only the stack-specific architecture documents that the project already
    needs.
@@ -108,6 +109,13 @@ The prompt instructs the agent to:
 - avoid introducing target stack, datastore, provider, or domain decisions
   without an accepted specification or ADR.
 - stop when the target specification or requested phase is missing.
+
+Grok Build discovers `.grok/rules/*.md` as a distinct, stronger-binding rules
+surface (visible via `grok inspect`) separate from generic context loading;
+keep it in sync with `AGENTS.md`/`CLAUDE.md` like any other contract file.
+Codex reads `AGENTS.md` directly (its own `~/.codex/rules/` is a user-home
+setting, not a project-distributable one), so it needs no dedicated
+template file.
 
 ## Cost and Reasoning Control
 

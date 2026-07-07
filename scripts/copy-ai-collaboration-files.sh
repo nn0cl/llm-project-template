@@ -152,6 +152,7 @@ replace_placeholders() {
         local full="$target/$file"
         [ -f "$full" ] || continue
         if [ -n "$project_replacement" ]; then
+          perl -0pi -e "s/<PROJECT_NAME: one-line description of the product and its\\ndomain>/$(escape_perl_replacement "$project_replacement")/g" "$full"
           perl -0pi -e "s/<PROJECT_NAME: one-line description of the product and its domain>/$(escape_perl_replacement "$project_replacement")/g" "$full"
         fi
         if [ -n "$project_name" ]; then

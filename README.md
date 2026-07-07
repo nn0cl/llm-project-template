@@ -4,8 +4,8 @@
 
 This repository is a starter template for a **Clean Architecture + AT-TDD**
 development workflow where a human architect (the "Referee") and one or more
-AI coding agents (Claude, Copilot, Codex, etc.) collaborate under a shared,
-written operating contract.
+AI coding agents (Claude, Copilot, Codex, Grok, etc.) collaborate under a
+shared, written operating contract.
 
 In this repository, **AT-TDD** is a local shorthand for an **ATDD + TDD hybrid
 workflow**: acceptance specifications drive failing tests, reviewed tests drive
@@ -26,8 +26,9 @@ installed.
   transitions, ADRs, and ambiguous decisions; agents produce reviewable,
   minimal, phase-correct artifacts.
 - **Agent operating contract files** (`AGENTS.md`, `CLAUDE.md`,
-  `.github/copilot-instructions.md`) kept in sync by a documented change-control
-  rule and a CI check.
+  `.github/copilot-instructions.md`, `.grok/rules/`) kept in sync by a
+  documented change-control rule and a CI check. Codex reads `AGENTS.md`
+  directly and needs no dedicated file.
 - **Local issue and work-plan planning** under `docs/issues/` and
   `docs/work-plans/`, usable before or alongside GitHub Issues.
 - **AI work traces** under `docs/collaboration/traces/` for auditability.
@@ -164,6 +165,8 @@ target project's accepted architecture or feature specifications.
 .
 ├── AGENTS.md                       # operating contract (tool-agnostic)
 ├── CLAUDE.md                       # operating contract (Claude-specific entry point)
+├── .grok/
+│   └── rules/                      # operating contract (Grok-specific entry point)
 ├── .github/
 │   ├── copilot-instructions.md     # operating contract (Copilot-specific entry point)
 │   ├── pull_request_template.md

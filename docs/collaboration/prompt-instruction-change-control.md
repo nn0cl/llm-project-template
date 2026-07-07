@@ -14,6 +14,7 @@ These files are the agent operating contract:
 - `AGENTS.md`
 - `CLAUDE.md`
 - `.github/copilot-instructions.md`
+- `.grok/rules/*.md`
 - `docs/at-tdd/process.md`
 - `docs/collaboration/*.md` (except files under `docs/collaboration/traces/`)
 - `docs/templates/*.md`
@@ -30,10 +31,10 @@ A pull request that changes an agent operating contract file requires:
 
 - explicit Referee review of the change, not only automated CI.
 - a stated reason for the change in the PR description.
-- confirmation that `AGENTS.md`, `CLAUDE.md`, and
-  `.github/copilot-instructions.md` still agree with each other after the
-  change, when the change touches shared phase, dependency, or read-order
-  rules.
+- confirmation that `AGENTS.md`, `CLAUDE.md`,
+  `.github/copilot-instructions.md`, and `.grok/rules/*.md` still agree with
+  each other after the change, when the change touches shared phase,
+  dependency, or read-order rules.
 
 Do not merge an agent operating contract change based only on an AI agent's
 self-review.
@@ -61,6 +62,7 @@ Code review should reject:
 
 - agent operating contract changes without a stated reason.
 - agent operating contract changes without an accompanying trace.
-- agent operating contract changes that leave `AGENTS.md`, `CLAUDE.md`, and
-  `.github/copilot-instructions.md` inconsistent with each other.
+- agent operating contract changes that leave `AGENTS.md`, `CLAUDE.md`,
+  `.github/copilot-instructions.md`, and `.grok/rules/*.md` inconsistent with
+  each other.
 - agent operating contract changes merged without Referee review.
