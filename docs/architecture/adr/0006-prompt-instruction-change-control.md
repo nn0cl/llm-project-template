@@ -6,10 +6,12 @@ Accepted
 
 ## Context
 
-`AGENTS.md`, `CLAUDE.md`, and `.github/copilot-instructions.md` are
-near-duplicate operating contracts for different AI coding tools, together
-with `docs/at-tdd/process.md`, `docs/collaboration/*.md`, and
-`docs/templates/*.md`. Agent behavior depends directly on these files.
+`AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`, and
+`.grok/rules/*.md` are near-duplicate operating contracts for different AI
+coding tools, together with `docs/at-tdd/process.md`,
+`docs/collaboration/*.md`, and `docs/templates/*.md`. Agent behavior depends
+directly on these files. (Codex reads `AGENTS.md` directly and does not need
+its own contract file.)
 
 These files can drift from each other silently: one file can gain a required
 read step that the others do not, and none of them require the
@@ -38,9 +40,9 @@ canonical definition of the agent operating contract file set.
 
 Positive:
 
-- Contract drift between `AGENTS.md`, `CLAUDE.md`, and
-  `.github/copilot-instructions.md` becomes visible in review instead of
-  silently changing agent behavior.
+- Contract drift between `AGENTS.md`, `CLAUDE.md`,
+  `.github/copilot-instructions.md`, and `.grok/rules/*.md` becomes visible
+  in review instead of silently changing agent behavior.
 - Every contract change has a recorded reason and expected behavior change.
 - CI gives an automated signal instead of relying only on Referee memory.
 
@@ -59,8 +61,9 @@ Code review should reject:
 - agent operating contract changes without a stated reason or Referee review.
 - agent operating contract changes without an accompanying trace under
   `docs/collaboration/traces/`.
-- agent operating contract changes that leave `AGENTS.md`, `CLAUDE.md`, and
-  `.github/copilot-instructions.md` inconsistent with each other.
+- agent operating contract changes that leave `AGENTS.md`, `CLAUDE.md`,
+  `.github/copilot-instructions.md`, and `.grok/rules/*.md` inconsistent
+  with each other.
 
 CI should reject:
 
