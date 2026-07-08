@@ -20,6 +20,8 @@ For the benefits and tradeoffs of using the template, see
    loop.
 6. Run `scripts/init-llm-context.sh <repo>` and paste the generated prompt into
    the first agent session.
+7. Read `docs/collaboration/session-start-and-resume.md` for ongoing session
+   start and resume patterns after adoption.
 
 ## Midway Adoption
 
@@ -98,11 +100,15 @@ not track which projects have adopted it.
 
 ## LLM Session Setup
 
-Use `scripts/init-llm-context.sh <repo>` to print a compact first prompt.
+Use `scripts/init-llm-context.sh <repo>` once to print a compact first prompt
+after adoption. For daily new sessions and resuming work, see
+`docs/collaboration/session-start-and-resume.md` instead of rerunning the
+script.
+
 For more detailed, project-neutral prompt examples, see
 `docs/templates/examples/adoption-prompts.md`.
 
-The prompt instructs the agent to:
+The first-session prompt instructs the agent to:
 
 - read `AGENTS.md` and `docs/architecture/agent-quickstart.md`.
 - select Fast Path, Feature Path, or Architecture Path.

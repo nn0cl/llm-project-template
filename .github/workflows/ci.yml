@@ -48,6 +48,7 @@ jobs:
             "docs/collaboration/branch-commit-pr-discipline.md"
             "docs/collaboration/local-issue-planning.md"
             "docs/collaboration/prompt-instruction-change-control.md"
+            "docs/collaboration/session-start-and-resume.md"
             "docs/architecture/README.md"
             "docs/architecture/project-structure.md"
             "docs/architecture/testing-strategy.md"

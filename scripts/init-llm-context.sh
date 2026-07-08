@@ -80,4 +80,7 @@ requires it.
 
 If no target specification or phase has been provided yet, stop after design
 intake and ask the Referee for the missing specification or phase approval.
+
+For later sessions and resume patterns, see
+docs/collaboration/session-start-and-resume.md.
 PROMPT
