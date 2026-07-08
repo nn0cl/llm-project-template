@@ -46,6 +46,19 @@ tests, implementation, migrations, or UI before identifying the target
 behavior, relevant context, omitted context, VO/DTO candidates when applicable,
 ports/adapters when applicable, and task-routing plan.
 
+## Session Entry
+
+- Treat each new session as having no prior chat context.
+- Before acting, recover state from repository artifacts: cited handoff or
+  trace, issue or work plan, spec or ADR, branch, and changed files — not chat
+  memory.
+- If the Referee message lacks operating path, phase, or an authoritative spec
+  (or explicit Architecture Path scope), stop after design intake and ask.
+- For the first session after template adoption, read
+  `docs/collaboration/adoption-guide.md` before changing target-owned files.
+- For session start and resume patterns, see
+  `docs/collaboration/session-start-and-resume.md`.
+
 ## Phase Discipline
 
 Execute only the phase explicitly requested by the Referee.
@@ -145,6 +158,8 @@ Before writing implementation, read the relevant architecture document:
   `docs/collaboration/local-issue-planning.md`.
 - Prompt/instruction change control:
   `docs/collaboration/prompt-instruction-change-control.md`.
+- Session start and resume:
+  `docs/collaboration/session-start-and-resume.md`.
 - `<Add one line per stack-specific architecture document you create, e.g.
   "Rust core or adapters: docs/architecture/rust-clean-architecture.md.">`
 

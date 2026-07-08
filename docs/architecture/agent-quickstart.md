@@ -2,6 +2,20 @@
 
 Use this as the first short entry point before coding.
 
+## Session Entry
+
+Each new LLM session starts without prior chat context.
+
+1. Read the Referee message for operating path, phase, spec or ADR, issue,
+   and branch.
+2. If resuming, read the cited handoff or trace before other documents.
+3. Recover progress from repository artifacts, not from assumed chat history.
+4. If path, phase, or authoritative scope is missing, stop after design intake
+   and ask the Referee.
+
+For Referee checklists and resume examples, see
+`docs/collaboration/session-start-and-resume.md`.
+
 ## Operating Paths
 
 Select the smallest path that safely fits the request.
