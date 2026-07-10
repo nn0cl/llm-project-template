@@ -10,6 +10,10 @@ A task is not done unless:
 - the current phase is explicit.
 - local issue, GitHub issue, work plan, or explicit no-issue reason is stated
   when the task is more than a tiny documentation edit.
+- planned feature or bug work states its planning size, or explains why size is
+  not applicable.
+- size `M`, `L`, or `XL` work has a linked AI planning record.
+- second-attempt bug fixes have a linked trace and updated planning size.
 - changed files are listed in the final response or handoff.
 - assumptions and open decisions are visible.
 - deterministic verification was run or explicitly marked not applicable.

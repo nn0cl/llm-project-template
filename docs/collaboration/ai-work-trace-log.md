@@ -26,6 +26,9 @@ trace is created.
 Create or update a trace when:
 
 - a task changes agent instructions, templates, ADRs, or collaboration rules.
+- a planned task is size `M`, `L`, or `XL`.
+- a bug fix reaches a second execution attempt, even if it originally looked
+  like size `S`.
 - a task spans more than one phase.
 - a task uses external AI, cloud providers, or non-default model routing.
 - a task is paused and another agent may resume it.
@@ -34,15 +37,25 @@ Create or update a trace when:
 Trace is optional for tiny documentation-only changes when the final response
 already includes enough context.
 
+An execution attempt is one cohesive run against the current plan. Start a new
+attempt when deterministic verification fails and replanning is needed, work is
+stopped unresolved and later resumed, the executing environment changes, or a
+materially different plan replaces the previous one. Individual chat messages,
+tool calls, formatting, linting, or tests within the same run are not separate
+attempts.
+
 ## Trace Contents
 
 Each trace should include:
 
 - user request.
 - current phase.
+- canonical issue or work plan.
+- AI planning record reference, when one exists.
 - included context.
 - omitted context.
 - model, assistant, or deterministic tool routing.
+- execution records by attempt, including scope and result.
 - operating path and cost/reasoning control signals.
 - Referee decisions.
 - assumptions.
@@ -53,6 +66,17 @@ Each trace should include:
 
 See `docs/collaboration/llm-cost-reduction.md` for the lightweight cost and
 reasoning control fields used in traces.
+
+For AI execution records:
+
+- Record the environment, displayed model name, and displayed reasoning
+  setting when available.
+- If token usage is unavailable, record `N/A` and the reason. Do not estimate
+  actual usage.
+- Do not replace per-attempt records with a combined total.
+- If a reference total is useful, include it only when the metric, source, and
+  attribution boundary are compatible and clearly stated.
+- Distinguish issue-only work from combined work in the attempt scope.
 
 ## Privacy Rules
 

@@ -16,7 +16,8 @@ Reduce avoidable LLM cost by making agents:
 
 ## Non-Goals
 
-- Tracking exact token counts.
+- Billing-grade exact token accounting.
+- Guessing unavailable token usage.
 - Choosing specific commercial models.
 - Building a centralized cost dashboard.
 - Requiring private prompts, provider logs, or billing exports in the repo.
@@ -36,6 +37,37 @@ Each substantial trace should record:
 
 Keep these entries short. The goal is trend visibility, not accounting
 precision.
+
+## AI Planning Estimates
+
+For planned work with size `M`, `L`, or `XL`, record a vendor-neutral planning
+estimate in the canonical local issue or work plan.
+
+Each planning record should include:
+
+- record id and status.
+- authoring agent and environment.
+- displayed model name and reasoning setting, or `N/A` with reason.
+- planned size and intended route.
+- estimated token range or other available usage metric.
+- estimation basis, assumptions, and confidence.
+- revision links when another agent updates the estimate.
+
+Use the model and reasoning names shown by the executing environment. Do not
+normalize names across vendors or overwrite another agent's estimate without a
+new revision record.
+
+## AI Execution Records
+
+For trace-required work, record actual AI usage by attempt in the AI work
+trace. Use `N/A` with a reason when the environment does not expose a stable
+usage value.
+
+Do not combine token values across attempts as the primary record. A reference
+total is allowed only when the token metric, source, and attribution boundary
+are compatible and stated.
+
+These records are planning and review evidence. They are not billing records.
 
 ## Review Questions
 

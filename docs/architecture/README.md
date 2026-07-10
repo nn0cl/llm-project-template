@@ -79,6 +79,18 @@ APIs)?>`
 - `io-reasoning-contracts.md`: AI input/output/reasoning contracts.
 - `<Add one line per stack-specific architecture document you create.>`
 
+## Accepted Decisions
+
+- `adr/0001-design-first-ai-request-routing.md`
+- `adr/0002-input-output-reasoning-contracts.md`
+- `adr/0003-ai-human-collaboration-governance.md`
+- `adr/0004-human-readable-source-code-quality.md`
+- `adr/0005-local-issue-planning.md`
+- `adr/0006-prompt-instruction-change-control.md`
+- `adr/0007-trunk-oriented-branching.md`
+- `adr/0008-template-update-propagation.md`
+- `adr/0009-bug-planning-and-ai-usage-records.md`
+
 ## Remaining Technology Evaluation
 
 List technology choices still open for ADR decision, e.g.:

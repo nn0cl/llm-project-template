@@ -106,6 +106,20 @@ Only execute the phase explicitly requested by the Referee.
 Phase transitions require Referee approval. Do not start Phase 2 from
 unreviewed Phase 1 tests.
 
+## Bug Triage
+
+Bug fixes follow the same phase rule as feature work. A minor bug may omit a
+separate local issue or work plan only when it is size `S`, within already
+approved scope, clear from existing behavior or specification, low risk, and
+verified in the same attempt.
+
+Omitting a separate planning artifact does not permit skipping Phase 1, Phase
+2, Phase 3, deterministic verification, or Referee review gates.
+
+When a bug is size `M` or larger, needs a second execution attempt, changes
+boundaries, or remains ambiguous, record it in a local issue or active work
+plan before continuing.
+
 ## Core Boundaries
 
 - Domain has no UI framework, DB, file-system, network, or third-party

@@ -146,6 +146,25 @@ Resolution:
 - Store local issues under `docs/issues/`.
 - Store multi-issue plans under `docs/work-plans/`.
 
+### 10. Bug Planning and AI Usage Records
+
+Status: resolved.
+
+Why it matters:
+
+- Difficult bugs can span multiple AI attempts and should not live only in
+  chat history.
+- Later agents need a readable planning size and AI usage record before
+  deciding how much reasoning is needed.
+- Actual token usage is not available in every environment and should not be
+  guessed.
+
+Resolution:
+
+- Use `docs/collaboration/local-issue-planning.md`.
+- Use `docs/collaboration/ai-work-trace-log.md`.
+- See `docs/architecture/adr/0009-bug-planning-and-ai-usage-records.md`.
+
 ## Current Assessment
 
 Ready enough to start design intake and Phase 1 work once the project's
