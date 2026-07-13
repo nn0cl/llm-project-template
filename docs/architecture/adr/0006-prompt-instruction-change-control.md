@@ -6,12 +6,29 @@ Accepted
 
 ## Context
 
-`AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`, and
-`.grok/rules/*.md` are near-duplicate operating contracts for different AI
-coding tools, together with `docs/at-tdd/process.md`,
-`docs/collaboration/*.md`, and `docs/templates/*.md`. Agent behavior depends
-directly on these files. (Codex reads `AGENTS.md` directly and does not need
-its own contract file.)
+`AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`,
+`.grok/rules/*.md`, and `.cursor/rules/*.mdc` are near-duplicate operating
+contracts for different AI coding tools, together with
+`docs/at-tdd/process.md`, `docs/collaboration/*.md`, and
+`docs/templates/*.md`. Agent behavior depends directly on these files.
+(Codex reads `AGENTS.md` directly and does not need its own contract file.)
+
+As of 2026, several of these tools also read `AGENTS.md` (and in Grok
+Build's case, `CLAUDE.md` too) natively, independent of their own dedicated
+rule surface: Cursor documents `AGENTS.md` as a "simple alternative to
+`.cursor/rules`", and current Grok Build documentation states it reads
+`AGENTS.md` at three levels (`~/.grok/AGENTS.md`, `<repo-root>/AGENTS.md`,
+`<cwd>/AGENTS.md`) plus `CLAUDE.md` "for compatibility" (verified via live
+web search, 2026-07-14; see the accompanying trace). This does not remove
+the need for dedicated per-tool files: Cursor's own documentation describes
+`.cursor/rules/*.mdc` as the primary, more powerful mechanism (scoped rules,
+`alwaysApply` control) with `AGENTS.md` support positioned as the simpler
+fallback, and Grok Build's `.grok/rules/` was confirmed via a live adopter's
+`grok inspect` output (2026-07-08) as a stronger-binding discovery surface
+than generic context loading. The template keeps the full-mirror pattern
+across all five files rather than relying on cross-tool `AGENTS.md` fallback
+reading, so that every supported tool gets the same explicit, strongly-bound
+entry point instead of a mix of native and fallback behavior.
 
 These files can drift from each other silently: one file can gain a required
 read step that the others do not, and none of them require the
@@ -41,8 +58,9 @@ canonical definition of the agent operating contract file set.
 Positive:
 
 - Contract drift between `AGENTS.md`, `CLAUDE.md`,
-  `.github/copilot-instructions.md`, and `.grok/rules/*.md` becomes visible
-  in review instead of silently changing agent behavior.
+  `.github/copilot-instructions.md`, `.grok/rules/*.md`, and
+  `.cursor/rules/*.mdc` becomes visible in review instead of silently
+  changing agent behavior.
 - Every contract change has a recorded reason and expected behavior change.
 - CI gives an automated signal instead of relying only on Referee memory.
 
@@ -62,8 +80,8 @@ Code review should reject:
 - agent operating contract changes without an accompanying trace under
   `docs/collaboration/traces/`.
 - agent operating contract changes that leave `AGENTS.md`, `CLAUDE.md`,
-  `.github/copilot-instructions.md`, and `.grok/rules/*.md` inconsistent
-  with each other.
+  `.github/copilot-instructions.md`, `.grok/rules/*.md`, and
+  `.cursor/rules/*.mdc` inconsistent with each other.
 
 CI should reject:
 

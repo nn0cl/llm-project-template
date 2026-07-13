@@ -11,8 +11,8 @@ For the benefits and tradeoffs of using the template, see
 
 1. Run `scripts/copy-ai-collaboration-files.sh --target <repo>`.
 2. Fill generic placeholders in `AGENTS.md`, `CLAUDE.md`,
-   `.github/copilot-instructions.md`, `.grok/rules/*.md`, and
-   `docs/architecture/README.md`.
+   `.github/copilot-instructions.md`, `.grok/rules/*.md`,
+   `.cursor/rules/*.mdc`, and `docs/architecture/README.md`.
 3. Add the first target feature specification under `docs/specs/`.
 4. Add only the stack-specific architecture documents that the project already
    needs.
@@ -119,6 +119,18 @@ The first-session prompt instructs the agent to:
 Grok Build discovers `.grok/rules/*.md` as a distinct, stronger-binding rules
 surface (visible via `grok inspect`) separate from generic context loading;
 keep it in sync with `AGENTS.md`/`CLAUDE.md` like any other contract file.
+As of 2026, Grok Build also reads `AGENTS.md` (at global, repo-root, and
+cwd levels) and `CLAUDE.md` natively as a fallback, but `.grok/rules/*.md`
+remains the stronger-binding surface, so keep both in sync.
+
+Cursor discovers `.cursor/rules/*.mdc` (files must use the `.mdc` extension
+with frontmatter — a plain `.md` file in `.cursor/rules/` is ignored by
+Cursor's rules system) as its primary, most powerful rules mechanism; this
+template sets `alwaysApply: true` on each file so the rules apply to every
+request regardless of which files are open. Cursor also reads `AGENTS.md`
+natively as a simpler fallback, but keep `.cursor/rules/*.mdc` in sync with
+the other contract files like any other.
+
 Codex reads `AGENTS.md` directly (its own `~/.codex/rules/` is a user-home
 setting, not a project-distributable one), so it needs no dedicated
 template file.
