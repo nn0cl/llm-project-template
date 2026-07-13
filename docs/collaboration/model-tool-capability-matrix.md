@@ -63,6 +63,27 @@ Referee approval:
 
 - required for ADR acceptance and phase transitions.
 
+## Compatibility State
+
+Routing by capability class assumes the chosen provider, model, or tool
+configuration actually works as expected. Record that assumption explicitly
+using one of three states, per `docs/architecture/adr/
+0010-ai-failure-recovery-and-runner-cli-contract.md`:
+
+- **Verified**: the specific configuration was actually exercised and its
+  behavior confirmed, not merely assumed from documentation.
+- **Inferred**: the configuration is assumed to work based on documentation,
+  a model/provider card, or general knowledge, without direct confirmation.
+- **Unknown**: compatibility has not been checked at all.
+
+Do not treat `inferred` or `unknown` as equivalent to `verified` when a
+routing or recovery decision depends on the configuration actually working
+(for example, automatic resume of an unconfirmed run in
+`docs/collaboration/ai-failure-recovery.md`, which requires `verified`
+idempotency/safe-retry support before it may proceed automatically).
+Escalate to a human decision instead of assuming `inferred` or `unknown`
+compatibility is safe to act on automatically.
+
 ## Routing Table
 
 | Task | Preferred route | Referee approval |
