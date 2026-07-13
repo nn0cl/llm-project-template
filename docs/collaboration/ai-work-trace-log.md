@@ -65,7 +65,10 @@ Each trace should include:
 - next safe action.
 
 See `docs/collaboration/llm-cost-reduction.md` for the lightweight cost and
-reasoning control fields used in traces.
+reasoning control fields used in traces. A trace that adopts an
+AI-generated or externally-sourced resource may also reference
+`docs/architecture/external-resource-adoption-contract.md`'s check-record
+fields.
 
 For AI execution records:
 
