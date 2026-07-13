@@ -5,9 +5,9 @@ This document resolves Gap Register #7
 stop, but not how to recover from a bad, interrupted, or unconfirmed AI turn.
 
 It applies to any AI-assisted task, not only code generation — including
-long-running external AI jobs (see `docs/collaboration/
-runner-cli-contract.md` for the optional CLI contract that uses this
-document's states). It does not name any specific commercial provider,
+long-running external AI jobs (see
+`docs/collaboration/runner-cli-contract.md` for the optional CLI contract
+that uses this document's states). It does not name any specific commercial provider,
 model, or tool.
 
 ## Failure Categories

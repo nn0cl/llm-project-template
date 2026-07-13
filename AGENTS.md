@@ -64,6 +64,12 @@ Relevant architecture documents:
   `docs/collaboration/prompt-instruction-change-control.md`.
 - Session start and resume:
   `docs/collaboration/session-start-and-resume.md`.
+- AI failure and recovery:
+  `docs/collaboration/ai-failure-recovery.md`.
+- Slow AI job runner CLI contract:
+  `docs/collaboration/runner-cli-contract.md`.
+- External resource adoption contract:
+  `docs/architecture/external-resource-adoption-contract.md`.
 - `<Add one line per stack-specific architecture document you create, e.g.
   "React UI: docs/architecture/frontend-architecture.md.">`
 

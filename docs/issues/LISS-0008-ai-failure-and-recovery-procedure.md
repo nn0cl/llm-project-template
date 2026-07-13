@@ -76,9 +76,9 @@
   requirement for template adopters that have no such workload;
   `llm-cost-reduction.md` links to it instead of absorbing it.
 - No new document assumes a specific target stack, image/generation
-  dependency, or commercial provider (per `docs/collaboration/
-  template-benefits.md`: the template does not choose target stack, datastore,
-  provider, or LLM).
+  dependency, or commercial provider (per
+  `docs/collaboration/template-benefits.md`: the template does not choose
+  target stack, datastore, provider, or LLM).
 - ADR 0010 is the durable record of this decision; the doc work below must
   stay consistent with it.
 
@@ -91,10 +91,11 @@
 
 ## Referee Decision Points
 
-- Resolved 2026-07-13: yes, ADR 0010 (`docs/architecture/adr/
-  0010-ai-failure-recovery-and-runner-cli-contract.md`) is written and
-  accepted, covering the failure taxonomy, the `unconfirmed` run state, the
-  capability-matrix compatibility state, and the runner CLI contract split.
+- Resolved 2026-07-13: yes, ADR 0010
+  (`docs/architecture/adr/0010-ai-failure-recovery-and-runner-cli-contract.md`)
+  is written and accepted, covering the failure taxonomy, the `unconfirmed`
+  run state, the capability-matrix compatibility state, and the runner CLI
+  contract split.
 - Resolved 2026-07-13: the five failure category names and the
   input-contract/workflow-compatibility tie-break rule are fixed as written
   in ADR 0010 and in this issue's Acceptance Notes.

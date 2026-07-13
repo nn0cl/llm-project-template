@@ -22,9 +22,9 @@ the rest of the process. The remaining design gaps this document covers are:
 - UI presentation rules for uncertain or unreviewed knowledge.
 
 For adopting AI-generated or human-sourced external resources (not software
-dependencies) into trusted use, see the optional `docs/architecture/
-external-resource-adoption-contract.md`, which extends this document's
-Output Contract with an explicit adoption-check lifecycle.
+dependencies) into trusted use, see the optional
+`docs/architecture/external-resource-adoption-contract.md`, which extends
+this document's Output Contract with an explicit adoption-check lifecycle.
 
 ## Input Contract
 

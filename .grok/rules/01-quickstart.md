@@ -13,12 +13,12 @@ The selected implementation stack is `<FILL IN: e.g. backend language,
 frontend framework, package manager>`.
 
 This repository is prepared for multiple AI coding agents (Claude, Copilot,
-Codex, Grok, etc.). All agents must use the same workflow and architectural
-boundaries. This file, `02-architecture-boundaries.md`, and
+Codex, Grok, Cursor, etc.). All agents must use the same workflow and
+architectural boundaries. This file, `02-architecture-boundaries.md`, and
 `03-collaboration-and-completion.md` together mirror the same operating
-contract as `AGENTS.md`, `CLAUDE.md`, and `.github/copilot-instructions.md`.
-If any of these disagree, treat it as a defect and flag it to the Referee
-rather than silently picking one.
+contract as `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`, and
+`.cursor/rules/*.mdc`. If any of these disagree, treat it as a defect and
+flag it to the Referee rather than silently picking one.
 
 ## Prime Directive
 
@@ -99,5 +99,11 @@ ports/adapters when applicable, and task routing.
   `docs/collaboration/prompt-instruction-change-control.md`.
 - Session start and resume:
   `docs/collaboration/session-start-and-resume.md`.
+- AI failure and recovery:
+  `docs/collaboration/ai-failure-recovery.md`.
+- Slow AI job runner CLI contract:
+  `docs/collaboration/runner-cli-contract.md`.
+- External resource adoption contract:
+  `docs/architecture/external-resource-adoption-contract.md`.
 - `<Add one line per stack-specific architecture document you create, e.g.
   "React UI: docs/architecture/frontend-architecture.md.">`

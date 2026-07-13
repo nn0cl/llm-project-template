@@ -67,8 +67,8 @@ Referee approval:
 
 Routing by capability class assumes the chosen provider, model, or tool
 configuration actually works as expected. Record that assumption explicitly
-using one of three states, per `docs/architecture/adr/
-0010-ai-failure-recovery-and-runner-cli-contract.md`:
+using one of three states, per
+`docs/architecture/adr/0010-ai-failure-recovery-and-runner-cli-contract.md`:
 
 - **Verified**: the specific configuration was actually exercised and its
   behavior confirmed, not merely assumed from documentation.

@@ -46,9 +46,9 @@
 - Merge conflicts encountered and resolved as anticipated: `CLAUDE.md` and
   `docs/architecture/README.md` (both branches' new lines kept),
   `.github/workflows/ci.yml` (ADR-existence loop combined to include both
-  `0010` and `0011`), and `docs/work-plans/WP-0001-...md` itself (an
-  "add/add" conflict, resolved by taking the more complete Part 2 branch
-  version). All CI-equivalent checks (required files, ADR existence 0001-
+  `0010` and `0011`), and this file itself
+  (`docs/work-plans/WP-0001-external-feedback-2026-07-13.md`, an "add/add"
+  conflict, resolved by taking the more complete Part 2 branch version). All CI-equivalent checks (required files, ADR existence 0001-
   0011, `git diff --check`) passed on merged `main` after resolution.
 - Neither feature branch was deleted after merging; that cleanup was not
   requested.
