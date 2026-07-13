@@ -4,8 +4,8 @@
 
 This repository is a starter template for a **Clean Architecture + AT-TDD**
 development workflow where a human architect (the "Referee") and one or more
-AI coding agents (Claude, Copilot, Codex, Grok, etc.) collaborate under a
-shared, written operating contract.
+AI coding agents (Claude, Copilot, Codex, Grok, Cursor, etc.) collaborate under
+a shared, written operating contract.
 
 In this repository, **AT-TDD** is a local shorthand for an **ATDD + TDD hybrid
 workflow**: acceptance specifications drive failing tests, reviewed tests drive
@@ -26,9 +26,13 @@ installed.
   transitions, ADRs, and ambiguous decisions; agents produce reviewable,
   minimal, phase-correct artifacts.
 - **Agent operating contract files** (`AGENTS.md`, `CLAUDE.md`,
-  `.github/copilot-instructions.md`, `.grok/rules/`) kept in sync by a
-  documented change-control rule and a CI check. Codex reads `AGENTS.md`
-  directly and needs no dedicated file.
+  `.github/copilot-instructions.md`, `.grok/rules/`, `.cursor/rules/`) kept
+  in sync by a documented change-control rule and a CI check. Codex reads
+  `AGENTS.md` directly and needs no dedicated file. Cursor and Grok Build
+  also read `AGENTS.md` natively as a fallback, but this template keeps
+  dedicated `.cursor/rules/*.mdc` and `.grok/rules/*.md` files since each
+  tool's own rule surface binds more strongly than generic `AGENTS.md`
+  fallback reading.
 - **Local issue and work-plan planning** under `docs/issues/` and
   `docs/work-plans/`, usable before or alongside GitHub Issues.
 - **AI work traces** under `docs/collaboration/traces/` for auditability.
@@ -117,8 +121,9 @@ This template deliberately avoids naming a stack, a domain, or concrete
 architecture layers. Before using it on a real project:
 
 1. Replace every `<PLACEHOLDER>` in `AGENTS.md`, `CLAUDE.md`,
-   `.github/copilot-instructions.md`, and `docs/architecture/README.md` with
-   your project's name, domain summary, and selected stack.
+   `.github/copilot-instructions.md`, `.grok/rules/*.md`,
+   `.cursor/rules/*.mdc`, and `docs/architecture/README.md` with your
+   project's name, domain summary, and selected stack.
 2. Add one architecture document per architectural area you actually have
    (e.g. `backend-architecture.md`, `frontend-architecture.md`,
    `persistence.md`). Use `docs/architecture/project-structure.md` and
@@ -167,6 +172,8 @@ target project's accepted architecture or feature specifications.
 ├── CLAUDE.md                       # operating contract (Claude-specific entry point)
 ├── .grok/
 │   └── rules/                      # operating contract (Grok-specific entry point)
+├── .cursor/
+│   └── rules/                      # operating contract (Cursor-specific entry point)
 ├── .github/
 │   ├── copilot-instructions.md     # operating contract (Copilot-specific entry point)
 │   ├── pull_request_template.md

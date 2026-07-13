@@ -148,7 +148,7 @@ replace_placeholders() {
   local file
   for file in "${copied_files[@]}"; do
     case "$file" in
-      *.md|*.yml|*.yaml)
+      *.md|*.mdc|*.yml|*.yaml)
         local full="$target/$file"
         [ -f "$full" ] || continue
         if [ -n "$project_replacement" ]; then
