@@ -90,6 +90,7 @@ APIs)?>`
 - `adr/0007-trunk-oriented-branching.md`
 - `adr/0008-template-update-propagation.md`
 - `adr/0009-bug-planning-and-ai-usage-records.md`
+- `adr/0010-ai-failure-recovery-and-runner-cli-contract.md`
 
 ## Remaining Technology Evaluation
 

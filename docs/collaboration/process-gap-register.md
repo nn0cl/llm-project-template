@@ -106,18 +106,18 @@ Resolution:
 
 ### 7. AI Failure and Recovery Procedure
 
-Status: future.
+Status: resolved.
 
 Why it matters:
 
 - The process says when to stop, but not how to recover from a bad AI turn.
 
-Needed:
+Resolution:
 
-- How to identify a contaminated phase.
-- How to preserve user changes.
-- How to restart from last trusted artifact.
-- How to document rejected AI output.
+- Use `docs/collaboration/ai-failure-recovery.md`.
+- See `docs/architecture/adr/0010-ai-failure-recovery-and-runner-cli-contract.md`.
+- Optional runner CLI contract for slow external AI jobs:
+  `docs/collaboration/runner-cli-contract.md`.
 
 ### 8. Branch, Commit, and PR Discipline
 
@@ -170,5 +170,5 @@ Resolution:
 Ready enough to start design intake and Phase 1 work once the project's
 architecture documents are filled in.
 
-Not yet mature enough for high-volume parallel agents without adding AI
-failure and recovery procedure (gap 7).
+Ready for higher-volume parallel agent work now that gap 7 (AI failure and
+recovery procedure) is resolved.
