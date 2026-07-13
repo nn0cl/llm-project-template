@@ -26,8 +26,8 @@
 
 | Issue | Status | Initial size | Current size | Planning record | Depends on | Blocks | Branch |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| LISS-0008 | review | L | L | AIP-0008-001 | - | - | process/ai-failure-recovery-and-runner-cli-contract |
-| LISS-0009 | review | L | L | AIP-0009-002 (revises AIP-0009-001) | - | - | process/external-resource-adoption-contract |
+| LISS-0008 | done | L | L | AIP-0008-001 | - | - | process/ai-failure-recovery-and-runner-cli-contract (merged) |
+| LISS-0009 | done | L | L | AIP-0009-002 (revises AIP-0009-001) | - | - | process/external-resource-adoption-contract (merged) |
 
 ## Recommended Order
 
@@ -41,16 +41,17 @@
 
 ## Current Next Issue
 
-- Issue: none — both issues implemented and in `review` on their own
-  branches, neither committed changes merged to `main` yet.
-- Referee approval needed: commit/merge decision for both branches. Note
-  that `CLAUDE.md`, `docs/architecture/README.md`'s Accepted Decisions list,
-  and `.github/workflows/ci.yml`'s ADR-existence loop were each edited
-  independently on both branches (Part 1 added its lines/ADR 0010; Part 2
-  added its lines/ADR 0011); expect a small, easily-resolved conflict on
-  `ci.yml`'s single-line loop, and a possible `WP-0001` "both added"
-  conflict for this file itself, when merging the two branches into `main`
-  in sequence.
+- Issue: none — both issues merged into `main` on 2026-07-13 (merge commits
+  `b9e8fd5` for LISS-0008, `0e13619` for LISS-0009). Plan complete.
+- Merge conflicts encountered and resolved as anticipated: `CLAUDE.md` and
+  `docs/architecture/README.md` (both branches' new lines kept),
+  `.github/workflows/ci.yml` (ADR-existence loop combined to include both
+  `0010` and `0011`), and `docs/work-plans/WP-0001-...md` itself (an
+  "add/add" conflict, resolved by taking the more complete Part 2 branch
+  version). All CI-equivalent checks (required files, ADR existence 0001-
+  0011, `git diff --check`) passed on merged `main` after resolution.
+- Neither feature branch was deleted after merging; that cleanup was not
+  requested.
 
 ## Risks
 
