@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0010
 - GitHub issue:
-- Status: review
+- Status: done
 - Phase: docs-only
 - Type: process/docs
 - Priority: medium
