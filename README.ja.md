@@ -5,8 +5,11 @@
 これは `README.md` の逐語訳ではありません。日本語話者がこのテンプレートを
 導入・運用するときに、判断を迷いやすい点を短く確認するための入口です。
 正式な運用契約は `AGENTS.md`、`CLAUDE.md`、`.github/copilot-instructions.md`、
-`.grok/rules/` と `docs/` 配下の各文書を参照してください。Codex は `AGENTS.md`
-を直接読むため専用ファイルは不要です。
+`.grok/rules/`、`.cursor/rules/` と `docs/` 配下の各文書を参照してください。
+Codex は `AGENTS.md` を直接読むため専用ファイルは不要です。Cursor と Grok
+Build は `AGENTS.md`（Grok Build は `CLAUDE.md` も）をフォールバックとして
+ネイティブに読みますが、各ツール固有のルール面の方が強く効くため、専用
+ファイルは引き続き維持しています。
 
 ## これは何か
 
@@ -134,7 +137,8 @@ scripts/copy-ai-collaboration-files.sh --target /path/to/existing-repo --dry-run
 ## 導入後に最初に埋めるもの
 
 1. `AGENTS.md`、`CLAUDE.md`、`.github/copilot-instructions.md`、
-   `.grok/rules/*.md` の project 名や stack placeholder。
+   `.grok/rules/*.md`、`.cursor/rules/*.mdc` の project 名や stack
+   placeholder。
 2. `docs/architecture/README.md` の project-specific な説明。
 3. `docs/specs/` 配下の最初の EARS/Gherkin specification。
 4. 必要になった architecture document。必要になるまで作りすぎない。

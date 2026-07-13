@@ -11,6 +11,7 @@ collaboration_template_paths=(
   "README.ja.md"
   ".github/copilot-instructions.md"
   ".grok/rules"
+  ".cursor/rules"
   ".github/dependabot.yml"
   ".github/pull_request_template.md"
   ".github/ISSUE_TEMPLATE"

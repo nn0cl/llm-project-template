@@ -15,6 +15,7 @@ These files are the agent operating contract:
 - `CLAUDE.md`
 - `.github/copilot-instructions.md`
 - `.grok/rules/*.md`
+- `.cursor/rules/*.mdc`
 - `docs/at-tdd/process.md`
 - `docs/collaboration/*.md` (except files under `docs/collaboration/traces/`)
 - `docs/templates/*.md`

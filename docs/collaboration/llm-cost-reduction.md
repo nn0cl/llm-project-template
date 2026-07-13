@@ -22,6 +22,14 @@ Reduce avoidable LLM cost by making agents:
 - Building a centralized cost dashboard.
 - Requiring private prompts, provider logs, or billing exports in the repo.
 
+## Slow External AI Jobs
+
+Projects that run slow external AI jobs (generation, batch inference, long
+training or evaluation runs) should avoid having an agent poll for
+completion, since polling burns reasoning cycles on waiting rather than
+working. See `docs/collaboration/runner-cli-contract.md` for an optional,
+concrete CLI contract (plan/detach/status/resume/dedupe) covering this case.
+
 ## Cost Control Signals
 
 Each substantial trace should record:
