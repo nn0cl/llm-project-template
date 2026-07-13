@@ -21,6 +21,11 @@ the rest of the process. The remaining design gaps this document covers are:
 - token and privacy budgets for prompts.
 - UI presentation rules for uncertain or unreviewed knowledge.
 
+For adopting AI-generated or human-sourced external resources (not software
+dependencies) into trusted use, see the optional `docs/architecture/
+external-resource-adoption-contract.md`, which extends this document's
+Output Contract with an explicit adoption-check lifecycle.
+
 ## Input Contract
 
 Every AI-assisted task should receive an input envelope instead of ad hoc text.

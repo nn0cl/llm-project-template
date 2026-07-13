@@ -160,6 +160,8 @@ Before writing implementation, read the relevant architecture document:
   `docs/collaboration/prompt-instruction-change-control.md`.
 - Session start and resume:
   `docs/collaboration/session-start-and-resume.md`.
+- External resource adoption contract:
+  `docs/architecture/external-resource-adoption-contract.md`.
 - `<Add one line per stack-specific architecture document you create, e.g.
   "Rust core or adapters: docs/architecture/rust-clean-architecture.md.">`
 
