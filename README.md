@@ -120,10 +120,14 @@ Target-local onboarding lives in
 This template deliberately avoids naming a stack, a domain, or concrete
 architecture layers. Before using it on a real project:
 
-1. Replace every `<PLACEHOLDER>` in `AGENTS.md`, `CLAUDE.md`,
+1. Fill target-specific placeholders in `AGENTS.md`, `CLAUDE.md`,
    `.github/copilot-instructions.md`, `.grok/rules/*.md`,
-   `.cursor/rules/*.mdc`, and `docs/architecture/README.md` with your
-   project's name, domain summary, and selected stack.
+   `.cursor/rules/*.mdc`, and `docs/architecture/README.md`. The copy
+   script can fill the project name, domain summary, and stack placeholders
+   when `--project-name`, `--domain-summary`, and `--stack` are provided;
+   runtime boundaries, datastore, migration tool, external resources, and
+   stack-specific architecture documents still need Referee-approved
+   target facts.
 2. Add one architecture document per architectural area you actually have
    (e.g. `backend-architecture.md`, `frontend-architecture.md`,
    `persistence.md`). Use `docs/architecture/project-structure.md` and
@@ -170,6 +174,7 @@ target project's accepted architecture or feature specifications.
 .
 ├── AGENTS.md                       # operating contract (tool-agnostic)
 ├── CLAUDE.md                       # operating contract (Claude-specific entry point)
+├── .gitignore                      # local editor/OS noise ignored by default
 ├── .grok/
 │   └── rules/                      # operating contract (Grok-specific entry point)
 ├── .cursor/

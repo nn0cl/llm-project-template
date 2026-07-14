@@ -98,6 +98,37 @@
 - `docs/collaboration/local-issue-planning.md` is unaffected by this issue
   (its token-related wording is LISS-0012's concern).
 
+### Addendum (2026-07-14): ported from a third, previously-unpushed commit
+
+A third commit existed only in the Referee's local checkout of
+`codex/process/token-variance-reasons` (`358280f`, "Tighten template
+adoption guidance"), never pushed to `origin/codex/process/
+token-variance-reasons` and therefore not visible when this issue was
+first drafted. Discovered when the Referee asked to push/PR/merge that
+branch directly; re-implemented here (not pushed as-is, for the same
+merge-base-staleness reason as the first two commits) rather than as a new
+issue, since it is a direct continuation of this same distribution-hygiene
+concern:
+
+- New `.gitignore` at the repository root (`.DS_Store`, `.idea/`,
+  `.vscode/`), added to `collaboration_template_paths` so adopting projects
+  receive it too.
+- CI `required_files` gains `.gitignore`; the smoke test gains `test -f
+  "$tmp/target/.gitignore"`.
+- CI smoke test gains a placeholder-substitution check: greps the copied
+  `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`,
+  `.grok/rules`, and (extended beyond the source commit, which predates
+  this session's Cursor support) `.cursor/rules` for unfilled
+  `<PROJECT_NAME: one-line description...>`/`<FILL IN: e.g. backend...>`
+  placeholders and fails if any remain.
+- `README.md`, `README.ja.md`, and `docs/collaboration/adoption-guide.md`'s
+  placeholder-fill instructions are reworded to distinguish what the copy
+  script can fill automatically (project name, domain summary, stack, via
+  `--project-name`/`--domain-summary`/`--stack`) from what still requires
+  Referee-approved target facts (runtime boundaries, datastore, migration
+  tool, external resources, stack-specific architecture documents).
+- `README.md`'s Directory Guide tree gains the `.gitignore` line.
+
 ## Dependencies
 
 - Parent:
@@ -172,15 +203,47 @@
 - Confidence: high
 - Revises:
 - Revision reason:
+- Superseded by: AIP-0013-002
+
+### AIP-0013-002
+
+- Status: accepted
+- Created by:
+  - Agent/environment: Claude Code CLI
+  - Model as displayed: Claude Sonnet 5
+  - Reasoning setting as displayed: N/A
+  - N/A reason: no reasoning-effort label is exposed to this agent in this
+    environment's output
+- Created at: 2026-07-14
+- Planning size: S
+- Intended execution route: deterministic diff/review of a third,
+  previously-unpushed source commit (`358280f`), direct edits to
+  re-implement against current `main`, live smoke test re-verification
+- Intended scope: new `.gitignore`, `collaboration-template-paths.sh`,
+  `.github/workflows/ci.yml`, `README.md`, `README.ja.md`,
+  `docs/collaboration/adoption-guide.md`
+- Estimated token range: 4,000-8,000
+- Token metric: approximate total model tokens for this follow-up task
+- Estimation basis: one new file plus small additions to five
+  already-touched documents/scripts
+- Assumptions: no application code changes
+- Confidence: high
+- Revises: AIP-0013-001
+- Revision reason: Referee asked to push/PR/merge the source branch
+  directly; a third, previously-unpushed local commit on that branch was
+  discovered in the process and is re-implemented here as a continuation
+  of the same issue.
 - Superseded by:
 
 ## References
 
 - `codex/process/token-variance-reasons` (GitHub branch, unmerged, no PR),
-  commit `6ed7a7d`.
+  commits `6ed7a7d` and `358280f` (the latter never pushed to
+  `origin/codex/process/token-variance-reasons`).
 - `docs/specs/template-rollout.md` (confirms the exclusion rationale).
 - Referee request, 2026-07-14 (chat): asked to evaluate the branch's
-  content and adapt it to current `main` if worthwhile.
+  content and adapt it to current `main` if worthwhile; later asked to
+  push/PR/merge the branch, which surfaced the third commit.
 
 ## Work Notes
 
@@ -190,6 +253,14 @@
   record of the original proposal; they are not copied into this
   repository's `main` history since this issue supersedes them with a
   collision-free ID.
+- 2026-07-14 addendum: the Referee asked to push/PR/merge the
+  `codex/process/token-variance-reasons` branch directly. Doing so verbatim
+  was rejected — the branch's merge-base predates most of this session's
+  own work, so a direct push/PR would have produced extensive conflicts and
+  risked reviving the superseded `LISS-0009` filename. The branch's third,
+  previously-unpushed local commit (`358280f`) was instead diffed and its
+  content re-implemented here (see AIP-0013-002 and the Addendum in
+  Acceptance Notes).
 
 ## Verification
 

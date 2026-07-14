@@ -10,9 +10,13 @@ For the benefits and tradeoffs of using the template, see
 ## New Repository Adoption
 
 1. Run `scripts/copy-ai-collaboration-files.sh --target <repo>`.
-2. Fill generic placeholders in `AGENTS.md`, `CLAUDE.md`,
+2. Fill target-specific placeholders in `AGENTS.md`, `CLAUDE.md`,
    `.github/copilot-instructions.md`, `.grok/rules/*.md`,
-   `.cursor/rules/*.mdc`, and `docs/architecture/README.md`.
+   `.cursor/rules/*.mdc`, and `docs/architecture/README.md`. The copy
+   script can fill project name, domain summary, and stack placeholders;
+   runtime boundaries, datastore, migration tool, external resources, and
+   stack-specific architecture documents still require Referee-approved
+   target facts.
 3. Add the first target feature specification under `docs/specs/`.
 4. Add only the stack-specific architecture documents that the project already
    needs.
