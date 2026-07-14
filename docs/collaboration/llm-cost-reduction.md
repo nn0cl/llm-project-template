@@ -57,7 +57,7 @@ Each planning record should include:
 - authoring agent and environment.
 - displayed model name and reasoning setting, or `N/A` with reason.
 - planned size and intended route.
-- estimated token range or other available usage metric.
+- estimated token range and midpoint, or another available usage metric.
 - estimation basis, assumptions, and confidence.
 - revision links when another agent updates the estimate.
 
@@ -70,6 +70,11 @@ new revision record.
 For trace-required work, record actual AI usage by attempt in the AI work
 trace. Use `N/A` with a reason when the environment does not expose a stable
 usage value.
+
+Each attempt should keep the accepted planning estimate beside the actual
+usage fields. When actual usage is unavailable, do not infer a count. If the
+work clearly expanded or contracted from the estimate, record the variance
+reason without calculating an exact variance.
 
 Do not combine token values across attempts as the primary record. A reference
 total is allowed only when the token metric, source, and attribution boundary

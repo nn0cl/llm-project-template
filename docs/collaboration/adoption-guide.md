@@ -40,6 +40,11 @@ Adoption via `scripts/copy-ai-collaboration-files.sh` records a
 that marker to pull in later template improvements without losing target
 customizations:
 
+The template repository keeps its own maintenance local issues, traces, and
+sample rollout specification for audit history. Copy and update scripts
+exclude those files from adopting projects so target repositories start
+with their own empty issue, trace, and spec ledgers.
+
 1. Update your local checkout of this template repository (`git pull` or
    equivalent) so it has the commit you want to sync to.
 2. Optionally list paths the target has intentionally diverged from in

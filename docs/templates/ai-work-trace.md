@@ -33,11 +33,15 @@ that the metric, source, and attribution boundary are compatible.
 - Environment:
 - Model as displayed:
 - Reasoning setting as displayed:
-- Token usage:
+- Estimated token range:
+- Estimated token midpoint:
+- Actual tokens:
 - Token metric:
 - Token source:
 - Token attribution boundary:
-- N/A reason:
+- Actual token unavailable reason:
+- Estimate variance:
+- Variance reason:
 - Scope:
 - Result:
 - Attempt boundary:

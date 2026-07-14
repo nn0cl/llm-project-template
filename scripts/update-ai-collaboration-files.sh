@@ -253,9 +253,16 @@ list_files() {
   local full="$base/$rel"
   [ -e "$full" ] || return 0
   if [ -d "$full" ]; then
-    (cd "$base" && find "$rel" -type f)
+    while IFS= read -r file_rel; do
+      if is_collaboration_template_excluded "$file_rel"; then
+        continue
+      fi
+      echo "$file_rel"
+    done < <(cd "$base" && find "$rel" -type f)
   else
-    echo "$rel"
+    if ! is_collaboration_template_excluded "$rel"; then
+      echo "$rel"
+    fi
   fi
 }
 

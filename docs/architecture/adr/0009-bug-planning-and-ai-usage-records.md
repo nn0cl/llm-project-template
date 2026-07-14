@@ -29,18 +29,23 @@ AI agent hands work to another.
    elapsed-time commitment.
 4. Require versioned AI planning records for `M`, `L`, and `XL` work. A record
    identifies its authoring environment and displayed model/reasoning names,
-   intended execution route and scope, token estimate when available, basis,
-   assumptions, and confidence. Revisions append a new record and link to the
-   superseded record rather than overwriting it.
+   intended execution route and scope, token estimate range and midpoint when
+   available, basis, assumptions, and confidence. Revisions append a new record
+   and link to the superseded record rather than overwriting it.
 5. Require an AI work trace for planning-size `M` or larger, a second or later
    execution attempt, non-default model routing or an AI handoff that changes
    the plan, and all existing trace-required cases.
-6. Preserve execution usage per attempt. Never replace attempt records with an
-   aggregate. A reference total may be shown only when token metric, source,
-   and attribution are compatible.
+6. Preserve execution usage per attempt. Each attempt should reference the
+   planning estimate, record actual usage when exposed by the environment, and
+   use `N/A` with a reason when actual usage is unavailable. Never replace
+   attempt records with an aggregate. A reference total may be shown only when
+   token metric, source, and attribution are compatible.
 7. Use `N/A` with a reason whenever a model, reasoning setting, or token value
    is unavailable. Do not infer or fabricate provider usage.
-8. Keep the policy vendor-neutral. Claude, Codex, Cursor, Copilot, Grok, or a
+8. When exact actual usage is unavailable but meaningful variance from the
+   estimate is observed or suspected, record the variance reason without
+   inventing a token count.
+9. Keep the policy vendor-neutral. Claude, Codex, Cursor, Copilot, Grok, or a
    future environment use the same record shape.
 
 An attempt is a cohesive AI execution toward resolving one problem. A failed
@@ -74,4 +79,6 @@ Code review should reject:
 - AI planning revisions that silently overwrite prior estimates.
 - guessed model, reasoning, or token values where the environment did not
   expose them.
+- omitted variance reasons when the task clearly expanded beyond or shrank
+  below the planning estimate.
 - totals that combine incompatible token metrics, sources, or attribution.

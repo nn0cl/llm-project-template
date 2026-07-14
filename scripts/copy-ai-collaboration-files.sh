@@ -107,9 +107,14 @@ copy_path() {
     mkdir -p "$dest"
     while IFS= read -r src_file; do
       local subpath="${src_file#$src/}"
+      local rel_file="$rel/$subpath"
       local dest_file="$dest/$subpath"
+      if is_collaboration_template_excluded "$rel_file"; then
+        echo "skip template-history $rel_file"
+        continue
+      fi
       if [ -e "$dest_file" ] && [ "$force" != true ]; then
-        echo "skip existing $rel/$subpath"
+        echo "skip existing $rel_file"
         continue
       fi
       mkdir -p "$(dirname "$dest_file")"

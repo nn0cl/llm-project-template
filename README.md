@@ -139,7 +139,7 @@ architecture layers. Before using it on a real project:
    stack-specific jobs (lint, test, dependency policy) once those tools
    exist.
 6. Renumber/extend `docs/architecture/adr/` as real architecture decisions are
-   made. The eight ADRs included here (0001-0008) describe the collaboration
+   made. The eleven ADRs included here (0001-0011) describe the collaboration
    process itself and normally do not need to change.
 
 ## Introduce into an existing repository
@@ -186,15 +186,23 @@ target project's accepted architecture or feature specifications.
     ├── templates/                  # design intake, handoff, trace, issue, work-plan, ADR, Gherkin
     │   └── examples/               # filled-in stack-specific examples, for reference only
     ├── architecture/               # Clean Architecture rules, quickstart, readiness checklist
-    │   └── adr/                    # architecture decision records (0001-0008 = process ADRs)
+    │   └── adr/                    # architecture decision records (0001-0011 = process ADRs)
     ├── specs/                      # EARS/Gherkin feature specifications
     ├── issues/                     # local issue files (LISS-0000 style)
     ├── work-plans/                 # multi-issue work plans
     └── evaluation/                 # golden examples and evaluation criteria
 └── scripts/
     ├── copy-ai-collaboration-files.sh
-    └── init-llm-context.sh
+    ├── update-ai-collaboration-files.sh
+    ├── init-llm-context.sh
+    └── lib/collaboration-template-paths.sh
 ```
+
+Template-maintenance local issues, traces, and the sample rollout spec
+remain in this repository for audit history, but the copy/update scripts
+exclude them from adopting projects. New target repositories receive the
+empty `.gitkeep` folders and create their own local issues, traces, and
+specs.
 
 ## Core rules worth remembering
 

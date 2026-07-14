@@ -134,7 +134,7 @@ Each record has a stable ID and records:
 - creation date.
 - planning size.
 - intended execution route and scope.
-- estimated token range and metric, or `N/A` with a reason.
+- estimated token range, midpoint, and metric, or `N/A` with a reason.
 - estimation basis, assumptions, and confidence.
 - revision links and reason when another record changes the plan.
 
