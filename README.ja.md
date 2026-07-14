@@ -141,8 +141,12 @@ scripts/copy-ai-collaboration-files.sh --target /path/to/existing-repo --dry-run
 ## 導入後に最初に埋めるもの
 
 1. `AGENTS.md`、`CLAUDE.md`、`.github/copilot-instructions.md`、
-   `.grok/rules/*.md`、`.cursor/rules/*.mdc` の project 名や stack
-   placeholder。
+   `.grok/rules/*.md`、`.cursor/rules/*.mdc` の target 固有 placeholder。
+   copy script は `--project-name`、`--domain-summary`、`--stack` で
+   project 名・概要・stack placeholder を埋められますが、runtime boundary、
+   datastore、migration tool、external resource、stack-specific
+   architecture document は Referee が承認した導入先の事実に基づいて
+   埋めます。
 2. `docs/architecture/README.md` の project-specific な説明。
 3. `docs/specs/` 配下の最初の EARS/Gherkin specification。
 4. 必要になった architecture document。必要になるまで作りすぎない。

@@ -29,6 +29,7 @@ jobs:
             "README.ja.md"
             "AGENTS.md"
             "CLAUDE.md"
+            ".gitignore"
             ".github/dependabot.yml"
             ".github/copilot-instructions.md"
             ".github/pull_request_template.md"
@@ -130,12 +131,22 @@ jobs:
             --domain-summary "template smoke test" \
             --stack "test stack"
           scripts/init-llm-context.sh "$tmp/target" >/tmp/init-llm-context-smoke.txt
+          test -f "$tmp/target/.gitignore"
           test -f "$tmp/target/docs/issues/.gitkeep"
           test -f "$tmp/target/docs/collaboration/traces/.gitkeep"
           test -f "$tmp/target/docs/specs/.gitkeep"
           ! ls "$tmp/target/docs/issues/"LISS-*.md >/dev/null 2>&1
           ! ls "$tmp/target/docs/collaboration/traces/"*.md >/dev/null 2>&1
           test ! -f "$tmp/target/docs/specs/template-rollout.md"
+          if grep -R -n -E '<PROJECT_NAME: one-line description|<FILL IN: e\.g\. backend' \
+            "$tmp/target/AGENTS.md" \
+            "$tmp/target/CLAUDE.md" \
+            "$tmp/target/.github/copilot-instructions.md" \
+            "$tmp/target/.grok/rules" \
+            "$tmp/target/.cursor/rules"; then
+            echo "Copy script left basic project placeholders unfilled." >&2
+            exit 1
+          fi
 
       - name: Check agent operating contract change traceability
         if: github.event_name == 'pull_request'

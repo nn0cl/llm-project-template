@@ -7,6 +7,7 @@
 collaboration_template_paths=(
   "AGENTS.md"
   "CLAUDE.md"
+  ".gitignore"
   "README.md"
   "README.ja.md"
   ".github/copilot-instructions.md"
