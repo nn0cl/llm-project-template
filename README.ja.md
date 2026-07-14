@@ -120,6 +120,10 @@ scripts/init-llm-context.sh .
 
 出力された prompt を、そのリポジトリの最初の AI session に貼ります。
 
+このテンプレート自身の保守用 local issue、trace、sample rollout spec は監査履歴
+としてこの repository には残しますが、導入先にはコピーしません。導入先には空の
+`.gitkeep` 付きディレクトリだけを配り、導入先自身の issue、trace、spec を作ります。
+
 ## 既存リポジトリへ途中導入する
 
 まず dry-run します。

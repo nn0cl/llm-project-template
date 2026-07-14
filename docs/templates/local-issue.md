@@ -56,6 +56,7 @@
 - Intended execution route:
 - Intended scope:
 - Estimated token range:
+- Estimated token midpoint:
 - Token metric:
 - Estimation basis:
 - Assumptions:
