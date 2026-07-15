@@ -20,6 +20,8 @@ chore/<short-maintenance-topic>
 Rules:
 
 - one branch should represent one feature, process change, or reviewable unit.
+- direct pushes to `main` or the trunk branch are prohibited; all changes must
+  arrive through a reviewed pull request.
 - feature branches should be tied to a local issue, GitHub issue, or explicit
   Referee waiver.
 - work on any local issue (`docs/issues/LISS-*`) or GitHub Issue must happen on
@@ -44,6 +46,9 @@ Rules:
 
 - a branch must pass CI before it merges into `main` or the trunk branch; do
   not merge on a red or skipped pipeline.
+- repository hosting settings should protect `main` or the trunk branch from
+  direct pushes and require the applicable pull-request checks and reviews;
+  repository documents alone cannot enforce this server-side restriction.
 - when PR volume or contributor count makes race conditions between merges
   likely, adopt a merge queue (or equivalent serialized-merge mechanism) so
   each merge is tested against the current state of `main` before landing.
