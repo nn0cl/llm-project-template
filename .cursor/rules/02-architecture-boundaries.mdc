@@ -51,43 +51,14 @@ After refactoring, output:
 - **人間がコードレビューで重点的に見るべきポイント**: ...
 ```
 
-## Clean Architecture Dependency Rule
+## Shared operating contract
 
-Allowed dependencies:
-
-- Domain -> nothing project-specific.
-- UseCase -> Domain and Ports.
-- Adapter -> UseCase, Ports, framework SDKs, DB SDKs, file system, network.
-- UI/Delivery -> application command/query contracts and presentation state.
-
-Forbidden dependencies:
-
-- Domain -> Adapter.
-- Domain -> Framework.
-- UseCase -> DB schema.
-- UseCase -> migration files.
-- UseCase -> UI component.
-- UseCase -> framework request/command handler.
-- UI -> DB.
-- UI -> external provider SDK.
-- Adapter -> business policy not present in UseCase or Domain.
-
-## External Resources Must Be Ports
-
-Represent these as ports before using concrete implementations. Replace this
-list with the project's actual external dependencies (see `AGENTS.md` and
-`CLAUDE.md` for the same list kept in sync):
-
-- `<External data source A>`.
-- `<External data source B>`.
-- `<Primary datastore>`.
-- `<Secondary datastore, if any>`.
-- Settings storage and validation.
-- Secret storage.
-- Dependency policy checks.
-- `<Optional local runtime services, e.g. Docker-hosted DB>`.
-- `<External API / third-party service>`.
-- `<LLM or agent provider>`.
+Root `AGENTS.md` is auto-applied by Cursor independently of this file
+([Rules](https://cursor.com/docs/rules.md); Help: "Cursor picks it up
+automatically"). It holds the Clean Architecture Dependency Rule
+(allowed/forbidden dependencies) and the External Resources Must Be Ports
+list. Do not duplicate those sections here, and do not `@`-reference
+`AGENTS.md` from `.cursor/rules` (see ADR 0006 Cursor evidence).
 
 ## Anti-Hallucination Rules
 

@@ -91,8 +91,7 @@ Forbidden dependencies:
 ## External Resources Must Be Ports
 
 Represent these as ports before using concrete implementations. Replace this
-list with the project's actual external dependencies (see `CLAUDE.md` for the
-same list kept in sync):
+list with the project's actual external dependencies:
 
 - `<External data source A>`.
 - `<External data source B>`.

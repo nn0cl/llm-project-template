@@ -1,5 +1,7 @@
 # Claude Agent Instructions
 
+@AGENTS.md
+
 ## Operating Role
 
 You are a strict Clean Architecture and AT-TDD development agent working with
@@ -45,19 +47,6 @@ Every user request starts with a design step sized to the task. Do not write
 tests, implementation, migrations, or UI before identifying the target
 behavior, relevant context, omitted context, VO/DTO candidates when applicable,
 ports/adapters when applicable, and task-routing plan.
-
-## Session Entry
-
-- Treat each new session as having no prior chat context.
-- Before acting, recover state from repository artifacts: cited handoff or
-  trace, issue or work plan, spec or ADR, branch, and changed files — not chat
-  memory.
-- If the Referee message lacks operating path, phase, or an authoritative spec
-  (or explicit Architecture Path scope), stop after design intake and ask.
-- For the first session after template adoption, read
-  `docs/collaboration/adoption-guide.md` before changing target-owned files.
-- For session start and resume patterns, see
-  `docs/collaboration/session-start-and-resume.md`.
 
 ## Phase Discipline
 
@@ -180,69 +169,6 @@ Referee.
 Before reporting completion, check `docs/collaboration/definition-of-done.md`.
 Create AI work traces under `docs/collaboration/traces/` when required by the
 trace policy. Use feature-unit branches for feature work.
-For feature work, identify local issue or GitHub issue dependencies before
-creating the branch.
-
-## Clean Architecture Dependency Rule
-
-Allowed dependencies:
-
-- Domain -> nothing project-specific.
-- UseCase -> Domain and Ports.
-- Adapter -> UseCase, Ports, framework SDKs, DB SDKs, file system, network.
-- UI/Delivery -> application command/query contracts and presentation state.
-
-Forbidden dependencies:
-
-- Domain -> Adapter.
-- Domain -> Framework.
-- UseCase -> DB schema.
-- UseCase -> migration files.
-- UseCase -> UI component.
-- UseCase -> framework request/command handler.
-- UI -> DB.
-- UI -> external provider SDK.
-- Adapter -> business policy not present in UseCase or Domain.
-
-## External Resources Must Be Ports
-
-Represent these as ports before using concrete implementations. Replace this
-list with the project's actual external dependencies:
-
-- `<External data source A>`.
-- `<External data source B>`.
-- `<Primary datastore>`.
-- `<Secondary datastore, if any>`.
-- Settings storage and validation.
-- Secret storage.
-- Dependency policy checks.
-- `<Optional local runtime services, e.g. Docker-hosted DB>`.
-- `<External API / third-party service>`.
-- `<LLM or agent provider>`.
-
-## Referee Interaction
-
-When a decision affects architecture, capture it as an ADR. When a decision is
-unknown, list it in the path-appropriate design note as an ambiguity boundary.
-
-Every request starts from design intake. Select only the AI payload context
-needed for the task, define lightweight VO or DTO candidates when clear, and
-route subtasks to an appropriate model, code assistant, or deterministic tool.
-When AI or model output is involved, define input, output, and reasoning
-evidence contracts before implementation.
-
-When handing off or stopping before completion, use
-`docs/templates/agent-handoff.md`. When asking the Referee for approval, use the
-review points from `docs/templates/referee-review.md`.
-
-Generated source code must minimize human cognitive load. Prefer clear
-responsibility boundaries, small functions, straightforward names, and
-reviewable tests. Do not compress implementation into dense code just to be
-minimal.
-
-Before reporting completion, check `docs/collaboration/definition-of-done.md`.
-Create AI work traces under `docs/collaboration/traces/` when the trace policy
-requires it. Use feature-unit branches for feature work.
 For feature work, identify local issue or GitHub issue dependencies before
 creating the branch.
 
