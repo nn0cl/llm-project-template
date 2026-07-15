@@ -33,9 +33,15 @@ A pull request that changes an agent operating contract file requires:
 - explicit Referee review of the change, not only automated CI.
 - a stated reason for the change in the PR description.
 - confirmation that `AGENTS.md`, `CLAUDE.md`,
-  `.github/copilot-instructions.md`, and `.grok/rules/*.md` still agree with
-  each other after the change, when the change touches shared phase,
-  dependency, or read-order rules.
+  `.github/copilot-instructions.md`, `.grok/rules/*.md`, and
+  `.cursor/rules/*.mdc` still agree with each other in effective content
+  after the change, when the change touches shared phase, dependency, or
+  read-order rules. Per ADR 0006 (extended by LISS-0015): agreement means
+  equivalent effective content, not a literal text match — `CLAUDE.md`
+  resolves through its `@AGENTS.md` import, `.cursor/rules/*.mdc` is a trial
+  resolving through an `@AGENTS.md` reference pending live Cursor
+  verification, and `.github/copilot-instructions.md` /
+  `.grok/rules/*.md` remain literal full mirrors.
 
 Do not merge an agent operating contract change based only on an AI agent's
 self-review.
@@ -64,6 +70,8 @@ Code review should reject:
 - agent operating contract changes without a stated reason.
 - agent operating contract changes without an accompanying trace.
 - agent operating contract changes that leave `AGENTS.md`, `CLAUDE.md`,
-  `.github/copilot-instructions.md`, and `.grok/rules/*.md` inconsistent with
-  each other.
+  `.github/copilot-instructions.md`, `.grok/rules/*.md`, and
+  `.cursor/rules/*.mdc` inconsistent with each other in effective content.
+- merging the `.cursor/rules/*.mdc` shrink-to-reference trial without a
+  recorded live Cursor verification result (see ADR 0006).
 - agent operating contract changes merged without Referee review.

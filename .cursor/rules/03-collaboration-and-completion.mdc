@@ -8,20 +8,10 @@ alwaysApply: true
 
 ## Referee Interaction
 
-When a decision affects architecture, capture it as an ADR. When a decision
-is unknown, list it in the path-appropriate design note as an ambiguity
-boundary.
+<!-- TRIAL (2026-07-16, LISS-0015): see the note in 01-quickstart.mdc. -->
 
-Every request starts from design intake. Select only the AI payload context
-needed for the task, define lightweight VO or DTO candidates when clear, and
-route subtasks to an appropriate model, code assistant, or deterministic
-tool. When AI or model output is involved, define input, output, and
-reasoning evidence contracts before implementation.
-
-Use the full `[THOUGHT]` scaffold only for Feature Path and Architecture
-Path work. For Fast Path work, use a compact design note that states scope,
-omitted context, deterministic checks, and why the full scaffold is
-unnecessary.
+See `@AGENTS.md` Referee Interaction for ADR capture, design intake, AI
+payload/routing selection, and `[THOUGHT]`-scaffold-vs-compact-note usage.
 
 ## Decision Gates
 

@@ -136,13 +136,47 @@ Cursor discovers `.cursor/rules/*.mdc` (files must use the `.mdc` extension
 with frontmatter — a plain `.md` file in `.cursor/rules/` is ignored by
 Cursor's rules system) as its primary, most powerful rules mechanism; this
 template sets `alwaysApply: true` on each file so the rules apply to every
-request regardless of which files are open. Cursor also reads `AGENTS.md`
-natively as a simpler fallback, but keep `.cursor/rules/*.mdc` in sync with
-the other contract files like any other.
+request regardless of which files are open. As of LISS-0015 (2026-07-16),
+`.cursor/rules/*.mdc` replaces its literal-duplicate-of-`AGENTS.md` sections
+with `@AGENTS.md` references, as a trial pending live verification that
+Cursor actually loads the referenced content on every application of the
+always-apply rules — see ADR 0006. Cursor also reads `AGENTS.md` natively as
+a simpler fallback, but this template keeps a dedicated `.cursor/rules/*.mdc`
+file set rather than relying on that fallback alone.
 
 Codex reads `AGENTS.md` directly (its own `~/.codex/rules/` is a user-home
 setting, not a project-distributable one), so it needs no dedicated
 template file.
+
+Claude Code supports `@path/to/file` imports (expanded inline into context at
+launch) and its own `.claude/rules/*.md` directory with `paths:`
+frontmatter, equivalent to Cursor's `globs`. `CLAUDE.md` uses `@AGENTS.md` to
+avoid duplicating `AGENTS.md`'s content, per Anthropic's own documented
+recommendation for this exact purpose — see ADR 0006.
+
+## Adding Stack-Specific Scoped Rules
+
+Once a stack ADR is accepted, a project may need rules that apply only to a
+specific area (for example, frontend conventions that should not load when an
+agent is only touching backend code). Add these as new files, scoped so they
+load only for matching paths, rather than growing the always-applying
+contract files:
+
+- **Cursor**: a new `.cursor/rules/<topic>.mdc` file with a non-empty `globs`
+  field (for example, `globs: src/frontend/**`) and `alwaysApply: false`.
+- **Claude Code**: a new `.claude/rules/<topic>.md` file with a `paths:`
+  frontmatter list of glob patterns.
+- **GitHub Copilot**: a new `.github/instructions/<topic>.instructions.md`
+  file with an `applyTo` frontmatter glob; it combines with
+  `.github/copilot-instructions.md` rather than replacing it.
+- **Grok / Codex**: no confirmed path-scoped rule mechanism as of 2026-07-16;
+  keep stack-specific rules for these tools inside the existing full-mirror
+  files, scoped by a heading that states which area they apply to.
+
+Add each new scoped-rule file to
+`docs/collaboration/prompt-instruction-change-control.md`'s contract file
+list when it is created, and follow the same trace/review requirements as any
+other contract-file change.
 
 ## Cost and Reasoning Control
 
