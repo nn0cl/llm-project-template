@@ -165,6 +165,20 @@ Resolution:
 - Use `docs/collaboration/ai-work-trace-log.md`.
 - See `docs/architecture/adr/0009-bug-planning-and-ai-usage-records.md`.
 
+### 11. Issue Completion Document Synchronization
+
+Status: resolved.
+
+Why it matters:
+
+- Implementation and tests can be complete while the issue ledger remains at `proposed`.
+- A stale issue ledger misleads the next agent about dependencies and current work.
+
+Resolution:
+
+- Use the Issue Status Synchronization section in `docs/collaboration/definition-of-done.md`.
+- Include the issue and work-plan updates in the same reviewable unit as the implementation status change.
+
 ## Current Assessment
 
 Ready enough to start design intake and Phase 1 work once the project's

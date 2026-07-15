@@ -91,6 +91,7 @@ Rules:
 
 - keep commits reviewable.
 - do not hide test changes inside implementation commits.
+- when issue status changes, include the matching issue/documentation synchronization and any applicable work-plan update in the same reviewable unit.
 - mention AI assistance in PR notes when it materially shaped the change.
 - never commit secrets or full exports of private data.
 
