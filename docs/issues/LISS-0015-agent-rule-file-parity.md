@@ -4,14 +4,15 @@
 
 - Local issue ID: LISS-0015
 - GitHub issue:
-- Status: blocked
+- Status: review
 - Phase: process-only
 - Type: process/docs
 - Priority: medium
 - Initial planning size: M
 - Current planning size: M
 - Reclassification reason:
-- Owner/agent: Claude Code CLI (Claude Sonnet 5)
+- Owner/agent: Claude Code CLI (Claude Sonnet 5); Cursor live verification +
+  optimization by Cursor agent 2026-07-16
 - Parent: -
 - Depends on: -
 - Blocks: -
@@ -60,18 +61,21 @@
   to avoid duplicating instructions between `AGENTS.md` and `CLAUDE.md`.
   Claude Code also has its own `.claude/rules/*.md` directory with a `paths:`
   frontmatter field, functionally equivalent to Cursor's `globs`.
-- **Cursor**: no confirmed guaranteed-inline import directive for `.mdc`
-  files. `@filename` pulls a file into a rule's context, and Cursor's own
-  community best-practice guidance favors referencing shared rules over
-  embedding duplicated content, but this is not confirmed with the same
-  certainty as Claude Code's `@import`. Core `globs`/`alwaysApply` behavior is
-  unchanged since LISS-0010 (2026-07-14).
+- **Cursor**: root `AGENTS.md` is a first-class Rules type alongside Project
+  Rules / User / Team ([Rules](https://cursor.com/docs/rules.md)). Help states
+  Cursor "picks it up automatically"
+  ([Help: Rules](https://cursor.com/help/customization/rules.md)). FAQ still
+  documents `@filename` inside `.mdc` to attach files to rule context, but for
+  root `AGENTS.md` that duplicates native loading. Live Cursor session
+  2026-07-16 confirmed separate always-applied injection of `AGENTS.md` and
+  the three `.mdc` files; `@AGENTS.md` text in `.mdc` was not inlined. Core
+  `globs`/`alwaysApply` behavior is unchanged since LISS-0010 (2026-07-14).
 - **Grok**: not re-verified this round; LISS-0006's live `grok inspect` test
   (2026-07-08) and LISS-0010's 2026-07-14 findings stand as the evidence base.
 - **Codex**: unchanged; reads `AGENTS.md` directly, no dedicated file, no
   duplication exists here to begin with.
 
-## Per-Vendor Decision (Referee-confirmed 2026-07-16)
+## Per-Vendor Decision (Referee-confirmed 2026-07-16; Cursor refined and approved same day)
 
 - **Codex**: no change. Already the optimal case (zero duplication).
 - **Claude Code — consolidate**: replace `CLAUDE.md`'s duplicated body with an
@@ -84,16 +88,12 @@
   documentation states adherence is weaker when relying on `AGENTS.md` alone.
   The duplication cost is accepted in exchange for the stronger, dedicated
   binding. Do not split or shrink `copilot-instructions.md` in this issue.
-- **Cursor — trial shrink**: reduce `.cursor/rules/*.mdc` (all three files) to
-  their persona header plus frontmatter (`description`, `globs`,
-  `alwaysApply`) plus an `@AGENTS.md` reference, replacing the duplicated
-  body. This is a trial, not an unconditional change: because Cursor's
-  inline-on-every-session guarantee is not confirmed the way Claude Code's is,
-  verify in a live Cursor session that the referenced `AGENTS.md` content is
-  actually present in context every time (not only when Cursor judges it
-  contextually relevant), before treating this as final. If verification is
-  inconclusive or fails, revert to full-mirror content for Cursor and record
-  why in Work Notes.
+- **Cursor — omit shared sections; rely on native `AGENTS.md`**: after the
+  shrink-to-`@AGENTS.md` trial, live verification plus primary docs showed
+  root `AGENTS.md` is already loaded as its own Rules type. Referee directed
+  optimization (2026-07-16): drop `@AGENTS.md` from `.mdc`; keep
+  Cursor-complementary content only. Grounds recorded in ADR 0006 Cursor
+  evidence items 1–5. Referee approved the grounded revision the same day.
 - **Grok — keep full mirror**: not revisited this round. LISS-0006's
   empirical `grok inspect` finding (generic `AGENTS.md` loading was
   insufficient in practice) is the strongest evidence of any vendor in this
@@ -155,6 +155,13 @@
 - `.cursor/rules/*.mdc`: resolved 2026-07-16 — attempt the shrink-to-reference
   trial, conditional on live verification that Cursor reliably inlines the
   `@AGENTS.md` reference every session.
+- Refinement 2026-07-16 (live Cursor session + Referee "optimize"):
+  verification showed root `AGENTS.md` is auto-applied independently of
+  `.mdc`, so `@AGENTS.md` inside `.mdc` is redundant. Drop the trial
+  references; keep Cursor-complementary content only; rely on native
+  `AGENTS.md` loading for shared sections.
+- Referee approval 2026-07-16: grounded revision approved ("根拠を付けて
+  修正して。承認します。").
 - `CLAUDE.md`: resolved 2026-07-16 — consolidate via `@AGENTS.md` import,
   per Anthropic's own documented recommendation.
 - `.grok/rules/*.md`: not revisited — keep full mirror, per LISS-0006's
@@ -237,11 +244,16 @@
   — `@import` mechanism, the explicit `@AGENTS.md` deduplication
   recommendation, and `.claude/rules/*.md` `paths:` scoping, fetched
   2026-07-16.
-- [Rules | Cursor Docs](https://cursor.com/docs/rules) — `globs`/`alwaysApply`
-  confirmation and nested-rules behavior, fetched 2026-07-16.
+- [Rules | Cursor Docs](https://cursor.com/docs/rules.md) — four Rules types
+  including `AGENTS.md`; nested `AGENTS.md`; FAQ `@filename` in rules;
+  fetched 2026-07-16.
+- [Help: Rules](https://cursor.com/help/customization/rules.md) — "Cursor
+  picks it up automatically" for root `AGENTS.md`; `CLAUDE.md` always
+  applied; fetched 2026-07-16.
 - Cursor community best-practice sources on referencing vs. embedding in
   `.mdc` rules (search results, 2026-07-16) — lower-confidence than the
-  primary-source findings above; treated as directional, not authoritative.
+  primary-source findings above; treated as directional, not authoritative
+  for the final Cursor policy (superseded by primary docs + live session).
 
 ## Work Notes
 
@@ -289,9 +301,21 @@
     (full mirror kept, per Referee decision).
   - Full research findings, sources, and the per-vendor decision are recorded
     above and in ADR 0006.
-- Not done: live verification that `@AGENTS.md` inside a Cursor `.mdc` rule
-  actually loads on every application of the rule. This agent cannot run
-  Cursor. This is the reason Status is `blocked` rather than `review`.
+- Follow-up 2026-07-16 (Cursor agent, same branch): after live verification,
+  removed `@AGENTS.md` references from `.cursor/rules/*.mdc`; replaced with
+  short notes that shared content comes from native `AGENTS.md` auto-apply;
+  updated ADR 0006, `prompt-instruction-change-control.md`,
+  `adoption-guide.md`, and this issue; Status moved `blocked` → `review`.
+- Not done in the first implementation pass: live verification that
+  `@AGENTS.md` inside a Cursor `.mdc` rule actually loads on every
+  application of the rule (Status was `blocked`).
+- Done 2026-07-16 in a live Cursor session: observed root `AGENTS.md` fully
+  injected as its own always-applied Rules entry alongside `.mdc` files;
+  `@AGENTS.md` text inside `.mdc` bodies was not expanded inline. Causation
+  (`@` vs native load) is indistinguishable; outcome (shared rules present)
+  held. Referee directed optimization: remove redundant `@AGENTS.md`
+  references from `.mdc` and document reliance on native `AGENTS.md`
+  auto-apply (see follow-up work notes and new trace).
 
 ## Verification
 
@@ -303,6 +327,9 @@
 - `grep` over `.github/workflows/ci.yml` confirming no CI check depends on
   literal byte-for-byte matching between `.cursor/rules/*.mdc` and
   `AGENTS.md`.
-- Not yet done, and blocking: live Cursor session verification of the
-  `@AGENTS.md` reference trial (see Referee Decision Points and ADR 0006).
-- AI work trace: `docs/collaboration/traces/2026-07-16-agent-rule-file-parity.md`.
+- Live Cursor session 2026-07-16: confirmed independent auto-apply of root
+  `AGENTS.md`; removed `@AGENTS.md` from `.mdc`; `grep` confirms no remaining
+  `@AGENTS.md` under `.cursor/rules/`.
+- AI work traces:
+  `docs/collaboration/traces/2026-07-16-agent-rule-file-parity.md`,
+  `docs/collaboration/traces/2026-07-16-cursor-mdc-drop-agents-ref.md`.

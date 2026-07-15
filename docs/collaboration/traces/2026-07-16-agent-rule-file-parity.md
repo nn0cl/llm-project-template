@@ -135,15 +135,12 @@
 
 ## Next Safe Action
 
-- Verify live, in an actual Cursor session, that `@AGENTS.md` references
-  inside `.cursor/rules/*.mdc` actually load `AGENTS.md`'s content into every
-  application of the always-apply rules. If confirmed, mark the trial
-  resolved in LISS-0015 and ADR 0006. If it fails or is inconclusive, restore
-  the full-mirror content for `.cursor/rules/*.mdc` (available in this
-  branch's prior commit / git history) and record why.
-- After the Cursor verification is resolved, this branch is ready for PR and
-  Referee review per `branch-commit-pr-discipline.md` (contract files
-  changed, so review cannot be AI self-review alone).
+- Completed by follow-up: live Cursor verification (2026-07-16) showed native
+  `AGENTS.md` auto-apply makes `.mdc` `@AGENTS.md` references redundant;
+  references removed; primary-source grounds attached; Referee approved —
+  see `docs/collaboration/traces/2026-07-16-cursor-mdc-drop-agents-ref.md`.
+- Open PR for branch `process/agent-rule-file-parity` (contract files;
+  human PR review still required for merge).
 
 ## Notes
 

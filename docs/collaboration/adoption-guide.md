@@ -136,13 +136,18 @@ Cursor discovers `.cursor/rules/*.mdc` (files must use the `.mdc` extension
 with frontmatter — a plain `.md` file in `.cursor/rules/` is ignored by
 Cursor's rules system) as its primary, most powerful rules mechanism; this
 template sets `alwaysApply: true` on each file so the rules apply to every
-request regardless of which files are open. As of LISS-0015 (2026-07-16),
-`.cursor/rules/*.mdc` replaces its literal-duplicate-of-`AGENTS.md` sections
-with `@AGENTS.md` references, as a trial pending live verification that
-Cursor actually loads the referenced content on every application of the
-always-apply rules — see ADR 0006. Cursor also reads `AGENTS.md` natively as
-a simpler fallback, but this template keeps a dedicated `.cursor/rules/*.mdc`
-file set rather than relying on that fallback alone.
+request regardless of which files are open. As of LISS-0015 (2026-07-16,
+Referee-approved after live verification the same day), `.cursor/rules/*.mdc`
+holds Cursor-complementary rules only and does not `@`-reference or
+full-mirror shared sections from `AGENTS.md`. Grounds: Cursor lists
+`AGENTS.md` as its own Rules type and "picks it up automatically"
+([Rules](https://cursor.com/docs/rules.md);
+[Help: Rules](https://cursor.com/help/customization/rules.md)); live session
+confirmed separate injection of root `AGENTS.md` alongside always-apply
+`.mdc` files — see ADR 0006 and
+`docs/collaboration/traces/2026-07-16-cursor-mdc-drop-agents-ref.md`. Keep
+the `.mdc` set for phase-gate detail, Decision Gates, and other Cursor-side
+complements rather than relying on `AGENTS.md` alone.
 
 Codex reads `AGENTS.md` directly (its own `~/.codex/rules/` is a user-home
 setting, not a project-distributable one), so it needs no dedicated

@@ -42,25 +42,45 @@ vendor:
   between `AGENTS.md` and `CLAUDE.md`. This is a materially different
   mechanism from a plain-text cross-reference, and removes the original
   "thin pointers aren't reliable" objection for this one vendor pair.
-- **Cursor** has no confirmed guaranteed-inline import directive for `.mdc`
-  files as of 2026-07-16; `@filename` references exist and Cursor's own
-  community best practice favors referencing over embedding, but this is not
-  confirmed with the same certainty as Claude Code's `@import`.
+- **Cursor** — shared contract via native `AGENTS.md`, not `@` inside `.mdc`.
+
+  Evidence (primary sources, fetched 2026-07-16):
+
+  1. Rules types list `AGENTS.md` separately from Project Rules
+     (`.cursor/rules`): [Rules | Cursor Docs](https://cursor.com/docs/rules.md)
+     ("Cursor supports four types of rules: … Project Rules … AGENTS.md").
+  2. Help: "Create an `AGENTS.md` file in your project root. …
+     Cursor picks it up automatically."
+     ([Help: Rules](https://cursor.com/help/customization/rules.md)).
+  3. Nested `AGENTS.md` is "automatically applied when working with files in
+     that directory" ([Rules § AGENTS.md](https://cursor.com/docs/rules.md)).
+  4. FAQ: `@filename` in a rule includes that file in rule context
+     ([Rules FAQ](https://cursor.com/docs/rules.md)) — valid, but for root
+     `AGENTS.md` it duplicates (1)–(2) rather than substituting for them.
+  5. Live Cursor session 2026-07-16 (this repo, branch
+     `process/agent-rule-file-parity`): agent context received root
+     `AGENTS.md` as its own always-applied workspace rule *and* the three
+     `alwaysApply` `.mdc` files; `@AGENTS.md` prose inside `.mdc` bodies was
+     not expanded inline. Shared Expected Workflow / dependency-rule content
+     was present via the `AGENTS.md` injection. Trace:
+     `docs/collaboration/traces/2026-07-16-cursor-mdc-drop-agents-ref.md`.
+
+  Conclusion: omitting shared sections from `.mdc` (and omitting `@AGENTS.md`
+  there) does not drop them from Cursor Agent context while root `AGENTS.md`
+  auto-apply remains in force. Keep `.mdc` for Cursor-only complements.
 - **Grok**'s `.grok/rules/` stronger-binding finding (LISS-0006's live `grok
   inspect` test, 2026-07-08) was not re-examined this round.
 
-Decision, per vendor (Referee-confirmed 2026-07-16):
+Decision, per vendor (Referee-confirmed 2026-07-16; Cursor policy refined
+and **Referee-approved** same day after live verification + cited grounds):
 
 - `CLAUDE.md` now imports `AGENTS.md` (`@AGENTS.md`) instead of duplicating
   its body, keeping only genuinely Claude Code-specific sections.
-- `.cursor/rules/*.mdc` replaces its literal duplicate-of-`AGENTS.md` content
-  (Clean Architecture Dependency Rule, External Resources Must Be Ports,
-  Referee Interaction's design-intake paragraphs, Session Entry, Expected
-  Workflow) with `@AGENTS.md` references, as a **trial**: this must be
-  verified live in a Cursor session (confirming the reference actually loads
-  `AGENTS.md` content into every application of the always-apply rules)
-  before being treated as settled; if verification fails or is inconclusive,
-  revert to full-mirror content for Cursor.
+- `.cursor/rules/*.mdc` keeps only Cursor-complementary content (phase gate
+  detail, anti-hallucination, Decision Gates, handoff/completion). Shared
+  sections formerly duplicated from `AGENTS.md` are omitted — not
+  `@`-referenced — because Cursor already auto-applies root `AGENTS.md`
+  (evidence items 1–5 above).
 - `.github/copilot-instructions.md` and `.grok/rules/*.md` keep the full
   mirror. For Copilot, the Referee weighed GitHub's documented weaker-adherence
   risk against the duplication cost and chose to keep the stronger, dedicated
@@ -91,8 +111,9 @@ canonical definition of the agent operating contract file set.
 - Per LISS-0015: the consistency check means the five files resolve to
   equivalent effective content, not that they are literal duplicates.
   `CLAUDE.md` resolves through its `@AGENTS.md` import; `.cursor/rules/*.mdc`
-  is a trial pending live verification (see Context); `copilot-instructions.md`
-  and `.grok/rules/*.md` remain literal full mirrors.
+  plus Cursor's native root `AGENTS.md` loading together supply the shared
+  contract; `copilot-instructions.md` and `.grok/rules/*.md` remain literal
+  full mirrors.
 
 ## Consequences
 
@@ -107,6 +128,9 @@ Positive:
 - `CLAUDE.md`'s `@AGENTS.md` import removes one full hand-maintained
   duplicate; a future change to `AGENTS.md`'s imported sections no longer
   needs a matching manual edit in `CLAUDE.md`.
+- Cursor `.mdc` files no longer carry redundant `@AGENTS.md` references or
+  full shared-section mirrors; shared content rides on native `AGENTS.md`
+  auto-apply.
 
 Negative:
 
@@ -116,13 +140,12 @@ Negative:
   `docs/collaboration/prompt-instruction-change-control.md` up to date as new
   contract-like files are introduced.
 - The consistency check can no longer be a simple text diff for `CLAUDE.md`
-  (and, if the Cursor trial holds, `.cursor/rules/*.mdc`); a reviewer must
-  confirm the import/reference actually resolves to the same effective rules
-  as `AGENTS.md`, which is a judgment call rather than a byte comparison.
-- The Cursor trial carries a real regression risk until verified: if
-  `@AGENTS.md` inside a `.mdc` rule does not reliably load on every
-  application of the rule, Cursor would silently lose rules it used to have
-  inline.
+  or for Cursor (`.mdc` + native `AGENTS.md`); a reviewer must confirm the
+  effective union still matches `AGENTS.md`, which is a judgment call rather
+  than a byte comparison.
+- If Cursor ever stopped auto-applying root `AGENTS.md`, shared rules would
+  disappear from Cursor sessions unless `.mdc` or another binding were
+  restored — watch product docs when upgrading Cursor.
 
 ## Enforcement
 
@@ -134,11 +157,9 @@ Code review should reject:
 - agent operating contract changes that leave `AGENTS.md`, `CLAUDE.md`,
   `.github/copilot-instructions.md`, `.grok/rules/*.md`, and
   `.cursor/rules/*.mdc` inconsistent with each other in effective content
-  (literal text for `copilot-instructions.md` and `.grok/rules/*.md`; resolved
-  content via the import/reference chain for `CLAUDE.md` and, pending
-  verification, `.cursor/rules/*.mdc`).
-- merging the `.cursor/rules/*.mdc` shrink-to-reference trial without a
-  recorded live Cursor verification result (see Context).
+  (literal text for `copilot-instructions.md` and `.grok/rules/*.md`;
+  resolved content via `@AGENTS.md` for `CLAUDE.md`; effective union of
+  `.cursor/rules/*.mdc` plus native root `AGENTS.md` for Cursor).
 
 CI should reject:
 

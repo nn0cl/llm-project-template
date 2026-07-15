@@ -51,12 +51,14 @@ After refactoring, output:
 - **人間がコードレビューで重点的に見るべきポイント**: ...
 ```
 
-## Clean Architecture Dependency Rule and External Resources Must Be Ports
+## Shared operating contract
 
-<!-- TRIAL (2026-07-16, LISS-0015): see the note in 01-quickstart.mdc. -->
-
-See `@AGENTS.md` for the Clean Architecture Dependency Rule (allowed/forbidden
-dependencies) and the External Resources Must Be Ports list.
+Root `AGENTS.md` is auto-applied by Cursor independently of this file
+([Rules](https://cursor.com/docs/rules.md); Help: "Cursor picks it up
+automatically"). It holds the Clean Architecture Dependency Rule
+(allowed/forbidden dependencies) and the External Resources Must Be Ports
+list. Do not duplicate those sections here, and do not `@`-reference
+`AGENTS.md` from `.cursor/rules` (see ADR 0006 Cursor evidence).
 
 ## Anti-Hallucination Rules
 

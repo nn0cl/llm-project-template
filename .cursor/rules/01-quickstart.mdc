@@ -58,15 +58,13 @@ or implementation, identify target behavior, relevant context, omitted
 context, lightweight VO/DTO candidates when applicable, involved
 ports/adapters when applicable, and task routing.
 
-## Expected Workflow, Session Entry, and Required Area Documents
+## Shared operating contract
 
-<!-- TRIAL (2026-07-16, LISS-0015): replaces a full-mirror copy of AGENTS.md's
-Expected Workflow, Session Entry, and doc list with a reference. Unverified:
-confirm live in a Cursor session that `@AGENTS.md` here actually loads that
-file's content into every application of this always-apply rule before
-merging this branch. If unconfirmed, restore the full-mirror text this
-replaced (see git history on this file). -->
-
-See `@AGENTS.md` for the Expected Workflow steps, Session Entry rules, and the
-Relevant Architecture Documents list. This project's stack-specific
-architecture documents (added once a stack ADR is accepted) apply here too.
+Root `AGENTS.md` is auto-applied by Cursor independently of this file
+([Rules](https://cursor.com/docs/rules.md); Help: "Cursor picks it up
+automatically"). It holds Expected Workflow, Session Entry, and the Relevant
+Architecture Documents list. Do not duplicate those sections here, and do not
+`@`-reference `AGENTS.md` from `.cursor/rules` — that would redundantly
+re-attach what Cursor already loads as its own Rules type (see ADR 0006
+Cursor evidence). Stack-specific architecture documents (added once a stack
+ADR is accepted) apply here too.
