@@ -17,6 +17,7 @@ A task is not done unless:
 - changed files are listed in the final response or handoff.
 - assumptions and open decisions are visible.
 - deterministic verification was run or explicitly marked not applicable.
+- issue status, phase, applicable work-plan row, and completion evidence are synchronized in the same reviewable unit when issue work changes status.
 - no unrelated context, secrets, or full private data exports were used
   without Referee approval.
 - generated code, if any, is readable and appropriately split.
@@ -75,6 +76,19 @@ Done when:
 - new ADRs are listed in README and CI checks when accepted.
 - instruction files are updated when agent behavior changes.
 - YAML or other structured files are validated when touched.
+
+## Issue Status Synchronization
+
+Issue status drift is a process failure, not an optional documentation task. When an issue reaches
+`done`, `review`, `blocked`, or `wont_do`, update all of the following before reporting completion:
+
+1. `docs/issues/LISS-*.md` metadata and completion/current-status evidence.
+2. The corresponding row and `Current Next Issue` in the active work plan, when a work plan exists.
+3. Any accepted-spec or ADR references whose decision boundary changed.
+
+The implementation commit and the status/documentation update should be the same reviewable unit,
+or the handoff must explicitly identify the pending synchronization. A status is not considered
+complete from code and tests alone.
 
 ## Handoff Done
 
