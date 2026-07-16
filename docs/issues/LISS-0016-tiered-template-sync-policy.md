@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0016
 - GitHub issue:
-- Status: in_progress
+- Status: review
 - Phase: process-only
 - Type: process/tooling
 - Priority: medium
@@ -194,8 +194,65 @@
 
 ## Work Notes
 
-- 
+- Implemented 2026-07-17 on branch `process/tiered-template-sync`. See
+  Changed Files in the accompanying trace
+  (`docs/collaboration/traces/2026-07-17-tiered-template-sync-policy.md`).
+- Verified with three throwaway local repositories built under the session
+  scratchpad (not committed anywhere; deleted after verification): one
+  adopted-then-customized target exercising Overwritten/Restored/silent
+  kept-deleted/silent customization-preserved, a second exercising NEEDS
+  AI-ASSISTED MERGE, and a third exercising NUMBER COLLISIONS and the
+  `.collaboration-template-ignore` path. Exact scenarios and results are
+  listed under Verification.
+- Not exercisable in this sandboxed environment: an operator answering the
+  interactive restore prompt at a real attached terminal (piping input into a
+  subshell does not produce a real TTY, so `is_interactive_tty` correctly
+  fell back to the non-interactive default in every attempt). The prompt
+  logic itself (`read -r -p` plus a `[nN]*` case match) was code-reviewed
+  instead; it is a small, standard, low-risk shape.
 
 ## Verification
 
-- 
+- `bash -n scripts/update-ai-collaboration-files.sh` (and after every edit
+  round): pass.
+- Scenario 1 (Tier 1, both changed): target hand-edited
+  `docs/collaboration/adoption-guide.md`; template also changed it.
+  Result: reported "Overwritten"; target's edit was gone after the sync,
+  template's content applied. Matches design.
+- Scenario 2 (Tier 1, target had not diverged): template changed
+  `docs/collaboration/adoption-guide.md` in a run where the target never
+  touched it. Result: reported "Updated". Matches design.
+- Scenario 3 (Tier 2, deleted locally + changed upstream, non-interactive):
+  target deleted `CLAUDE.md`; template changed it since. Result: reported
+  "Restored" with the template's new content present after the sync (no TTY
+  attached, so the non-interactive default fired). Matches design.
+- Scenario 4 (Tier 1, deleted locally, unchanged upstream): target deleted
+  `docs/collaboration/llm-cost-reduction.md`; template never touched it.
+  Result: silently kept deleted (folded into the Unchanged count, no
+  prompt) -- file remained absent after the sync. Matches design.
+- Scenario 5 (Tier 2, diverged, unchanged upstream): target appended a note
+  to `AGENTS.md`; template never touched it since. Result: silently
+  preserved (folded into Unchanged) -- the adopter's note was still present
+  after the sync. Matches design.
+- Scenario 6 (Tier 2, both changed, file still present on both sides): a
+  separate target edited `CLAUDE.md` (without deleting it) while the
+  template also changed it. Result: reported "NEEDS AI-ASSISTED MERGE" with
+  the old ref, new ref, and source path named; the target's file was left
+  completely untouched (adopter's note still present) after the sync
+  committed. Matches design.
+- Scenario 7 (Added): a new upstream file
+  (`docs/collaboration/example-new-doc.md`) appeared with no target-side
+  counterpart. Result: reported "Added" and copied. Matches pre-existing
+  behavior (unchanged by this issue).
+- Scenario 8 (Number Collision): target and template each independently
+  added an ADR numbered 0099 with different slugs. Result: reported under
+  "NUMBER COLLISIONS" with the correct next-free-number suggestion (0100).
+  Matches pre-existing behavior (unchanged by this issue).
+- Scenario 9 (Ignored): a path listed in `.collaboration-template-ignore`
+  was excluded from the "Added" list entirely. Matches pre-existing behavior
+  (unchanged by this issue).
+- Every real (non-dry-run) sync run created a dedicated
+  `process/update-collab-template-*` branch, never committed to the target's
+  default branch, and correctly skipped PR creation under `--no-pr`.
+- Not verified: a real interactive terminal answering "n" to the restore
+  prompt (see Work Notes).
