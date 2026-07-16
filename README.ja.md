@@ -1,6 +1,6 @@
 # LLM Project Template 日本語ガイド
 
-[English README](README.md)
+[English README](README.md) · [Quickstart: 導入とアンインストール](QUICKSTART.ja.md)
 
 これは `README.md` の逐語訳ではありません。日本語話者がこのテンプレートを
 導入・運用するときに、判断を迷いやすい点を短く確認するための入口です。

@@ -1,6 +1,6 @@
 # LLM Project Template
 
-[日本語ガイド](README.ja.md)
+[日本語ガイド](README.ja.md) · [Quickstart: adopting / uninstalling this template](QUICKSTART.md)
 
 This repository is a starter template for a **Clean Architecture + AT-TDD**
 development workflow where a human architect (the "Referee") and one or more
@@ -172,6 +172,7 @@ target project's accepted architecture or feature specifications.
 
 ```text
 .
+├── QUICKSTART.md / QUICKSTART.ja.md  # adoption/uninstall guide, not copied to targets
 ├── AGENTS.md                       # operating contract (tool-agnostic)
 ├── CLAUDE.md                       # operating contract (Claude-specific entry point)
 ├── .gitignore                      # local editor/OS noise ignored by default
