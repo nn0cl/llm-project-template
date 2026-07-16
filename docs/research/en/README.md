@@ -2,7 +2,7 @@
 
 This folder holds the research and rationale essays behind the
 `llm-project-template` — the design philosophy of AI-human collaborative
-software development: why the template puts a human Referee at decision
+software development: why the template puts a human Adjudicator at decision
 points, why work is phase-gated, why plans and decisions live in the
 repository, and why agent context is deliberately minimized.
 
@@ -22,7 +22,7 @@ These documents are non-normative reading material for humans:
 - This folder is not distributed to adopting projects.
   `scripts/lib/collaboration-template-paths.sh` excludes it.
 - Nothing here defines rules. Conclusions get promoted to ADRs or
-  `docs/collaboration/` documents through Referee review; the essays
+  `docs/collaboration/` documents through Adjudicator review; the essays
   remain as background reading.
 
 Citation conventions (retrieval-dated sources, explicit "unverified"
@@ -33,7 +33,7 @@ the Japanese [README](../README.md).
 
 Read the first one before the rest; it is the entry point.
 
-### [The target end state: why AI collaboration needs structure](../2026-07-05-rationale-target-end-state.md)
+### [The target end state: why AI collaboration needs structure](2026-07-05-rationale-target-end-state.md)
 
 Fast code generation that leaves nothing behind — no approvals, no design
 rationale, no resumable context — is not software engineering. The
@@ -45,21 +45,21 @@ resume), and human checkpoints designed against Bainbridge's "Ironies of
 Automation". Deliberately leaves domain, stack, and datastore decisions
 to the adopting project.
 
-### [The agent is a sandbox: an architecture of freedom and control](../2026-07-07-rationale-saas-agent-as-sandbox.md)
+### [The agent is a sandbox: an architecture of freedom and control](2026-07-07-rationale-saas-agent-as-sandbox.md)
 
 Vendor sandboxes (GitHub Copilot, Cursor) provide OS-level safety —
 isolated, ephemeral execution — but never semantic safety: they cannot
 stop an architecture violation or a spec misunderstanding. The team must
 supply the integration layer itself: operating-path allowlists, a shared
-constitution in the repository, design intake, Referee approval gates,
+constitution in the repository, design intake, Adjudicator approval gates,
 and PR review. Covers tiered agent teams (LLM cascades, learned routing,
 orchestrator-worker patterns) and why hierarchy does not dissolve the
 human's distinct responsibility.
 
-### [The Referee and phases: automation's ironies and the design of responsibility](../2026-07-05-rationale-referee-centered-collaboration.md)
+### [The Adjudicator and phases: automation's ironies and the design of responsibility](2026-07-05-rationale-adjudicator-centered-collaboration.md)
 
 Instead of making the human a full-time reviewer of every generated
-token, the Referee owns decision points: phase transitions, ADR
+token, the Adjudicator owns decision points: phase transitions, ADR
 acceptance, test review, ambiguity resolution. The AT-TDD cycle
 (Red / Green / Refactor) is externalized from personal discipline into
 physical approval gates, connecting TDD, Continuous Delivery pipelines,
@@ -68,7 +68,7 @@ escalating to a stronger model and requesting human approval are
 semantically different acts, and that stronger models make gates more
 important, not less.
 
-### [Design first and controlling the context boundary](../2026-07-05-rationale-design-first-minimal-context.md)
+### [Design first and controlling the context boundary](2026-07-05-rationale-design-first-minimal-context.md)
 
 Context is a scarce resource. Irrelevant context measurably degrades LLM
 reasoning (Shi et al.), long contexts have U-shaped recall (Lost in the
@@ -79,7 +79,7 @@ small models, or strong reasoning models (FrugalGPT, RouteLLM), and
 undecided items are managed as explicit non-decisions that agents must
 not fill in.
 
-### [Output contracts and the boundary of verifiability](../2026-07-05-rationale-ai-output-contracts.md)
+### [Output contracts and the boundary of verifiability](2026-07-05-rationale-ai-output-contracts.md)
 
 Fluent prose is not a correctness guarantee (hallucination and
 faithfulness research), so AI output crossing a trust boundary must be
@@ -90,7 +90,7 @@ auditable evidence (sources, assumptions, confidence, review status),
 not chain-of-thought dumps; persisting an output is treated as adopting
 it.
 
-### [Reviewable code and managing cognitive load](../2026-07-05-rationale-code-for-human-review.md)
+### [Reviewable code and managing cognitive load](2026-07-05-rationale-code-for-human-review.md)
 
 When generation is cheap, verification becomes the bottleneck. Generated
 code is optimized for minimal human cognitive load, not minimal lines:
@@ -100,7 +100,7 @@ dependency rules localize what a reviewer must hold in their head at
 once. Tests are written as readable Given/When/Then specifications, for
 future agents as much as for humans.
 
-### [Keeping plans in the repository: repository-native planning and change control](../2026-07-05-rationale-repository-native-planning-and-change-control.md)
+### [Keeping plans in the repository: repository-native planning and change control](2026-07-05-rationale-repository-native-planning-and-change-control.md)
 
 Chat windows are not artifacts. Plans, local issues with dependency
 graphs, work traces, and handoffs are versioned files, so agents can
@@ -110,7 +110,7 @@ agent instructions are treated as code with review and CI-enforced
 traces, and the two-tier local-first design (Kleppmann et al.) keeps the
 planning ledger in the repository with GitHub as a projection.
 
-### [The pull-based upstream: sovereignty in template distribution](../2026-07-06-rationale-template-as-pull-based-upstream.md)
+### [The pull-based upstream: sovereignty in template distribution](2026-07-06-rationale-template-as-pull-based-upstream.md)
 
 Template updates propagate by downstream pull, never upstream push. A
 3-way merge protects adopter sovereignty — including respecting
@@ -121,7 +121,7 @@ shift in manufacturing (Kanban) and networked organizations
 (Team of Teams), annotated as practitioner accounts rather than
 controlled studies.
 
-### [Branching strategy for AI collaboration: the economics of integration latency](../2026-07-06-branching-strategies-develop-and-multi-target-releases.md)
+### [Branching strategy for AI collaboration: the economics of integration latency](2026-07-06-branching-strategies-develop-and-multi-target-releases.md)
 
 DORA's trunk-based development capability condemns integration latency,
 not branch names: three or fewer active branches, daily merges to trunk.
@@ -132,16 +132,16 @@ toggles and module boundaries rather than long-lived per-target
 branches. Proposes the topics an adopting project's ADR should settle
 before keeping any long-lived integration branch.
 
-### [Normative versus reading documents: an architecture for documentation](../2026-07-06-rationale-normative-vs-reading-documents.md)
+### [Normative versus reading documents: an architecture for documentation](2026-07-06-rationale-normative-vs-reading-documents.md)
 
 Humans skip irrelevant documents; agents cannot — everything in context
 influences generation. So agent inputs are an explicit allowlist
 (stronger than any denylist), and reading material is structurally
 outside it. Maps the split onto Diátaxis (reference/how-to vs
 explanation) and the RFC 2119 normative/informative tradition. Promotion
-from research to rules is one-way, via Referee review.
+from research to rules is one-way, via Adjudicator review.
 
-### [Evidence and rules: EBSE and respect for context](../2026-07-06-rationale-evidence-based-process-design.md)
+### [Evidence and rules: EBSE and respect for context](2026-07-06-rationale-evidence-based-process-design.md)
 
 Process rules are set by evidence, not fashion: formulate the question,
 search the evidence, appraise it critically, integrate it into the
@@ -149,4 +149,4 @@ project's own context — Evidence-Based Software Engineering (Kitchenham
 et al.) scaled down to daily operations. Adopter feedback flows into a
 process-gap register and revises the norms. Persuasiveness is not
 evidence: sources carry retrieval dates, unverified URLs are marked, and
-nothing is promoted to a rule without Referee review.
+nothing is promoted to a rule without Adjudicator review.
