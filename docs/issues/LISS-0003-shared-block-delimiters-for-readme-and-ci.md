@@ -13,14 +13,14 @@
 
 ## Summary
 
-- `README.md` and `.github/workflows/ci.yml` are tracked as shared template
-  paths (see `scripts/lib/collaboration-template-paths.sh`). Once an
-  adopting project replaces the template's own explainer prose with its own
-  product content (which `copy-ai-collaboration-files.sh`'s default
-  skip-existing behavior encourages), a later 3-way sync's merge conflict on
-  these files can span nearly the entire file, because there is no
-  structural marker separating "template-owned section" from
-  "project-owned section" within the same file.
+- `.github/workflows/ci.yml` is tracked as a shared template path (see
+  `scripts/lib/collaboration-template-paths.sh`). Once an adopting project
+  customizes it, a later 3-way sync's merge conflict can span nearly the
+  entire file, because there is no structural marker separating
+  "template-owned section" from "project-owned section" within the same
+  file. (`README.md` originally had the same problem as a shared path; as
+  of 2026-07-16 it is no longer distributed at all — see Work Notes — so
+  the remaining scope is `ci.yml` only.)
 - Reported by an external adopter (voice-to-dic) as the single most
   time-consuming conflict class to resolve by hand.
 
@@ -61,7 +61,14 @@
 
 ## Work Notes
 
-- None yet; this is a backlog placeholder.
+- 2026-07-16: The README half of this issue is resolved by a different
+  route than delimiters: `README.md` / `README.ja.md` were removed from
+  `collaboration_template_paths` (and from `ci.yml`'s `required_files`)
+  entirely, on the grounds that the template README carries no
+  placeholders, describes the template repository itself, and was the
+  documented worst conflict class for adopters. Projects now own their
+  README with no template sync against it. The remaining scope of this
+  issue is the `ci.yml` shared-block question only.
 
 ## Verification
 
