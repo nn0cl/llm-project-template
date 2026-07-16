@@ -2,11 +2,11 @@
 
 2026-07-05. Non-normative. Related: ADR 0002.
 
-> Japanese original (authoritative): [../2026-07-05-rationale-ai-output-contracts.md](../2026-07-05-rationale-ai-output-contracts.md) at commit `0661781` (`0661781f1d7052ebad6aa9cffa7d0b43354282f8`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
+> Japanese original (authoritative): [../2026-07-05-rationale-ai-output-contracts.md](../2026-07-05-rationale-ai-output-contracts.md) at commit `320e59d` (`320e59d79d13ff6ef67589d737f725bd146cdfb3`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
 
 ---
 
-In software engineering, a "contract" is more than an interface signature. Bertrand Meyer's Design by Contract makes reliability depend on preconditions, postconditions, and invariants between caller and callee. That idea gains force in the AI era.
+In software engineering, a "contract" is more than an interface signature. Bertrand Meyer's Design by Contract ([Meyer, 1992](https://doi.org/10.1109/2.161279)) makes reliability depend on preconditions, postconditions, and invariants between caller and callee. That idea gains force in the AI era.
 
 Fluent prose is not a guarantee of correctness. That is not mere distrust of LLMs; it is a boundary-design principle. Humans err, search ages, databases omit. Systems always compose imperfect parts. LLM output often arrives as a finished-looking explanation, so guesses look like facts. Credibility must not rest on a "smarter model"; it must rest on verifiable contracts of the kind Meyer described.
 
@@ -70,8 +70,8 @@ However, `docs/research/` is not the place to unilaterally change the rules of t
    - `docs/architecture/external-resource-adoption-contract.md`
    - `docs/research/README.md`
 2. **Software Engineering & Philosophy**
-   - Meyer, B. "Applying 'Design by Contract'". IEEE Computer, 1992.
-   - Parnas, D. L. "On the Criteria To Be Used in Decomposing Systems into Modules". CACM, 1972.
+   - Meyer, B. "Applying 'Design by Contract'". IEEE Computer, 1992. https://doi.org/10.1109/2.161279 (Retrieved 2026-07-17)
+   - Parnas, D. L. "On the Criteria To Be Used in Decomposing Systems into Modules". CACM, 1972. https://doi.org/10.1145/361598.361623 (Retrieved 2026-07-17)
    - Preston-Werner, T. *Semantic Versioning 2.0.0*. https://semver.org/ (Cited for its rules on declaring a public API and incrementing the major version on incompatible API changes. Retrieved 2026-07-17.)
 3. **AI Research & Human-Computer Interaction**
    - Ji, Z. et al. "Survey of Hallucination in Natural Language Generation." *ACM Computing Surveys* / arXiv:2202.03629. https://arxiv.org/abs/2202.03629 (Retrieved 2026-07-16)
