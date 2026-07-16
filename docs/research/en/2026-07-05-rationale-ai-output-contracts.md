@@ -2,7 +2,7 @@
 
 2026-07-05. Non-normative. Related: ADR 0002.
 
-> Japanese original (authoritative): [../2026-07-05-rationale-ai-output-contracts.md](../2026-07-05-rationale-ai-output-contracts.md) at commit `6910bf0` (`6910bf0ecd025b7561b1446568f0459c00283b3d`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
+> Japanese original (authoritative): [../2026-07-05-rationale-ai-output-contracts.md](../2026-07-05-rationale-ai-output-contracts.md) at commit `0661781` (`0661781f1d7052ebad6aa9cffa7d0b43354282f8`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
 
 ---
 
@@ -12,9 +12,9 @@ Fluent prose is not a guarantee of correctness. That is not mere distrust of LLM
 
 ## Provider freedom and consumer contracts: interface stability
 
-When Design by Contract is applied to AI-driven edits, the Linux community slogan “WE DO NOT BREAK USERSPACE!” is a **readable analogy** (widely cited Torvalds mail; also marked unverified in this folder’s sources). However pretty the provider’s internals, breaking contracts that consumers depend on destroys systemic trust.
+When Design by Contract is applied to AI-driven edits, Semantic Versioning ([semver.org](https://semver.org/)) offers a **readable analogy**: declare a public API explicitly, and treat backward-incompatible changes as a major version bump. However pretty the provider’s internals, silently breaking a public contract that consumers depend on destroys systemic trust.
 
-Agents rewrite broadly and will happily “clean up” signatures while touching internals. Optimizing internals (e.g. Clean Architecture Adapters) can be fine; **silently changing Interfaces or external calling conventions is not** (aligned with ADR 0002). A contract is more than JSON Schema type checks—it is the trust boundary that contains generative freedom. This is not the kernel’s institution transplanted wholesale. **Analogy aids understanding; it is not a portable law.**
+Agents rewrite broadly and will happily “clean up” signatures while touching internals. Optimizing internals (e.g. Clean Architecture Adapters) can be fine; **silently changing Interfaces or external calling conventions is not** (aligned with ADR 0002). A contract is more than JSON Schema type checks—it is the trust boundary that contains generative freedom. This does not ask us to transplant a package-versioning regime wholesale. **Analogy aids understanding; it is not a portable law.**
 
 ## Separating Prose Fluency from Factuality
 
@@ -72,7 +72,7 @@ However, `docs/research/` is not the place to unilaterally change the rules of t
 2. **Software Engineering & Philosophy**
    - Meyer, B. "Applying 'Design by Contract'". IEEE Computer, 1992.
    - Parnas, D. L. "On the Criteria To Be Used in Decomposing Systems into Modules". CACM, 1972.
-   - Torvalds, L. "Re: [Regression w/ patch] Media commit causes user space to misbehave." LKML, 2012-12-23. https://lkml.org/lkml/2012/12/23/75 (Unverified: Archival bot access blocked, text unconfirmed. Widely referenced email as the origin of "WE DO NOT BREAK USERSPACE".)
+   - Preston-Werner, T. *Semantic Versioning 2.0.0*. https://semver.org/ (Cited for its rules on declaring a public API and incrementing the major version on incompatible API changes. Retrieved 2026-07-17.)
 3. **AI Research & Human-Computer Interaction**
    - Ji, Z. et al. "Survey of Hallucination in Natural Language Generation." *ACM Computing Surveys* / arXiv:2202.03629. https://arxiv.org/abs/2202.03629 (Retrieved 2026-07-16)
    - Maynez, J. et al. "On Faithfulness and Factuality in Abstractive Summarization." ACL 2020. https://aclanthology.org/2020.acl-main.173/ (Retrieved 2026-07-16)
