@@ -27,7 +27,7 @@
 
 ### 三役はチームに拡張される：階層とエスカレーション
 
-「協働の三役」は、単一のエージェントを前提とした固定的な図式ではない。マルチエージェント研究——会話を通じて複数の LLM エージェントを協調させる AutoGen（Wu et al., [arXiv:2308.08155](https://arxiv.org/abs/2308.08155)）や、自律エージェントの構成要素を体系化したサーベイ（Wang et al., [arXiv:2308.11432](https://arxiv.org/abs/2308.11432)）——が示すように、「Agent」の席には複数の LLM が座りうる。実装全体を管轄する実行役、スコープの限定された機械的作業を高速にこなす軽量役、不確実性の高い判断点でのみ呼ばれる強い推論役、という分担は、[設計先行とコンテキスト](2026-07-05-rationale-design-first-minimal-context.md) が述べる「能力の階段」を、エージェントの内側にまで適用したものだ。
+「協働の三役」は、単一のエージェントを前提とした固定的な図式ではない。マルチエージェント研究——会話を通じて複数の LLM エージェントを協調させる AutoGen（Wu et al., [arXiv:2308.08155](https://arxiv.org/abs/2308.08155)）——が示すように、「Agent」の席には複数の LLM が座りうる。そして、実装全体を管轄する実行役、スコープの限定された機械的作業を高速にこなす軽量役、不確実性の高い判断点でのみ呼ばれる強い推論役、という能力階層の分担は、思弁的なアイデアではなく、測定された先行研究のあるパターンである。LLM カスケード研究（Yue et al., [arXiv:2310.03094](https://arxiv.org/abs/2310.03094)）は、弱いモデルにまず答えさせ、回答の一貫性を不確実性の信号として強いモデルへ委譲する構成が、精度を保ったまま推論コストを大幅に削減できることを示した。学習型ルーティング（RouteLLM: Ong et al., [arXiv:2406.18665](https://arxiv.org/abs/2406.18665)）は、問い合わせの難度に応じた強弱モデルの振り分けそのものを学習可能な問題として定式化した。さらに Anthropic は、強いモデルをリードエージェント、より軽いモデルを並列サブエージェントとするオーケストレーター・ワーカー構成を実運用し、単体の強いモデルを内部評価で大きく上回ったと報告している（[How we built our multi-agent research system](https://www.anthropic.com/engineering/built-multi-agent-research-system)）。これらは、[設計先行とコンテキスト](2026-07-05-rationale-design-first-minimal-context.md) が述べる「能力の階段」を、エージェントの内側にまで適用できることの裏づけである。
 
 ただし、この階層化をもって「人間と AI の境界が消える」と結論づけてはならない。エスカレーションの連鎖がどれほど洗練されても、Referee は階層の中の「いちばん強い推論リソース」ではない。強いモデルへの相談は答えの質を上げるための手段だが、Referee への承認要求はプロジェクトの責任と監査可能性を確定させる行為であり、両者は情報の流れとして似ていても意味論的に別物である。エージェントチームはサンドボックスの内側で自由に組織化してよい。だが、その出力がプロジェクトの意味を変える地点では、チームの構成にかかわらず同じ承認ゲートを通る。三役の分割が守っているのは、この責任の非対称性である。
 
@@ -102,6 +102,8 @@
    - Anthropic. *Use Claude Code on the web*. https://code.claude.com/docs/en/claude-code-on-the-web （取得 2026-07-07）
 3. **AI協働と推論の限界（および階層型エージェント）**
    - Anthropic. *Building effective agents*. https://www.anthropic.com/research/building-effective-agents （取得 2026-07-07）
+   - Anthropic. *How we built our multi-agent research system*. https://www.anthropic.com/engineering/built-multi-agent-research-system （取得 2026-07-16）
    - Shi, F. et al. "Large Language Models Can Be Easily Distracted by Irrelevant Context." arXiv:2302.00093. https://arxiv.org/abs/2302.00093 （取得 2026-07-07）
-   - Wang, L. et al. "A Survey on Large Language Model based Autonomous Agents." *Frontiers of Computer Science*, 2024 / arXiv:2308.11432. https://arxiv.org/abs/2308.11432 （取得 2026-07-16）
    - Wu, Q. et al. "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation." arXiv:2308.08155. https://arxiv.org/abs/2308.08155 （取得 2026-07-16）
+   - Yue, M. et al. "Large Language Model Cascades with Mixture of Thoughts Representations for Cost-efficient Reasoning." ICLR 2024 / arXiv:2310.03094. https://arxiv.org/abs/2310.03094 （取得 2026-07-16）
+   - Ong, I. et al. "RouteLLM: Learning to Route LLMs with Preference Data." arXiv:2406.18665. https://arxiv.org/abs/2406.18665 （取得 2026-07-16）
