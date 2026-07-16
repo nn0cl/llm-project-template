@@ -73,6 +73,7 @@ jobs:
             "docs/templates/adjudicator-review.md"
             "docs/templates/gherkin-feature.md"
             "docs/templates/adr.md"
+            "docs/templates/contract-file-sync-prompt.md"
             "docs/collaboration/traces/.gitkeep"
             "docs/issues/.gitkeep"
             "docs/work-plans/.gitkeep"
