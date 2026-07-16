@@ -79,39 +79,89 @@ service is introduced.
 5. The template repository does not maintain a registry of adopting
    repositories and does not push updates to them.
 
+## Tiered Sync Policy (LISS-0016, 2026-07-16)
+
+The original per-file 3-way merge treated every template file the same way.
+In practice, most template files are pure process/methodology documentation
+or tooling with no adopter-fillable placeholder: `docs/collaboration/*.md`
+(other than the persona files below), `docs/templates/*.md`,
+`docs/at-tdd/process.md`, the shipped ADRs and CI/workflow config, and the
+sync scripts themselves. Adopters are never meant to hand-edit these; running
+a text-level 3-way merge on them only produces the avoidable false conflicts
+this ADR already names as a downside, for files where there is nothing
+adopter-specific to protect.
+
+The Adjudicator proposed splitting template files into two tiers instead:
+
+- **Tier 1** (everything not listed under Tier 2): the template is fully
+  authoritative. If the target's copy differs from the template's current
+  copy, the template's version wins outright -- no merge is attempted.
+- **Tier 2**: the five agent persona/contract files that carry adopter-filled
+  placeholders -- `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`,
+  `.grok/rules/*.md`, `.cursor/rules/*.mdc`. When both the target and the
+  template changed one of these since the last sync, the file is left
+  untouched and flagged for AI-assisted reconciliation via
+  `docs/templates/contract-file-sync-prompt.md`, rather than mechanically
+  merged (`git merge-file` cannot tell "adopter's project fact" apart from
+  "adopter's incidental edit") or blindly overwritten (which would destroy
+  the adopter's placeholder fills).
+
+Two follow-on questions were resolved via `AskUserQuestion` (2026-07-16):
+
+- Tier 2 mechanism: a durable prompt template plus `git show` references to
+  the old and new template commits, not a throwaway generated prompt file per
+  run -- consistent with this template's existing `docs/templates/*.md`
+  pattern (`design-intake.md`, `agent-handoff.md`, `ai-work-trace.md`, etc.).
+- Deletion handling (either tier: the target deleted a file the template
+  later changed again): ask interactively when a real terminal is available
+  (default: restore on empty input), default to restoring without prompting
+  otherwise (or under `--non-interactive`), and report the actual per-file
+  outcome at the end of the run rather than only a "needs decision" count.
+  This replaces the previous "always leave it for manual resolution"
+  behavior for this one case.
+
+Numbered ADR and local-issue files the template ships (like this one) are
+Tier 1: they carry no adopter placeholders, and an adopter who wants their
+own decision creates a new ADR or local issue at their own next number rather
+than editing a shipped one.
+
 ## Consequences
 
 Positive:
 
 - Adopting projects can pull in template improvements repeatedly instead of
   only at initial adoption.
-- Local customizations and intentional deletions are preserved by default;
-  nothing is silently overwritten or resurrected.
+- Tier 2 customizations (adopter-filled placeholders) are never silently
+  overwritten or mechanically merged; Tier 1 files never produce a false
+  merge conflict, since adopters are not meant to customize them at all.
 - The template repository carries no list of, or credentials to, adopting
   repositories.
 - The sync always goes through the same branch/PR/CI gate as any other
   change, so a bad merge cannot land without review.
+- The final report names an explicit outcome (added / updated / overwritten /
+  needs AI-assisted merge / restored / kept deleted / ignored / number
+  collision) for every affected file, rather than only aggregate counts.
 
 Negative:
 
 - Adopting projects must keep a local checkout of the template repository
   with enough history to reach the marker commit; a shallow clone missing
   that commit will fail the sync with an explicit error rather than guessing.
-- Three-way text merging on Markdown/YAML files can produce conflicts on
-  reformatting-only changes (e.g., a paragraph rewrap) even when the
-  semantic content does not truly conflict; this trades a few avoidable
-  manual resolutions for never silently overwriting target customizations.
+- A Tier 1 file an adopter hand-edited despite not being meant to (for
+  example, wording a process doc to fit house style) loses that edit on the
+  next sync with no merge attempt and no prompt; `.collaboration-template-ignore`
+  is the only escape hatch, and using it is a manual, deliberate step.
+- Tier 2 conflicts are not resolved by the script at all; a sync with several
+  Tier 2 conflicts requires an agent session per file before the PR can
+  merge, which is slower than an automatic (if occasionally wrong) merge.
 - Nothing runs this automatically; an adopting project that never re-runs the
   script simply never updates. Scheduling it (e.g., via a periodic CI job) is
   left to the adopting project.
-- A clean merge (no conflict markers) is not the same guarantee as "nothing
-  needs review": a hunk can merge cleanly purely because of where the
-  target's own edits fell relative to line boundaries, even immediately next
-  to a hunk that did conflict, and it can introduce a forward reference (for
-  example, to a file also being added by the same sync, or skipped via
-  `.collaboration-template-ignore`) with no visible signal. Reviewers should
-  diff the whole changed file against its pre-sync version, not only search
-  for conflict markers.
+- The default-restore behavior for locally-deleted-but-upstream-changed files
+  means a project that deleted a Tier 2 file on purpose (for example, one
+  that does not use Grok and removed `.grok/rules/*.md`) must either answer
+  "no" interactively each time or add the path to
+  `.collaboration-template-ignore` to avoid it being restored.
 
 ## Enforcement
 
@@ -119,9 +169,17 @@ Code review should reject:
 
 - any change to `scripts/update-ai-collaboration-files.sh` that commits
   directly to the target's trunk branch instead of a dedicated branch.
-- a sync PR merged while it still contains conflict markers or unresolved
-  "needs decision" items in its description.
+- a sync PR merged while it still contains unresolved "NEEDS AI-ASSISTED
+  MERGE" or "NUMBER COLLISIONS" items in its description.
+- an AI-assisted Tier 2 merge (via `docs/templates/contract-file-sync-prompt.md`)
+  committed without Adjudicator review, per
+  `docs/collaboration/prompt-instruction-change-control.md`.
 - removing the `.collaboration-template-ignore` honoring logic, or making the
   update script overwrite ignored paths.
 - adding a registry of adopting repositories or push-based delivery to this
   template repository without superseding this ADR.
+- moving a file into or out of the Tier 2 persona/contract list
+  (`is_contract_persona_file` in
+  `scripts/lib/collaboration-template-paths.sh`) without also updating
+  `docs/collaboration/prompt-instruction-change-control.md`'s contract file
+  list, since the two are meant to describe the same file set.

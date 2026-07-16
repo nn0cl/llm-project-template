@@ -53,18 +53,27 @@ with their own empty issue, trace, and spec ledgers.
    equivalent) so it has the commit you want to sync to.
 2. Optionally list paths the target has intentionally diverged from in
    `.collaboration-template-ignore` (simple glob patterns, one per line).
-3. Run `scripts/update-ai-collaboration-files.sh --target <repo>`.
-4. Review the reported summary: files added, updated, merged, files with
-   conflict markers, files flagged as "needs decision" (deleted in the
-   target but changed upstream since the last sync), and any "NUMBER
-   COLLISIONS" (a newly added ADR or local issue shares a number with an
-   existing target file under a different name). A "needs decision" item can
-   also mean the target renamed the file (for example, to its own sequential
-   ADR/issue number) rather than truly deleting it -- check for a
-   same-content match under a different filename before restoring anything.
-5. Resolve any conflict markers or flagged items before merging the PR the
-   script opened. Never merge a sync PR with unresolved conflict markers,
-   unresolved NUMBER COLLISIONS, or unresolved NEEDS DECISION items.
+3. Run `scripts/update-ai-collaboration-files.sh --target <repo>` (add
+   `--non-interactive` for unattended/CI runs; see below for what that
+   changes).
+4. Review the reported summary. Template files are split into two tiers (see
+   ADR 0008): **Tier 1** (most files -- process docs, templates, shipped
+   ADRs, CI/scripts) is fully template-authoritative, so a differing file is
+   reported as **Overwritten** with no merge attempt. **Tier 2** (the five
+   agent persona/contract files: `AGENTS.md`, `CLAUDE.md`,
+   `.github/copilot-instructions.md`, `.grok/rules/*.md`,
+   `.cursor/rules/*.mdc`) is never mechanically merged or overwritten; a
+   conflicting Tier 2 file is reported as **NEEDS AI-ASSISTED MERGE** and left
+   untouched. Other categories: **Added** (new upstream files), **Updated**
+   (either tier, target had not diverged), **Restored** / **Kept deleted**
+   (the target had deleted a file the template changed again), and **NUMBER
+   COLLISIONS** (a newly added ADR or local issue shares a number with an
+   existing target file under a different name).
+5. For every file under NEEDS AI-ASSISTED MERGE, run
+   `docs/templates/contract-file-sync-prompt.md` with an agent (the script's
+   output names the old ref, new ref, and file path to use) before merging.
+   Resolve any NUMBER COLLISIONS by renumbering. Never merge a sync PR with
+   unresolved NEEDS AI-ASSISTED MERGE or NUMBER COLLISIONS items.
 6. If the sync introduces new cross-cutting process vocabulary (for example,
    a new operating-path or phase concept), check whether the target's own
    `CLAUDE.md`/`AGENTS.md` needs a matching, reviewed update so the newly
@@ -72,6 +81,15 @@ with their own empty issue, trace, and spec ledgers.
    uses. A project that customized `CLAUDE.md` before that vocabulary
    existed will not get it added automatically, and imported docs that
    reference an unused concept are worse than no docs.
+
+When a file the target deleted was changed again upstream, the script asks
+`Restore '<path>'? [Y/n]` if it is running with a real terminal attached,
+defaulting to restore on an empty answer; with `--non-interactive`, or with
+no terminal attached (for example, a CI job), it restores without asking. A
+project that deleted a file on purpose and wants to keep it deleted across
+syncs (for example, a project not using Grok that removed
+`.grok/rules/*.md`) should add that path to `.collaboration-template-ignore`
+rather than answering "no" on every sync.
 
 ### Recovering When a Repository Predates the Marker
 

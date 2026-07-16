@@ -47,3 +47,20 @@ is_collaboration_template_excluded() {
   done
   return 1
 }
+
+# Tier 2: the five agent persona/contract files that carry adopter-filled
+# placeholders (project name, stack, domain boundaries, external resources).
+# A mechanical text merge or blind overwrite on these can destroy or bury
+# adopter-specific facts, so update-ai-collaboration-files.sh routes conflicts
+# on these to AI-assisted reconciliation instead (see
+# docs/templates/contract-file-sync-prompt.md) rather than to `git merge-file`
+# or an unconditional overwrite. Everything else in
+# collaboration_template_paths is Tier 1: the template is fully authoritative.
+is_contract_persona_file() {
+  local rel="$1"
+  case "$rel" in
+    AGENTS.md|CLAUDE.md|.github/copilot-instructions.md) return 0 ;;
+    .grok/rules/*|.cursor/rules/*) return 0 ;;
+    *) return 1 ;;
+  esac
+}

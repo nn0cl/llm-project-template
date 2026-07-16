@@ -9,19 +9,31 @@ Usage:
 Pulls later AI-human collaboration template updates into a repository that
 already adopted the template (via copy-ai-collaboration-files.sh).
 
-Unlike the initial copy, this performs a 3-way merge per file:
-  base   = the template file as of the target's recorded sync commit
-  ours   = the target's current file (keeps target customizations)
-  theirs = the template's current file
+Template files are split into two tiers:
+  Tier 1 (most files): pure process/methodology documents and tooling with no
+    adopter-filled placeholders. The template is fully authoritative -- if
+    the target's copy differs from the template's current copy, the
+    template's version wins, unconditionally.
+  Tier 2 (AGENTS.md, CLAUDE.md, .github/copilot-instructions.md,
+    .grok/rules/*.md, .cursor/rules/*.mdc): agent persona/contract files that
+    carry adopter-filled placeholders (project name, stack, domain
+    boundaries, external resources). When both the target and the template
+    changed one of these since the last sync, the file is left untouched and
+    flagged for AI-assisted reconciliation using
+    docs/templates/contract-file-sync-prompt.md, rather than mechanically
+    merged or overwritten.
 
-Files the target intentionally deleted since the last sync are left deleted
-unless the template also changed them, in which case they are flagged for a
-manual decision instead of being silently restored. Files listed in the
-target's .collaboration-template-ignore are never touched.
+A file the target deleted since the last sync, where the template changed it
+again afterward, is not silently resolved either way: with an interactive
+terminal, the script asks whether to restore it (default: restore); without
+one (or with --non-interactive), it restores by default. The final report
+lists the actual outcome for every affected file. Files listed in the
+target's .collaboration-template-ignore are never touched, regardless of
+tier.
 
 This script never commits to the target's trunk branch. It creates a
-dedicated branch, commits the merged result there, and (when possible) opens
-a pull request, per docs/collaboration/branch-commit-pr-discipline.md.
+dedicated branch, commits the result there, and (when possible) opens a pull
+request, per docs/collaboration/branch-commit-pr-discipline.md.
 
 Options:
   --target PATH        Target repository directory. Required.
@@ -30,6 +42,8 @@ Options:
   --branch-prefix TEXT  Branch name prefix. Default: process/update-collab-template
   --no-pr               Create the branch and commit locally; skip pushing
                         and opening a PR even if `gh` is available.
+  --non-interactive     Never prompt for locally-deleted-but-upstream-changed
+                        files; always take the default (restore).
   --dry-run             Report planned actions without changing anything.
   -h, --help            Show this help.
 USAGE
@@ -43,6 +57,7 @@ source_repo="$repo_root"
 branch_prefix="process/update-collab-template"
 no_pr=false
 dry_run=false
+non_interactive=false
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
@@ -60,6 +75,10 @@ while [ "$#" -gt 0 ]; do
       ;;
     --no-pr)
       no_pr=true
+      shift
+      ;;
+    --non-interactive)
+      non_interactive=true
       shift
       ;;
     --dry-run)
@@ -159,17 +178,40 @@ is_ignored() {
 # shellcheck source=lib/collaboration-template-paths.sh
 source "$script_dir/lib/collaboration-template-paths.sh"
 
-workdir="$(mktemp -d)"
-trap 'rm -rf "$workdir"' EXIT
-
 added=()
 updated=()
-merged=()
-conflicts=()
-needs_decision=()
+overwritten=()
+needs_ai_merge=()
+restored=()
+kept_deleted=()
 collisions=()
 ignored=()
 unchanged_count=0
+
+# Whether stdin/stdout are both a real terminal, i.e. an operator is present
+# to answer the restore-or-keep-deleted prompt interactively.
+is_interactive_tty() {
+  [ "$non_interactive" != true ] && [ -t 0 ] && [ -t 1 ]
+}
+
+# Asks whether to restore a target-deleted, template-since-changed file.
+# Defaults to "restore" on empty input, non-interactive mode, or no TTY, per
+# the Adjudicator's 2026-07-16 decision (LISS-0016).
+ask_restore_or_keep_deleted() {
+  local rel="$1"
+  if is_interactive_tty; then
+    local answer=""
+    echo "Before deciding: check whether '$rel' was renamed rather than deleted" >&2
+    echo "(e.g. to the target's own sequential ADR/local-issue number) elsewhere" >&2
+    echo "in the repository." >&2
+    read -r -p "Target deleted '$rel' but the template changed it since the last sync. Restore it? [Y/n] " answer || true
+    case "$answer" in
+      [nN]*) return 1 ;;
+      *) return 0 ;;
+    esac
+  fi
+  return 0
+}
 
 # Classifies a relative path as a numbered ADR or local-issue file. On match,
 # sets numbered_class_dir/_num/_kind and returns 0; otherwise returns 1.
@@ -307,7 +349,15 @@ process_file() {
       if [ "$base_content" = "$(cat "$theirs_file")" ]; then
         : # target deleted it on purpose, upstream never changed it since: respect deletion.
       else
-        needs_decision+=("$rel (deleted locally, changed upstream since last sync)")
+        if ask_restore_or_keep_deleted "$rel"; then
+          restored+=("$rel")
+          if [ "$dry_run" != true ]; then
+            mkdir -p "$(dirname "$ours_file")"
+            cp "$theirs_file" "$ours_file"
+          fi
+        else
+          kept_deleted+=("$rel")
+        fi
       fi
     fi
     return
@@ -328,6 +378,8 @@ process_file() {
   fi
 
   if [ "$base_missing" = false ] && [ "$ours_content" = "$base_content" ]; then
+    # Target had not diverged from the template: a plain copy is safe
+    # regardless of tier, since there is no adopter customization to lose.
     updated+=("$rel")
     if [ "$dry_run" != true ]; then
       cp "$theirs_file" "$ours_file"
@@ -340,30 +392,20 @@ process_file() {
     return
   fi
 
-  local base_tmp="$workdir/base"
-  local ours_tmp="$workdir/ours"
-  local theirs_tmp="$workdir/theirs"
-  if [ "$base_missing" = true ]; then
-    : > "$base_tmp"
-  else
-    git -C "$source_repo" show "$old_ref:$rel" > "$base_tmp"
-  fi
-  cp "$ours_file" "$ours_tmp"
-  cp "$theirs_file" "$theirs_tmp"
-
-  local merge_status=0
-  git merge-file -p -L "ours (target)" -L "base (last sync)" -L "theirs (template)" \
-    "$ours_tmp" "$base_tmp" "$theirs_tmp" > "$workdir/merged" 2>/dev/null || merge_status=$?
-
-  if [ "$merge_status" -eq 0 ]; then
-    merged+=("$rel")
-  else
-    conflicts+=("$rel")
+  # Both sides changed since the marker commit.
+  if is_contract_persona_file "$rel"; then
+    # Tier 2: never mechanically merge or overwrite a file that can carry
+    # adopter-filled placeholders. Leave the target's current file in place
+    # and flag it for AI-assisted reconciliation.
+    needs_ai_merge+=("$rel")
+    return
   fi
 
+  # Tier 1: the template is fully authoritative. No merge is attempted.
+  overwritten+=("$rel")
   if [ "$dry_run" != true ]; then
     mkdir -p "$(dirname "$ours_file")"
-    cp "$workdir/merged" "$ours_file"
+    cp "$theirs_file" "$ours_file"
   fi
 }
 
@@ -389,21 +431,21 @@ echo "Source: $source_repo ($old_ref -> $new_ref)"
 echo "Target: $target"
 echo
 print_list "Added (new upstream files):" "${added[@]+"${added[@]}"}"
-print_list "Updated (target had not customized):" "${updated[@]+"${updated[@]}"}"
-print_list "Merged cleanly (target customization preserved):" "${merged[@]+"${merged[@]}"}"
-print_list "CONFLICTS (manual resolution required, markers left in file):" "${conflicts[@]+"${conflicts[@]}"}"
-print_list "NUMBER COLLISIONS (manual renumbering required):" "${collisions[@]+"${collisions[@]}"}"
-print_list "NEEDS DECISION (deleted locally, changed upstream):" "${needs_decision[@]+"${needs_decision[@]}"}"
-if [ "${#needs_decision[@]}" -gt 0 ]; then
-  echo "  Hint: before restoring any item above, check whether the target already"
-  echo "  has the same content under a different filename (e.g. a renumbered ADR or"
-  echo "  local issue) elsewhere in the repository -- it may be a rename, not a"
-  echo "  real deletion."
+print_list "Updated (Tier 1 or 2, target had not diverged from the template):" "${updated[@]+"${updated[@]}"}"
+print_list "Overwritten (Tier 1, template is authoritative -- target had diverged):" "${overwritten[@]+"${overwritten[@]}"}"
+print_list "NEEDS AI-ASSISTED MERGE (Tier 2 persona/contract file, both sides changed):" "${needs_ai_merge[@]+"${needs_ai_merge[@]}"}"
+if [ "${#needs_ai_merge[@]}" -gt 0 ]; then
+  echo "  Left untouched. Run docs/templates/contract-file-sync-prompt.md with an"
+  echo "  agent for each file above, using old ref $old_ref and new ref $new_ref in"
+  echo "  $source_repo, before merging this branch."
 fi
+print_list "Restored (was deleted locally; template changed it since last sync):" "${restored[@]+"${restored[@]}"}"
+print_list "Kept deleted (operator decision):" "${kept_deleted[@]+"${kept_deleted[@]}"}"
+print_list "NUMBER COLLISIONS (manual renumbering required):" "${collisions[@]+"${collisions[@]}"}"
 print_list "Ignored (per .collaboration-template-ignore):" "${ignored[@]+"${ignored[@]}"}"
 echo "Unchanged: $unchanged_count file(s)"
 
-total_changes=$(( ${#added[@]} + ${#updated[@]} + ${#merged[@]} + ${#conflicts[@]} ))
+total_changes=$(( ${#added[@]} + ${#updated[@]} + ${#overwritten[@]} + ${#restored[@]} ))
 
 if [ "$dry_run" = true ]; then
   echo
@@ -436,14 +478,14 @@ MARKER
 git -C "$target" add -A
 git -C "$target" commit -m "chore: sync collaboration template to ${new_ref:0:8}
 
-Added: ${#added[@]}, updated: ${#updated[@]}, merged: ${#merged[@]}, conflicts: ${#conflicts[@]}, number collisions: ${#collisions[@]}, needs decision: ${#needs_decision[@]}.
+Added: ${#added[@]}, updated: ${#updated[@]}, overwritten: ${#overwritten[@]}, needs AI-assisted merge: ${#needs_ai_merge[@]}, restored: ${#restored[@]}, kept deleted: ${#kept_deleted[@]}, number collisions: ${#collisions[@]}.
 See PR description or this commit's file list for details." >/dev/null
 
 echo
 echo "Committed sync on branch $branch_name."
 
-if [ "${#conflicts[@]}" -gt 0 ] || [ "${#collisions[@]}" -gt 0 ] || [ "${#needs_decision[@]}" -gt 0 ]; then
-  echo "Manual resolution needed before merging (see CONFLICTS / NUMBER COLLISIONS / NEEDS DECISION above)."
+if [ "${#needs_ai_merge[@]}" -gt 0 ] || [ "${#collisions[@]}" -gt 0 ]; then
+  echo "Manual resolution needed before merging (see NEEDS AI-ASSISTED MERGE / NUMBER COLLISIONS above)."
 fi
 
 if [ "$no_pr" = true ]; then
@@ -468,16 +510,19 @@ pr_body="$(cat <<BODY
 Sync from collaboration template ${old_ref:0:8} -> ${new_ref:0:8}.
 
 - Added: ${#added[@]}
-- Updated: ${#updated[@]}
-- Merged (target customization preserved): ${#merged[@]}
-- Conflicts needing manual resolution: ${#conflicts[@]}
+- Updated (Tier 1/2, target had not diverged): ${#updated[@]}
+- Overwritten (Tier 1, template authoritative): ${#overwritten[@]}
+- Needs AI-assisted merge (Tier 2 persona/contract files): ${#needs_ai_merge[@]}
+- Restored (was deleted locally, template changed since): ${#restored[@]}
+- Kept deleted (operator decision): ${#kept_deleted[@]}
 - Number collisions needing manual renumbering: ${#collisions[@]}
-- Needs decision (deleted locally, changed upstream): ${#needs_decision[@]}
 - Ignored: ${#ignored[@]}
 
 This branch follows docs/collaboration/branch-commit-pr-discipline.md: it
-must pass CI before merge and should not be merged with unresolved conflict
-markers, unresolved NUMBER COLLISIONS, or unresolved NEEDS DECISION items.
+must pass CI before merge and should not be merged with unresolved NEEDS
+AI-ASSISTED MERGE or NUMBER COLLISIONS items. For each file needing
+AI-assisted merge, run docs/templates/contract-file-sync-prompt.md with an
+agent (old ref ${old_ref}, new ref ${new_ref}) before merging.
 BODY
 )"
 
