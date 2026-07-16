@@ -61,7 +61,14 @@
 
 ## Work Notes
 
-- None yet; this is a backlog placeholder.
+- 2026-07-16: The README half of this issue is resolved by a different
+  route than delimiters: `README.md` / `README.ja.md` were removed from
+  `collaboration_template_paths` (and from `ci.yml`'s `required_files`)
+  entirely, on the grounds that the template README carries no
+  placeholders, describes the template repository itself, and was the
+  documented worst conflict class for adopters. Projects now own their
+  README with no template sync against it. The remaining scope of this
+  issue is the `ci.yml` shared-block question only.
 
 ## Verification
 

@@ -107,6 +107,11 @@ delete outright.
 
 ### Safe to delete outright (template tooling only)
 
+Trim `.github/workflows/ci.yml`'s `required_files` list first — see
+"Must edit, not delete" below — because that list asserts the existence of
+almost every file this template installs, including the ones in this
+section.
+
 - `scripts/copy-ai-collaboration-files.sh`
 - `scripts/update-ai-collaboration-files.sh`
 - `scripts/init-llm-context.sh`
@@ -152,21 +157,27 @@ and keep anything your project added:
 
 ### Must edit, not delete
 
-- `.github/workflows/ci.yml` — the "Check required project documents" and
-  "Check architecture decision records" steps assert that the contract files
-  above exist. If you delete `AGENTS.md` or the ADRs without editing this
-  workflow, CI starts failing on the next push. Rewrite or remove those
-  steps to match what you actually kept.
-- `README.md` / `README.ja.md` — once adopted, these are your project's own
-  README, not the template's. Edit out the template-specific sections (this
-  Quickstart link, the install instructions) rather than deleting the file.
+- `.github/workflows/ci.yml` — edit this **first**. Its "Check required
+  project documents" step asserts the existence of nearly every file this
+  template installs — including the scripts, templates, and process docs
+  listed as safe to delete above — and "Check architecture decision
+  records" asserts ADRs 0001–0011. Deleting anything before trimming those
+  lists makes CI fail on the next push. Rewrite or remove those steps to
+  match what you actually keep.
 
-### Not part of the template
+Your project's `README.md` is never part of this template's distribution
+(the template's own README stays in the template repository), so uninstall
+does not touch it. If your project adopted an older template version that
+still copied `README.md` / `README.ja.md`, edit any template-derived
+sections out of them rather than deleting the files.
+
+### Distributed, but useful on their own
 
 `.github/dependabot.yml`, `.github/pull_request_template.md`, and
-`.github/ISSUE_TEMPLATE/` are generic GitHub configuration this template
-happens to ship with sensible defaults. Keep them regardless of whether you
-keep the AI-collaboration process — they are useful on their own.
+`.github/ISSUE_TEMPLATE/` are part of this template's distribution, but
+they are generic GitHub configuration with sensible defaults, not
+AI-collaboration process. Keep them regardless of whether you keep the
+process — they are useful on their own.
 
 ## Why this file will not bloat agent context
 
