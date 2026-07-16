@@ -40,7 +40,7 @@ applicable, and task routing.
 - Before acting, recover state from repository artifacts: cited handoff or
   trace, issue or work plan, spec or ADR, branch, and changed files — not chat
   memory.
-- If the Referee message lacks operating path, phase, or an authoritative spec
+- If the Adjudicator message lacks operating path, phase, or an authoritative spec
   (or explicit Architecture Path scope), stop after design intake and ask.
 - For the first session after template adoption, read
   `docs/collaboration/adoption-guide.md` before changing target-owned files.
@@ -49,7 +49,7 @@ applicable, and task routing.
 
 ## Phase Gate
 
-Only execute the phase explicitly requested by the human Referee.
+Only execute the phase explicitly requested by the human Adjudicator.
 
 Do not implement ahead of the current phase. Do not "helpfully" generate
 production code during Phase 1.

@@ -15,7 +15,7 @@
 - [ ] Local issue / GitHub issue / no-issue reason is identified.
 - [ ] Issue dependencies are resolved, waived, or not applicable.
 - [ ] Design intake / context ledger is included or not applicable.
-- [ ] Referee approval points are identified.
+- [ ] Adjudicator approval points are identified.
 - [ ] Phase transition is explicit.
 - [ ] Handoff notes are included when work is incomplete.
 - [ ] AI payload includes/omits are documented when AI assistance shaped the change.
