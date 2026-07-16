@@ -2,15 +2,13 @@
 
 2026-07-05. Non-normative. Related: ADR 0003, `docs/at-tdd/process.md`.
 
-> Japanese original (authoritative): [../2026-07-05-rationale-adjudicator-centered-collaboration.md](../2026-07-05-rationale-adjudicator-centered-collaboration.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
+> Japanese original (authoritative): [../2026-07-05-rationale-adjudicator-centered-collaboration.md](../2026-07-05-rationale-adjudicator-centered-collaboration.md) at commit `6910bf0` (`6910bf0ecd025b7561b1446568f0459c00283b3d`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
 
 ---
 
-Agreeing that "human-in-the-loop is necessary" is not enough to run a project. Unless human placement is designed as architecture, teams slide into one of two extremes: constantly monitoring every agent token, or merging agent output without review. The first exceeds human limits; the second abandons engineering responsibility.
+Agreeing that “human-in-the-loop is necessary” is not enough. Without designing human placement, teams drift toward watching every token or merging without review—unsustainable or irresponsible.
 
-I take a third path: structural collaboration. The human Adjudicator explicitly owns decision points and delegates generation and verification to the agent.
-
-The Adjudicator owns phase transition approvals, ADR (Architecture Decision Record) acceptance, Phase 1 test domain reviews, and final decision authority over ambiguous choices. In contrast, the agent owns formulating design intake, context selection, generating code and documentation appropriate to the phase, visualizing assumptions, verifying with deterministic tools, and handing off to the human. The very fact that this responsibility boundary is documented and embedded in the system is the prerequisite for sustainable collaboration (ADR 0003).
+The third path is structural collaboration: the Adjudicator owns decision points; generation and mechanical verification go to the agent (and deterministic tools). Role detail lives in `docs/collaboration/ai-human-scheme.md` and [The Agent is a Sandbox](./2026-07-07-rationale-saas-agent-as-sandbox.md); this essay focuses on **decision points, phases, and responsibility**. Documented boundaries are the premise (ADR 0003).
 
 ## Do Not Make Humans "Constant Monitors": Beyond the Irony of Automation
 
@@ -40,7 +38,7 @@ In AI collaboration, this "verbalization of behavior" and "shared understanding"
 
 ## Stopping Phase Skips: The Sequence of Responsibility
 
-"Going straight from an ambiguous request to production code"—this is an AI agent's most characteristic, and most dangerous, failure mode. To prevent this runaway behavior, the absolute prohibition of phase skipping is the primary bulwark. Green after Red; Refactor after Green. The process physically forbids entering Phase 2 implementation without the Phase 1 tests being reviewed by the Adjudicator.
+"Going straight from an ambiguous request to production code"—this is an AI agent's most characteristic, and most dangerous, failure mode. To prevent this runaway behavior, the prohibition of phase skipping (per operating contract / ADR 0003) is the primary bulwark. Green after Red; Refactor after Green. The process forbids under the operating contract entering Phase 2 implementation without the Phase 1 tests being reviewed by the Adjudicator.
 
 What is important here is that phases are not merely a "sequence of tasks" but a "sequence of responsibility." In Phase 1, the agent translates expected behavior into test code, but does not yet hold responsibility for the production implementation. The Adjudicator verifies that the translation matches the domain requirements. In Phase 2, the agent takes responsibility for writing the minimal implementation to pass the reviewed tests, but conversely is stripped of the "authority to change the tests." In Phase 3, readability is improved without changing behavior. Precisely because authority and responsibility are clearly separated in each phase, a human can concentrate on one single context per review.
 

@@ -2,7 +2,7 @@
 
 2026-07-05. Non-normative. Gateway to detailed topics.
 
-> Japanese original (authoritative): [../2026-07-05-rationale-target-end-state.md](../2026-07-05-rationale-target-end-state.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
+> Japanese original (authoritative): [../2026-07-05-rationale-target-end-state.md](../2026-07-05-rationale-target-end-state.md) at commit `6910bf0` (`6910bf0ecd025b7561b1446568f0459c00283b3d`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
 
 ---
 
@@ -64,9 +64,7 @@ As Bainbridge's irony of automation ([ScienceDirect](https://www.sciencedirect.c
 
 ## Do Not Mix Reading Materials and Norms
 
-The contents of the `docs/research/` folder, including this text, are explanations for humans to decipher the philosophy of software development. Agents need not read this folder as daily task input (not a physical ban; excluded from the normal allowlist — see [../README.md](../README.md)). Furthermore, the discourses and references here do not alter the actual rules of the practical project operational template provided by `llm-project-template`.
-
-This separation of "norms" and "explanations" is architecturally critical. The absolute operational rules agents must follow are strictly defined in documents like `AGENTS.md`, ADRs, `architecture/`, and `collaboration/`. `research/` is the place to write in-depth the Rationale behind why those rules are necessary. It is fertile ground for humans to deeply understand the ideology, maintain the rules without letting them become dead letters, and, if necessary, elevate them to another artifact through discussion. It is not, in itself, a direct document of commands to the agent.
+`docs/research/` is human-facing explanation; agents need not load it as daily task input ([../README.md](../README.md)). Editing it does not change the operational template. Norms live in `AGENTS.md`, ADRs, `architecture/`, and `collaboration/`; research holds rationale. Detail: [Normative vs. Reading Documents](./2026-07-06-rationale-normative-vs-reading-documents.md).
 
 ## To Detailed Topics
 

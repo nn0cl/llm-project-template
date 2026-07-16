@@ -2,7 +2,7 @@
 
 2026-07-05. Non-normative. Related: ADR 0005, ADR 0006.
 
-> Japanese original (authoritative): [../2026-07-05-rationale-repository-native-planning-and-change-control.md](../2026-07-05-rationale-repository-native-planning-and-change-control.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
+> Japanese original (authoritative): [../2026-07-05-rationale-repository-native-planning-and-change-control.md](../2026-07-05-rationale-repository-native-planning-and-change-control.md) at commit `6910bf0` (`6910bf0ecd025b7561b1446568f0459c00283b3d`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
 
 ---
 
@@ -20,18 +20,13 @@ A plan is not merely a ToDo list. It is a dependency graph expressed through met
 
 For lightweight tasks such as editing reading materials, the Adjudicator may explicitly omit creating an issue (granting a waiver). Even then, this waiver should not be handled casually by verbal agreement but explicitly recorded in the work trace. Not creating an issue is an architectural decision to streamline a process; it is not a decision to erase the history of the work.
 
-## ADRs are not Records, they are "Laws"
+## ADRs go beyond memos: treat them as binding decisions
 
-The idea of placing architecture decisions in repository history traces back to Michael Nygard's proposal for ADRs (Architecture Decision Records) ([Cognitect](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)). For teams composed only of humans, ADRs might have functioned simply as "memos summarizing decisions and their context." However, in an environment where AI agents operate autonomously, **ADRs must be redefined not as mere records, but as "Legislation" in the system space.**
+Placing architecture decisions in repository history goes back to Michael Nygard’s ADR proposal ([Cognitect](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)). In human-only teams ADRs may act as short memos of context and outcome. When agents lose session context, **leaving ADRs as “past notes” is too weak**: models lean on generic training priors and may violate local decisions.
 
-In *Code and Other Laws of Cyberspace*, Lawrence Lessig argued that code—as an architecture—regulates human behavior much like law (the famous "Code is Law"). AI collaboration introduces a reversal of this relationship: **the rules (Law) written in the repository dictate the generated code (Code).** For an AI, which loses context with every new session and uses provided documents as initial conditions for inference, the rules in the repository serve as the supreme governing law. However, this is not physical enforcement ([The Agent is a Sandbox](./2026-07-07-rationale-saas-agent-as-sandbox.md)). If ADRs are treated merely as "past memos," AI will gravitate toward its learned general best practices and casually violate them. Therefore, the normative documents must clearly declare that "ADRs are laws, and generating code contrary to them is strictly forbidden," and the execution of this law must be backed by the Adjudicator's review and CI.
+So this template treats ADRs on the normative side as **binding decisions**, contract files (`AGENTS.md` and peers) as how those decisions are enforced in sessions, and issues/traces as change procedure (ADR 0005 / 0006). That is not physical enforcement ([The Agent is a Sandbox](./2026-07-07-rationale-saas-agent-as-sandbox.md)). Lessig’s “Code is Law” is a famous **analogy**—code shapes behavior—which helps say “repository rules steer generated code,” but it is **not a legal system**. Review and CI back documented decisions and process, not a metaphoric judiciary.
 
-This template extends the philosophy of ADRs into a comprehensive legal system governing the entire project:
-- **ADRs** are the basic laws that must be obeyed.
-- **Instructions (Contract files / AGENTS.md)** are the "enforcement regulations" for executing the laws on the ground.
-- **Plans (Issues) and Histories (Traces)** are the "administrative procedures and records" for operating and revising the laws.
-
-In AI collaboration, the very acts of "which files the agent is instructed to read" and "at which phase work is stopped" have a decisive impact on the implementation. To change the AI's behavior, one must alter the enforcement regulations (contract files), which requires going through the proper procedures (Issues/Traces). Running this strict legal system—which classical ADRs alone cannot cover—is the reality of sustainable project management in the AI era.
+In AI collaboration, which files are loaded and which phase is open already shape implementation. Changing behavior requires changing contracts through the prescribed procedure—more than classical ADR memo culture alone.
 
 ## Prompts are Code, Not Configuration
 

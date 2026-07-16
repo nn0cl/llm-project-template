@@ -2,19 +2,13 @@
 
 2026-07-06. Non-normative. Related: `docs/research/README.md`, `agent-quickstart.md`.
 
-> Japanese original (authoritative): [../2026-07-06-rationale-normative-vs-reading-documents.md](../2026-07-06-rationale-normative-vs-reading-documents.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
+> Japanese original (authoritative): [../2026-07-06-rationale-normative-vs-reading-documents.md](../2026-07-06-rationale-normative-vs-reading-documents.md) at commit `6910bf0` (`6910bf0ecd025b7561b1446568f0459c00283b3d`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
 
 ---
 
-As a project matures, documentation volume grows. The line between rules the system must obey and background reading blurs. Humans skip what they do not need right now. Agents cannot: anything in the context window—chatty notes or deep philosophy—shapes reasoning and code generation. So agent inputs are a strict allowlist, and reading material and philosophy sit outside that list by structure.
+As documentation grows, the line between “rules to obey” and “background reading” blurs. Humans skip; agents treat everything in context as influence. So normal task inputs are an allowlist, and reading material sits outside it (see [../README.md](../README.md); same point as the target-end-state and sandbox essays).
 
-However, "agents need not read reading materials as daily task input" is not a physical access ban, but an architectural expectation (see [../README.md](../README.md)). It means there is no need to load `research` as normal task input. The rich text (philosophy) written for humans to deeply understand the development ideology, and the operational contracts (constitution) that agents mechanically follow, have entirely different purposes and readers. If this distinction is blurred, we are forced to choose: either we write rich reading materials that bloat agent instructions and dull their reasoning, or we write strict agent instructions that make human-facing explanations thin and dry. Structural separation of documentation is an architecture designed to achieve both at the highest quality.
-
-"I want to manage investigation results as reports with Sources, separate from design documents and operational constraint documents—as reading material that agents need not read as daily task input. The research folder is not copied when the template is rolled out to other repositories."
-
-In this template, documents have three distinct tiers: Design Documents (Architecture), Operational Constraints (Collaboration), and Reading Materials (Research). The agent's context is always composed solely of the top two "Norms." However, investigation results and philosophy are not discarded. They are accumulated with their Sources for future human engineers. Only the conclusions that are debated, agreed upon, and codified into rules are extracted and "elevated" into ADRs, collaboration docs, or issues.
-
-Editing `docs/research/` does not change the project's operational template (the operational rules themselves) provided by `llm-project-template`. No matter how many references you add, or how thickly and philosophically you rewrite an essay, that alone does not constitute any change to the norms. If a change in norms is required, it must be submitted separately as a diff to an ADR or collaboration document and pass the Adjudicator's review. It is precisely because of this sharp dividing line that humans can safely write deeply and richly about philosophy and background without fear of breaking the system's behavior.
+Three tiers: Architecture, Collaboration, Research. Agents’ normal inputs are the first two. Investigations and philosophy stay as sourced reading for humans; only agreed conclusions promote one-way into ADRs / collaboration / issues. Editing `docs/research/` alone does not change the operational template.
 
 ## Correspondence with Diátaxis: Information Architecture
 

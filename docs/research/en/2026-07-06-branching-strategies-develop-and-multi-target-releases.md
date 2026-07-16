@@ -2,15 +2,15 @@
 
 2026-07-06 Research. Non-normative. Related: The problem of long-lived branches and integration latency.
 
-> Japanese original (authoritative): [../2026-07-06-branching-strategies-develop-and-multi-target-releases.md](../2026-07-06-branching-strategies-develop-and-multi-target-releases.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
+> Japanese original (authoritative): [../2026-07-06-branching-strategies-develop-and-multi-target-releases.md](../2026-07-06-branching-strategies-develop-and-multi-target-releases.md) at commit `6910bf0` (`6910bf0ecd025b7561b1446568f0459c00283b3d`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
 
 ---
 
 AI agents generate code far faster than humans type. If that throughput diverges into unchecked branches, the project quickly piles up "integration latency" debt. In large products with multiple release targets, how do we fold high-speed artifacts into the mainline safely?
 
-That question came from a concrete failure (LISS-0005). During a development session by a second adoption adapter (adopting project; see [../README.md](../README.md)), the agent cheerfully created a `develop` branch and deferred merging to mainline. Unintegrated work stacked on the feature branch. The Adjudicator asked: "Should the template ban `develop` outright?"
+That question came from a concrete failure (LISS-0005). During a development session by a second adopter (adopting project; see [../README.md](../README.md)), the agent cheerfully created a `develop` branch and deferred merging to mainline. Unintegrated work stacked on the feature branch. The Adjudicator asked: "Should the template ban `develop` outright?"
 
-This essay answers that question. Conclusion first: what the evidence condemns is not the mere existence of long-lived branches, but integration latency. Healthy multi-target work does not fork the source tree forever; it uses upstream-first propagation and architectural divergence (feature toggles or Ports/Adapters).
+This essay answers that question. Conclusion first: what the evidence condemns is not the mere existence of long-lived branches, but integration latency. Healthy multi-target work usually avoids permanent source-tree forks; a strong pattern is upstream-first propagation and architectural divergence (feature toggles or Ports/Adapters).
 
 ## Is `develop` Acceptable? The True Meaning of DORA Metrics
 
@@ -50,7 +50,7 @@ When names diverge from reality, AI agents learn incorrectly from the names. If 
 
 ## Proposal for Operational Contracts in Multi-Target Environments
 
-The default etiquette of this template is Trunk-oriented (main and short-lived branches), and long-lived branches like `develop` are generally not recommended. However, relaxing this "generally not recommended" stance into a pragmatic approach of "tolerating long-lived branches under a clear integration contract (ADR)" is amply supported by the evidence above. Long-lived integration, release, or environment branches can be justified for the specialized requirements of multi-version or multi-target systems, but the adopting project's ADR must explicitly define that operational contract.
+The default etiquette of this template is Trunk-oriented (main and short-lived branches), and long-lived branches like `develop` are generally not recommended. However, relaxing this "generally not recommended" stance into a pragmatic approach of "tolerating long-lived branches under a clear integration contract (ADR)" is amply supported by the evidence above. Long-lived integration, release, or environment branches can be justified for the specialized requirements of multi-version or multi-target systems, but if kept, writing the operational contract into an ADR is the safe path (a proposal here; research alone does not make it normative).
 
 When formalizing this into a normative rule, this document proposes the following five points to be addressed in that ADR (adoption and exact wording are up to the Adjudicator and the adopting project):
 - The upstream source of truth (declaring that shared changes are upstream-first).

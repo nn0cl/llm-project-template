@@ -3,7 +3,7 @@
 2026-07-07. Non-normative.
 Related: [Target End State](./2026-07-05-rationale-target-end-state.md), [The Adjudicator and Phases](./2026-07-05-rationale-adjudicator-centered-collaboration.md), [Repository-Native Planning](./2026-07-05-rationale-repository-native-planning-and-change-control.md), [Design First and Context](./2026-07-05-rationale-design-first-minimal-context.md).
 
-> Japanese original (authoritative): [../2026-07-07-rationale-saas-agent-as-sandbox.md](../2026-07-07-rationale-saas-agent-as-sandbox.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
+> Japanese original (authoritative): [../2026-07-07-rationale-saas-agent-as-sandbox.md](../2026-07-07-rationale-saas-agent-as-sandbox.md) at commit `6910bf0` (`6910bf0ecd025b7561b1446568f0459c00283b3d`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
 
 ---
 
@@ -13,19 +13,13 @@ Modern coding agents already move with surprising freedom: they read project fil
 
 Freedom of local operation is not yet an enterprise "project." Integrating generated snippets into a coherent system is not a product vendors ship as a package; **it is an architecture the team writes into their own repository.** This template is a concrete blueprint for that integration and collaboration layer.
 
-A vendor sandbox covers part of OS-level physical safety; it does not cover "semantic safety" as software. Isolating the filesystem does not isolate a diff with a serious bug born from a misunderstood spec. Restricting the network does not stop Clean Architecture violations where domain rules leak into UI components or DB Adapters (Clean Architecture; not adoption adapters). Execution safety and the project's acceptable semantic boundary are different things. Confusing them is a dangerous shortcut: "It ran in a sandbox, so the output is safe."
+A vendor sandbox covers part of OS-level physical safety; it does not cover "semantic safety" as software. Isolating the filesystem does not isolate a diff with a serious bug born from a misunderstood spec. Restricting the network does not stop Clean Architecture violations where domain rules leak into UI components or DB Adapters (Clean Architecture; not adopters). Execution safety and the project's acceptable semantic boundary are different things. Confusing them is a dangerous shortcut: "It ran in a sandbox, so the output is safe."
 
 ## The Trio of Collaboration: Explicit Division of Responsibility
 
-`docs/collaboration/ai-human-scheme.md` explicitly divides the roles in this collaborative project into three.
+`docs/collaboration/ai-human-scheme.md` splits roles three ways: **Adjudicator** (owns decision points), **Agent** (generation and visibility inside a phase), **Deterministic Tool** (formatters, linters, tests—verify without relying on model probability, as deterministically as practical). Success is not single-model IQ.
 
-1. **Adjudicator**—The human designer. Solely owns gate approvals for phase transitions, final acceptance of ADRs (Architecture Decision Records), domain reviews of tests generated in Phase 1, and the final decision authority over "ambiguous judgments" when the agent is unsure.
-2. **Agent**—AI coding assistant. Starts work from the design intake, executes autonomously exclusively within the boundaries of the requested phase, visualizes assumptions and impact scope, and stops at the boundary where an Adjudicator's decision is required.
-3. **Deterministic Tool**—Formatters, linters, static analyzers, test runners, etc. Reproducibly verifies "facts" that must not depend on probabilistic model judgment.
-
-True collaboration is established only when this trio runs in a loop under a clear protocol. The success of a project does not depend solely on the LLM capability (IQ) of a single agent.
-
-This three-way division is not meant to vaguely distribute blame when trouble occurs. Rather, it is designed to reduce ambiguity to the absolute minimum. The Adjudicator is the owner of judgments, the Agent is the executor of generation, and Deterministic Tools are responsible for factual verification. When a bug or design violation leaks into the main branch, we do not resign ourselves by saying, "The AI model hallucinated, it can't be helped." Instead, we can transform it into an architectural question: "Which role's check gate was poorly designed?"
+The point is not to blur blame but to ask, when main breaks, which role’s gate was poorly designed—not “the model hallucinated, so nothing to do.”
 
 ### The Trio Expands into a Team: Hierarchy and Escalation
 
@@ -70,7 +64,7 @@ This is the core of the integration architecture provided by this template. The 
 
 ### The Exit—PRs, Human Review, and Thin CI
 
-The changes output from the sandbox eventually land in a Pull Request (PR) and undergo human review. Here, CI is strictly an "auxiliary checkpoint." The CI in this template merely verifies the "skeleton of metadata"—whether contract files correctly exist, whether ADR numbers are assigned, or whether Trace logs exist during contract changes. It is not a magical layer that mechanically judges 100% on every commit whether phases were truly obeyed or whether the code aligns with the design intent. The ultimate responsibility for integration lies firmly with the Adjudicator and human reviewers. The instruction to the agent to "Report Red, Green, Refactor, or Fast Path status honestly" is the final bastion where the system demands honest status reporting from the agent.
+The changes output from the sandbox eventually land in a Pull Request (PR) and undergo human review. Here, CI is strictly an "auxiliary checkpoint." The CI in this template merely verifies the "skeleton of metadata"—whether contract files correctly exist, whether ADR numbers are assigned, or whether Trace logs exist during contract changes. It is not a magical layer that fully judges on every commit whether phases were truly obeyed or whether the code aligns with the design intent. The ultimate responsibility for integration lies firmly with the Adjudicator and human reviewers. The instruction to the agent to "Report Red, Green, Refactor, or Fast Path status honestly" is the final bastion where the system demands honest status reporting from the agent.
 
 ## Do Not Confuse the Two Worlds
 

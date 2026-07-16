@@ -2,7 +2,7 @@
 
 2026-07-05. Non-normative. Related: ADR 0004.
 
-> Japanese original (authoritative): [../2026-07-05-rationale-code-for-human-review.md](../2026-07-05-rationale-code-for-human-review.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
+> Japanese original (authoritative): [../2026-07-05-rationale-code-for-human-review.md](../2026-07-05-rationale-code-for-human-review.md) at commit `6910bf0` (`6910bf0ecd025b7561b1446568f0459c00283b3d`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
 
 ---
 
@@ -30,7 +30,7 @@ The strong demand in `docs/collaboration/source-code-quality.md` for small funct
 
 ## Dependency Direction is a Discipline to Localize Cognitive Load
 
-The domain must be readable without knowledge of the framework; business policy must not leak into Clean Architecture Adapters (not adoption adapters; see [../README.md](../README.md)). Dependency disciplines, epitomized by Clean Architecture, are extremely practical means not only for decoupling systems but also for localizing the review scope to fit human cognitive limits.
+The domain must be readable without knowledge of the framework; business policy must not leak into Clean Architecture Adapters (not adopters; see [../README.md](../README.md)). Dependency disciplines, epitomized by Clean Architecture, are extremely practical means not only for decoupling systems but also for localizing the review scope to fit human cognitive limits.
 
 Robert C. Martin's "The Clean Architecture" ([Clean Coder Blog](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)) provides a powerful policy where dependencies point inward from the outside (details) to the inside (abstractions). The reason for bringing this policy into the AI-TDD workflow is not to satisfy architectural purism. It is to shrink the unit of code a human must read in a single review.
 

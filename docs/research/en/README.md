@@ -42,8 +42,8 @@ Canonical definitions live in Japanese
 | Term | Meaning in these essays |
 |------|-------------------------|
 | **Adjudicator** | The human designer who owns decision points (phase gates, ADR acceptance, ambiguity resolution). Not an AI role. JA: Adjudicator. |
-| **Adoption adapter** | A person or team on an *adopting project* who runs template sync, operations, and feedback. **Not** a Clean Architecture `Adapter`. JA: **採用アダプター**. Older phrasing “adapter (executor)” means this. |
-| **Clean Architecture Adapter** | An outer-layer component that implements a port (DB, SDK, file I/O). Distinct from adoption adapter. JA: Adapter（Clean Architecture）. |
+| **Adopter** | Person or team on an *adopting project* who runs template sync, operations, and feedback. **Not** a Clean Architecture `Adapter`. JA: **採用者**. Older “adapter (executor)” / “adoption adapter” mean this. |
+| **Clean Architecture Adapter** | An outer-layer component that implements a port (DB, SDK, file I/O). Distinct from **adopter**. JA: Adapter（Clean Architecture）. |
 | **Capability ladder** | Route work to deterministic tools, small models, or strong models by task difficulty and risk. JA: **能力の階段**. |
 | **Non-normative** | Reading material only. Does not change project rules until promoted via ADR / collaboration docs. JA: **非規範**. |
 | **Adoption lifecycle** | State machine for external **resources** in `docs/architecture/external-resource-adoption-contract.md` (below). Software dependencies use `dependency-policy.md` instead. JA: **採用ライフサイクル**. |
@@ -64,7 +64,7 @@ accepted -> adopted                                         ← entry into trust
 - When these essays say “adopted,” they usually mean this **lifecycle end state**.
 - An ADR file’s `## Status` / **Accepted** (MADR: the decision record was accepted by the project) is a **different namespace** from resource `accepted` / `adopted`. Do not mix them.
 
-These English pages track Japanese originals as of commit `d1b86c8` (terminology and accepted/adopted clarification). If Japanese has moved on, prefer Japanese.
+Japanese originals are authoritative (critical-review fixes at `6910bf0`). English tracks JA terminology (adopter, accepted vs adopted, analogy hygiene). If English lags, prefer Japanese.
 
 ## The essays
 

@@ -2,7 +2,7 @@
 
 2026-07-05. Non-normative. Related: ADR 0002.
 
-> Japanese original (authoritative): [../2026-07-05-rationale-ai-output-contracts.md](../2026-07-05-rationale-ai-output-contracts.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
+> Japanese original (authoritative): [../2026-07-05-rationale-ai-output-contracts.md](../2026-07-05-rationale-ai-output-contracts.md) at commit `6910bf0` (`6910bf0ecd025b7561b1446568f0459c00283b3d`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
 
 ---
 
@@ -10,13 +10,11 @@ In software engineering, a "contract" is more than an interface signature. Bertr
 
 Fluent prose is not a guarantee of correctness. That is not mere distrust of LLMs; it is a boundary-design principle. Humans err, search ages, databases omit. Systems always compose imperfect parts. LLM output often arrives as a finished-looking explanation, so guesses look like facts. Credibility must not rest on a "smarter model"; it must rest on verifiable contracts of the kind Meyer described.
 
-## "We Do Not Break Userspace": Interface Stability
+## Provider freedom and consumer contracts: interface stability
 
-One of the most powerful historical lessons in practicing Design by Contract can be found in Linus Torvalds' absolute rule in the Linux kernel: "WE DO NOT BREAK USERSPACE!" No matter how beautifully you refactor the kernel's (provider's) implementation, any change that causes existing programs in userspace (consumers) to stop working is instantly rejected as a breach of the architecture contract.
+When Design by Contract is applied to AI-driven edits, the Linux community slogan “WE DO NOT BREAK USERSPACE!” is a **readable analogy** (widely cited Torvalds mail; also marked unverified in this folder’s sources). However pretty the provider’s internals, breaking contracts that consumers depend on destroys systemic trust.
 
-In AI collaboration, this idea of interface stability is critically important. AI agents possess the ability to oversee an entire codebase and rewrite code at high speed. Therefore, they are vulnerable to the temptation of "while I'm cleaning up the internal implementation, let me just rewrite the function arguments or return types (the contract) too," and they execute it innocently. However, if the impact on other components depending on that interface (equivalent to userspace) cannot be accurately foreseen, the entire system breaks.
-
-When having AI generate or refactor code, we must consistently demand the same rigor as we do from "kernel developers." "You may optimize the internal implementation (e.g., Clean Architecture Adapters) however you like, but you must never arbitrarily change the contract with the consumer (Interface) or the external calling conventions." A contract is not merely JSON Schema type checking. It is a robust boundary of trust between the provider and the consumer, and a bulwark to safely contain the generative power of AI.
+Agents rewrite broadly and will happily “clean up” signatures while touching internals. Optimizing internals (e.g. Clean Architecture Adapters) can be fine; **silently changing Interfaces or external calling conventions is not** (aligned with ADR 0002). A contract is more than JSON Schema type checks—it is the trust boundary that contains generative freedom. This is not the kernel’s institution transplanted wholesale. **Analogy aids understanding; it is not a portable law.**
 
 ## Separating Prose Fluency from Factuality
 
