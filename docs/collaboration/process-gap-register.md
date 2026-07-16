@@ -106,18 +106,18 @@ Resolution:
 
 ### 7. AI Failure and Recovery Procedure
 
-Status: future.
+Status: resolved.
 
 Why it matters:
 
 - The process says when to stop, but not how to recover from a bad AI turn.
 
-Needed:
+Resolution:
 
-- How to identify a contaminated phase.
-- How to preserve user changes.
-- How to restart from last trusted artifact.
-- How to document rejected AI output.
+- Use `docs/collaboration/ai-failure-recovery.md`.
+- See `docs/architecture/adr/0010-ai-failure-recovery-and-runner-cli-contract.md`.
+- Optional runner CLI contract for slow external AI jobs:
+  `docs/collaboration/runner-cli-contract.md`.
 
 ### 8. Branch, Commit, and PR Discipline
 
@@ -146,10 +146,43 @@ Resolution:
 - Store local issues under `docs/issues/`.
 - Store multi-issue plans under `docs/work-plans/`.
 
+### 10. Bug Planning and AI Usage Records
+
+Status: resolved.
+
+Why it matters:
+
+- Difficult bugs can span multiple AI attempts and should not live only in
+  chat history.
+- Later agents need a readable planning size and AI usage record before
+  deciding how much reasoning is needed.
+- Actual token usage is not available in every environment and should not be
+  guessed.
+
+Resolution:
+
+- Use `docs/collaboration/local-issue-planning.md`.
+- Use `docs/collaboration/ai-work-trace-log.md`.
+- See `docs/architecture/adr/0009-bug-planning-and-ai-usage-records.md`.
+
+### 11. Issue Completion Document Synchronization
+
+Status: resolved.
+
+Why it matters:
+
+- Implementation and tests can be complete while the issue ledger remains at `proposed`.
+- A stale issue ledger misleads the next agent about dependencies and current work.
+
+Resolution:
+
+- Use the Issue Status Synchronization section in `docs/collaboration/definition-of-done.md`.
+- Include the issue and work-plan updates in the same reviewable unit as the implementation status change.
+
 ## Current Assessment
 
 Ready enough to start design intake and Phase 1 work once the project's
 architecture documents are filled in.
 
-Not yet mature enough for high-volume parallel agents without adding AI
-failure and recovery procedure (gap 7).
+Ready for higher-volume parallel agent work now that gap 7 (AI failure and
+recovery procedure) is resolved.

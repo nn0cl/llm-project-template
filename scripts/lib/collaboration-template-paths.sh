@@ -7,9 +7,12 @@
 collaboration_template_paths=(
   "AGENTS.md"
   "CLAUDE.md"
+  ".gitignore"
   "README.md"
   "README.ja.md"
   ".github/copilot-instructions.md"
+  ".grok/rules"
+  ".cursor/rules"
   ".github/dependabot.yml"
   ".github/pull_request_template.md"
   ".github/ISSUE_TEMPLATE"
@@ -27,3 +30,22 @@ collaboration_template_paths=(
   "scripts/init-llm-context.sh"
   "scripts/lib/collaboration-template-paths.sh"
 )
+
+# Files that are useful inside this template repository but should not be
+# copied into adopting projects as target-owned planning history.
+collaboration_template_exclude_paths=(
+  "docs/collaboration/traces/*.md"
+  "docs/issues/LISS-*.md"
+  "docs/specs/template-rollout.md"
+)
+
+is_collaboration_template_excluded() {
+  local rel="$1"
+  local pattern
+  for pattern in "${collaboration_template_exclude_paths[@]}"; do
+    case "$rel" in
+      $pattern) return 0 ;;
+    esac
+  done
+  return 1
+}

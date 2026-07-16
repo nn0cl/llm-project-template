@@ -2,6 +2,12 @@
 
 Dependency relationships must be checked by tools as the implementation grows.
 
+This document covers software packages, libraries, provider SDKs, CLI
+tools, and test helpers. For AI-generated artifacts or human-sourced
+external content/data resources (not software dependencies), see the
+optional `docs/architecture/external-resource-adoption-contract.md`
+instead.
+
 Pick and configure the tools that match your stack. See
 `docs/templates/examples/` for two worked examples (`cargo-deny` for Rust,
 `dependency-cruiser` for a TypeScript front-end) — copy the pattern for

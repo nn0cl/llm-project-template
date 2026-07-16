@@ -2,6 +2,20 @@
 
 Use this as the first short entry point before coding.
 
+## Session Entry
+
+Each new LLM session starts without prior chat context.
+
+1. Read the Referee message for operating path, phase, spec or ADR, issue,
+   and branch.
+2. If resuming, read the cited handoff or trace before other documents.
+3. Recover progress from repository artifacts, not from assumed chat history.
+4. If path, phase, or authoritative scope is missing, stop after design intake
+   and ask the Referee.
+
+For Referee checklists and resume examples, see
+`docs/collaboration/session-start-and-resume.md`.
+
 ## Operating Paths
 
 Select the smallest path that safely fits the request.
@@ -91,6 +105,20 @@ Only execute the phase explicitly requested by the Referee.
 
 Phase transitions require Referee approval. Do not start Phase 2 from
 unreviewed Phase 1 tests.
+
+## Bug Triage
+
+Bug fixes follow the same phase rule as feature work. A minor bug may omit a
+separate local issue or work plan only when it is size `S`, within already
+approved scope, clear from existing behavior or specification, low risk, and
+verified in the same attempt.
+
+Omitting a separate planning artifact does not permit skipping Phase 1, Phase
+2, Phase 3, deterministic verification, or Referee review gates.
+
+When a bug is size `M` or larger, needs a second execution attempt, changes
+boundaries, or remains ambiguous, record it in a local issue or active work
+plan before continuing.
 
 ## Core Boundaries
 

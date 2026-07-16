@@ -23,6 +23,19 @@ No hidden business logic in adapters.
 6. Execute only the requested phase.
 7. Report Red, Green, Refactor, or Fast Path status honestly.
 
+## Session Entry
+
+- Treat each new session as having no prior chat context.
+- Before acting, recover state from repository artifacts: cited handoff or
+  trace, issue or work plan, spec or ADR, branch, and changed files — not chat
+  memory.
+- If the Referee message lacks operating path, phase, or an authoritative spec
+  (or explicit Architecture Path scope), stop after design intake and ask.
+- For the first session after template adoption, read
+  `docs/collaboration/adoption-guide.md` before changing target-owned files.
+- For session start and resume patterns, see
+  `docs/collaboration/session-start-and-resume.md`.
+
 Relevant architecture documents:
 
 - Quickstart: `docs/architecture/agent-quickstart.md`.
@@ -49,6 +62,8 @@ Relevant architecture documents:
   `docs/collaboration/local-issue-planning.md`.
 - Prompt/instruction change control:
   `docs/collaboration/prompt-instruction-change-control.md`.
+- Session start and resume:
+  `docs/collaboration/session-start-and-resume.md`.
 - `<Add one line per stack-specific architecture document you create, e.g.
   "React UI: docs/architecture/frontend-architecture.md.">`
 
@@ -76,8 +91,7 @@ Forbidden dependencies:
 ## External Resources Must Be Ports
 
 Represent these as ports before using concrete implementations. Replace this
-list with the project's actual external dependencies (see `CLAUDE.md` for the
-same list kept in sync):
+list with the project's actual external dependencies:
 
 - `<External data source A>`.
 - `<External data source B>`.

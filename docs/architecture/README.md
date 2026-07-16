@@ -77,7 +77,23 @@ APIs)?>`
 - `dependency-policy.md`: package dependency checking policy.
 - `ai-request-routing.md`: AI payload selection and task routing.
 - `io-reasoning-contracts.md`: AI input/output/reasoning contracts.
+- `external-resource-adoption-contract.md`: optional contract for adopting
+  AI-generated or human-sourced external content/data resources.
 - `<Add one line per stack-specific architecture document you create.>`
+
+## Accepted Decisions
+
+- `adr/0001-design-first-ai-request-routing.md`
+- `adr/0002-input-output-reasoning-contracts.md`
+- `adr/0003-ai-human-collaboration-governance.md`
+- `adr/0004-human-readable-source-code-quality.md`
+- `adr/0005-local-issue-planning.md`
+- `adr/0006-prompt-instruction-change-control.md`
+- `adr/0007-trunk-oriented-branching.md`
+- `adr/0008-template-update-propagation.md`
+- `adr/0009-bug-planning-and-ai-usage-records.md`
+- `adr/0010-ai-failure-recovery-and-runner-cli-contract.md`
+- `adr/0011-external-resource-adoption-contract.md`
 
 ## Remaining Technology Evaluation
 

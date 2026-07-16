@@ -22,5 +22,15 @@ assignees: ""
 - App version / commit:
 - Relevant feature flags enabled:
 
-## Logs or screenshots
+## Planning and triage
 
+- Local issue or work plan:
+- Accepted behavior source:
+- Initial planning size:
+- Current planning size:
+- AI planning record:
+- AI work trace:
+- Attempt count:
+- Combined with other fixes:
+
+## Logs or screenshots

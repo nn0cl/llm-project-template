@@ -26,9 +26,22 @@ jobs:
           set -euo pipefail
           required_files=(
             "README.md"
+            "README.ja.md"
             "AGENTS.md"
             "CLAUDE.md"
+            ".gitignore"
+            ".github/dependabot.yml"
             ".github/copilot-instructions.md"
+            ".github/pull_request_template.md"
+            ".github/ISSUE_TEMPLATE/bug_report.md"
+            ".github/ISSUE_TEMPLATE/config.yml"
+            ".github/ISSUE_TEMPLATE/feature_request.md"
+            ".grok/rules/01-quickstart.md"
+            ".grok/rules/02-architecture-boundaries.md"
+            ".grok/rules/03-collaboration-and-completion.md"
+            ".cursor/rules/01-quickstart.mdc"
+            ".cursor/rules/02-architecture-boundaries.mdc"
+            ".cursor/rules/03-collaboration-and-completion.mdc"
             "docs/at-tdd/process.md"
             "docs/collaboration/ai-human-scheme.md"
             "docs/collaboration/source-code-quality.md"
@@ -45,6 +58,7 @@ jobs:
             "docs/collaboration/branch-commit-pr-discipline.md"
             "docs/collaboration/local-issue-planning.md"
             "docs/collaboration/prompt-instruction-change-control.md"
+            "docs/collaboration/session-start-and-resume.md"
             "docs/architecture/README.md"
             "docs/architecture/project-structure.md"
             "docs/architecture/testing-strategy.md"
@@ -66,6 +80,10 @@ jobs:
             "docs/work-plans/.gitkeep"
             "docs/evaluation/golden-examples/.gitkeep"
             "docs/evaluation/criteria/.gitkeep"
+            "scripts/copy-ai-collaboration-files.sh"
+            "scripts/update-ai-collaboration-files.sh"
+            "scripts/init-llm-context.sh"
+            "scripts/lib/collaboration-template-paths.sh"
           )
 
           for file in "${required_files[@]}"; do
@@ -76,9 +94,59 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for n in 0001 0002 0003 0004 0005 0006 0007 0008; do
+          for n in 0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011; do
             ls "docs/architecture/adr/${n}-"*.md >/dev/null
           done
+
+      - name: Check script syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash -n \
+            scripts/copy-ai-collaboration-files.sh \
+            scripts/update-ai-collaboration-files.sh \
+            scripts/init-llm-context.sh \
+            scripts/lib/collaboration-template-paths.sh
+
+      - name: Check unresolved conflict markers
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git grep -n -E '^(<<<<<<<|=======|>>>>>>>)' -- . ':!.git' >/tmp/conflict-markers.txt; then
+            cat /tmp/conflict-markers.txt >&2
+            exit 1
+          fi
+
+      - name: Check template copy smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          mkdir -p "$tmp/target"
+          git init -q "$tmp/target"
+          scripts/copy-ai-collaboration-files.sh \
+            --target "$tmp/target" \
+            --project-name "Smoke App" \
+            --domain-summary "template smoke test" \
+            --stack "test stack"
+          scripts/init-llm-context.sh "$tmp/target" >/tmp/init-llm-context-smoke.txt
+          test -f "$tmp/target/.gitignore"
+          test -f "$tmp/target/docs/issues/.gitkeep"
+          test -f "$tmp/target/docs/collaboration/traces/.gitkeep"
+          test -f "$tmp/target/docs/specs/.gitkeep"
+          ! ls "$tmp/target/docs/issues/"LISS-*.md >/dev/null 2>&1
+          ! ls "$tmp/target/docs/collaboration/traces/"*.md >/dev/null 2>&1
+          test ! -f "$tmp/target/docs/specs/template-rollout.md"
+          if grep -R -n -E '<PROJECT_NAME: one-line description|<FILL IN: e\.g\. backend' \
+            "$tmp/target/AGENTS.md" \
+            "$tmp/target/CLAUDE.md" \
+            "$tmp/target/.github/copilot-instructions.md" \
+            "$tmp/target/.grok/rules" \
+            "$tmp/target/.cursor/rules"; then
+            echo "Copy script left basic project placeholders unfilled." >&2
+            exit 1
+          fi
 
       - name: Check agent operating contract change traceability
         if: github.event_name == 'pull_request'
@@ -97,7 +165,7 @@ jobs:
               docs/collaboration/traces/*.md)
                 trace_added=true
                 ;;
-              AGENTS.md|CLAUDE.md|.github/copilot-instructions.md|docs/at-tdd/process.md|docs/collaboration/*.md|docs/templates/*.md)
+              AGENTS.md|CLAUDE.md|.github/copilot-instructions.md|.grok/rules/*.md|.cursor/rules/*.mdc|docs/at-tdd/process.md|docs/collaboration/*.md|docs/templates/*.md)
                 contract_changed=true
                 ;;
             esac

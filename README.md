@@ -4,8 +4,8 @@
 
 This repository is a starter template for a **Clean Architecture + AT-TDD**
 development workflow where a human architect (the "Referee") and one or more
-AI coding agents (Claude, Copilot, Codex, etc.) collaborate under a shared,
-written operating contract.
+AI coding agents (Claude, Copilot, Codex, Grok, Cursor, etc.) collaborate under
+a shared, written operating contract.
 
 In this repository, **AT-TDD** is a local shorthand for an **ATDD + TDD hybrid
 workflow**: acceptance specifications drive failing tests, reviewed tests drive
@@ -26,8 +26,13 @@ installed.
   transitions, ADRs, and ambiguous decisions; agents produce reviewable,
   minimal, phase-correct artifacts.
 - **Agent operating contract files** (`AGENTS.md`, `CLAUDE.md`,
-  `.github/copilot-instructions.md`) kept in sync by a documented change-control
-  rule and a CI check.
+  `.github/copilot-instructions.md`, `.grok/rules/`, `.cursor/rules/`) kept
+  in sync by a documented change-control rule and a CI check. Codex reads
+  `AGENTS.md` directly and needs no dedicated file. Cursor and Grok Build
+  also read `AGENTS.md` natively as a fallback, but this template keeps
+  dedicated `.cursor/rules/*.mdc` and `.grok/rules/*.md` files since each
+  tool's own rule surface binds more strongly than generic `AGENTS.md`
+  fallback reading.
 - **Local issue and work-plan planning** under `docs/issues/` and
   `docs/work-plans/`, usable before or alongside GitHub Issues.
 - **AI work traces** under `docs/collaboration/traces/` for auditability.
@@ -115,9 +120,14 @@ Target-local onboarding lives in
 This template deliberately avoids naming a stack, a domain, or concrete
 architecture layers. Before using it on a real project:
 
-1. Replace every `<PLACEHOLDER>` in `AGENTS.md`, `CLAUDE.md`,
-   `.github/copilot-instructions.md`, and `docs/architecture/README.md` with
-   your project's name, domain summary, and selected stack.
+1. Fill target-specific placeholders in `AGENTS.md`, `CLAUDE.md`,
+   `.github/copilot-instructions.md`, `.grok/rules/*.md`,
+   `.cursor/rules/*.mdc`, and `docs/architecture/README.md`. The copy
+   script can fill the project name, domain summary, and stack placeholders
+   when `--project-name`, `--domain-summary`, and `--stack` are provided;
+   runtime boundaries, datastore, migration tool, external resources, and
+   stack-specific architecture documents still need Referee-approved
+   target facts.
 2. Add one architecture document per architectural area you actually have
    (e.g. `backend-architecture.md`, `frontend-architecture.md`,
    `persistence.md`). Use `docs/architecture/project-structure.md` and
@@ -133,7 +143,7 @@ architecture layers. Before using it on a real project:
    stack-specific jobs (lint, test, dependency policy) once those tools
    exist.
 6. Renumber/extend `docs/architecture/adr/` as real architecture decisions are
-   made. The eight ADRs included here (0001-0008) describe the collaboration
+   made. The eleven ADRs included here (0001-0011) describe the collaboration
    process itself and normally do not need to change.
 
 ## Introduce into an existing repository
@@ -164,6 +174,11 @@ target project's accepted architecture or feature specifications.
 .
 ├── AGENTS.md                       # operating contract (tool-agnostic)
 ├── CLAUDE.md                       # operating contract (Claude-specific entry point)
+├── .gitignore                      # local editor/OS noise ignored by default
+├── .grok/
+│   └── rules/                      # operating contract (Grok-specific entry point)
+├── .cursor/
+│   └── rules/                      # operating contract (Cursor-specific entry point)
 ├── .github/
 │   ├── copilot-instructions.md     # operating contract (Copilot-specific entry point)
 │   ├── pull_request_template.md
@@ -176,15 +191,23 @@ target project's accepted architecture or feature specifications.
     ├── templates/                  # design intake, handoff, trace, issue, work-plan, ADR, Gherkin
     │   └── examples/               # filled-in stack-specific examples, for reference only
     ├── architecture/               # Clean Architecture rules, quickstart, readiness checklist
-    │   └── adr/                    # architecture decision records (0001-0008 = process ADRs)
+    │   └── adr/                    # architecture decision records (0001-0011 = process ADRs)
     ├── specs/                      # EARS/Gherkin feature specifications
     ├── issues/                     # local issue files (LISS-0000 style)
     ├── work-plans/                 # multi-issue work plans
     └── evaluation/                 # golden examples and evaluation criteria
 └── scripts/
     ├── copy-ai-collaboration-files.sh
-    └── init-llm-context.sh
+    ├── update-ai-collaboration-files.sh
+    ├── init-llm-context.sh
+    └── lib/collaboration-template-paths.sh
 ```
+
+Template-maintenance local issues, traces, and the sample rollout spec
+remain in this repository for audit history, but the copy/update scripts
+exclude them from adopting projects. New target repositories receive the
+empty `.gitkeep` folders and create their own local issues, traces, and
+specs.
 
 ## Core rules worth remembering
 

@@ -107,9 +107,14 @@ copy_path() {
     mkdir -p "$dest"
     while IFS= read -r src_file; do
       local subpath="${src_file#$src/}"
+      local rel_file="$rel/$subpath"
       local dest_file="$dest/$subpath"
+      if is_collaboration_template_excluded "$rel_file"; then
+        echo "skip template-history $rel_file"
+        continue
+      fi
       if [ -e "$dest_file" ] && [ "$force" != true ]; then
-        echo "skip existing $rel/$subpath"
+        echo "skip existing $rel_file"
         continue
       fi
       mkdir -p "$(dirname "$dest_file")"
@@ -148,10 +153,11 @@ replace_placeholders() {
   local file
   for file in "${copied_files[@]}"; do
     case "$file" in
-      *.md|*.yml|*.yaml)
+      *.md|*.mdc|*.yml|*.yaml)
         local full="$target/$file"
         [ -f "$full" ] || continue
         if [ -n "$project_replacement" ]; then
+          perl -0pi -e "s/<PROJECT_NAME: one-line description of the product and its\\ndomain>/$(escape_perl_replacement "$project_replacement")/g" "$full"
           perl -0pi -e "s/<PROJECT_NAME: one-line description of the product and its domain>/$(escape_perl_replacement "$project_replacement")/g" "$full"
         fi
         if [ -n "$project_name" ]; then

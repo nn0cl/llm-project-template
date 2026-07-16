@@ -32,6 +32,9 @@ required_files=(
   "AGENTS.md"
   "CLAUDE.md"
   ".github/copilot-instructions.md"
+  ".grok/rules/01-quickstart.md"
+  ".grok/rules/02-architecture-boundaries.md"
+  ".grok/rules/03-collaboration-and-completion.md"
   "docs/architecture/agent-quickstart.md"
   "docs/at-tdd/process.md"
   "docs/collaboration/ai-human-scheme.md"
@@ -77,4 +80,7 @@ requires it.
 
 If no target specification or phase has been provided yet, stop after design
 intake and ask the Referee for the missing specification or phase approval.
+
+For later sessions and resume patterns, see
+docs/collaboration/session-start-and-resume.md.
 PROMPT
