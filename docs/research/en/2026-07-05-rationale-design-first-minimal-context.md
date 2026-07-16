@@ -2,7 +2,7 @@
 
 2026-07-05. Non-normative. Related: ADR 0001.
 
-> Japanese original (authoritative): [../2026-07-05-rationale-design-first-minimal-context.md](../2026-07-05-rationale-design-first-minimal-context.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
+> Japanese original (authoritative): [../2026-07-05-rationale-design-first-minimal-context.md](../2026-07-05-rationale-design-first-minimal-context.md) at commit `6910bf0` (`6910bf0ecd025b7561b1446568f0459c00283b3d`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
 
 ---
 

@@ -2,7 +2,7 @@
 
 2026-07-06. Non-normative. Related: LISS-0002, LISS-0005, `process-gap-register.md`.
 
-> Japanese original (authoritative): [../2026-07-06-rationale-evidence-based-process-design.md](../2026-07-06-rationale-evidence-based-process-design.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
+> Japanese original (authoritative): [../2026-07-06-rationale-evidence-based-process-design.md](../2026-07-06-rationale-evidence-based-process-design.md) at commit `6910bf0` (`6910bf0ecd025b7561b1446568f0459c00283b3d`). Terminology and critical-review fixes (adopter, analogies, less repetition): [../README.md](../README.md) and [README.md](./README.md). If English lags, prefer Japanese.
 
 ---
 
@@ -12,7 +12,7 @@ When designing collaboration processes with AI, the temptation to jump on fads i
 
 "Investigate prior research, empirical studies, precedents of existing services, and best practices. Analyze them, and give me a consultation."
 
-These were the words born from a desperate demand on the ground: *do not decide how to handle the `develop` branch based on intuition or mood*. However, this was not a one-off request, but rather an elevation into three robust behavioral patterns as a general rule. First, investigate before setting rules. Second, make failure feedback from agents and adoption adapters (adopting projects) the primary input for revision. Third, separate research and norms, keeping records of both.
+These were the words born from a desperate demand on the ground: *do not decide how to handle the `develop` branch based on intuition or mood*. However, this was not a one-off request, but rather an elevation into three robust behavioral patterns as a general rule. First, investigate before setting rules. Second, make failure feedback from agents and adopters the primary input for revision. Third, separate research and norms, keeping records of both.
 
 ## The Lineage of EBSE (Evidence-Based Software Engineering)
 
@@ -32,7 +32,7 @@ However, that attitude must always be paired with a strong caveat: "Correlation 
 
 ## Feedback Drives Norms: The Process Gap
 
-"Reports from adoption adapters → gap analysis → norm revision." This template's `process-gap-register.md` strictly dictates that if a gap is found between the ideal and reality, you must not silently ignore it, but write a document and record it in the register. LISS-0002 (Session 1) and LISS-0005 (Session 2) are testaments to this. The system repairs itself not only through top-down rules but through bottom-up observations from the field.
+"Reports from adopters → gap analysis → norm revision." `process-gap-register.md` (normative) says not to silently ignore ideal–reality gaps: document and register them. LISS-0002 (Session 1) and LISS-0005 (Session 2) are testaments to this. The system repairs itself not only through top-down rules but through bottom-up observations from the field.
 
 ## The "Evidence" and "Context" Required by ISSUEs and ADRs
 
@@ -42,11 +42,14 @@ To the questions "Why choose this design?" or "Why include this library?", mere 
 
 In AI collaboration, this constraint carries a dual meaning. Agents can instantaneously pull countless "general best practices" from their training data, but they cannot evaluate whether those practices fit the project's specific context (budget, phase, constraints of the existing system). Therefore, when planning work in an ISSUE or drafting an ADR, the agent is forced to verbalize both "links to official documentation or precedents for the adopted technology (objective evidence)" and "why it is necessary for our current situation (integration into context)", and pass it through the human Adjudicator's verification gate. This is the reality of the Evidence Discipline demanded by the template.
 
-## Evidence-Based Adoption of External Software and Dependencies
+## External resource adoption vs software dependencies
 
-The EBSE philosophy of integration into context manifests most intensely in the adoption process for external resources (libraries, external APIs, frameworks, etc.). An AI agent might innocently suggest from its general knowledge, "Library X is standard for this feature." However, the AI cannot judge whether it fits our team's security requirements, dependency conflicts, or maintenance structure (Context).
+One place EBSE’s “integrate into context” shows up is when something external enters the trust boundary. Do not conflate targets:
 
-Therefore, this template establishes an operational rule called `docs/architecture/external-resource-adoption-contract.md`, requiring a strict adoption lifecycle before external **resources** (AI-generated artifacts, brought-in data, and similar—not software dependencies, which use `dependency-policy.md`) enter the trust boundary. Check verdicts (`accepted | rejected | needs_recheck`) and entry into trusted use (`accepted -> adopted`) are separate; accepted alone is not adopted (see [../README.md](../README.md) / [README.md](./README.md)). We do not adopt because something "seems convenient," but gather evidence that it is safe and appropriate in this project's context, verify it, and have the Adjudicator explicitly approve adoption. This, too, is a practical defense line of EBSE.
+- **Software dependencies** (libraries, SDKs, CLIs, …) → `docs/architecture/dependency-policy.md`
+- **External resources** (AI-generated artifacts, imported data/content, …) → `docs/architecture/external-resource-adoption-contract.md`
+
+Models may propose “library X is standard,” but cannot judge fit to this team’s security, conflicts, or maintenance structure. For resources, separate check verdicts (`accepted | rejected | needs_recheck`) from trusted use (`accepted -> adopted`); accepted alone is not adopted (see [../README.md](../README.md) / [README.md](./README.md)). In both paths, “seems convenient” is not enough—project-context evidence and explicit Adjudicator approval are required.
 
 ## "Investigated" Does Not Mean "Correct": Awareness of Limits
 
