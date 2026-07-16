@@ -1,58 +1,53 @@
-# 規範と読み物
+# 規範と読み物：ドキュメントのアーキテクチャ
 
 2026-07-06。非規範。関連: `docs/research/README.md`、`agent-quickstart.md`。
 
 ---
 
-ドキュメントが増えるほど、どれが従うべき規則でどれが読み物かが曖昧になる。
-人間は「読まなくてよい文書」を無視できる。エージェントはできない。コンテキストに
-入った文はすべて挙動に影響する。だから私は、エージェントが読む文書を列挙制で
-定義し、読み物を構造的にその外へ置く。
+プロジェクトが成熟するにつれて、ドキュメントの総量は単調増加する。ドキュメントが増えるほど、どれが「システムとして絶対に従うべき強固な規則」であり、どれが「単なる背景知識や読み物」であるかの境界線が曖昧になる。人間のエンジニアは「今は読まなくてよい文書」を直感的にスキップして無視する高度な能力を備えている。しかし、AI エージェントはそのような暗黙の文脈切り捨てができない。コンテキストウィンドウに放り込まれた文章は、それが雑談であろうと思索であろうと、すべてエージェントの推論と挙動（コード生成）に物理的な影響を与えてしまう。だからこそ私は、エージェントが読むべき文書を厳格な「列挙制（Allowlist）」で定義し、読み物や背景思想を構造的にそのコンテキストの外側へ配置する。
 
-「調査結果は Sources 付きのレポートとして、設計図書や運営用制約ドキュメントとは
-別のもの——エージェントは読む必要がない読み物——として管理したい。research フォルダは
-他リポジトリへテンプレート展開するときにはコピーされない。」
+ただし、「エージェントは読み物を読まない」というのは、物理的なアクセス禁止ではなく、アーキテクチャ設計上の期待値（Expectation）である。通常の作業入力として `research` を読み込む必要はない、という意味だ。人間が開発の思想を深く理解するために厚く書く文章（哲学）と、エージェントが機械的に従う運用契約（憲法）は、その目的も読者も全く異なる。この違いを曖昧にすると、読み物を豊かに書けば書くほど agent instruction が肥大化して推論がボケるか、あるいは agent instruction を厳密にするために人間向けの説明が痩せ細って無味乾燥になるかの二者択一を迫られる。ドキュメントの構造的分離は、この両方を最高品質で両立させるためのアーキテクチャである。
 
-文書には三つの階級がある。設計図書（architecture）、運用制約（collaboration）、
-読み物（research）。エージェントのコンテキストは規範だけで構成される。調査結果は
-捨てない。Sources 付きで人間向けに蓄積する。規則になった結論だけが ADR や
-collaboration 文書、issue へ昇格する。
+「調査結果は Sources 付きのレポートとして、設計図書や運営用制約ドキュメントとは別のもの——エージェントは読む必要がない読み物——として管理したい。research フォルダは他リポジトリへテンプレート展開するときにはコピーされない。」
 
-## Diátaxis との対応
+本テンプレートにおいて、文書には明確な三つの階級が存在する。設計図書（Architecture）、運用制約（Collaboration）、そして読み物（Research）である。エージェントのコンテキストは常に上位二つの「規範」だけで構成される。しかし、調査結果や哲学は捨てない。Sources（出典）付きで、未来の人間エンジニア向けに蓄積する。そこで議論され、合意に至り規則化された結論だけが、抽出されて ADR や collaboration 文書、あるいは issue へと「昇格」する。
 
-[Diátaxis](https://diataxis.fr/)（取得 2026-07-07、tutorials / how-to / reference /
-explanation の四象限を確認）は、ドキュメントを目的別に分け、混ぜると品質が落ちる
-と述べる。設計図書と運用制約は reference / how-to に、research は explanation に
-対応する。エージェントは explanation を読む必要がない——Diátaxis の「reference に
-explanation を混ぜるな」の、エージェント版だ。
+この repository の `docs/research/` 編集作業は、`llm-project-template` が提供するプロジェクトの運用テンプレート（運用ルールそのもの）に変更を加えるものではない。references をいくら増やしても、essay をどれほど厚く哲学的に書き直しても、それだけでは一切の規範変更にはならない。規範の変更が必要なら、別途 ADR や collaboration 文書の差分として提出し、Referee のレビューを通過しなければならない。この峻別された線引きがあるからこそ、人間は安心して、システムの挙動を壊す恐怖なしに、思想や背景を深く豊かに書くことができる。
 
-## RFC の伝統
+## Diátaxis との対応：情報アーキテクチャ
 
-[RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)（内容は安定した標準文書）以来、
-normative と informative の区別は標準化の基本である。読み物とは、準拠——すなわち
-エージェントの正しい動作——に影響しない文書のことだ。
+[Diátaxis](https://diataxis.fr/) は、ソフトウェアドキュメントを目的別に四象限（tutorials / how-to / reference / explanation）に分類し、「これらを混ぜ合わせるとドキュメントの品質が致命的に落ちる」と喝破した。本テンプレートの設計図書と運用制約は、Diátaxis における `reference` と `how-to` に強く対応する。対して `research` は純粋な `explanation` に対応する。エージェントは `explanation` を読む必要がない——これはまさに、Diátaxis の「reference の中に explanation を混ぜるな」という鉄則の、AI エージェント時代における実装版である。
 
-## allowlist は denylist より強い
+Diátaxis の最も重要な教訓は、文書間に優劣があるのではなく、「目的の違い」があるという点だ。reference は正確さと検索性を至上命題とする。how-to は手順の機械的な完遂を優先する。explanation は読者の深い理解と思索を助ける。私たちが research を充実した explanation として書けるのは、エージェントが従うべき reference と how-to が別のフォルダに隔離されているからだ。逆に、もし research の中に直接的な指示（規則）を混ぜてしまえば、explanation は単なる説教くさいルールブックに堕ち、reference は情報過多で曖昧なものになる。
 
-`privacy-context-budget-policy.md` が payload 最小化を規範化するなら、読み物を
-読む対象から外す実装手段は列挙制である。参照されない文書は、存在しないのと同じ
-保証を与える。除外リストでは足りない。
+## RFC の伝統：Normative と Informative
 
-## 昇格は一方向
+インターネットの基盤を築いてきた [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) 以来、技術標準の世界において "normative"（規範的・義務的）なテキストと "informative"（参考・非規範的）なテキストの厳密な区別は、標準化作業の絶対的な基本である。本稿における「読み物」とは、システムの準拠（コンプライアンス）——すなわちエージェントの正しいコード生成やツールの動作——には直接影響を与えない、informative な文書のことだ。
 
-research →（Referee 判断）→ ADR / collaboration / issue は許す。逆は作らない。
-規範文書が research を normative に参照すれば、分離は壊れる。同期対象外であることの
-担保は、`collaboration-template-paths.sh` の列挙に `docs/research` が含まれない
-ことによる（2026-07-07 に copy / update 両スクリプトが同一リストを参照することを
-確認）。
+RFC の世界では、同じひとつの文書の中にも normative text と informative examples が共存することがある。しかし本テンプレートでは、それをさらに強く、物理的な「フォルダ」とスクリプトによる「参照経路」で物理的に分割する。理由は再三述べる通り、エージェントのコンテキスト管理である。人間のエンジニアは「ここからここは背景説明のコラムだな」と視覚的に読み分けられるが、エージェントに渡された長い文書は、しばしばその全テキストが「行動の根拠（プロンプト）」としてフラットに解釈されてしまう。だからこそ、絶対に混在させず、読み物は読み物として別の隔離された場所に置くのだ。
+
+## Allowlist は Denylist より強い：セキュリティと予算
+
+`privacy-context-budget-policy.md` がコンテキストの payload 最小化を規範化している。この制約を満たすため、読み物をエージェントの読む対象から確実に外す最も堅牢な実装手段は、除外リスト（Denylist）ではなく「列挙制（Allowlist）」である。参照されない文書は、システム上に存在しないのと同じ保証を与える。
+
+Denylist は、エントロピーが増大し続けるファイルシステムに対して脆い。新しい読み物や一時ファイルが追加されたとき、それを除外リストへ明示的に書き入れ忘れるだけで、たちまち agent payload にノイズとして混ざり込む。Allowlist なら完全に逆である。作業経路（Operating Path）が読むべき文書をホワイトリストで列挙し、新しい文書は、アーキテクチャ上の合意を経て明示的に追加されない限り、決して入力コンテキストにはならない。この堅牢な性質は、プライバシー（機密情報の保護）とリーズニングバジェット（推論精度の維持）の両方に強力に機能する。
+
+## 昇格は一方向である
+
+`research` から（Referee の判断を経て）ADR / collaboration / issue への「昇格」は推奨される。しかし、その逆の経路は絶対に作らない。規範文書が `research` の内容を normative に（従うべきルールとして）参照してしまえば、せっかくの構造的分離は崩壊する。同期対象外であることの技術的担保は、`collaboration-template-paths.sh` の列挙リストに `docs/research` が一切含まれないことによって物理的に強制される。
+
+昇格の経路が一方向であることは、決して research を軽んじているからではない。むしろ、research という知的な活動を真に自由にするためである。ここでは大胆な仮説、歴史的な背景、採用されなかった反論、他社の文献の読み比べを、文字数を気にすることなく豊かに書ける。まだ確定した規則ではない柔らかい考えを、無理に短く硬い命令文（プロンプト）の形に押し込める必要はない。人間が深く思考し、哲学を熟成させる場所を確保するために、あえてエージェントが従う冷徹な場所とは分けるのである。
 
 ## 参考文献
 
-1. 内部: `docs/research/README.md`、`docs/collaboration/privacy-context-budget-policy.md`、
-   `docs/architecture/agent-quickstart.md`、`scripts/lib/collaboration-template-paths.sh`
-2. Diátaxis. https://diataxis.fr/ （取得 2026-07-07）
-3. RFC 2119. *Key words for use in RFCs to Indicate Requirement Levels*.
-   https://www.rfc-editor.org/rfc/rfc2119
-4. Canonical. "Diátaxis, a new foundation for Canonical documentation."
-   https://ubuntu.com/blog/diataxis-a-new-foundation-for-canonical-documentation
-   （取得 2026-07-07、ブログ存在確認）
+1. **プロジェクト内部規定**
+   - `docs/research/README.md`
+   - `docs/collaboration/privacy-context-budget-policy.md`
+   - `docs/architecture/agent-quickstart.md`
+   - `scripts/lib/collaboration-template-paths.sh`
+2. **ドキュメンテーション・アーキテクチャ**
+   - Diátaxis. https://diataxis.fr/ （取得 2026-07-07）
+   - Canonical. "Diátaxis, a new foundation for Canonical documentation." https://ubuntu.com/blog/diataxis-a-new-foundation-for-canonical-documentation （取得 2026-07-07）
+3. **技術標準化の原則**
+   - RFC 2119. *Key words for use in RFCs to Indicate Requirement Levels*. https://www.rfc-editor.org/rfc/rfc2119
+   - RFC 8174. *Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words*. https://www.rfc-editor.org/rfc/rfc8174 （取得 2026-07-16）

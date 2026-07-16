@@ -1,67 +1,75 @@
-# リポジトリに計画を置く
+# リポジトリに計画を置く：Docs-as-Code の極致
 
 2026-07-05。非規範。関連: ADR 0005、ADR 0006。
 
 ---
 
-チャットは成果物ではない。セッションで決めたこと、計画したこと、文脈として渡した
-こと——放っておけばログに埋もれて消える。エージェントはサンドボックス内では自由に
-動けるが、プロジェクトとして統合する配線は外側——リポジトリ、CI、承認——に置く
-（[エージェントはサンドボックスである](2026-07-07-rationale-saas-agent-as-sandbox.md)）。
-私は、計画・指示・来歴をすべてリポジトリ内のファイルとし、コードと同じレビュー、
-CI、差分管理の対象に載せる。挙動を変えるものは、理由とレビューと痕跡を伴ってだけ
-変わる。
+チャットのウィンドウは成果物ではない。AIセッションで決めたこと、計画したこと、文脈としてエージェントに渡したこと——これらをチャット履歴の中に放っておけば、それは膨大なログに埋もれ、いずれコンテキストウィンドウの彼方へと消え去る。エージェントはサンドボックス内では驚異的な自由度で動けるが、それをソフトウェアプロジェクトとして統合するための配線（計画、履歴、承認フロー）は、サンドボックスの外側——すなわちリポジトリ、CI（継続的インテグレーション）、そして人間の承認プロセス——に確固として置かなければならない（[エージェントはサンドボックスである](2026-07-07-rationale-saas-agent-as-sandbox.md)）。
 
-## 計画はファイルである
+私は、計画・指示・作業来歴のすべてをリポジトリ内のプレーンテキストファイルとし、ソースコードと全く同じようにレビュー、CIの検査、差分管理（バージョン管理）の対象に載せる。システムの挙動を変えるあらゆる要素は、その理由、レビューの痕跡、および差分を伴って初めて変更される。
 
-local issue（LISS）と work plan は `docs/issues/` と `docs/work-plans/` に置く。
-GitHub へのネットワークアクセスなしに計画が成立する（ADR 0005）。エージェントが
-設計インテーク中に読めるリポジトリローカルな成果物が必要だからだ。計画の読者に
-エージェントを一級として想定している。
+この「決定をコードと共に残す」という発想は、AI 時代のためだけに新しく生まれたものではない。ソフトウェア開発は古くから、「暗黙の決定が揮発して消える」という問題に苦しんできた。アーキテクチャの重要な決定が口頭の会議で決まり、Issue Tracker の奥底のコメントへ流れ、数か月後には「結論」だけが残り「なぜそうしたかという理由」が失われる。AI エージェントはこの情報の揮発問題を劇的に加速する。セッションが短く、生成が速く、会話の外へ波及する差分が大量にあるからだ。だからこそ、計画をリポジトリに置くことは、AI 時代の特殊対応ではなく、ソフトウェア工学が以前から抱えていた記録問題への、より厳格で不可避な解答なのである。
 
-計画は ToDo リストではない。depends_on / blocks / parent で表される依存グラフ
-である。未解決の depends_on がある issue に着手してはならない。
+## 計画はファイルである：Local-First の原則
 
-決定の記録をリポジトリに置く発想の原典は Nygard の ADR 提言
-（[Documenting Architecture Decisions, 2011](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)、
-取得 2026-07-07、本文に「決定を版管理下の短いテキストで残す」方針を確認）である。
-本テンプレートは ADR を計画（issue）・指示（契約ファイル）・来歴（trace）へ拡張する。
+本プロジェクトにおいて、local issue（LISS）と work plan は `docs/issues/` と `docs/work-plans/` に Markdown 形式で置かれる。GitHub などの外部ネットワークアクセスなしに、ローカル環境だけで計画が成立する（ADR 0005）。これは単にオフライン作業を可能にするためではない。エージェントが設計インテーク中に自律的に読める、リポジトリローカルな成果物が絶対的に必要だからだ。私たちは、計画の第一の読者に「エージェント」を一級市民として想定している。
 
-## プロンプトは設定ではなくコード
+計画は単なる ToDo リストではない。depends_on / blocks / parent といったメタデータで表される依存グラフである。未解決の depends_on がある issue に着手してはならない。依存関係をファイルに明記することで、人間だけでなくエージェントも「次に何をしてよいか」を正確に復元できる。これは、セッションが途切れた後の session resume（再開）における技術的基盤である。
 
-`AGENTS.md`、`CLAUDE.md`、`.github/copilot-instructions.md` は近接して重複した
-操作契約である。放置すれば無言でドリフトする（ADR 0006）。変更には理由、Referee
-レビュー、ファイル間整合、trace を要求し、CI が trace 欠落を拒否する。
+今回の `docs/research/` 編集のように、Referee が明示的に issue の作成を省略する（issue なしを認める）作業もある。しかしその場合でも、waiver（免除）は口頭の雰囲気で済ませるのではなく、作業報告（trace）に明記されるべきである。issue を作らないことは、手続きを軽量化するという設計判断であって、作業の来歴を完全に消し去るという判断ではない。
 
-これは docs-as-code の延長だ
-（[Write the Docs: Docs as Code](https://www.writethedocs.org/guide/docs-as-code/)、
-取得 2026-07-07）。ただし対象は説明書ではなく、エージェントの挙動そのものである。
+## ADR は記録ではなく「法律」である
 
-## local-first の計画
+アーキテクチャの決定をリポジトリの履歴に置くという発想の原点は、Michael Nygard による ADR（Architecture Decision Records）の提言（[Cognitect](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)）に遡る。人間同士のチームであれば、ADR は「決定事項とその背景（Context）をまとめたメモ」として機能したかもしれない。しかし、AIエージェントが自律的に動く環境において、**ADRは単なる記録ではなく、システム空間における絶対の「法律（Legislation）」**として再定義されなければならない。
 
-Ink & Switch の local-first
-（[2019](https://www.inkandswitch.com/local-first/)、取得 2026-07-07、
-エッセイページ存在確認）は、所有権と可用性をローカルに置く原則を述べる。
-GitHub は有用だが、計画の一次台帳はリポジトリ内——この二層構造は、計画における
-local-first と読める。
+ローレンス・レッシグは *Code and Other Laws of Cyberspace* において、コードというアーキテクチャが法と同様に人の行動を規制すると論じた（いわゆる "Code is Law"）。AI 協働ではこの関係に一つの逆転が加わる——**リポジトリに書かれた規約（Law）が、生成されるコード（Code）を規定する**のだ。セッションごとに文脈を失い、渡された文書を推論の初期条件とする AI にとって、リポジトリ内の規約は事実上の最上位ルールとして機能する。もっともこれは物理的な強制ではない（[エージェントはサンドボックスである](2026-07-07-rationale-saas-agent-as-sandbox.md)）。ADR を「ただの過去のメモ」と位置づければ、AI は学習済みの一般的なベストプラクティスに引き寄せられて平然とそれを破る。だからこそ、「ADR は法律であり、これに反するコード生成は許されない」という位置づけを規範文書の側で明確に宣言し、Referee のレビューと CI がその執行を支える必要があるのだ。
 
-## 観測が規範を更新する
+本テンプレートは、この ADR の思想をプロジェクト全体を統治する法体系へと拡張する。
+- **ADR** は遵守すべき基本法である。
+- **指示（契約ファイル/AGENTS.md）** は法律を現場で執行するための「施行規則」である。
+- **計画（Issue）と来歴（Trace）** は法律を運用・改訂していくための「行政手続きと記録」である。
 
-ADR 0005 の Negative（local と GitHub メタデータのドリフト、status 更新の規律依存）は、
-第2アダプターレビューで親 issue の陳腐化として顕在化した。その観測は LISS-0005 へ
-還流している。規範は机上の理念で終わらせない。
-[エビデンスと規則](2026-07-06-rationale-evidence-based-process-design.md) が述べる
-フィードバックループの実例である。
+AI 協働においては、「エージェントにどのファイルを読ませたか」「どの phase で作業を止めたか」という行為自体が実装に決定的な影響を与える。AIの振る舞いを変えるには、法律の施行規則（契約ファイル）をいじる必要があり、そのためには所定の手続き（Issue/Trace）を踏まなければならない。古典的な ADR だけではカバーしきれないこの厳格な法体系の運用こそが、AI時代の持続可能なプロジェクト管理の実態である。
+
+## プロンプトは設定ではなくコードである
+
+`AGENTS.md`、`CLAUDE.md`、`.github/copilot-instructions.md` などのファイルは、エージェントの操作契約を定義している。これらを放置すれば、それぞれが無言で独自の方向へドリフトしていく（ADR 0006）。これらのファイルの変更には明確な理由、Referee によるレビュー、ファイル間の整合性確認、そして trace の記録を要求し、CI が trace の欠落を機械的に拒否する。
+
+これは Docs-as-Code（[Write the Docs](https://www.writethedocs.org/guide/docs-as-code/)）の哲学の究極の延長である。ただし、管理の対象は単なる人間向けの説明書ではない。エージェントの挙動そのものを制御するプログラムである。プロンプトや agent instruction は、システムの実行時環境変数、あるいはルールのソースコードそのものに近い。それを一言変えれば、出力される数百行のコードの質が変わる。それほど強力なものであるなら、ソースコードと全く同じ水準で reviewable（レビュー可能）でなければならない。
+
+ここでいう「プロンプトはコードである」は、プロンプトをプログラミング言語のように複雑にせよという意味ではない。むしろ逆である。プロンプトをコードのように扱うのであれば、DRY原則に反する重複、デッドコード（未使用の指示）、暗黙の依存、そしてテスト不能な曖昧な変更を、コードレビューの時と同じように嫌悪すべきである。contract file の変更は、それがどの agent surface（UI/CLI）に効くのか、どの trace によって裏付けられているのか、どの ADR によって正当化されているのかを持たなければならない。
+
+## Local-First の計画と外部ツールの役割
+
+Ink & Switch による Local-First Software の提唱（[Ink & Switch](https://www.inkandswitch.com/local-first/)）は、データの所有権とシステムの可用性をローカル環境に置くことの重要性を説いている。GitHub や Jira は極めて有用なツールだが、プロジェクト計画の一次台帳（Source of Truth）はリポジトリ内のプレーンテキストである——この二層構造は、アジャイル計画における Local-First アーキテクチャと読むことができる。
+
+もちろん、Local-First はリモートコラボレーション（GitHub Issue 等）の否定ではない。GitHub Issues や Pull Requests は、非同期の通知、チーム内のレビュー、公開性に優れている。一方で、エージェントがネットワーク依存なしにローカルのファイルシステムから直接設計インテークを開始できること、フォークやテンプレート導入後もプロジェクトの履歴がそのまま残ること、ブランチと Issue の関係を `git checkout` だけで完全に復元できることには、SaaS には代替できない絶対的な価値がある。local issue は GitHub Issue の単なる劣化コピーではない。AI との協働のために最適化された、リポジトリネイティブな planning artifact（計画成果物）なのである。
+
+## 観測が規範を更新する：フィードバックループ
+
+ADR 0005 が Negative として挙げていたリスク（ローカルファイルと GitHub メタデータのドリフト、ステータス更新が人間の規律に依存しすぎること）は、開発の第2段階でのアダプターレビューにおいて「親 issue の陳腐化」という形で現実のものとなった。その実践上の観測は、LISS-0005 という新たな issue へと還流し、プロセス改善のトリガーとなった。
+
+この教訓から導かれた**「ISSUE完了時には必ずステータスを更新する（完了マークをつける、状態を Done にする）」**という運用規約は、単なる些細な事務手続きの追加ではない。ファイルベースの依存グラフ（blocks / depends_on）を破綻させず、次にエージェントがセッションを再開する際の推論の土台を健全に保つための「生命線」としてのルールである。規範は机上の理念で終わらせてはならない。[エビデンスと規則](2026-07-06-rationale-evidence-based-process-design.md) が述べるフィードバックループが、まさにここで機能している。
+
+このとき決定的に重要なのは、現場の観測やアドホックな判断を、直接「規範ファイル」に混ぜ込まないことである。失敗事例は research や trace として「記録」に残る。規則を変える必要があるなら ADR や collaboration 文書で「宣言」する。計画を更新するなら local issue を「修正」する。ファイル種別ごとに役割を厳格に分けるからこそ、後から読んだ人間が「これは背景事実なのか、決定されたルールなのか、単なる将来の作業計画なのか」を迷わず読み分けることができる。
+
+## 記録は速度を落とすのか？
+
+「いちいちテキストファイルに書くと開発速度が落ちる」という反論は、直感的には正しい。記録には確実に認知コストが伴う。しかし、記録しないことのコストは、後になって指数関数的に跳ね返ってくる。セッション再開時のコンテキストの再構築、エージェントによる同じ失敗の反復、意図不明な巨大 diff のレビュー、agent instruction のドリフト、issue status のドリフト。AI がコードを生成する速度が速くなるほど、この「記録しなかったことによる負債」のコストは見えにくい形で、しかし確実にプロジェクトを蝕む。
+
+したがって、我々の目標は「考えうるすべてを記録する」ことではなく、「セッションの再開と人間によるレビューに必要な最小の記録を、確実に行う」ことである。Fast Path は compact design note で十分だ。大きい作業には詳細な issue や trace が要る。プロジェクトの規範を変えるなら ADR が必須である。ドキュメントの種類を緻密に分けているのは、記録の総量を増やすためではなく、必要な記録を、必要な時に、必要な場所にだけ置くための経済合理的な選択なのである。
 
 ## 参考文献
 
-1. 内部: ADR 0005、ADR 0006、`docs/collaboration/local-issue-planning.md`、
-   `docs/collaboration/prompt-instruction-change-control.md`、
-   `docs/collaboration/ai-work-trace-log.md`
-2. Nygard, M. "Documenting Architecture Decisions." 2011.
-   https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions
-   （取得 2026-07-07）
-3. Kleppmann, M. et al. "Local-first software." Ink & Switch, 2019.
-   https://www.inkandswitch.com/local-first/ （取得 2026-07-07）
-4. Write the Docs. *Docs as Code*.
-   https://www.writethedocs.org/guide/docs-as-code/ （取得 2026-07-07）
+1. **プロジェクト内部規定**
+   - ADR 0005, ADR 0006
+   - `docs/collaboration/local-issue-planning.md`
+   - `docs/collaboration/prompt-instruction-change-control.md`
+   - `docs/collaboration/ai-work-trace-log.md`
+2. **アーキテクチャ記録とサイバー法学**
+   - Nygard, M. "Documenting Architecture Decisions." 2011. https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions （取得 2026-07-16）
+   - MADR. *Markdown Architectural Decision Records*. https://adr.github.io/madr/ （取得 2026-07-16）
+   - Lessig, L. *Code and Other Laws of Cyberspace*. Basic Books, 1999.
+   - Write the Docs. *Docs as Code*. https://www.writethedocs.org/guide/docs-as-code/ （取得 2026-07-16）
+3. **ローカルファースト哲学**
+   - Kleppmann, M. et al. "Local-first software." Ink & Switch, 2019. https://www.inkandswitch.com/local-first/ （取得 2026-07-16）

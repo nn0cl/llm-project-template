@@ -1,174 +1,107 @@
-# エージェントはサンドボックスである
+# エージェントはサンドボックスである：自由と統制のアーキテクチャ
 
 2026-07-07。非規範。
-関連: [完成形](2026-07-05-rationale-target-end-state.md)、
-[Referee とフェーズ](2026-07-05-rationale-referee-centered-collaboration.md)、
-[リポジトリに計画を置く](2026-07-05-rationale-repository-native-planning-and-change-control.md)、
-[設計先行とコンテキスト](2026-07-05-rationale-design-first-minimal-context.md)。
+関連: [完成形](2026-07-05-rationale-target-end-state.md)、[Referee とフェーズ](2026-07-05-rationale-referee-centered-collaboration.md)、[リポジトリに計画を置く](2026-07-05-rationale-repository-native-planning-and-change-control.md)、[設計先行とコンテキスト](2026-07-05-rationale-design-first-minimal-context.md)。
 
 ---
 
-私は、AI と人間が**協調して**開発を進める仕組みを作ろうとしている。エージェントに
-仕事を奪わせるのではない。人間が設計と承認を担い、エージェントが探索と生成を担い、
-その境界を文書と成果物とレビューで接続する——そういう工学的協働だ。
+私は、AI と人間が真の意味で**協調して**ソフトウェア開発を持続的に進める仕組みを構築しようとしている。これは、人間のエンジニアからクリエイティビティを奪い、AI にすべてを自動化させるディストピアではない。人間が高度な設計判断と責任ある承認（Governance）を担い、エージェントが広大な設計空間の探索と大量のコード生成（Execution）を担い、その両者の境界を、厳密な文書、永続的な成果物、そしてフェーズごとのレビューによって強固に接続する——それこそが、新しい時代の工学的協働の姿である。
 
-その前提として、コーディングエージェントは驚くほど自由に動く。ファイルを読み、
-コマンドを打ち、複数ファイルを書き換え、失敗してやり直す。SaaS 製品はこの自由を
-"isolated" / "ephemeral" な実行空間——サンドボックス——のなかで与える
-（GitHub Copilot: [cloud and local sandboxes](https://docs.github.com/en/copilot/concepts/about-cloud-and-local-sandboxes)、
-取得 2026-07-07。Cursor: [agent sandboxing](https://cursor.com/blog/agent-sandboxing)、
-取得 2026-07-07）。自由はベンダー側の実行境界で確保される。
+その前提として理解すべきは、現代のコーディングエージェントは驚くほど自由に動くという事実だ。プロジェクトのファイルを縦横無尽に読み、シェルコマンドを打ち、複数ファイルにまたがるリファクタリングを一度に行い、テストが失敗すれば自律的にやり直す。各 SaaS 製品はこの強力な自由を、OS レベルの "isolated"（隔離された）かつ "ephemeral"（短命な）実行空間——すなわちサンドボックス——のなかで提供している（GitHub Copilot: [cloud and local sandboxes](https://docs.github.com/en/copilot/concepts/about-cloud-and-local-sandboxes)、Cursor: [agent sandboxing](https://cursor.com/blog/agent-sandboxing)）。悪意あるコードの実行やホスト環境の破壊を防ぐ「物理的な自由と安全」は、ベンダー側が提供するこのサンドボックスという実行境界によって確保されている。
 
-だが自由だけではプロジェクトにならない。統合の仕組みはベンダーが売るものではなく、
-**チームがリポジトリに書くもの**である。本テンプレートは、その仕組みの設計図だ。
+だが、エージェントがローカルで自由に動けるということだけでは、決してエンタープライズの「プロジェクト」にはならない。生成された大量のコード片をシステムに統合するための仕組みは、SaaS ベンダーがパッケージとして売ってくれるものではなく、**チーム自身がリポジトリの中にアーキテクチャとして記述するもの**である。本テンプレートは、その「統合と協調の仕組み」の具体的な設計図なのだ。
 
-## 協働の三役
+ベンダーのサンドボックスは「OS上の物理的な安全性」の一部を引き受けるが、ソフトウェアとしての「意味の安全性（Semantic Safety）」までは絶対に引き受けない。ファイルシステムへのアクセスを隔離したからといって、エージェントが誤った仕様理解に基づいて生成した致命的なバグを含む diff を隔離することはできない。ネットワーク通信を制限したからといって、UI コンポーネントや DB アダプターの中にビジネスドメインの重要ルールが混入してしまうアーキテクチャ違反（Clean Architecture 違反）は防げない。実行環境の「安全境界」と、プロジェクトとして受け入れてよい変更の「意味的境界」は全くの別物である。この二つの違いを混同すると、「サンドボックス内で動いているから、出たものは安全だし任せてよい」という、致命的なエンジニアリングの短絡が起こる。
 
-`docs/collaboration/ai-human-scheme.md` は、役割を三つに分ける。
+## 協働の三役：責任の明示的分割
 
-**Referee**——人間の設計者。フェーズ遷移の承認、ADR の受理、Phase 1 テストのレビュー、
-曖昧な判断の決定を所有する。
+`docs/collaboration/ai-human-scheme.md` は、この協働プロジェクトにおける役割を明確に三つに分割する。
 
-**Agent**——AI コーディング補助。設計インテークから始め、依頼されたフェーズだけを
-実行し、仮定と境界を可視化し、Referee の決定が要るところで止まる。
+1. **Referee（裁定者）**——人間の設計者。フェーズ遷移のゲート承認、ADR（アーキテクチャ決定記録）の最終受理、Phase 1 で生成されたテストのドメイン的レビュー、そしてエージェントが迷った際の「曖昧な判断」に対する最終決定権を単独で所有する。
+2. **Agent（エージェント）**——AI コーディング補助。設計インテークから作業を開始し、依頼されたフェーズの境界内だけで自律実行し、仮定と影響範囲を可視化し、Referee の決定が要る境界に到達した地点でピタリと止まる。
+3. **Deterministic Tool（決定的ツール）**——formatter、linter、静的解析、test runner など。AI モデルの確率的な判断に依存すべきでない「事実」を、冷徹かつ 100% 再現可能に検証する。
 
-**Deterministic Tool**——formatter、linter、test runner など。モデルの判断に依存
-すべきでない事実を、再現可能に検証する。
+真の協働は、この三役が明確なプロトコルのもとでループを回ることで初めて成立する。プロジェクトの成功は、エージェント単体の LLM 性能（IQ）のみに依存するわけではない。
 
-協働は、この三役がループのなかで回ることで成立する。エージェント単体の性能ではない。
+この三役の分割は、トラブル時の責任を曖昧に分散させるためのものではない。むしろ、曖昧さを極限まで減らすためのものである。Referee は判断の所有者であり、Agent は生成の実行者であり、Deterministic Tool は事実確認の担当である。あるバグや設計違反が main ブランチへ流出したとき、「AI モデルがハルシネーションを起こしたから仕方ない」と諦めるのではなく、「どの役割の、どのチェックゲートの設計が甘かったか」というアーキテクチャの問いへと変換できる。
 
-```text
-依頼
-  -> Phase 0 設計インテーク
-  -> Referee のレビューまたは承認
-  -> Phase 1 Red
-  -> Referee がテストをレビュー
-  -> Phase 2 Green
-  -> 決定的検証
-  -> Phase 3 Refactor
-  -> レビュー者共感サマリ
-  -> Referee の最終レビュー
-```
+### 三役はチームに拡張される：階層とエスカレーション
 
-（`ai-human-scheme.md` の Collaboration Loop を要約）
+「協働の三役」は、単一のエージェントを前提とした固定的な図式ではない。マルチエージェント研究——会話を通じて複数の LLM エージェントを協調させる AutoGen（Wu et al., [arXiv:2308.08155](https://arxiv.org/abs/2308.08155)）や、自律エージェントの構成要素を体系化したサーベイ（Wang et al., [arXiv:2308.11432](https://arxiv.org/abs/2308.11432)）——が示すように、「Agent」の席には複数の LLM が座りうる。実装全体を管轄する実行役、スコープの限定された機械的作業を高速にこなす軽量役、不確実性の高い判断点でのみ呼ばれる強い推論役、という分担は、[設計先行とコンテキスト](2026-07-05-rationale-design-first-minimal-context.md) が述べる「能力の階段」を、エージェントの内側にまで適用したものだ。
 
-## 本リポジトリが置く制御——実行強制ではなく、協調の規範
+ただし、この階層化をもって「人間と AI の境界が消える」と結論づけてはならない。エスカレーションの連鎖がどれほど洗練されても、Referee は階層の中の「いちばん強い推論リソース」ではない。強いモデルへの相談は答えの質を上げるための手段だが、Referee への承認要求はプロジェクトの責任と監査可能性を確定させる行為であり、両者は情報の流れとして似ていても意味論的に別物である。エージェントチームはサンドボックスの内側で自由に組織化してよい。だが、その出力がプロジェクトの意味を変える地点では、チームの構成にかかわらず同じ承認ゲートを通る。三役の分割が守っているのは、この責任の非対称性である。
 
-ここで誤解しやすい。`CLAUDE.md` と `AGENTS.md` は、エージェントのシェルコマンドを
-プログラムで遮断する仕組みではない。サンドボックスの権限モデルを書き換えるものでも
-ない。**行動憲法**である。セッション全体を通じて、何をしてよいか、いつ止まるか、
-何を推測してはならないかを述べる。
+## 本リポジトリが置く制御——実行の強制ではなく、協調の規範
 
-制御は次の層で接続されている。層は上から順に、エージェントの最初の一歩に近い。
+ここでよくある誤解を解いておく。本テンプレートが提供する `CLAUDE.md` や `AGENTS.md` は、エージェントが `rm -rf` を打つのをプログラム（インターセプター）で強制遮断するような仕組みではない。ベンダーが提供するサンドボックスの OS 権限モデルを書き換えるものでもない。これらは、エージェントと人間が共有する**行動憲法（Constitution）**である。セッション全体を通じて、何をしてよいか、いつ立ち止まるべきか、何を推測してはならないかを宣言する、システムへの宣誓書である。
 
-### 第一関門——Operating Path の列挙制
+制御は以下の重層的なレイヤーで接続されている。
 
-`docs/architecture/agent-quickstart.md` は、依頼の性質に応じて Fast / Feature /
-Architecture の三経路を選ばせる。各経路は**読む文書を列挙する**。読まない文書は、
-そのタスクの規範に入らない。これは research をエージェントの読む対象から外すのと
-同じ論理であり、コンテキスト予算の実装でもある
-（[規範と読み物](2026-07-06-rationale-normative-vs-reading-documents.md)）。
+### 第一関門——Operating Path の列挙制（Allowlist）
 
-`scripts/init-llm-context.sh` は、セッション開始時にこの順序を最初のプロンプトへ
-焼き込む。仕様もフェーズもまだなければ、実装に入らず設計インテークのあとで止まれ、
-と指示する。協働はいきなり生成から始まらない。
+`docs/architecture/agent-quickstart.md` は、依頼の性質に応じて Fast / Feature / Architecture の三つの経路（Path）を選択させる。それぞれの経路は、**エージェントが読むべき文書を厳格に列挙（Allowlist）する**。そこに列挙されていない文書は、そのタスクのコンテキストには存在しないものとみなす。これは、`research` フォルダのような哲学的な読み物をエージェントの推論対象から外し、コンテキスト予算（Context Budget）とプライバシーを確保するための実装である（[規範と読み物](2026-07-06-rationale-normative-vs-reading-documents.md)）。
+
+`scripts/init-llm-context.sh` は、セッション開始時にこの「読むべき順序と範囲」を最初のシステムプロンプトとして焼き込む。「受入仕様もフェーズ定義もまだ無いなら、いきなりコードの実装には入らず、設計インテークを提示した上で一旦止まれ」と指示する。協働は、決して「いきなり大量のコード生成」からは始まらない。
+
+この列挙制は、サンドボックスの内側へ入るエージェントの「認知的ファイルシステム」を制御する。OS のサンドボックスがエージェントが読める物理パスを制限するように、Operating Path はエージェントが考慮すべき意味的パスを制限する。もちろんこれは完全な物理強制ではない。だが、エージェントの推論の初期条件を極限まで絞り込むことで、のちに人間がレビューする際、「AI は一体どの仕様書のどの文脈を根拠にこのコードを書いたのか」をトレースしやすくする。
 
 ### 憲法——同期した操作契約
 
-`AGENTS.md`（ツール非依存）、`CLAUDE.md`（Claude 入口）、
-`.github/copilot-instructions.md`（Copilot 入口）は、同じフェーズ規律と依存境界を
-複数エージェント向けに同期した**操作契約**である。Claude Code on the web は
-リポジトリの `CLAUDE.md` をセッションに持ち込むが、ユーザーホームだけの設定は
-持ち込まない（[Use Claude Code on the web](https://code.claude.com/docs/en/claude-code-on-the-web)、
-取得 2026-07-07）。だから憲法はリポジトリに置く。サンドボックスはそれをクローンして
-読む側にすぎない。
+`AGENTS.md`（ツール非依存の基本憲法）、`CLAUDE.md`（Claude 向けの指示）、`.github/copilot-instructions.md`（Copilot 向けの指示）は、同じフェーズ規律と依存境界を、異なる複数の AI エージェント向けに同期した**操作契約**である。Claude Code のような CLI ツールは、リポジトリ直下の `CLAUDE.md` をセッションのグローバルコンテキストとして持ち込む仕様を持っている（[Use Claude Code on the web](https://code.claude.com/docs/en/claude-code-on-the-web)）。だからこそ、憲法はユーザーのローカル PC の隠しフォルダではなく、リポジトリの中心に堂々と置く。ベンダーのサンドボックスは、それを起動時にクローンして読み込む従属的な実行環境にすぎない。
 
-契約の変更自体も統制の対象だ。`prompt-instruction-change-control.md` は Referee
-レビューと trace を要求し、CI が契約変更に trace が無い PR を拒否する。協働のルールを
-変える行為も、協働のルールに従う。
+そして、この憲法（契約）の変更自体も厳格な統制の対象となる。`prompt-instruction-change-control.md` は、プロンプトの変更に対して Referee の深いレビューと Trace（変更の検証記録）を要求し、CI が「Trace の記録が無い契約変更の Pull Request」を機械的に拒否する。協働のルールを変える行為自体が、協働のルールに服属するのだ。
 
 ### 誘導——設計インテークと Prime Directive
 
-`AGENTS.md` の Prime Directive は三つだ。レビュー済み受入仕様なしに実装しない。
-フェーズをスキップしない。adapter に隠れた業務ロジックを置かない。
+`AGENTS.md` の頂点に掲げられる Prime Directive（最優先指令）は三つだ。
+1. 人間がレビュー済みの受入仕様なしに、実装を始めてはならない。
+2. 作業フェーズ（Phase 1~3）を勝手にスキップしてはならない。
+3. Adapter（外部接続層）の中に、隠れたビジネスロジックを忍び込ませてはならない。
 
-毎依頼は設計から始まる。Feature / Architecture Path では `[THOUGHT]` が、
-対象挙動、include/omit、ports/adapters、Must not guess、モデル/ツール振り分けを
-先に固定する。Fast Path では compact design note で同趣旨を短く述べる。これは
-セッション前のブリーフィングではなく、**作業中ずっと効く誘導**である。
+毎回の依頼は必ず設計（Design Intake）から始まる。Feature / Architecture Path では、エージェントは `[THOUGHT]` ブロックを用い、対象の挙動、コンテキストの include/omit、Ports/Adapters の境界線、Must not guess（推測してはならない未決事項）、そしてモデルとツールの振り分けを、コードを書く前に固定する。これは作業前の単なる通過儀礼のブリーフィングではなく、**作業中ずっとエージェントの推論を縛り続ける強力な誘導（Guidance）**である。
 
 ### ライブ制御——Referee の承認ループ
 
-規範文書だけでは協働は完結しない。人間がループの中に入る。Referee は決定点を
-「所有」するだけでなく、各フェーズで**止めて承認させる**能動的制御である。
-Phase 2 はレビュー済み Phase 1 のあとにだけ始まる。フェーズ遷移は Referee の
-明示的な依頼が要る（`agent-quickstart.md` の Phase Rule）。
+静的な規範文書だけでは、動的な協働は完結しない。実行中のループの中に、人間が介入する。Referee は決定点を「所有」するだけでなく、各フェーズの節目でエージェントを物理的に**止めて承認させる（Gate）**という能動的制御を行う。Phase 2（本実装）は、人間がレビュー済みの Phase 1（テストコード）のあとにだけ開始が許可される。フェーズの遷移は、エージェントの自己判断ではなく、Referee の明示的な依頼トリガーが必要である。
 
-ここが本テンプレートの統合の心臓だ。サンドボックス内の自由な生成は、Referee の
-承認点を通過するとき初めてプロジェクトの前進になる。
-
-### 配線——永続成果物とアーキテクチャ境界
-
-issue、ADR、trace、handoff、EARS/Gherkin 仕様は、セッションをまたぐ配線である。
-Clean Architecture の依存規則と Ports は、生成物をリポジトリが受け入れられる形に
-寄せる。エージェントの自由な diff が、のちのレビューと引き継ぎで読めるようにする。
+ここが本テンプレートが提供する統合アーキテクチャの心臓部だ。サンドボックス内の無軌道な生成パワーは、Referee の意図的で冷静な承認ポイントを通過するときに初めて、プロジェクトの価値ある前進へと変換される。
 
 ### 出口——PR、人間レビュー、薄い CI
 
-サンドボックスから出た変更は PR と人間レビューへ載る。CI は補助的関所である。
-本テンプレートの CI は、契約ファイルの存在、ADR 番号、契約変更時の trace などを
-見る骨格にすぎない。フェーズ遵守を毎コミットで機械判定する層ではない。統合の最終
-責任は Referee とレビュアーにある。正直なフェーズ報告（"Report Red, Green, Refactor,
-or Fast Path status honestly"）は、規範が誠実さを要求する部分だ。
+サンドボックスから出力された変更は、最終的に Pull Request (PR) と人間のレビューへと載る。ここでは、CI はあくまで「補助的な関所」である。本テンプレートの CI は、契約ファイルが正しく存在するか、ADR 番号が振られているか、契約変更時に Trace ログがあるか、といった「メタデータの骨格」を検証するにすぎない。フェーズが本当に遵守されたか、設計意図に沿っているかを毎回のコミットで 100% 機械判定する魔法の層ではない。統合の最終責任は、あくまで Referee と人間のレビュアーにある。エージェントに対する「正直なフェーズ報告（Report Red, Green, Refactor, or Fast Path status honestly）」という指示は、システムがエージェントの誠実さ（Faithfulness）を要求する最後の砦である。
 
-## 二つの世界を混ぜない
+## 二つの世界を混同しない
 
-整理のために、次の二つを分けておく。
+議論の整理のために、以下の二つを明確に分けておく。
 
-**ベンダーのサンドボックス**——実行の自由と安全境界（ファイル、シェル、ネットワーク）。
-製品が与える。
+1. **ベンダーのサンドボックス**——エージェントに与えられた実行の自由と、OS レベルの安全境界（ファイル破壊、シェル暴走、ネットワーク漏洩からの保護）。これは各ベンダーの SaaS 製品がカプセル化して提供する。
+2. **チームの協働規範**——`CLAUDE.md` / `AGENTS.md`、Operating Path、Referee による承認ループ、永続成果物、そして PR フロー。これらは、チームがリポジトリのアーキテクチャとして自ら定義し提供する。
 
-**チームの協働規範**——`CLAUDE.md` / `AGENTS.md`、Operating Path、Referee ループ、
-成果物、PR。リポジトリが与える。
+私が「内側（サンドボックス）は極めて自由であり、外側（システムへの統合）は極めて明示的・厳格であるべきだ」と言うとき、外側を支配する主役は機械的な CI ツールではなく、**書かれた規範文書と、人間の承認ループと、永続化される設計成果物**である。ベンダーが強力なサンドボックスを提供してくれるからこそ、私たちは内側のコード生成を AI に安心して任せられる。同時に、私たちがリポジトリに強固な協働規範を定義するからこそ、外側でプロジェクトの意味論的な一貫性を保てる。どちらか一方が欠けても、AI を用いたエンタープライズ開発は崩壊する。
 
-私が「内側は自由、外側は明示的」と言うとき、外側の主役は CI ではなく、**規範文書と
-人間の承認ループと永続成果物**である。サンドボックスがあるから内側を任せられる。
-協働規範があるから外側で一貫性を保てる。どちらか一方では足りない。
+## このテンプレートは何であり、何でないか
 
-## このテンプレートは何か、何でないか
+本リポジトリは、そのまま動くウェブアプリケーションや SaaS プロダクトではない。AI 時代のプロセスと協働のための「足場（Scaffolding）」である。ここにある `CLAUDE.md` や `AGENTS.md` は、このテンプレートリポジトリのためだけにあるのではなく、**アダプター先のターゲットプロジェクト（あなたのプロジェクト）へコピーされ、そこで初めて生きた憲法として機能する**設計図である。
 
-本リポジトリはアプリケーションではない。プロセスと協働の足場である。ここにある
-`CLAUDE.md` / `AGENTS.md` は、**アダプター先のターゲットプロジェクトへコピーされ、
-そこで憲法として機能する**設計図だ（`copy-ai-collaboration-files.sh`）。
+このテンプレートがやろうとしていることは極めて明確だ。**圧倒的な速度で自由に動くエージェントを、人間が責任を持てる工学的ワークフローへと安全に接続する。** エージェントの知能を過信して人間による統制の仕組みを省くのでもなく、逆にエージェントの暴走を恐れてその生成の自由をすべて潰すのでもない。三役（Referee / Agent / Tool）の協働ループと、リポジトリに明文化された規範と、Referee の的確な承認ゲートによって、持続可能な統合された開発環境を作る。
 
-やろうとしていることは明確だ。**自由に動くエージェントを、人間と一緒に使える
-工学的ワークフローへ接続する。** エージェントを信じて仕組みを省くのでも、
-エージェントを疑って自由を潰すのでもない。三役の協働ループと、リポジトリに書かれた
-規範と、Referee の承認で、統合された開発を作る。
-
-`docs/research/` の各論——Referee、設計先行、出力契約、レビュー可能なコード、
-リポジトリ計画——は、この一枚の骨格の上に載る詳細である。
-
-## 並列するとき
-
-複数エージェントが並ぶとき、各セッションは別のサンドボックスで自由に動く。衝突は
-サンドボックス同士ではなく、git と worktree（ADR 0007）で吸収する。並列の成熟は
-`process-gap-register.md` が未完成と認めているが、方向は同じだ。永続境界でマージし、
-Referee が統合を見る。
+`docs/research/` フォルダにある各論——Referee、設計先行、出力の契約、レビュー可能なコード、リポジトリ計画——は、すべてこの一枚の巨大な骨格設計の上に載る、哲学的な詳細にすぎない。
 
 ## 参考文献
 
-1. 内部: `AGENTS.md`、`CLAUDE.md`、`docs/architecture/agent-quickstart.md`、
-   `docs/collaboration/ai-human-scheme.md`、`docs/collaboration/prompt-instruction-change-control.md`、
-   `scripts/init-llm-context.sh`、ADR 0007
-2. GitHub Docs. *About cloud and local sandboxes for GitHub Copilot*.
-   https://docs.github.com/en/copilot/concepts/about-cloud-and-local-sandboxes
-   （取得 2026-07-07）
-3. Cursor. *Implementing a secure sandbox for local agents*.
-   https://cursor.com/blog/agent-sandboxing （取得 2026-07-07）
-4. Anthropic. *Use Claude Code on the web*.
-   https://code.claude.com/docs/en/claude-code-on-the-web （取得 2026-07-07）
-5. Anthropic. *Building effective agents*.
-   https://www.anthropic.com/research/building-effective-agents （取得 2026-07-07）
-6. Shi, F. et al. arXiv:2302.00093.
-   https://arxiv.org/abs/2302.00093 （取得 2026-07-07）
+1. **プロジェクト内部規定**
+   - `AGENTS.md`, `CLAUDE.md`
+   - `docs/architecture/agent-quickstart.md`
+   - `docs/collaboration/ai-human-scheme.md`
+   - `docs/collaboration/prompt-instruction-change-control.md`
+   - `scripts/init-llm-context.sh`
+   - ADR 0007
+2. **AIエージェントとサンドボックス・アーキテクチャ**
+   - GitHub Docs. *About cloud and local sandboxes for GitHub Copilot*. https://docs.github.com/en/copilot/concepts/about-cloud-and-local-sandboxes （取得 2026-07-07）
+   - Cursor. *Implementing a secure sandbox for local agents*. https://cursor.com/blog/agent-sandboxing （取得 2026-07-07）
+   - Anthropic. *Use Claude Code on the web*. https://code.claude.com/docs/en/claude-code-on-the-web （取得 2026-07-07）
+3. **AI協働と推論の限界（および階層型エージェント）**
+   - Anthropic. *Building effective agents*. https://www.anthropic.com/research/building-effective-agents （取得 2026-07-07）
+   - Shi, F. et al. "Large Language Models Can Be Easily Distracted by Irrelevant Context." arXiv:2302.00093. https://arxiv.org/abs/2302.00093 （取得 2026-07-07）
+   - Wang, L. et al. "A Survey on Large Language Model based Autonomous Agents." *Frontiers of Computer Science*, 2024 / arXiv:2308.11432. https://arxiv.org/abs/2308.11432 （取得 2026-07-16）
+   - Wu, Q. et al. "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation." arXiv:2308.08155. https://arxiv.org/abs/2308.08155 （取得 2026-07-16）

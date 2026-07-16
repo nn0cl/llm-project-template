@@ -48,7 +48,6 @@ research を normative に参照する——は作らない。
 - [レビュー可能なコード](2026-07-05-rationale-code-for-human-review.md)
 - [リポジトリに計画を置く](2026-07-05-rationale-repository-native-planning-and-change-control.md)
 - [pull 型の上流](2026-07-06-rationale-template-as-pull-based-upstream.md)
-- [ブランチと統合](2026-07-06-rationale-branching-and-release-strategy.md)
+- [AI協働におけるブランチ戦略](2026-07-06-branching-strategies-develop-and-multi-target-releases.md)
 - [規範と読み物](2026-07-06-rationale-normative-vs-reading-documents.md)
 - [エビデンスと規則](2026-07-06-rationale-evidence-based-process-design.md)
-- [develop と複数リリース先（調査稿）](2026-07-06-branching-strategies-develop-and-multi-target-releases.md)
