@@ -5,7 +5,7 @@
 - Date: 2026-07-06
 - User request: Design and implement pull-based propagation of template
   updates to repositories that already adopted this template, addressing the
-  Referee's concern that ignored/customized/deleted target files must not be
+  Adjudicator's concern that ignored/customized/deleted target files must not be
   silently merged over, and requiring the mechanism itself to follow the
   repository's branch/PR discipline.
 - Current phase: Feature Path (LISS-0001), implemented directly given the
@@ -37,7 +37,7 @@
 - Privacy constraints: no private data used; fixture repos were synthetic and
   discarded.
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - Pull model confirmed over push/registry model.
 - 3-way merge with explicit ignore list and no silent overwrite confirmed.

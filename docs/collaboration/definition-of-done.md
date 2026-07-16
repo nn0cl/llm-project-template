@@ -19,7 +19,7 @@ A task is not done unless:
 - deterministic verification was run or explicitly marked not applicable.
 - issue status, phase, applicable work-plan row, and completion evidence are synchronized in the same reviewable unit when issue work changes status.
 - no unrelated context, secrets, or full private data exports were used
-  without Referee approval.
+  without Adjudicator approval.
 - generated code, if any, is readable and appropriately split.
 
 ## Phase 0 Done: Design Intake
@@ -32,7 +32,7 @@ Done when:
 - omitted context is listed.
 - AI payload and model/tool routing are stated.
 - input/output/reasoning contract is stated when AI output is involved.
-- Referee decisions needed are identified.
+- Adjudicator decisions needed are identified.
 - next phase is proposed, not silently executed.
 
 ## Phase 1 Done: Red
@@ -43,7 +43,7 @@ Done when:
 - tests map to accepted EARS/Gherkin behavior.
 - external dependencies are mocked through ports or interfaces.
 - expected Red state is reported.
-- Phase 2 is not started before Referee review.
+- Phase 2 is not started before Adjudicator review.
 
 ## Phase 2 Done: Green
 

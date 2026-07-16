@@ -32,7 +32,7 @@
 - Consider delimiting the propagating parts (HTML comment markers, or a
   separate generated snippet the project includes) so future syncs only
   ever conflict on that narrow, intentionally-shared block.
-- This changes the shape of two files every adopter touches; needs Referee
+- This changes the shape of two files every adopter touches; needs Adjudicator
   design review before implementation, not a mechanical fix.
 
 ## Dependencies
@@ -42,7 +42,7 @@
 - Blocks:
 - Related: LISS-0002, ADR 0008
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - Not yet reviewed. Deliberately left at `proposed` status instead of being
   implemented alongside LISS-0002, since it changes file structure every

@@ -60,7 +60,7 @@ Each local issue should record:
 - blocks.
 - related branch.
 - acceptance notes.
-- Referee decision points.
+- Adjudicator decision points.
 - an AI planning record when the current planning size is `M` or larger.
 
 ## Bug Planning
@@ -72,10 +72,10 @@ than copying mutable details.
 
 A separate issue or work plan is optional only when all of these are true:
 
-- the bug is within the current Referee-approved scope.
+- the bug is within the current Adjudicator-approved scope.
 - its planning size is `S`.
 - the expected behavior is explicit in an accepted specification, an accepted
-  test, or established behavior approved by the Referee.
+  test, or established behavior approved by the Adjudicator.
 - the correction remains within one file or one feature area.
 - it does not change an architecture boundary, data model, migration,
   dependency, security policy, privacy policy, or external contract.
@@ -93,7 +93,7 @@ Minor bug; fixed within approved scope; separate plan not required
 
 Use the existing approved plan when the bug is already within its scope. If an
 accepted test already reproduces the bug, record the Red result and obtain
-Referee confirmation before Phase 2. If no accepted test reproduces it, add a
+Adjudicator confirmation before Phase 2. If no accepted test reproduces it, add a
 regression test in Phase 1 and wait for review before Phase 2. Create a new
 issue or work-plan entry when scope, expected behavior, dependencies, or
 boundaries are uncertain. Record but do not mix a bug that is outside the
@@ -159,7 +159,7 @@ Allowed dependency meanings:
 - `related`: useful context, but not an ordering constraint.
 
 Agents must not start work on an issue with unresolved `depends_on` entries
-unless the Referee explicitly waives the dependency.
+unless the Adjudicator explicitly waives the dependency.
 
 Agents must not implement issue work directly on `main` or the trunk branch.
 Every local issue or GitHub Issue requires a dedicated branch before any
@@ -213,7 +213,7 @@ Do not require GitHub network access for local planning.
 
 ## Review Rule
 
-Referee review is required when:
+Adjudicator review is required when:
 
 - issue dependencies are unclear.
 - an issue is split or merged.

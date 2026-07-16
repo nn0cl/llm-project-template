@@ -4,7 +4,7 @@
 
 - Date: 2026-07-16 (covering the research-essay refinement sessions of
   2026-07-05 through 2026-07-16 on branch `docs/research-rationale-essays`)
-- User request: Referee asked for (1) advanced editing of the
+- User request: Adjudicator asked for (1) advanced editing of the
   `docs/research/` rationale essays — fact-checking against academic
   sources, link liveness verification, pruning of weak analogies, and
   normative/reading separation; (2) a new `QUICKSTART.md`/`QUICKSTART.ja.md`
@@ -13,7 +13,7 @@
   its findings.
 - Current phase: non-normative documentation (research essays) plus new
   template-repo-local guide files; no operating-contract files changed.
-- Canonical issue or work plan: none — the Referee explicitly ran this as
+- Canonical issue or work plan: none — the Adjudicator explicitly ran this as
   issue-less documentation work in session. Per
   `docs/collaboration/local-issue-planning.md`'s waiver expectation, that
   waiver is recorded here rather than left verbal.
@@ -53,7 +53,7 @@
 - Agent: Claude Code
 - Environment: local CLI session(s)
 - Model as displayed: claude-fable-5 (parts of one session on
-  claude-sonnet-5 by Referee's model switch)
+  claude-sonnet-5 by Adjudicator's model switch)
 - Reasoning setting as displayed: default
 - Estimated token range: not estimated
 - Estimated token midpoint: not estimated
@@ -71,7 +71,7 @@
   unit of documentation work.
 - Notes: substantive corrections included removing an unsourced
   "Fintech/MT4" claim that contradicted both the folder's citation policy
-  and the essays' own Referee-responsibility argument; regrounding the
+  and the essays' own Adjudicator-responsibility argument; regrounding the
   model-tier pattern in cascade/routing literature (Yue et al. ICLR 2024,
   RouteLLM) plus a grade-annotated vendor self-report; author and URL
   corrections (Hodgson not Fowler for Feature Toggles; Tyree, J.;
@@ -95,19 +95,19 @@
   generation.
 - Rework caused by AI output: two essays briefly carried near-duplicate
   escalation-vs-approval passages introduced during rewriting; deduplicated
-  by keeping the full argument in the Referee essay and referencing it from
+  by keeping the full argument in the Adjudicator essay and referencing it from
   the sandbox essay.
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - Issue-less execution of this documentation work (waiver recorded here).
 - Deletion of the superseded
   `2026-07-06-rationale-branching-and-release-strategy.md` in favor of the
   merged branching-strategies essay.
 - Stash `wip-before-session-docs` audited and dropped after extracting
-  LISS-0005 and three superior citations (Referee direction, 2026-07-16).
+  LISS-0005 and three superior citations (Adjudicator direction, 2026-07-16).
 - QUICKSTART stays out of every agent read path and out of the template
-  distribution (Referee, 2026-07-16).
+  distribution (Adjudicator, 2026-07-16).
 
 ## Verification
 

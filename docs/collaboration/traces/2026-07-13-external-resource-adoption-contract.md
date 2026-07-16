@@ -20,8 +20,8 @@
   `docs/architecture/adr/0002-input-output-reasoning-contracts.md`,
   `docs/collaboration/template-benefits.md`, `CLAUDE.md`,
   `docs/architecture/README.md`, `.github/workflows/ci.yml`, the
-  Referee-supplied external feedback document (2026-07-13, not stored as a
-  separate file), the Referee's mid-session rescope correction (chat,
+  Adjudicator-supplied external feedback document (2026-07-13, not stored as a
+  separate file), the Adjudicator's mid-session rescope correction (chat,
   2026-07-13).
 - Omitted: the feedback source repository's game-specific safe-area
   dimensions, adult-content experiment details, Studio/provider-specific API
@@ -58,11 +58,11 @@
   (candidate/promotion state machine, image-specific output-shape contract,
   deterministic-vs-human boundary table naming image properties). Entered
   Plan Mode with this design as part of the overall implementation plan.
-- Result: rejected by the Referee during Plan Mode review — the media-
+- Result: rejected by the Adjudicator during Plan Mode review — the media-
   specific vocabulary in ADR 0011 items 4-5 violated the template's
   technology-neutrality principle. Not implemented as files beyond the
   already-written (and since-rewritten) ADR 0011/LISS-0009 drafts.
-- Attempt boundary: ended when the Referee's correction required a
+- Attempt boundary: ended when the Adjudicator's correction required a
   materially different plan (attempt boundary per `docs/collaboration/
   ai-work-trace-log.md`: "a materially different plan replaces the previous
   one").
@@ -87,7 +87,7 @@
   one-line pointers to `io-reasoning-contracts.md`,
   `dependency-policy.md`, and `ai-work-trace-log.md`; updated CLAUDE.md,
   architecture README, and CI's ADR-existence loop.
-- Result: Part 2 implementation complete, pending Referee verification and
+- Result: Part 2 implementation complete, pending Adjudicator verification and
   commit decision.
 - Attempt boundary: continuous from the rescope decision through
   implementation; no further replanning occurred.
@@ -129,7 +129,7 @@
   before treating a first draft as final, even after an ADR has been
   "accepted."
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - 2026-07-13: rejected ADR 0011's image-specific output-shape contract and
   deterministic-vs-human boundary table.
@@ -168,7 +168,7 @@
 ## Next Safe Action
 
 - Run the Part 2 verification checklist (Task #15), update WP-0001's final
-  state, then stop and ask the Referee whether to commit this branch. Note
+  state, then stop and ask the Adjudicator whether to commit this branch. Note
   for the eventual merge: `CLAUDE.md`, `docs/architecture/README.md`'s
   Accepted Decisions list, and `.github/workflows/ci.yml`'s ADR-existence
   loop were each edited independently on both this branch and

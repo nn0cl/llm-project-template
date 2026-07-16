@@ -7,7 +7,7 @@ Use this before tests, implementation, migrations, UI, or provider work.
 - Target behavior or question:
 - Requested phase:
 - Proposed next phase:
-- Referee decision needed:
+- Adjudicator decision needed:
 
 ## Context Ledger
 
@@ -31,5 +31,5 @@ Use this before tests, implementation, migrations, UI, or provider work.
 
 ## Stop Conditions
 
-- Conditions that require Referee decision:
+- Conditions that require Adjudicator decision:
 - Conditions that require ADR:

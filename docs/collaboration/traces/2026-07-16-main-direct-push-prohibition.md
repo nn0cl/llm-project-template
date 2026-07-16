@@ -5,7 +5,7 @@
 - Date: 2026-07-16
 - User request: Prohibit direct pushes to the `main` branch.
 - Current phase: process-only (docs).
-- Canonical issue or work plan: none; explicit Referee process-rule request.
+- Canonical issue or work plan: none; explicit Adjudicator process-rule request.
 - AI planning record: direct-push prohibition review.
 
 ## Context Ledger
@@ -58,9 +58,9 @@
 - Avoided LLM work: none.
 - Rework caused by AI output: none.
 
-## Referee Decisions
+## Adjudicator Decisions
 
-- 2026-07-16: Referee requested that direct pushes to `main` be prohibited.
+- 2026-07-16: Adjudicator requested that direct pushes to `main` be prohibited.
 
 ## Verification
 

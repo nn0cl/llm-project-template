@@ -22,7 +22,7 @@
   `docs/collaboration/adoption-guide.md`, `.github/workflows/ci.yml`,
   LISS-0006/LISS-0010 and their traces.
 - Omitted: application source; adopter feedback items 1 (resolved by
-  LISS-0014) and 3 (explicitly out of scope, per Referee instruction).
+  LISS-0014) and 3 (explicitly out of scope, per Adjudicator instruction).
 - Assumptions: vendor conventions confirmed live on 2026-07-16 are accurate as
   of that date; Grok's conventions were not re-verified this round and rely on
   LISS-0006/LISS-0010's existing findings.
@@ -62,16 +62,16 @@
   from LISS-0006/LISS-0010 per vendor; consolidate `CLAUDE.md` via
   `@AGENTS.md` import; trial-shrink `.cursor/rules/*.mdc` to `@AGENTS.md`
   references; keep `.github/copilot-instructions.md` and `.grok/rules/*.md`
-  as full mirrors per Referee decision; update ADR 0006 and
+  as full mirrors per Adjudicator decision; update ADR 0006 and
   `prompt-instruction-change-control.md` in place; add a new
   stack-specific-scoped-rules section to `adoption-guide.md`.
 - Result: completed, with one item left open (Cursor live verification,
   recorded as a blocking follow-up, not claimed as done).
 - Attempt boundary: single cohesive execution across one chat session.
-- Notes: two rounds of Referee direction shaped scope — first round excluded
+- Notes: two rounds of Adjudicator direction shaped scope — first round excluded
   adopter feedback item 3; second round asked for the full-mirror decision
   itself to be re-grounded rather than assumed. An `AskUserQuestion` was used
-  to get an explicit Referee decision on Copilot (keep full mirror) and
+  to get an explicit Adjudicator decision on Copilot (keep full mirror) and
   Cursor (attempt the trial) once the trade-offs were evidenced.
 
 ## Optional Reference Total
@@ -98,7 +98,7 @@
 - Avoided LLM work: none.
 - Rework caused by AI output: none.
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - 2026-07-16 (first round): scope this issue to rule-file organization only,
   excluding adopter feedback item 3.
@@ -113,7 +113,7 @@
 - Commands/checks: manual re-read of the edited `CLAUDE.md` to confirm no
   content was silently dropped (only sections verbatim-identical to
   `AGENTS.md` were removed: Session Entry, Clean Architecture Dependency
-  Rule, External Resources Must Be Ports, Referee Interaction); `grep` over
+  Rule, External Resources Must Be Ports, Adjudicator Interaction); `grep` over
   `.github/workflows/ci.yml` confirming its required-files and
   contract-traceability checks do not depend on literal content matching, so
   no CI changes were required.
@@ -137,7 +137,7 @@
 
 - Completed by follow-up: live Cursor verification (2026-07-16) showed native
   `AGENTS.md` auto-apply makes `.mdc` `@AGENTS.md` references redundant;
-  references removed; primary-source grounds attached; Referee approved —
+  references removed; primary-source grounds attached; Adjudicator approved —
   see `docs/collaboration/traces/2026-07-16-cursor-mdc-drop-agents-ref.md`.
 - Open PR for branch `process/agent-rule-file-parity` (contract files;
   human PR review still required for merge).

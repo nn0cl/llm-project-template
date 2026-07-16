@@ -29,4 +29,4 @@ Scenario: <observable scenario name>
 
 ## Ambiguities
 
-- <decision that needs Referee review or ADR>
+- <decision that needs Adjudicator review or ADR>

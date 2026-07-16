@@ -40,7 +40,7 @@
 - Blocks:
 - Related: ADR 0005, ADR 0009
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - Resolved 2026-07-10: phase gates are never waived for bug fixes.
 - Resolved 2026-07-10: use vendor-neutral, versioned AI planning records.
@@ -51,7 +51,7 @@
 
 - Included: agent quickstart, local issue planning, work and issue templates,
   trace policy and template, cost policy, prompt change control, bug report
-  template, related ADRs, CI documentation checks, and Referee feedback.
+  template, related ADRs, CI documentation checks, and Adjudicator feedback.
 - Omitted: application source, stack-specific model pricing, provider billing
   exports, and unrelated ADRs.
 - Assumptions: token estimates and actual usage are planning evidence rather
@@ -85,13 +85,13 @@
 
 ## References
 
-- Referee-approved project feedback supplied on 2026-07-10.
+- Adjudicator-approved project feedback supplied on 2026-07-10.
 - `docs/architecture/adr/0009-bug-planning-and-ai-usage-records.md`.
 
 ## Work Notes
 
 - Architecture Path scope and the three policy decisions were approved by the
-  Referee on 2026-07-10.
+  Adjudicator on 2026-07-10.
 
 ## Verification
 

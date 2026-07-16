@@ -1,4 +1,4 @@
-# Referee Review: LISS-0014
+# Adjudicator Review: LISS-0014
 
 ## Review Target
 
@@ -17,7 +17,7 @@
 
 The rule prevents issue status drift while preserving the repository's existing path for small process tasks that do not have an active work plan.
 
-## Referee Checklist
+## Adjudicator Checklist
 
 - [x] The phase is correct.
 - [x] The included context is sufficient.
@@ -38,10 +38,10 @@ The rule prevents issue status drift while preserving the repository's existing 
 - [x] Approved
 - [ ] Approved with comments
 - [ ] Rejected
-- [ ] Needs Referee decision
+- [ ] Needs Adjudicator decision
 
-## Referee Decision
+## Adjudicator Decision
 
-- Reviewer: repository Referee (user)
+- Reviewer: repository Adjudicator (user)
 - Date: 2026-07-16
 - Decision: approved after correction and re-commit.

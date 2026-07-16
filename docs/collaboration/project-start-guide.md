@@ -16,7 +16,7 @@ After adoption, the target project may and should design its domain model
 inside this process, based on:
 
 - accepted EARS/Gherkin specifications.
-- Referee decisions.
+- Adjudicator decisions.
 - ADRs when the decision affects architecture or long-term policy.
 - Phase 1 tests reviewed before Phase 2 implementation.
 
@@ -35,7 +35,7 @@ uses the template workflow to discover and implement its own domain model.
 7. List early dependency candidates and apply the adoption checklist in
    `docs/architecture/dependency-policy.md`.
 8. Start with Feature Path Phase 0 design intake.
-9. Ask the Referee to approve Phase 1 Red before writing tests.
+9. Ask the Adjudicator to approve Phase 1 Red before writing tests.
 
 Do not create a full domain layer, persistence schema, provider adapter, or UI
 structure before a specification, ADR, or reviewed test requires it.
@@ -82,14 +82,14 @@ For each feature:
 5. Produce the path-appropriate design note.
 6. For new dependencies, check vulnerability reports, version-matched examples,
    troubleshooting depth, minimal real-file tests, and POC feasibility.
-7. Execute only the Referee-approved phase.
+7. Execute only the Adjudicator-approved phase.
 8. Run deterministic verification when available.
 9. Record trace and cost/reasoning control signals when required.
-10. Stop at phase gates for Referee review.
+10. Stop at phase gates for Adjudicator review.
 
 ## Stop and Ask
 
-Stop for Referee decision when:
+Stop for Adjudicator decision when:
 
 - the target behavior is not specified.
 - the requested phase is unclear.

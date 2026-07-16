@@ -16,7 +16,7 @@
 
 ## Summary
 
-- Referee asked to research the current (2026-07-14) state of Grok, Cursor,
+- Adjudicator asked to research the current (2026-07-14) state of Grok, Cursor,
   and Codex project-configuration conventions and make the template work
   with all three, following the precedent set by LISS-0006 (2026-07-08),
   which added `.grok/rules/` and confirmed Codex needs no dedicated file.
@@ -51,7 +51,7 @@
   matching the existing `.grok/rules/*.md` pattern exactly in content, with
   a Cursor-specific persona header and `.mdc` frontmatter), rather than
   relying on Cursor's native `AGENTS.md` fallback — consistent with the
-  Referee's LISS-0006 decision to keep full per-vendor mirrors instead of a
+  Adjudicator's LISS-0006 decision to keep full per-vendor mirrors instead of a
   thin pointer, even though this is now a fifth file set to keep in sync.
 - Found and fixed a related pre-existing bug while implementing: the
   placeholder-substitution glob in `scripts/copy-ai-collaboration-files.sh`
@@ -102,10 +102,10 @@
 - Blocks:
 - Related: LISS-0006 (Grok agent entry point, same precedent and pattern).
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - Full-mirror vs. thin-pointer for `.cursor/rules/*.mdc`: resolved by
-  following the Referee's existing LISS-0006 precedent (full mirror), not
+  following the Adjudicator's existing LISS-0006 precedent (full mirror), not
   re-litigated here since the same reasoning applies (keep the pattern
   consistent across vendors, explicit stronger-binding entry point per
   tool).
@@ -172,7 +172,7 @@
 
 ## References
 
-- Referee request, 2026-07-14 (chat): "grok/cursor/codexの最新の情報を調べて
+- Adjudicator request, 2026-07-14 (chat): "grok/cursor/codexの最新の情報を調べて
   テンプレートが働くように対応して."
 - `docs/issues/LISS-0006-grok-agent-entry-point.md` and
   `docs/collaboration/traces/2026-07-08-grok-agent-entry-point.md` (direct
@@ -199,7 +199,7 @@
 - Implemented 2026-07-14 on branch `process/cursor-agent-entry-point`,
   created from `main` after the LISS-0008/LISS-0009 merge.
 - Unlike LISS-0006, this round was not triggered by a specific adopter's
-  feedback — the Referee asked directly for a research-and-refresh pass.
+  feedback — the Adjudicator asked directly for a research-and-refresh pass.
 
 ## Verification
 

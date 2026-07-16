@@ -81,7 +81,7 @@ routing, or provider choices.
 
 - inspect relevant ADRs, contract files, and architecture rules.
 - state rejected alternatives only when they materially affect the decision.
-- stop for Referee approval when the decision changes project policy.
+- stop for Adjudicator approval when the decision changes project policy.
 
 ## Value Object Design
 
@@ -110,7 +110,7 @@ Route tasks by risk and complexity:
 - Architecture boundary choices: stronger reasoning model.
 - Cross-module refactor: stronger reasoning model plus deterministic tests.
 - Formatting/lint/import checks: deterministic tools.
-- Privacy-sensitive provider choice: stronger reasoning model and Referee
+- Privacy-sensitive provider choice: stronger reasoning model and Adjudicator
   review.
 
 Escalate to a stronger reasoning agent only when ambiguity, cross-boundary
@@ -133,6 +133,6 @@ covered by an accepted spec.
 - Ambiguities:
 ```
 
-If the Referee already provided enough detail, the design note should be short
+If the Adjudicator already provided enough detail, the design note should be short
 and decisive. If the request is ambiguous, list the missing decisions and stop
 before implementation.

@@ -10,7 +10,7 @@ Use this checklist before starting a coding task.
   task routing, and any applicable VO/DTO candidates or ports/adapters.
 - AI-assisted tasks identify input envelope, output schema, and reasoning
   evidence contract.
-- The Referee explicitly selected the current phase.
+- The Adjudicator explicitly selected the current phase.
 - The touched area has a matching architecture rule document.
 - Unknown provider, DB, model, or folder decisions are listed as ambiguities or
   captured in an ADR.
@@ -35,13 +35,13 @@ Use this checklist before starting a coding task.
 - Business logic belongs in domain or application modules.
 - Delivery handlers, UI components, and adapters remain thin.
 - Source code remains readable, appropriately split, and reviewable by a human
-  Referee.
+  Adjudicator.
 
 ## Ready for Phase 3 Refactor
 
 - Tests are green.
 - Refactoring does not change assertions or behavior.
-- Remaining risks can be summarized for the Referee.
+- Remaining risks can be summarized for the Adjudicator.
 
 ## Not Ready If
 
@@ -52,7 +52,7 @@ Use this checklist before starting a coding task.
 - AI output is accepted as trusted data without structured validation, source
   evidence, confidence or uncertainty, and review status.
 - The task requires choosing a datastore, vector DB, embedding model, external
-  layout, or provider API without an ADR or explicit Referee instruction.
+  layout, or provider API without an ADR or explicit Adjudicator instruction.
 - A new dependency is adopted without checking known vulnerability reports for
   the intended version, version-matched examples, troubleshooting evidence, a
   minimal real-file test path, and POC feasibility when architecture risk is

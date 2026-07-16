@@ -73,7 +73,7 @@
   branch, implemented together in this session for efficiency but tracked
   as separate concerns).
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - Resolved 2026-07-14: adopt the token-variance proposal, renumbered to
   avoid the LISS-0008 collision with this session's own issue of that
@@ -134,7 +134,7 @@
 - `codex/process/token-variance-reasons` (GitHub branch, unmerged, no PR),
   commit `08d0d88`.
 - `docs/architecture/adr/0009-bug-planning-and-ai-usage-records.md`.
-- Referee request, 2026-07-14 (chat): asked to evaluate the branch's
+- Adjudicator request, 2026-07-14 (chat): asked to evaluate the branch's
   content and adapt it to current `main` if worthwhile.
 
 ## Work Notes

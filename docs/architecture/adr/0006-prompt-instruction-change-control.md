@@ -24,7 +24,7 @@ web search, 2026-07-14; see the accompanying trace).
 LISS-0006 and LISS-0010 originally resolved this with one blanket rule: full
 mirror across all five files, no thin pointers, so every tool gets the same
 explicit, strongly-bound entry point. LISS-0015 (2026-07-16) revisited that
-blanket rule on Referee instruction, on the grounds that "we decided this
+blanket rule on Adjudicator instruction, on the grounds that "we decided this
 once before" is not itself evidence, and found the picture differs per
 vendor:
 
@@ -71,8 +71,8 @@ vendor:
 - **Grok**'s `.grok/rules/` stronger-binding finding (LISS-0006's live `grok
   inspect` test, 2026-07-08) was not re-examined this round.
 
-Decision, per vendor (Referee-confirmed 2026-07-16; Cursor policy refined
-and **Referee-approved** same day after live verification + cited grounds):
+Decision, per vendor (Adjudicator-confirmed 2026-07-16; Cursor policy refined
+and **Adjudicator-approved** same day after live verification + cited grounds):
 
 - `CLAUDE.md` now imports `AGENTS.md` (`@AGENTS.md`) instead of duplicating
   its body, keeping only genuinely Claude Code-specific sections.
@@ -82,7 +82,7 @@ and **Referee-approved** same day after live verification + cited grounds):
   `@`-referenced — because Cursor already auto-applies root `AGENTS.md`
   (evidence items 1–5 above).
 - `.github/copilot-instructions.md` and `.grok/rules/*.md` keep the full
-  mirror. For Copilot, the Referee weighed GitHub's documented weaker-adherence
+  mirror. For Copilot, the Adjudicator weighed GitHub's documented weaker-adherence
   risk against the duplication cost and chose to keep the stronger, dedicated
   binding. For Grok, the original empirical grounding was not revisited.
 
@@ -91,7 +91,7 @@ read step that the others do not, and none of them require the
 operating-contract files themselves to be reviewed with the same rigor as
 application code. The AI Work Trace Log already asks for a trace when
 contract files change, but that alone does not name the exact file set,
-require Referee review specifically, or get enforced by CI.
+require Adjudicator review specifically, or get enforced by CI.
 
 This gap is tracked in `docs/collaboration/process-gap-register.md`.
 
@@ -102,7 +102,7 @@ canonical definition of the agent operating contract file set.
 
 - Name the exact files and glob patterns that count as the agent operating
   contract.
-- Require Referee review, a stated reason, and a cross-file consistency
+- Require Adjudicator review, a stated reason, and a cross-file consistency
   check whenever a contract file changes.
 - Require an AI work trace under `docs/collaboration/traces/` for every
   contract change, including small wording changes.
@@ -124,7 +124,7 @@ Positive:
   `.cursor/rules/*.mdc` becomes visible in review instead of silently
   changing agent behavior.
 - Every contract change has a recorded reason and expected behavior change.
-- CI gives an automated signal instead of relying only on Referee memory.
+- CI gives an automated signal instead of relying only on Adjudicator memory.
 - `CLAUDE.md`'s `@AGENTS.md` import removes one full hand-maintained
   duplicate; a future change to `AGENTS.md`'s imported sections no longer
   needs a matching manual edit in `CLAUDE.md`.
@@ -151,7 +151,7 @@ Negative:
 
 Code review should reject:
 
-- agent operating contract changes without a stated reason or Referee review.
+- agent operating contract changes without a stated reason or Adjudicator review.
 - agent operating contract changes without an accompanying trace under
   `docs/collaboration/traces/`.
 - agent operating contract changes that leave `AGENTS.md`, `CLAUDE.md`,

@@ -17,7 +17,7 @@ Use for:
 - YAML parsing.
 - import-boundary checks.
 
-Referee approval:
+Adjudicator approval:
 
 - not required unless the tool changes files beyond the task scope.
 
@@ -30,7 +30,7 @@ Use for:
 - mechanical edits with obvious local context.
 - renaming within one module.
 
-Referee approval:
+Adjudicator approval:
 
 - required before phase transition, not for every completion.
 
@@ -44,7 +44,7 @@ Use for:
 - summarizing changed files.
 - drafting handoff notes.
 
-Referee approval:
+Adjudicator approval:
 
 - required when the output changes process rules or accepted tests.
 
@@ -59,7 +59,7 @@ Use for:
 - privacy-sensitive routing.
 - resolving conflicts between instructions.
 
-Referee approval:
+Adjudicator approval:
 
 - required for ADR acceptance and phase transitions.
 
@@ -86,7 +86,7 @@ compatibility is safe to act on automatically.
 
 ## Routing Table
 
-| Task | Preferred route | Referee approval |
+| Task | Preferred route | Adjudicator approval |
 | --- | --- | --- |
 | Mechanical file or wording edit | Deterministic tool or code assistant | not normally |
 | One-file local code change with clear spec | Code assistant plus deterministic tests | after verification |
@@ -130,4 +130,4 @@ Use local or deterministic tools when:
 - excerpts contain personal or confidential notes.
 - provider terms are unknown.
 
-Escalate to Referee before using external AI with sensitive context.
+Escalate to Adjudicator before using external AI with sensitive context.

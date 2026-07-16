@@ -29,7 +29,7 @@
 - Blocks:
 - Related:
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - 
 

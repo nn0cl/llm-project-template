@@ -29,7 +29,7 @@ No hidden business logic in adapters.
 - Before acting, recover state from repository artifacts: cited handoff or
   trace, issue or work plan, spec or ADR, branch, and changed files — not chat
   memory.
-- If the Referee message lacks operating path, phase, or an authoritative spec
+- If the Adjudicator message lacks operating path, phase, or an authoritative spec
   (or explicit Architecture Path scope), stop after design intake and ask.
 - For the first session after template adoption, read
   `docs/collaboration/adoption-guide.md` before changing target-owned files.
@@ -104,7 +104,7 @@ list with the project's actual external dependencies:
 - `<External API / third-party service>`.
 - `<LLM or agent provider>`.
 
-## Referee Interaction
+## Adjudicator Interaction
 
 When a decision affects architecture, capture it as an ADR. When a decision is
 unknown, list it in the path-appropriate design note as an ambiguity boundary.
@@ -120,8 +120,8 @@ work. For Fast Path work, use a compact design note that states scope, omitted
 context, deterministic checks, and why the full scaffold is unnecessary.
 
 When handing off or stopping before completion, use
-`docs/templates/agent-handoff.md`. When asking the Referee for approval, use the
-review points from `docs/templates/referee-review.md`.
+`docs/templates/agent-handoff.md`. When asking the Adjudicator for approval, use the
+review points from `docs/templates/adjudicator-review.md`.
 
 Generated source code must minimize human cognitive load. Prefer clear
 responsibility boundaries, small functions, straightforward names, and

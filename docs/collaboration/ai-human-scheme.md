@@ -5,7 +5,7 @@ It does not define application internals.
 
 ## Roles
 
-### Referee
+### Adjudicator
 
 The human architect and final decision maker.
 
@@ -29,7 +29,7 @@ Responsibilities:
 - execute only the requested phase.
 - keep payloads minimal.
 - produce reviewable artifacts.
-- stop when a Referee decision is required.
+- stop when a Adjudicator decision is required.
 
 ### Deterministic Tool
 
@@ -47,17 +47,17 @@ Responsibilities:
 ```text
 User request
   -> Phase 0 Design Intake
-  -> Referee review or approval
+  -> Adjudicator review or approval
   -> Phase 1 Red
-  -> Referee reviews tests
+  -> Adjudicator reviews tests
   -> Phase 2 Green
   -> deterministic verification
   -> Phase 3 Refactor
   -> reviewer empathy summary
-  -> Referee final review
+  -> Adjudicator final review
 ```
 
-The loop can stop at any point when the Referee asks for clarification, changes
+The loop can stop at any point when the Adjudicator asks for clarification, changes
 scope, rejects an assumption, or requests a new ADR.
 
 ## Required Artifacts
@@ -92,7 +92,7 @@ Required for Phase 3:
 
 ## Decision Gates
 
-Agents must stop for Referee decision when:
+Agents must stop for Adjudicator decision when:
 
 - phase is not explicitly selected.
 - issue dependencies are unclear or unresolved.
@@ -113,7 +113,7 @@ or final answer:
 - `Included`: files, specs, ADRs, and snippets used.
 - `Omitted`: relevant-looking context intentionally excluded.
 - `Assumptions`: assumptions made for this phase.
-- `Open decisions`: questions for Referee or future ADR.
+- `Open decisions`: questions for Adjudicator or future ADR.
 - `Verification`: deterministic checks run or not run.
 - `Issue links`: local issue IDs, GitHub issue links, and work plan links.
 
@@ -138,7 +138,7 @@ Acceptable AI work is:
 - phase-correct.
 - reviewable in small pieces.
 - readable with low human cognitive load.
-- traceable to specs, ADRs, or Referee instructions.
+- traceable to specs, ADRs, or Adjudicator instructions.
 - verified by deterministic tools when possible.
 - honest about ambiguity and unverified claims.
 
@@ -149,6 +149,6 @@ Unacceptable AI work is:
 - broad context dumping.
 - hidden assumptions.
 - modifying tests to make implementation pass.
-- turning AI prose into accepted design without Referee or ADR review.
+- turning AI prose into accepted design without Adjudicator or ADR review.
 - generating dense or multi-responsibility source code that is difficult for a
   human to review.

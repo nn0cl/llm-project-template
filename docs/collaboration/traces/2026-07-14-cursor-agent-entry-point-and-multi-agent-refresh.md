@@ -24,7 +24,7 @@
   `docs/issues/LISS-0006-grok-agent-entry-point.md` and its trace.
 - Omitted: full vendor documentation pages beyond what answered the
   specific discovery-order/file-format questions; no adopter-specific or
-  private data (this round was Referee-initiated research, not triggered by
+  private data (this round was Adjudicator-initiated research, not triggered by
   a specific adopter report).
 - Assumptions: live web search results (2026-07-14) for Cursor and Grok
   Build reflect current vendor behavior; Codex behavior re-confirmed
@@ -70,7 +70,7 @@
   README.md, README.ja.md, adoption-guide.md; write LISS-0010 and this
   trace.
 - Result: implementation complete, verification passed (see below), pending
-  Referee review and commit decision.
+  Adjudicator review and commit decision.
 - Attempt boundary: single cohesive session; no replanning or resumption.
 - Notes: found and fixed a pre-existing bug while implementing (the `*.mdc`
   glob gap), verified by a live dry-run/non-dry-run execution of the copy
@@ -110,7 +110,7 @@
   fixed a small rework-causing bug (the `*.mdc` glob gap) left over from
   LISS-0006, before it could affect a real adopter.
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - 2026-07-14: confirmed scope is "make Grok/Cursor/Codex work with the
   template" via live research, following the LISS-0006 precedent.
@@ -159,7 +159,7 @@
 
 ## Next Safe Action
 
-- Ask the Referee whether to commit this branch
+- Ask the Adjudicator whether to commit this branch
   (`process/cursor-agent-entry-point`) and, if so, whether to merge it into
   `main` now (no conflicts expected — `main` is already up to date with the
   LISS-0008/LISS-0009 merges from earlier in this session).

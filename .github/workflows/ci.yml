@@ -70,7 +70,7 @@ jobs:
             "docs/templates/ai-work-trace.md"
             "docs/templates/local-issue.md"
             "docs/templates/work-plan.md"
-            "docs/templates/referee-review.md"
+            "docs/templates/adjudicator-review.md"
             "docs/templates/gherkin-feature.md"
             "docs/templates/adr.md"
             "docs/collaboration/traces/.gitkeep"

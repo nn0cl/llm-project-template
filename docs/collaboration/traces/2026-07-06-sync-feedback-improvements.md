@@ -25,7 +25,7 @@
   pre-existing repositories, not specific to voice-to-dic.
 - Open decisions: LISS-0003 (shared-block delimiters for README/ci.yml) and
   LISS-0004 (Tauri/Rust/React example CI job) are left `proposed` pending
-  Referee design review and/or a contributed, verified job definition.
+  Adjudicator design review and/or a contributed, verified job definition.
 
 ## Routing
 
@@ -54,7 +54,7 @@
   repository has not verified (finding 5).
 - Rework caused by AI output: none.
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - Accepted (this PR): number-collision detection for ADR/local-issue files
   (finding 1), manual-adoption recovery recipe (finding 2), rename-detection
@@ -92,9 +92,9 @@
 ## Next Safe Action
 
 - Open a PR from `process/template-sync-feedback-fixes` against `main` for
-  Referee review, per `docs/collaboration/prompt-instruction-change-control.md`
+  Adjudicator review, per `docs/collaboration/prompt-instruction-change-control.md`
   (adoption-guide.md is an agent operating contract file).
-- If the Referee wants findings 4/5 pursued, promote LISS-0003/LISS-0004 from
+- If the Adjudicator wants findings 4/5 pursued, promote LISS-0003/LISS-0004 from
   `proposed` to `ready` and scope them as their own feature-unit branches.
 
 ## Notes

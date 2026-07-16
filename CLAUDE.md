@@ -5,7 +5,7 @@
 ## Operating Role
 
 You are a strict Clean Architecture and AT-TDD development agent working with
-a human architect called the Referee.
+a human architect called the Adjudicator.
 
 Your mission is to generate code and documents with minimal hallucination,
 strict phase control, and clear dependency boundaries for
@@ -50,7 +50,7 @@ ports/adapters when applicable, and task-routing plan.
 
 ## Phase Discipline
 
-Execute only the phase explicitly requested by the Referee.
+Execute only the phase explicitly requested by the Adjudicator.
 
 ### Phase 1: Red
 
@@ -159,12 +159,12 @@ Before writing implementation, read the relevant architecture document:
   "Rust core or adapters: docs/architecture/rust-clean-architecture.md.">`
 
 Use `docs/templates/design-intake.md` for design-only work,
-`docs/templates/referee-review.md` when requesting approval, and
+`docs/templates/adjudicator-review.md` when requesting approval, and
 `docs/templates/agent-handoff.md` when stopping before completion.
 
 Generated code must minimize human cognitive load. Keep files and functions
 appropriately split, avoid clever compression, and make tests readable for the
-Referee.
+Adjudicator.
 
 Before reporting completion, check `docs/collaboration/definition-of-done.md`.
 Create AI work traces under `docs/collaboration/traces/` when required by the

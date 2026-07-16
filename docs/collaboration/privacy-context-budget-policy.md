@@ -62,7 +62,7 @@ Default:
 
 Use the smallest useful context.
 
-Default maximums unless the Referee approves more:
+Default maximums unless the Adjudicator approves more:
 
 - one target EARS/Gherkin scenario.
 - only directly relevant ADRs.
@@ -101,7 +101,7 @@ or cross-boundary design.
 
 - read the relevant contract files, ADRs, and policy documents.
 - summarize only decision-relevant alternatives.
-- stop for Referee approval when policy changes.
+- stop for Adjudicator approval when policy changes.
 
 ## Required Ledger
 
@@ -110,7 +110,7 @@ When private or large context is considered, record:
 - what was included.
 - what was omitted.
 - why the included context was necessary.
-- whether Referee approval was needed.
+- whether Adjudicator approval was needed.
 
 For substantial tasks, also record the cost/reasoning control signals defined
 in `docs/collaboration/llm-cost-reduction.md`.
@@ -128,4 +128,4 @@ Do not send:
 ## Review Rule
 
 If a task cannot be done without forbidden or large private context, stop and
-ask the Referee for a narrower excerpt or explicit approval.
+ask the Adjudicator for a narrower excerpt or explicit approval.

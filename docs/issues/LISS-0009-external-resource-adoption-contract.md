@@ -12,7 +12,7 @@
 - Current planning size: L
 - Reclassification reason: scope generalized 2026-07-13 from a media-artifact-
   specific contract to a general external resource adoption contract, per
-  Referee correction; size unchanged (still L) since the document count and
+  Adjudicator correction; size unchanged (still L) since the document count and
   cross-reference work are comparable, but the design is now more novel
   (no longer reusing a media-specific worked example).
 - Owner/agent:
@@ -46,10 +46,10 @@
 - Source: same external feedback document as LISS-0008 (2026-07-13).
 - **Rescope note (2026-07-13):** this issue originally covered only
   AI-generated binary/media artifacts (images/audio/video), matching the
-  feedback's own examples. The Referee reviewed the resulting draft ADR
+  feedback's own examples. The Adjudicator reviewed the resulting draft ADR
   0011 and rejected its image-specific vocabulary (orientation, resolution,
   crop, alpha channel) and its deterministic-vs-human table naming those
-  same properties. The Referee's stated principle was broader: adoption
+  same properties. The Adjudicator's stated principle was broader: adoption
   without a recorded check is unacceptable whether the resource is
   AI-generated or human-sourced, and regardless of who performs the check.
   This issue and ADR 0011 were rewritten (and both renamed) to state that
@@ -102,7 +102,7 @@
 - Related: LISS-0008, ADR 0002 (input/output/reasoning contracts), ADR 0011,
   `docs/architecture/dependency-policy.md`
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - Resolved 2026-07-13: standalone document at
   `docs/architecture/external-resource-adoption-contract.md`, not an
@@ -130,8 +130,8 @@
   `docs/collaboration/model-tool-capability-matrix.md`,
   `docs/collaboration/evaluation-and-golden-examples.md`,
   `docs/collaboration/ai-work-trace-log.md`,
-  `docs/collaboration/definition-of-done.md`, the Referee-supplied external
-  feedback document (2026-07-13), the Referee's 2026-07-13 rescope
+  `docs/collaboration/definition-of-done.md`, the Adjudicator-supplied external
+  feedback document (2026-07-13), the Adjudicator's 2026-07-13 rescope
   correction (chat).
 - Omitted: the feedback source repository's game-specific safe-area
   dimensions, adult-content experiment details, and any Studio/provider-
@@ -166,7 +166,7 @@
   a coherent, optional contract without duplicating ADR 0002's existing
   scope; real uncertainty about final document boundaries
 - Assumptions: no application code changes; final size may be reclassified
-  to XL if the Referee decides this needs a full new ADR plus a new
+  to XL if the Adjudicator decides this needs a full new ADR plus a new
   standalone document rather than an extension of existing docs
 - Confidence: medium
 - Revises:
@@ -202,14 +202,14 @@
 - Assumptions: no application code changes
 - Confidence: high
 - Revises: AIP-0009-001
-- Revision reason: Referee rejected the media-specific draft and specified
+- Revision reason: Adjudicator rejected the media-specific draft and specified
   the general adoption-check principle; scope narrowed in novelty even
   though file count is similar
 - Superseded by:
 
 ## References
 
-- Referee-supplied external feedback document, 2026-07-13 (transcribed in
+- Adjudicator-supplied external feedback document, 2026-07-13 (transcribed in
   chat; not stored as a separate file in this repository).
 - `docs/architecture/adr/0002-input-output-reasoning-contracts.md`.
 - `docs/architecture/adr/0011-external-resource-adoption-contract.md`.
@@ -217,17 +217,17 @@
 
 ## Work Notes
 
-- Referee agreed on 2026-07-13 to split the feedback into two local issues
+- Adjudicator agreed on 2026-07-13 to split the feedback into two local issues
   (LISS-0008 and this one) rather than adopting the feedback document
   verbatim.
-- Referee ran a second adversarial self-review on 2026-07-13 and surfaced
+- Adjudicator ran a second adversarial self-review on 2026-07-13 and surfaced
   three gaps in the (then media-specific) draft: (1) inline extension of
   existing core contract docs would raise cognitive load for non-media
   adopters; (2) a static deterministic-vs-human boundary table naming
   specific tools would go stale; (3) risk of rule conflict with ADR 0002
   without an explicit topology statement. All three were accepted at the
   time.
-- Referee then rejected the resulting draft's technology-specific
+- Adjudicator then rejected the resulting draft's technology-specific
   vocabulary entirely (2026-07-13) and specified the general principle:
   adoption of any AI-generated or human-sourced external resource requires
   an explicit, recorded check (automated and/or human) before use;

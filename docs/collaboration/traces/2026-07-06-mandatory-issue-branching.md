@@ -24,7 +24,7 @@
 - Reason: process rule change affecting future agent behavior.
 - Privacy constraints: no private data used.
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - User requested the constraint be added after asking about current branch
   strategy.
@@ -43,7 +43,7 @@
 
 ## Next Safe Action
 
-- Commit and push if the Referee accepts the wording.
+- Commit and push if the Adjudicator accepts the wording.
 
 ## Notes
 

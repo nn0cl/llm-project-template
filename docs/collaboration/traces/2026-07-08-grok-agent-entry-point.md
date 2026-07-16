@@ -6,7 +6,7 @@
 - User request: Examine a third adopter's feedback (a Grok-based rhythm/music
   learning game) for elements worth incorporating, focused specifically on
   adding a Grok entry point (`.grok/`) and clarifying support for
-  "codex-fugu"; the Referee explicitly declined the same feedback's
+  "codex-fugu"; the Adjudicator explicitly declined the same feedback's
   stack-specific "browser ports cookbook" item as out of scope for the
   template.
 - Current phase: Architecture Path (new agent operating contract files;
@@ -29,7 +29,7 @@
   `AGENTS.md`-reading behavior, both confirmed via live web search this
   session (see References), are accurate as of 2026-07-08.
 - Open decisions: none blocking; the full-mirror vs. thin-pointer choice for
-  `.grok/rules/` was resolved in-session by the Referee (full mirror).
+  `.grok/rules/` was resolved in-session by the Adjudicator (full mirror).
 
 ## Routing
 
@@ -61,7 +61,7 @@
   project-level.
 - Rework caused by AI output: none.
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - Reject the browser-specific "ports cookbook" item from the same feedback
   round: stack-specific concerns are the adopting project's responsibility,
@@ -118,13 +118,13 @@
 
 ## Next Safe Action
 
-- Open a PR from `process/grok-agent-entry-point` against `main` for Referee
+- Open a PR from `process/grok-agent-entry-point` against `main` for Adjudicator
   review, per `docs/collaboration/prompt-instruction-change-control.md`.
   Note: this session's work is currently uncommitted on branch
   `docs/research-rationale-essays`, which already has unrelated pending
   changes (research-essay renumbering); commit this work on its own branch
   rather than mixing it with that pending rename.
-- If the Referee wants the CI placeholder-detection gate or the
+- If the Adjudicator wants the CI placeholder-detection gate or the
   legacy-spec-backlog / monolith-transition guidance from the same feedback
   round pursued, open those as a separate LISS rather than folding them into
   LISS-0006.

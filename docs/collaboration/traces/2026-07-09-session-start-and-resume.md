@@ -26,7 +26,7 @@
 - Model/assistant/tool: direct documentation edit on Architecture Path.
 - Reason: changes agent session-entry behavior across contract files.
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - User requested implementation and push.
 
@@ -55,7 +55,7 @@
   repository artifacts before acting.
 - Agents stop after design intake when path, phase, or authoritative scope is
   missing.
-- Referees have a single how-to for first adoption session vs daily resume vs
+- Adjudicators have a single how-to for first adoption session vs daily resume vs
   new task.
 - `init-llm-context.sh` remains a first-adoption bootstrap; later sessions
   point to `session-start-and-resume.md`.

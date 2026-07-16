@@ -8,7 +8,7 @@
 - Phase: docs-only
 - Type: process/docs
 - Priority: medium
-- Owner/agent: Claude Fable 5 (proposal and implementation); Referee to review
+- Owner/agent: Claude Fable 5 (proposal and implementation); Adjudicator to review
 - Related branch: process/grok-agent-entry-point (create on implementation)
 
 ## Summary
@@ -32,7 +32,7 @@
   directory is a user-home-level setting, not a project-distributable
   convention. Codex needs no dedicated file; this issue records that finding
   so it is not re-litigated by a future adopter or agent.
-- A brief investigation into "Fugu" (referenced by the Referee as
+- A brief investigation into "Fugu" (referenced by the Adjudicator as
   "codex-fugu") found it to be Sakana AI's multi-agent orchestration model
   (https://sakana.ai/fugu-release/), not itself a project-config-reading
   coding agent; its own material describes pairing with "tools like Codex
@@ -44,10 +44,10 @@
 1. Add `.grok/rules/01-quickstart.md`, `.grok/rules/02-architecture-boundaries.md`,
    and `.grok/rules/03-collaboration-and-completion.md`, mirroring the full
    content of `AGENTS.md` (Prime Directive, Expected Workflow, Clean
-   Architecture Dependency Rule, External Resources Must Be Ports, Referee
+   Architecture Dependency Rule, External Resources Must Be Ports, Adjudicator
    Interaction) with a short Grok-specific persona header, matching the
    existing full-mirror pattern used by `CLAUDE.md` and
-   `.github/copilot-instructions.md` (Referee's explicit choice: full mirror
+   `.github/copilot-instructions.md` (Adjudicator's explicit choice: full mirror
    over thin pointer, to keep the pattern consistent across vendors even
    though it adds a fourth file set to keep in sync).
 2. Add `.grok/rules` to `scripts/lib/collaboration-template-paths.sh` so
@@ -76,9 +76,9 @@
 - Related: LISS-0002, LISS-0005 (same adopter-feedback-to-template-change
   precedent).
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
-- Full-mirror vs. thin-pointer for `.grok/rules/`: resolved by the Referee
+- Full-mirror vs. thin-pointer for `.grok/rules/`: resolved by the Adjudicator
   in-session as full mirror, matching the existing `CLAUDE.md`/
   `copilot-instructions.md` pattern. Revisit if the 4-way sync cost (raised
   by the same adopter round as a separate complaint) is addressed later by a
@@ -86,7 +86,7 @@
   change, not folded into this issue.
 - Whether the browser-specific "ports cookbook" item from the same feedback
   round (Web Audio unlock, bound fetch, localStorage) belongs in the
-  template: Referee explicitly declined -- stack-specific concerns are the
+  template: Adjudicator explicitly declined -- stack-specific concerns are the
   adopting project's responsibility, not the template's. Not tracked as a
   future item.
 
@@ -109,7 +109,7 @@
 ## References
 
 - Third adopter review (2026-07-08, rhythm/music-learning game, Grok-based),
-  provided verbatim by the Referee in session.
+  provided verbatim by the Adjudicator in session.
 - xAI Grok Build docs/community references confirming `grok inspect` reports
   discovered config sources, instructions, and rules
   (https://docs.x.ai/build/overview, https://github.com/superagent-ai/grok-cli

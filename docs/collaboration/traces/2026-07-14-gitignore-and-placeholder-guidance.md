@@ -5,7 +5,7 @@
 - Date: 2026-07-14
 - User request: "プッシュしてPRを作ってマージしたい" (push, open a PR, and
   merge), following an earlier request to evaluate/adapt
-  `codex/process/token-variance-reasons` and after the Referee had already
+  `codex/process/token-variance-reasons` and after the Adjudicator had already
   approved merging that adapted work as PR #8.
 - Current phase: process-only (docs + scripts).
 - Canonical issue or work plan:
@@ -28,7 +28,7 @@
   filename).
 - Assumptions: this third commit, though never pushed even to the source
   branch's own remote, represents intentional, completed local work by the
-  Referee (commit message and diff are coherent and self-consistent) rather
+  Adjudicator (commit message and diff are coherent and self-consistent) rather
   than an abandoned experiment.
 - Open decisions: none.
 
@@ -120,7 +120,7 @@
   — the smoke-test fix from that earlier round already made the pattern
   used here, `ls`-based matching, correct from the start).
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - 2026-07-14: asked to push/PR/merge `codex/process/token-variance-reasons`
   directly; agent investigated first, found a third unpushed commit, and
@@ -157,8 +157,8 @@
 
 - Commit on branch `process/2026-07-14-gitignore-and-placeholder-guidance`
   (created from current `main`), push, open a PR against `main`, and merge
-  once CI passes, per the Referee's standing approval for this session's
-  push/PR/merge pattern. After merging, ask the Referee about disposing of
+  once CI passes, per the Adjudicator's standing approval for this session's
+  push/PR/merge pattern. After merging, ask the Adjudicator about disposing of
   the now-fully-superseded `codex/process/token-variance-reasons` branch
   (both local and remote) and any other stale local branches noticed this
   session.

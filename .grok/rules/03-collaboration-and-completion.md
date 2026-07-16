@@ -1,6 +1,6 @@
 # Grok Agent Instructions: Collaboration and Completion
 
-## Referee Interaction
+## Adjudicator Interaction
 
 When a decision affects architecture, capture it as an ADR. When a decision
 is unknown, list it in the path-appropriate design note as an ambiguity
@@ -19,7 +19,7 @@ unnecessary.
 
 ## Decision Gates
 
-Stop for Referee decision when:
+Stop for Adjudicator decision when:
 
 - phase is not explicitly selected.
 - issue dependencies are unclear or unresolved.
@@ -37,8 +37,8 @@ Stop for Referee decision when:
 When handing off or stopping before completion, use
 `docs/templates/agent-handoff.md`, stating current phase, completed
 artifacts, next safe action, blockers, files changed, and verification
-status. When asking the Referee for approval, use the review points from
-`docs/templates/referee-review.md`.
+status. When asking the Adjudicator for approval, use the review points from
+`docs/templates/adjudicator-review.md`.
 
 Generated source code must minimize human cognitive load. Prefer clear
 responsibility boundaries, small functions, straightforward names, and
