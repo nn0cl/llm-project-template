@@ -136,9 +136,9 @@
   Token-metric-field drop were changed from the source.
 - Rework caused by AI output: the `compgen -G` bug (see Notes above) was
   caught and fixed within this same attempt, before being committed, so it
-  did not require a second attempt or Referee-visible rework.
+  did not require a second attempt or Adjudicator-visible rework.
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - 2026-07-14: asked for an opinion before deciding whether to adopt; agent
   recommended adopting both LISS-0008 (token variance) and LISS-0009
@@ -193,7 +193,7 @@
 
 - Commit on branch `process/2026-07-14-token-variance-and-distribution-hygiene`
   (created from current `main`), push, and open a PR against `main`. Ask the
-  Referee whether to also delete or otherwise dispose of the now-superseded
+  Adjudicator whether to also delete or otherwise dispose of the now-superseded
   `codex/process/token-variance-reasons` branch on GitHub, since its content
   has been fully re-implemented here under collision-free IDs.
 

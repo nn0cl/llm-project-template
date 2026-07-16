@@ -33,11 +33,11 @@
   empty with `alwaysApply: true` on every file), so the "load only what's
   relevant to the touched file" part of the feedback is not yet realized
   anywhere.
-- Referee direction (2026-07-16, chat, first round): focus this issue on
+- Adjudicator direction (2026-07-16, chat, first round): focus this issue on
   organizing/aligning the per-agent rule files (not on the separate
   safety-rule feedback about push restriction or search-scope limiting, which
   is explicitly out of scope for this issue).
-- Referee direction (2026-07-16, chat, second round): the blanket "full
+- Adjudicator direction (2026-07-16, chat, second round): the blanket "full
   mirror across all five contract files, do not re-open" framing from
   LISS-0006/LISS-0010 is itself required to have current grounds, not just be
   inherited as precedent. Live research (below) found real per-vendor
@@ -75,7 +75,7 @@
 - **Codex**: unchanged; reads `AGENTS.md` directly, no dedicated file, no
   duplication exists here to begin with.
 
-## Per-Vendor Decision (Referee-confirmed 2026-07-16; Cursor refined and approved same day)
+## Per-Vendor Decision (Adjudicator-confirmed 2026-07-16; Cursor refined and approved same day)
 
 - **Codex**: no change. Already the optimal case (zero duplication).
 - **Claude Code — consolidate**: replace `CLAUDE.md`'s duplicated body with an
@@ -84,20 +84,20 @@
   documentation recommends exactly this for this exact deduplication purpose,
   and the import mechanism does not carry the "agent might not follow a
   pointer" risk that motivated the original full-mirror choice.
-- **GitHub Copilot — keep full mirror**: Referee decision, given GitHub's own
+- **GitHub Copilot — keep full mirror**: Adjudicator decision, given GitHub's own
   documentation states adherence is weaker when relying on `AGENTS.md` alone.
   The duplication cost is accepted in exchange for the stronger, dedicated
   binding. Do not split or shrink `copilot-instructions.md` in this issue.
 - **Cursor — omit shared sections; rely on native `AGENTS.md`**: after the
   shrink-to-`@AGENTS.md` trial, live verification plus primary docs showed
-  root `AGENTS.md` is already loaded as its own Rules type. Referee directed
+  root `AGENTS.md` is already loaded as its own Rules type. Adjudicator directed
   optimization (2026-07-16): drop `@AGENTS.md` from `.mdc`; keep
   Cursor-complementary content only. Grounds recorded in ADR 0006 Cursor
-  evidence items 1–5. Referee approved the grounded revision the same day.
+  evidence items 1–5. Adjudicator approved the grounded revision the same day.
 - **Grok — keep full mirror**: not revisited this round. LISS-0006's
   empirical `grok inspect` finding (generic `AGENTS.md` loading was
   insufficient in practice) is the strongest evidence of any vendor in this
-  set and was not questioned by the Referee in this round.
+  set and was not questioned by the Adjudicator in this round.
 
 ## Acceptance Notes
 
@@ -147,7 +147,7 @@
   LISS-0010 (Cursor agent entry point, same precedent and live-research
   method).
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - `.github/copilot-instructions.md`: resolved 2026-07-16 — keep full mirror,
   since the impact of weaker adherence would be confined to Copilot itself
@@ -155,12 +155,12 @@
 - `.cursor/rules/*.mdc`: resolved 2026-07-16 — attempt the shrink-to-reference
   trial, conditional on live verification that Cursor reliably inlines the
   `@AGENTS.md` reference every session.
-- Refinement 2026-07-16 (live Cursor session + Referee "optimize"):
+- Refinement 2026-07-16 (live Cursor session + Adjudicator "optimize"):
   verification showed root `AGENTS.md` is auto-applied independently of
   `.mdc`, so `@AGENTS.md` inside `.mdc` is redundant. Drop the trial
   references; keep Cursor-complementary content only; rely on native
   `AGENTS.md` loading for shared sections.
-- Referee approval 2026-07-16: grounded revision approved ("根拠を付けて
+- Adjudicator approval 2026-07-16: grounded revision approved ("根拠を付けて
   修正して。承認します。").
 - `CLAUDE.md`: resolved 2026-07-16 — consolidate via `@AGENTS.md` import,
   per Anthropic's own documented recommendation.
@@ -209,7 +209,7 @@
   implementation
 - Estimation basis: closely follows the established LISS-0010 pattern (same
   kind of vendor-capability research plus contract-file updates), scoped down
-  by excluding the safety-rule work the Referee split out.
+  by excluding the safety-rule work the Adjudicator split out.
 - Assumptions: no application code changes; no new ADR needed unless research
   reveals a decision the existing ADR 0006 does not cover.
 - Confidence: medium (depends on what the live research finds for Copilot;
@@ -220,13 +220,13 @@
 
 ## References
 
-- Referee feedback relay, 2026-07-16 (chat): mt4-orchestration project
+- Adjudicator feedback relay, 2026-07-16 (chat): mt4-orchestration project
   feedback document, item 2 ("ルールのモジュール化").
-- Referee direction, 2026-07-16 (chat, first round): scope this issue to
+- Adjudicator direction, 2026-07-16 (chat, first round): scope this issue to
   rule-file organization only (excluding item 3).
-- Referee direction, 2026-07-16 (chat, second round): the full-mirror pattern
+- Adjudicator direction, 2026-07-16 (chat, second round): the full-mirror pattern
   itself needs current grounds, not inherited precedent; reconsider it.
-- Referee decision, 2026-07-16 (chat, in response to AskUserQuestion):
+- Adjudicator decision, 2026-07-16 (chat, in response to AskUserQuestion):
   Copilot keeps full mirror; Cursor gets the shrink-to-reference trial.
 - `docs/issues/LISS-0006-grok-agent-entry-point.md` and
   `docs/issues/LISS-0010-cursor-agent-entry-point-and-multi-agent-refresh.md`
@@ -260,7 +260,7 @@
 - Implemented 2026-07-16 on branch `process/agent-rule-file-parity`:
   - `CLAUDE.md`: added `@AGENTS.md` import; removed Session Entry, Clean
     Architecture Dependency Rule, External Resources Must Be Ports, and
-    Referee Interaction (all verbatim-identical to `AGENTS.md`, confirmed by
+    Adjudicator Interaction (all verbatim-identical to `AGENTS.md`, confirmed by
     manual comparison before removal). Kept Operating Role, Required First
     Output, Phase Discipline, Project Boundaries, Implementation Entry Point
     (kept as-is: it has real deltas from `AGENTS.md`'s Expected Workflow —
@@ -273,7 +273,7 @@
     keeping its own copy).
   - `.cursor/rules/*.mdc`: replaced only the sections confirmed
     verbatim-identical to `AGENTS.md` (Clean Architecture Dependency Rule,
-    External Resources Must Be Ports, Referee Interaction's design-intake
+    External Resources Must Be Ports, Adjudicator Interaction's design-intake
     paragraphs, Session Entry, Expected Workflow, the doc list) with
     `@AGENTS.md` references, marked with an inline HTML comment noting the
     trial and pointing at git history for the original full-mirror text if a
@@ -298,7 +298,7 @@
     `.cursor/rules/*.mdc` against `AGENTS.md`. No CI changes were needed
     (Acceptance Note 9 turned out to be a non-issue).
   - `.github/copilot-instructions.md` and `.grok/rules/*.md`: left unchanged
-    (full mirror kept, per Referee decision).
+    (full mirror kept, per Adjudicator decision).
   - Full research findings, sources, and the per-vendor decision are recorded
     above and in ADR 0006.
 - Follow-up 2026-07-16 (Cursor agent, same branch): after live verification,
@@ -313,7 +313,7 @@
   injected as its own always-applied Rules entry alongside `.mdc` files;
   `@AGENTS.md` text inside `.mdc` bodies was not expanded inline. Causation
   (`@` vs native load) is indistinguishable; outcome (shared rules present)
-  held. Referee directed optimization: remove redundant `@AGENTS.md`
+  held. Adjudicator directed optimization: remove redundant `@AGENTS.md`
   references from `.mdc` and document reliance on native `AGENTS.md`
   auto-apply (see follow-up work notes and new trace).
 

@@ -3,7 +3,7 @@
 [日本語ガイド](README.ja.md)
 
 This repository is a starter template for a **Clean Architecture + AT-TDD**
-development workflow where a human architect (the "Referee") and one or more
+development workflow where a human architect (the "Adjudicator") and one or more
 AI coding agents (Claude, Copilot, Codex, Grok, Cursor, etc.) collaborate under
 a shared, written operating contract.
 
@@ -22,7 +22,7 @@ installed.
 
 - A **phase-gated workflow** (Design Intake -> Red -> Green -> Refactor) that
   every agent must follow, with explicit stop points for human review.
-- A **Referee-centered collaboration scheme**: the human approves phase
+- A **Adjudicator-centered collaboration scheme**: the human approves phase
   transitions, ADRs, and ambiguous decisions; agents produce reviewable,
   minimal, phase-correct artifacts.
 - **Agent operating contract files** (`AGENTS.md`, `CLAUDE.md`,
@@ -36,7 +36,7 @@ installed.
 - **Local issue and work-plan planning** under `docs/issues/` and
   `docs/work-plans/`, usable before or alongside GitHub Issues.
 - **AI work traces** under `docs/collaboration/traces/` for auditability.
-- **Reusable templates** for design intake, Referee review, agent handoff,
+- **Reusable templates** for design intake, Adjudicator review, agent handoff,
   work traces, local issues, work plans, Gherkin features, and ADRs.
 - A **CI skeleton** that checks the contract files exist, checks that
   ADRs are numbered, and enforces that contract-file changes come with a
@@ -109,7 +109,7 @@ scripts/init-llm-context.sh .
 Paste the generated prompt into the first LLM session for that repository. The
 prompt tells the agent which operating documents to read, which phase gates to
 respect, how to choose Fast Path / Feature Path / Architecture Path, and when
-to stop for Referee approval. It does not select the target project's stack,
+to stop for Adjudicator approval. It does not select the target project's stack,
 datastore, LLM provider, external APIs, or domain behavior.
 
 Target-local onboarding lives in
@@ -126,7 +126,7 @@ architecture layers. Before using it on a real project:
    script can fill the project name, domain summary, and stack placeholders
    when `--project-name`, `--domain-summary`, and `--stack` are provided;
    runtime boundaries, datastore, migration tool, external resources, and
-   stack-specific architecture documents still need Referee-approved
+   stack-specific architecture documents still need Adjudicator-approved
    target facts.
 2. Add one architecture document per architectural area you actually have
    (e.g. `backend-architecture.md`, `frontend-architecture.md`,
@@ -186,7 +186,7 @@ target project's accepted architecture or feature specifications.
 │   └── workflows/ci.yml
 └── docs/
     ├── at-tdd/process.md           # phase discipline
-    ├── collaboration/              # process rules (Referee scheme, DoD, privacy, branching, ...)
+    ├── collaboration/              # process rules (Adjudicator scheme, DoD, privacy, branching, ...)
     │   └── traces/                 # AI work trace log (per-task audit trail)
     ├── templates/                  # design intake, handoff, trace, issue, work-plan, ADR, Gherkin
     │   └── examples/               # filled-in stack-specific examples, for reference only
@@ -212,12 +212,12 @@ specs.
 ## Core rules worth remembering
 
 - No implementation without a reviewed acceptance specification.
-- No phase skipping. Only the Referee-selected phase runs.
+- No phase skipping. Only the Adjudicator-selected phase runs.
 - No hidden business logic in adapters, UI components, or framework handlers.
 - Every external resource is represented as a port before it is used.
 - Every task starts with path-appropriate design intake: compact note for Fast
   Path, full `[THOUGHT]` for Feature Path or Architecture Path.
-- Changing an agent operating contract file requires a stated reason, Referee
+- Changing an agent operating contract file requires a stated reason, Adjudicator
   review, and a trace under `docs/collaboration/traces/` (CI enforced).
 
 ## License

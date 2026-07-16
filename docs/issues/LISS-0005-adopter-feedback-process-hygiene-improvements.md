@@ -8,7 +8,7 @@
 - Phase: process-only
 - Type: process/docs
 - Priority: medium
-- Owner/agent: Claude Fable 5 (proposal); Referee to assign
+- Owner/agent: Claude Fable 5 (proposal); Adjudicator to assign
 - Related branch: (create on acceptance, e.g. process/adopter-feedback-hygiene)
 
 ## Summary
@@ -67,7 +67,7 @@
 - Blocks:
 - Related: LISS-0002 (first adopter-feedback round, same bundling precedent)
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - Should the `develop`-branch guidance (item 4) be a prohibition or an
   "requires ADR" rule? Proposal: requires ADR, since some adopters have
@@ -98,7 +98,7 @@
 
 ## References
 
-- Second adopter review (2026-07-06, provided verbatim by the Referee in
+- Second adopter review (2026-07-06, provided verbatim by the Adjudicator in
   session; positive on decision-forcing effects, critical on initial diff
   weight, issue-graph maintenance, ADR/issue lag, and unexecuted merge
   strategy).

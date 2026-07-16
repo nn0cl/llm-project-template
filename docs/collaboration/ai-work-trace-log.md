@@ -32,7 +32,7 @@ Create or update a trace when:
 - a task spans more than one phase.
 - a task uses external AI, cloud providers, or non-default model routing.
 - a task is paused and another agent may resume it.
-- the Referee asks for an audit trail.
+- the Adjudicator asks for an audit trail.
 
 Trace is optional for tiny documentation-only changes when the final response
 already includes enough context.
@@ -57,7 +57,7 @@ Each trace should include:
 - model, assistant, or deterministic tool routing.
 - execution records by attempt, including scope and result.
 - operating path and cost/reasoning control signals.
-- Referee decisions.
+- Adjudicator decisions.
 - assumptions.
 - open decisions.
 - verification run.

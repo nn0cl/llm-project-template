@@ -1,6 +1,6 @@
-# Referee Review Template
+# Adjudicator Review Template
 
-Use this when asking the human Referee to approve a phase transition, ADR, test
+Use this when asking the human Adjudicator to approve a phase transition, ADR, test
 set, or architecture decision.
 
 ## Review Target
@@ -17,7 +17,7 @@ set, or architecture decision.
 
 - 
 
-## Referee Checklist
+## Adjudicator Checklist
 
 - [ ] The phase is correct.
 - [ ] The included context is sufficient.

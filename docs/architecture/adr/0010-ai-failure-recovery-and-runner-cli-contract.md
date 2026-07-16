@@ -11,7 +11,7 @@ Gap Register #7 (`docs/collaboration/process-gap-register.md`) has tracked
 initial gap survey: the process defines when to stop, but not how to recover
 from a bad or interrupted AI turn.
 
-External feedback from real usage of this template (Referee-supplied,
+External feedback from real usage of this template (Adjudicator-supplied,
 2026-07-13, based on a Studio integration running long, detachable AI
 generation jobs) confirmed the gap in practice and surfaced two related
 problems that the existing documents do not cover:

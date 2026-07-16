@@ -2,7 +2,7 @@
 
 ## Phase Gate
 
-Only execute the phase explicitly requested by the human Referee.
+Only execute the phase explicitly requested by the human Adjudicator.
 
 Do not implement ahead of the current phase. Do not "helpfully" generate
 production code during Phase 1.

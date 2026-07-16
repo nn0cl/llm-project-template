@@ -24,13 +24,13 @@
   `docs/collaboration/ai-work-trace-log.md`,
   `docs/collaboration/prompt-instruction-change-control.md`,
   `CLAUDE.md`, `docs/architecture/README.md`, `.github/workflows/ci.yml`,
-  the Referee-supplied external feedback document (2026-07-13, not stored as
+  the Adjudicator-supplied external feedback document (2026-07-13, not stored as
   a separate file).
 - Omitted: the feedback source repository's internal experiment data,
   provider-specific (Studio) configuration details.
 - Assumptions: doc-only change; no application code or test suite exists in
   this template repository.
-- Open decisions: none remaining for this issue; see LISS-0008 Referee
+- Open decisions: none remaining for this issue; see LISS-0008 Adjudicator
   Decision Points for the resolved history.
 
 ## Routing
@@ -62,7 +62,7 @@
   (`ai-failure-recovery.md`, `runner-cli-contract.md`, Gap Register #7
   resolution, capability-matrix compatibility state, cost-reduction pointer,
   CLAUDE.md/README/CI updates).
-- Result: Part 1 implementation complete, pending Referee verification and
+- Result: Part 1 implementation complete, pending Adjudicator verification and
   commit decision.
 - Attempt boundary: single cohesive session; no replanning, resumption, or
   environment change occurred.
@@ -101,9 +101,9 @@
   formats.
 - Rework caused by AI output: minor — the "detached worker" factual error
   required a two-file wording correction before implementation; caught by
-  the agent's own re-verification, not by the Referee.
+  the agent's own re-verification, not by the Adjudicator.
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - 2026-07-13: split external feedback into two Local Issues rather than
   adopting the feedback document verbatim.
@@ -141,7 +141,7 @@
 
 - Run the Part 1 verification checklist (Task #9), update LISS-0008 status
   to `review` and fill in its Verification section, update WP-0001's issue
-  graph row, then stop and ask the Referee whether to commit this branch
+  graph row, then stop and ask the Adjudicator whether to commit this branch
   before starting Part 2 on a fresh branch.
 
 ## Notes

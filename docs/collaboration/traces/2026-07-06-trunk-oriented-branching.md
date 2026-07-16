@@ -31,7 +31,7 @@
 - Reason: process rule change affecting future agent branching behavior.
 - Privacy constraints: no private data used.
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - User reviewed the research report and approved implementing the findings.
 
@@ -51,7 +51,7 @@
 
 ## Next Safe Action
 
-- Commit and push if the Referee accepts the wording.
+- Commit and push if the Adjudicator accepts the wording.
 
 ## Notes
 

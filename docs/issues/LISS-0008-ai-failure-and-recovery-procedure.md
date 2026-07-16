@@ -31,7 +31,7 @@
     run-state model covering an `unconfirmed` state for unresolved provider
     idempotency) for any slow external job, not only AI image generation.
     `llm-cost-reduction.md` keeps only a short pointer to it.
-- Source: external feedback document supplied by the Referee via chat on
+- Source: external feedback document supplied by the Adjudicator via chat on
   2026-07-13, based on real usage of this template outside this repository
   (Studio integration, long-running generation jobs). The template's own
   files were not changed by that feedback; this issue is where it gets
@@ -89,7 +89,7 @@
 - Blocks:
 - Related: LISS-0009, Gap Register #7, ADR 0010
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - Resolved 2026-07-13: yes, ADR 0010 (`docs/architecture/adr/
   0010-ai-failure-recovery-and-runner-cli-contract.md`) is written and
@@ -111,7 +111,7 @@
 - Included: `docs/collaboration/process-gap-register.md`,
   `docs/collaboration/model-tool-capability-matrix.md`,
   `docs/collaboration/llm-cost-reduction.md`,
-  `docs/collaboration/template-benefits.md`, the Referee-supplied external
+  `docs/collaboration/template-benefits.md`, the Adjudicator-supplied external
   feedback document (2026-07-13).
 - Omitted: the feedback source repository's internal experiment data,
   provider-specific (Studio) configuration details, application-internal
@@ -154,22 +154,22 @@
 
 ## References
 
-- Referee-supplied external feedback document, 2026-07-13 (transcribed in
+- Adjudicator-supplied external feedback document, 2026-07-13 (transcribed in
   chat; not stored as a separate file in this repository).
 - `docs/collaboration/process-gap-register.md` gap #7.
 - `docs/architecture/adr/0010-ai-failure-recovery-and-runner-cli-contract.md`.
 
 ## Work Notes
 
-- Referee agreed on 2026-07-13 to split the feedback into two local issues
+- Adjudicator agreed on 2026-07-13 to split the feedback into two local issues
   (this one and LISS-0009) rather than adopting the feedback document
   verbatim.
-- Referee ran an adversarial self-review on 2026-07-13 and surfaced three
+- Adjudicator ran an adversarial self-review on 2026-07-13 and surfaced three
   gaps in the initial design intake: (1) missing provider-level idempotency
   handling on resume, distinct from local record dedup; (2) the runner CLI
   contract outgrowing `llm-cost-reduction.md`'s scope; (3) ambiguity at the
   input-contract/workflow-compatibility failure-category boundary. All three
-  were accepted and folded into Acceptance Notes and Referee Decision Points
+  were accepted and folded into Acceptance Notes and Adjudicator Decision Points
   above; see the `unconfirmed` run state, the new standalone
   `runner-cli-contract.md`, and the classification tie-break rule.
 - Implementation completed 2026-07-13 on branch

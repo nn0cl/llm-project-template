@@ -73,13 +73,13 @@ Before implementing anything:
 
 Use a compact design note for Fast Path work. Use the full [THOUGHT] scaffold
 for Feature Path and Architecture Path work.
-Execute only the phase explicitly requested by the human Referee.
+Execute only the phase explicitly requested by the human Adjudicator.
 Do not introduce target-project domain behavior, datastore choices, provider
 choices, or stack-specific architecture unless an accepted specification or ADR
 requires it.
 
 If no target specification or phase has been provided yet, stop after design
-intake and ask the Referee for the missing specification or phase approval.
+intake and ask the Adjudicator for the missing specification or phase approval.
 
 For later sessions and resume patterns, see
 docs/collaboration/session-start-and-resume.md.

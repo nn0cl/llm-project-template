@@ -41,7 +41,7 @@
 - Blocks:
 - Related: ADR 0005, ADR 0007
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - Confirmed: pull model (not push/registry-based) is the desired mechanism.
 - Confirmed: 3-way merge with explicit ignore list, no silent overwrite.

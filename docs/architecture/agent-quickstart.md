@@ -6,14 +6,14 @@ Use this as the first short entry point before coding.
 
 Each new LLM session starts without prior chat context.
 
-1. Read the Referee message for operating path, phase, spec or ADR, issue,
+1. Read the Adjudicator message for operating path, phase, spec or ADR, issue,
    and branch.
 2. If resuming, read the cited handoff or trace before other documents.
 3. Recover progress from repository artifacts, not from assumed chat history.
 4. If path, phase, or authoritative scope is missing, stop after design intake
-   and ask the Referee.
+   and ask the Adjudicator.
 
-For Referee checklists and resume examples, see
+For Adjudicator checklists and resume examples, see
 `docs/collaboration/session-start-and-resume.md`.
 
 ## Operating Paths
@@ -72,7 +72,7 @@ Read:
 7. `docs/architecture/io-reasoning-contracts.md` when AI/model output is
    involved.
 
-Output the full `[THOUGHT]` scaffold and stop for Referee approval when a new
+Output the full `[THOUGHT]` scaffold and stop for Adjudicator approval when a new
 architecture or process decision is required.
 
 ## Design First
@@ -97,13 +97,13 @@ contract fields when it explicitly states that they are not involved.
 
 ## Phase Rule
 
-Only execute the phase explicitly requested by the Referee.
+Only execute the phase explicitly requested by the Adjudicator.
 
 - Phase 1: failing tests only.
 - Phase 2: minimum implementation only.
 - Phase 3: refactor and reviewer empathy summary.
 
-Phase transitions require Referee approval. Do not start Phase 2 from
+Phase transitions require Adjudicator approval. Do not start Phase 2 from
 unreviewed Phase 1 tests.
 
 ## Bug Triage
@@ -114,7 +114,7 @@ approved scope, clear from existing behavior or specification, low risk, and
 verified in the same attempt.
 
 Omitting a separate planning artifact does not permit skipping Phase 1, Phase
-2, Phase 3, deterministic verification, or Referee review gates.
+2, Phase 3, deterministic verification, or Adjudicator review gates.
 
 When a bug is size `M` or larger, needs a second execution attempt, changes
 boundaries, or remains ambiguous, record it in a local issue or active work
@@ -144,7 +144,7 @@ plan before continuing.
 
 ## Stop Conditions
 
-Stop and ask for Referee decision or ADR when the task requires choosing:
+Stop and ask for Adjudicator decision or ADR when the task requires choosing:
 
 - `<Persistence engine or schema details beyond the accepted baseline>`.
 - `<Vector DB / embedding model or dimensions>`.

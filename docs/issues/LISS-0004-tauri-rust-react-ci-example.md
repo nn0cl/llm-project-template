@@ -42,7 +42,7 @@
 - Blocks:
 - Related: LISS-0002
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - Not yet reviewed. Left at `proposed` pending either a contributed,
   verified job definition or this repository independently verifying the

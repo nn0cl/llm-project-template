@@ -23,7 +23,7 @@ Rules:
 - direct pushes to `main` or the trunk branch are prohibited; all changes must
   arrive through a reviewed pull request.
 - feature branches should be tied to a local issue, GitHub issue, or explicit
-  Referee waiver.
+  Adjudicator waiver.
 - work on any local issue (`docs/issues/LISS-*`) or GitHub Issue must happen on
   a dedicated branch; do not implement issue work directly on `main` or the
   trunk branch, even for a single commit.
@@ -64,8 +64,8 @@ time:
   equivalent isolated checkout) rather than sharing one working directory
   across agents.
 - do not let two agents write to the same worktree/branch concurrently.
-- keep the number of concurrent agent worktrees within what the Referee can
-  actually review; more parallel branches than the Referee can review before
+- keep the number of concurrent agent worktrees within what the Adjudicator can
+  actually review; more parallel branches than the Adjudicator can review before
   they go stale defeats the point of short-lived branches.
 
 ## Stacked Branches for Phase Splitting
@@ -77,7 +77,7 @@ PR, as long as:
 - each stacked branch still targets `main` as its eventual destination and is
   still checked by the same CI/branch-protection rules as a normal PR.
 - the stack order matches phase order: Red before Green before Refactor.
-- the Referee can tell, from the PR description, where each branch sits in the
+- the Adjudicator can tell, from the PR description, where each branch sits in the
   stack and which phase it represents.
 
 ## Commits
@@ -105,7 +105,7 @@ Rules:
 PRs should identify:
 
 - current phase.
-- Referee approval points.
+- Adjudicator approval points.
 - changed files.
 - deterministic verification.
 - whether tests were reviewed before implementation.
@@ -122,7 +122,7 @@ When starting a new feature:
 3. create or update the design intake.
 4. create a feature branch.
 5. add Phase 1 tests only.
-6. wait for Referee review.
+6. wait for Adjudicator review.
 7. continue with Phase 2 on the same feature branch or a clearly linked branch.
 
 Recommended command shape:

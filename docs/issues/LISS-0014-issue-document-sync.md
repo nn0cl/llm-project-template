@@ -34,13 +34,13 @@ to be updated when implementation work reaches `done`, `review`, `blocked`, or `
 - Confirmed the new rule is present in the template's Definition of Done and commit discipline documents.
 - Confirmed the issue is marked `done` with process-only scope and completion evidence.
 
-## Referee Review
+## Adjudicator Review
 
-- Reviewed by: repository Referee (user)
+- Reviewed by: repository Adjudicator (user)
 - Review date: 2026-07-16
-- Review route: explicit Referee review of the recent agent changes against the repository operating rules.
+- Review route: explicit Adjudicator review of the recent agent changes against the repository operating rules.
 - Decision: approved after correction and re-commit.
-- Review record: `docs/collaboration/reviews/2026-07-16-issue-document-sync-referee-review.md`
+- Review record: `docs/collaboration/reviews/2026-07-16-issue-document-sync-adjudicator-review.md`
 - Corrections required by review:
   - combine the split process changes into one reviewable commit.
   - add the required AI work trace for operating-contract changes.

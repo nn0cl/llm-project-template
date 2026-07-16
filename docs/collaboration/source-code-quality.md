@@ -1,6 +1,6 @@
 # Source Code Quality for AI-TDD Collaboration
 
-Generated code must be easy for a human Referee to review.
+Generated code must be easy for a human Adjudicator to review.
 
 This is a collaboration rule, not an application-internal design decision.
 

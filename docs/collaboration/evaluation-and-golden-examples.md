@@ -25,7 +25,7 @@ Keep `.gitkeep` files in both folders until concrete examples are added.
 Create golden examples for:
 
 - design intake notes.
-- Referee review requests.
+- Adjudicator review requests.
 - agent handoff notes.
 - Phase 1 Red test requests.
 - Phase 3 reviewer empathy summaries.
@@ -42,7 +42,7 @@ AI collaboration artifacts should be evaluated for:
 - visible assumptions.
 - small and relevant payload selection.
 - omitted context explanation.
-- Referee decision points.
+- Adjudicator decision points.
 - deterministic verification summary.
 - low cognitive load.
 - absence of secrets and unrelated large context.
@@ -62,4 +62,4 @@ Use human review for:
 - clarity.
 - sufficiency of assumptions.
 - quality of reviewer empathy summary.
-- whether the artifact helps or burdens the Referee.
+- whether the artifact helps or burdens the Adjudicator.

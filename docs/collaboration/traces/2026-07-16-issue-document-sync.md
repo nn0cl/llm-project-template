@@ -53,12 +53,12 @@
 - Avoided LLM work: none.
 - Rework caused by AI output: none.
 
-## Referee Decisions
+## Adjudicator Decisions
 
-- 2026-07-16: repository Referee reviewed the agent changes against the
+- 2026-07-16: repository Adjudicator reviewed the agent changes against the
   operating rules and required the split commits to be reconstructed with the
   required trace and corrected synchronization wording.
-- 2026-07-16: Referee approved the corrected, consolidated result.
+- 2026-07-16: Adjudicator approved the corrected, consolidated result.
 
 ## Verification
 

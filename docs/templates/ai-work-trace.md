@@ -64,7 +64,7 @@ that the metric, source, and attribution boundary are compatible.
 - Avoided LLM work:
 - Rework caused by AI output:
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - 
 

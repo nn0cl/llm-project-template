@@ -15,7 +15,7 @@ For the benefits and tradeoffs of using the template, see
    `.cursor/rules/*.mdc`, and `docs/architecture/README.md`. The copy
    script can fill project name, domain summary, and stack placeholders;
    runtime boundaries, datastore, migration tool, external resources, and
-   stack-specific architecture documents still require Referee-approved
+   stack-specific architecture documents still require Adjudicator-approved
    target facts.
 3. Add the first target feature specification under `docs/specs/`.
 4. Add only the stack-specific architecture documents that the project already
@@ -137,7 +137,7 @@ with frontmatter — a plain `.md` file in `.cursor/rules/` is ignored by
 Cursor's rules system) as its primary, most powerful rules mechanism; this
 template sets `alwaysApply: true` on each file so the rules apply to every
 request regardless of which files are open. As of LISS-0015 (2026-07-16,
-Referee-approved after live verification the same day), `.cursor/rules/*.mdc`
+Adjudicator-approved after live verification the same day), `.cursor/rules/*.mdc`
 holds Cursor-complementary rules only and does not `@`-reference or
 full-mirror shared sections from `AGENTS.md`. Grounds: Cursor lists
 `AGENTS.md` as its own Rules type and "picks it up automatically"
@@ -195,7 +195,7 @@ any escalation reason.
 - Do not use this template to replace target project architecture.
 - Do not ship target-specific domain models as part of the reusable template.
 - Do design the target domain model after adoption, through target specs,
-  reviewed tests, Referee decisions, and ADRs.
+  reviewed tests, Adjudicator decisions, and ADRs.
 - Do not use `--force` unless the target owner has reviewed each overwrite.
 - Do not treat placeholder examples as selected technology.
 - Keep target secrets, private data, and full exports out of AI prompts.

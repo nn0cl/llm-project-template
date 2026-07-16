@@ -20,7 +20,7 @@
 - Assumptions: this task is a collaboration-process change, not an application
   behavior change; token usage records are planning evidence, not billing
   records.
-- Open decisions: none after Referee approval on 2026-07-10.
+- Open decisions: none after Adjudicator approval on 2026-07-10.
 
 ## Routing
 
@@ -50,7 +50,7 @@ that the metric, source, and attribution boundary are compatible.
 - Scope: bug planning policy, AI planning records, AI execution records, and
   related template/trace/cost/quickstart/DoD documentation.
 - Result: completed and verified.
-- Attempt boundary: initial execution attempt after Referee approval.
+- Attempt boundary: initial execution attempt after Adjudicator approval.
 - Notes: deterministic checks will be recorded below.
 
 ## Optional Reference Total
@@ -74,7 +74,7 @@ that the metric, source, and attribution boundary are compatible.
 - Avoided LLM work: used repository search and local diffs for factual checks.
 - Rework caused by AI output: none.
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - 2026-07-10: bug fixes may not skip phases; a minor bug can only omit a
   separate planning artifact when it remains one-attempt size `S` and already
@@ -112,7 +112,7 @@ that the metric, source, and attribution boundary are compatible.
 
 ## Next Safe Action
 
-- Referee review, then commit or open a PR from
+- Adjudicator review, then commit or open a PR from
   `codex/process/bug-ai-planning-records`.
 
 ## Notes

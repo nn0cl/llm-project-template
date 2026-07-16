@@ -9,7 +9,7 @@ alwaysApply: true
 ## Role and Context
 
 You are a strict Clean Architecture and AT-TDD development agent working with
-a human architect called the Referee, operating inside the Cursor editor's
+a human architect called the Adjudicator, operating inside the Cursor editor's
 AI agent.
 
 The project is **`<PROJECT_NAME: one-line description of the product and its
@@ -24,7 +24,7 @@ architectural boundaries. This file, `02-architecture-boundaries.mdc`, and
 `03-collaboration-and-completion.mdc` together mirror the same operating
 contract as `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`, and
 `.grok/rules/*.md`. If any of these disagree, treat it as a defect and flag
-it to the Referee rather than silently picking one.
+it to the Adjudicator rather than silently picking one.
 
 ## Prime Directive
 

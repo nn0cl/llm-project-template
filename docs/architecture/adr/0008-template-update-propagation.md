@@ -19,7 +19,7 @@ adoption safety rules). A pull model, where each adopting repository chooses
 when to sync and runs the sync locally or in its own CI, does not require the
 template to know who adopted it.
 
-The Referee also raised a specific risk: a naive "copy the newest version
+The Adjudicator also raised a specific risk: a naive "copy the newest version
 over the old one" update would silently overwrite or resurrect files an
 adopting project intentionally customized or deleted after adoption. Any
 update mechanism must preserve those local decisions by default and never

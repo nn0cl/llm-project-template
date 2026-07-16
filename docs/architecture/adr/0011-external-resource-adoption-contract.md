@@ -14,14 +14,14 @@ a *resource* — AI-generated or human-sourced — that is not a software
 dependency: a generated artifact, a downloaded dataset, a third-party
 content asset, or similar.
 
-External feedback from real usage of this template (Referee-supplied,
+External feedback from real usage of this template (Adjudicator-supplied,
 2026-07-13) showed this gap in practice: generated output was treated as
 usable before any human verdict was recorded on it.
 
 An earlier draft of this ADR defined the contract using image-specific
 vocabulary (orientation, dimensions, crop policy, alpha/channel policy) and
 a deterministic-vs-human boundary table naming specific artifact properties.
-The Referee rejected that draft: this template must avoid describing
+The Adjudicator rejected that draft: this template must avoid describing
 specific technologies, and the actual principle needed is more general —
 **no resource that originates outside the project's own reviewed work is
 adopted without passing an explicit, recorded check, whether that resource

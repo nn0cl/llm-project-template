@@ -9,7 +9,7 @@ template, it means:
 - acceptance specifications drive the first tests.
 - reviewed failing tests drive the minimum implementation.
 - refactoring happens only after verified Green.
-- phase transitions require human Referee approval.
+- phase transitions require human Adjudicator approval.
 
 The workflow combines:
 
@@ -54,7 +54,7 @@ Required output for Feature Path and Architecture Path:
 - input, output, and reasoning evidence contracts when AI or model output is
   involved.
 - ambiguity boundaries.
-- Referee decision needed or not needed.
+- Adjudicator decision needed or not needed.
 
 Fast Path output may be a compact design note that states:
 
@@ -74,7 +74,7 @@ Rules:
   and reasoning evidence contracts.
 - Deterministic tools should be used instead of AI for formatting, linting,
   dependency checks, migration ordering checks, and test execution.
-- Phase transitions require Referee approval.
+- Phase transitions require Adjudicator approval.
 
 ## Mandatory `[THOUGHT]`
 
@@ -99,7 +99,7 @@ Allowed:
 - Test files.
 - Test fixtures.
 - Test-only interface declarations when the language requires a compile target
-  for mock types and the Referee has accepted this convention.
+  for mock types and the Adjudicator has accepted this convention.
 
 Forbidden:
 
@@ -116,7 +116,7 @@ Red may mean:
 
 Phase 1 exit gate:
 
-- The Referee reviews and accepts the failing tests before Phase 2 starts.
+- The Adjudicator reviews and accepts the failing tests before Phase 2 starts.
 
 ## Phase 2: Green
 

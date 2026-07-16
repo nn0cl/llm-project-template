@@ -100,11 +100,11 @@
 
 ### Addendum (2026-07-14): ported from a third, previously-unpushed commit
 
-A third commit existed only in the Referee's local checkout of
+A third commit existed only in the Adjudicator's local checkout of
 `codex/process/token-variance-reasons` (`358280f`, "Tighten template
 adoption guidance"), never pushed to `origin/codex/process/
 token-variance-reasons` and therefore not visible when this issue was
-first drafted. Discovered when the Referee asked to push/PR/merge that
+first drafted. Discovered when the Adjudicator asked to push/PR/merge that
 branch directly; re-implemented here (not pushed as-is, for the same
 merge-base-staleness reason as the first two commits) rather than as a new
 issue, since it is a direct continuation of this same distribution-hygiene
@@ -125,7 +125,7 @@ concern:
   placeholder-fill instructions are reworded to distinguish what the copy
   script can fill automatically (project name, domain summary, stack, via
   `--project-name`/`--domain-summary`/`--stack`) from what still requires
-  Referee-approved target facts (runtime boundaries, datastore, migration
+  Adjudicator-approved target facts (runtime boundaries, datastore, migration
   tool, external resources, stack-specific architecture documents).
 - `README.md`'s Directory Guide tree gains the `.gitignore` line.
 
@@ -138,7 +138,7 @@ concern:
   session), LISS-0001/LISS-0002 (original copy/update script design),
   ADR 0008 (template update propagation).
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - Resolved 2026-07-14: adopt the distribution-hygiene proposal, renumbered
   to avoid the LISS-0009 collision with this session's own issue of that
@@ -229,7 +229,7 @@ concern:
 - Assumptions: no application code changes
 - Confidence: high
 - Revises: AIP-0013-001
-- Revision reason: Referee asked to push/PR/merge the source branch
+- Revision reason: Adjudicator asked to push/PR/merge the source branch
   directly; a third, previously-unpushed local commit on that branch was
   discovered in the process and is re-implemented here as a continuation
   of the same issue.
@@ -241,7 +241,7 @@ concern:
   commits `6ed7a7d` and `358280f` (the latter never pushed to
   `origin/codex/process/token-variance-reasons`).
 - `docs/specs/template-rollout.md` (confirms the exclusion rationale).
-- Referee request, 2026-07-14 (chat): asked to evaluate the branch's
+- Adjudicator request, 2026-07-14 (chat): asked to evaluate the branch's
   content and adapt it to current `main` if worthwhile; later asked to
   push/PR/merge the branch, which surfaced the third commit.
 
@@ -253,7 +253,7 @@ concern:
   record of the original proposal; they are not copied into this
   repository's `main` history since this issue supersedes them with a
   collision-free ID.
-- 2026-07-14 addendum: the Referee asked to push/PR/merge the
+- 2026-07-14 addendum: the Adjudicator asked to push/PR/merge the
   `codex/process/token-variance-reasons` branch directly. Doing so verbatim
   was rejected — the branch's merge-base predates most of this session's
   own work, so a direct push/PR would have produced extensive conflicts and

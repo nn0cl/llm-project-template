@@ -2,7 +2,7 @@
 
 [English entry point](en/README.md)
 
-このフォルダは、Referee と AI の相談のなかで生まれた調査と論考を置く場所である。
+このフォルダは、Adjudicator と AI の相談のなかで生まれた調査と論考を置く場所である。
 AI と人間が協調して開発を進めるための設計思想——なぜそういう仕組みを置くのか——を
 人間向けに残す。ここにある文章は、エージェントへの指示でもなく、ADR でもない。
 規範は `AGENTS.md` や `docs/collaboration/` にあり、research はその背後の理由である。
@@ -37,7 +37,7 @@ research を normative に参照する——は作らない。
 直接引用の表記は ACM の run-in quotation に合わせる。
 
 - 英語の直接引用は二重引用符 `"..."` で囲む。斜体は使わない。
-- 日本語の直接引用（Referee の発言など）は鉤括弧 `「...」` で囲む。
+- 日本語の直接引用（Adjudicator の発言など）は鉤括弧 `「...」` で囲む。
 - 間接引用や筆者の論述には引用符を付けない。
 - 参考文献リストの文献・作品名は斜体のままとする（例: *Docs as Code*）。
 
@@ -58,7 +58,7 @@ research を normative に参照する——は作らない。
 
 - [完成形](2026-07-05-rationale-target-end-state.md)
 - [エージェントはサンドボックスである](2026-07-07-rationale-saas-agent-as-sandbox.md)
-- [Referee とフェーズ](2026-07-05-rationale-referee-centered-collaboration.md)
+- [Adjudicator とフェーズ](2026-07-05-rationale-adjudicator-centered-collaboration.md)
 - [設計先行とコンテキスト](2026-07-05-rationale-design-first-minimal-context.md)
 - [出力の契約](2026-07-05-rationale-ai-output-contracts.md)
 - [レビュー可能なコード](2026-07-05-rationale-code-for-human-review.md)

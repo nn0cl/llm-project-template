@@ -16,9 +16,9 @@ This ADR intentionally does not decide application internals.
 
 ## Decision
 
-Adopt a Referee-centered collaboration scheme.
+Adopt a Adjudicator-centered collaboration scheme.
 
-The human Referee owns:
+The human Adjudicator owns:
 
 - phase transition approval.
 - ADR acceptance.
@@ -36,7 +36,7 @@ Agents own:
 - handoff notes when work stops before completion.
 
 Use the collaboration templates under `docs/templates/` for design intake,
-handoff, and Referee review.
+handoff, and Adjudicator review.
 
 ## Consequences
 
@@ -45,7 +45,7 @@ Positive:
 - Work can be resumed by another agent without guessing hidden state.
 - Human review is focused on decision points instead of every token of output.
 - Phase transitions become explicit and auditable.
-- AI-generated artifacts remain subordinate to Referee decisions and ADRs.
+- AI-generated artifacts remain subordinate to Adjudicator decisions and ADRs.
 
 Negative:
 
@@ -57,9 +57,9 @@ Negative:
 
 Code review should reject:
 
-- phase transitions without Referee approval.
+- phase transitions without Adjudicator approval.
 - Phase 2 implementation based on unreviewed Phase 1 tests.
 - tasks without design intake or context ledger.
 - handoffs that omit current phase, changed files, verification status, or next
   safe action.
-- architectural decisions made only in chat without ADR or Referee approval.
+- architectural decisions made only in chat without ADR or Adjudicator approval.

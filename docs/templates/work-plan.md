@@ -68,7 +68,7 @@ attempt starts. Link to a local issue record instead of duplicating it. -->
 
 - Issue:
 - Reason it is unblocked:
-- Referee approval needed:
+- Adjudicator approval needed:
 
 ## Risks
 

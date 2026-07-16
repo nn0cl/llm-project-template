@@ -6,11 +6,11 @@
 - User request: after confirming Cursor auto-applies root `AGENTS.md`
   independently of `.cursor/rules`, remove redundant `@AGENTS.md` references
   from `.mdc` rules ("optimize"); then attach primary-source grounds and
-  record Referee approval ("根拠を付けて修正して。承認します。").
+  record Adjudicator approval ("根拠を付けて修正して。承認します。").
 - Current phase: process-only (docs), Architecture Path (contract files
   changed).
 - Canonical issue or work plan: `docs/issues/LISS-0015-agent-rule-file-parity.md`.
-- AI planning record: AIP-0015-001 (prior); this follow-up executes Referee
+- AI planning record: AIP-0015-001 (prior); this follow-up executes Adjudicator
   refinement after live Cursor verification.
 
 ## Context Ledger
@@ -24,7 +24,7 @@
   scope), copilot/grok full mirrors, application source.
 - Assumptions: Cursor continues to auto-apply root `AGENTS.md` as a Rules
   type separate from `.cursor/rules`.
-- Open decisions: none — Referee approved the grounded revision 2026-07-16.
+- Open decisions: none — Adjudicator approved the grounded revision 2026-07-16.
 
 ## Routing
 
@@ -54,7 +54,7 @@
 4. **Live session outcome (this repo, 2026-07-16)**: Agent context included
    root `AGENTS.md` as its own always-applied workspace rule with full body
    (Expected Workflow, Session Entry, Clean Architecture Dependency Rule,
-   External Resources Must Be Ports, Referee Interaction) *and* the three
+   External Resources Must Be Ports, Adjudicator Interaction) *and* the three
    `alwaysApply: true` `.mdc` files. Literal `See @AGENTS.md` text inside
    `.mdc` was present as prose, not an expanded inline paste. Therefore
    shared rules survived without depending on `@` resolution inside `.mdc`.
@@ -86,7 +86,7 @@ Regression watch: if a future Cursor release stops auto-applying root
 - Variance reason: N/A
 - Scope: drop `@AGENTS.md` from three `.mdc` files; update ADR 0006,
   change-control, adoption-guide, LISS-0015; add this trace; attach
-  primary-source URLs and live-session evidence; record Referee approval.
+  primary-source URLs and live-session evidence; record Adjudicator approval.
 - Result: completed.
 - Attempt boundary: single cohesive follow-up on branch
   `process/agent-rule-file-parity`.
@@ -108,12 +108,12 @@ Regression watch: if a future Cursor release stops auto-applying root
 - Context intentionally omitted: application source; copilot/grok bodies.
 - Deterministic checks used: `rg '@AGENTS\.md' .cursor/rules/` after edit
   (expect zero matches for the import token).
-- Escalation reason: none — Referee requested optimization, then approved
+- Escalation reason: none — Adjudicator requested optimization, then approved
   grounded revision.
 - Avoided LLM work: no full-mirror restore after outcome evidence.
 - Rework caused by AI output: none.
 
-## Referee Decisions
+## Adjudicator Decisions
 
 - 2026-07-16: live verification only (prior turn).
 - 2026-07-16: if Cursor auto-applies `AGENTS.md` independently, `.mdc`

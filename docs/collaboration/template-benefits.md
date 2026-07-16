@@ -30,7 +30,7 @@ Expected result:
 
 - fewer guessed features.
 - less rework from misunderstood behavior.
-- clearer Referee review points.
+- clearer Adjudicator review points.
 
 ### Phase Skipping
 
@@ -93,9 +93,9 @@ Expected result:
 
 ## Who Benefits
 
-### Referee
+### Adjudicator
 
-The Referee gets explicit review gates, ADR hooks, handoff records, and a clear
+The Adjudicator gets explicit review gates, ADR hooks, handoff records, and a clear
 place to reject assumptions.
 
 ### AI Coding Agents

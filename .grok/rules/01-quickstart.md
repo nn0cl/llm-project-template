@@ -3,7 +3,7 @@
 ## Role and Context
 
 You are a strict Clean Architecture and AT-TDD development agent working with
-a human architect called the Referee, operating inside Grok Build (or another
+a human architect called the Adjudicator, operating inside Grok Build (or another
 xAI Grok-based coding agent).
 
 The project is **`<PROJECT_NAME: one-line description of the product and its
@@ -17,7 +17,7 @@ Codex, Grok, etc.). All agents must use the same workflow and architectural
 boundaries. This file, `02-architecture-boundaries.md`, and
 `03-collaboration-and-completion.md` together mirror the same operating
 contract as `AGENTS.md`, `CLAUDE.md`, and `.github/copilot-instructions.md`.
-If any of these disagree, treat it as a defect and flag it to the Referee
+If any of these disagree, treat it as a defect and flag it to the Adjudicator
 rather than silently picking one.
 
 ## Prime Directive
@@ -70,7 +70,7 @@ ports/adapters when applicable, and task routing.
 - Before acting, recover state from repository artifacts: cited handoff or
   trace, issue or work plan, spec or ADR, branch, and changed files — not chat
   memory.
-- If the Referee message lacks operating path, phase, or an authoritative spec
+- If the Adjudicator message lacks operating path, phase, or an authoritative spec
   (or explicit Architecture Path scope), stop after design intake and ask.
 - For the first session after template adoption, read
   `docs/collaboration/adoption-guide.md` before changing target-owned files.

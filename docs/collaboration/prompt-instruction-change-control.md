@@ -30,7 +30,7 @@ collaboration rules should be added to this list when they are created.
 
 A pull request that changes an agent operating contract file requires:
 
-- explicit Referee review of the change, not only automated CI.
+- explicit Adjudicator review of the change, not only automated CI.
 - a stated reason for the change in the PR description.
 - confirmation that `AGENTS.md`, `CLAUDE.md`,
   `.github/copilot-instructions.md`, `.grok/rules/*.md`, and
@@ -73,4 +73,4 @@ Code review should reject:
 - agent operating contract changes that leave `AGENTS.md`, `CLAUDE.md`,
   `.github/copilot-instructions.md`, `.grok/rules/*.md`, and
   `.cursor/rules/*.mdc` inconsistent with each other in effective content.
-- agent operating contract changes merged without Referee review.
+- agent operating contract changes merged without Adjudicator review.

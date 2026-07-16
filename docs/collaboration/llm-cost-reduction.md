@@ -110,4 +110,4 @@ Investigate when:
 - agents repeatedly read whole directories for local changes.
 - verification is described in prose but no deterministic check was run.
 - AI output causes repeated rework or test changes.
-- Referee review repeatedly rejects work for phase or scope drift.
+- Adjudicator review repeatedly rejects work for phase or scope drift.

@@ -5,7 +5,7 @@
 - Evaluate the 2026-07-13 external feedback document (real-world template
   usage: Studio integration, long-running AI image generation, human review
   of generated artifacts) and incorporate the parts that fit this template's
-  intent — stack-neutral, provider-neutral, Referee-gated collaboration
+  intent — stack-neutral, provider-neutral, Adjudicator-gated collaboration
   process — without making any generation-specific dependency a required
   part of the template.
 
@@ -36,7 +36,7 @@
    and committed to its branch 2026-07-13.
 2. LISS-0009 (external resource adoption contract) — net-new optional
    extension point; was rescoped mid-plan from a media-artifact-specific
-   contract to a general adoption-check principle after Referee review
+   contract to a general adoption-check principle after Adjudicator review
    rejected technology-specific vocabulary. Implemented 2026-07-13.
 
 ## Current Next Issue

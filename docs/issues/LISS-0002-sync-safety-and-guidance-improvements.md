@@ -51,7 +51,7 @@
 - Blocks:
 - Related: LISS-0001, LISS-0003, LISS-0004
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - Confirmed: fix silent numbering collisions and add missing recovery/
   guidance documentation; do not restructure README.md/ci.yml or fabricate
