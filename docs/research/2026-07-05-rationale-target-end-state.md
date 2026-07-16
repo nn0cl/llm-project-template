@@ -62,9 +62,7 @@ Bainbridge の自動化の皮肉（[ScienceDirect](https://www.sciencedirect.com
 
 ## 読み物と規範を混ぜない
 
-この文章を含む `docs/research/` フォルダの内容は、人間がソフトウェア開発の哲学を読み解くための explanation（解説）である。エージェントは日々の作業入力としてここを読む必要がない（物理的禁止ではなく、allowlist による通常入力からの除外。方針は [README](README.md) の「エージェントと research」）。また、ここにある論考や references は、`llm-project-template` が提供する実務的なプロジェクト運用テンプレートのルールそのものに変更を加えるものではない。
-
-この「規範」と「解説」の分離は、アーキテクチャ上極めて重要である。エージェントが従うべき絶対の運用規則は、`AGENTS.md`、ADR、`architecture/`、`collaboration/` などの文書に厳格に定義されている。`research/` は、その規則がなぜ必要なのかという背後の理由（Rationale）を厚く書く場所である。人間が思想を深く理解し、規則を形骸化させずに維持し、必要であれば議論を経て別の artifact へ昇格させるための肥沃な土壌であって、これ自体がエージェントへの直接的な命令書ではないのだ。
+`docs/research/` は人間向けの explanation であり、日々の作業入力としては読む必要がない（[README](README.md)）。ここを編集しても運用テンプレートの規則は変わらない。規範は `AGENTS.md`、ADR、`architecture/`、`collaboration/` にあり、research はその rationale である。詳細は [規範と読み物](2026-07-06-rationale-normative-vs-reading-documents.md)。
 
 ## 各論へ
 
