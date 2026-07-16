@@ -2,15 +2,15 @@
 
 2026-07-06. Non-normative. Related: `docs/research/README.md`, `agent-quickstart.md`.
 
-> Translated from [../2026-07-06-rationale-normative-vs-reading-documents.md](../2026-07-06-rationale-normative-vs-reading-documents.md) as of 2026-07-16. The Japanese original is authoritative.
+> Japanese original (authoritative): [../2026-07-06-rationale-normative-vs-reading-documents.md](../2026-07-06-rationale-normative-vs-reading-documents.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
 
 ---
 
-As a project matures, the total volume of documentation monotonically increases. The more documents there are, the more blurred the line becomes between "rigid rules that the system must absolutely obey" and "mere background knowledge and reading material." Human engineers possess an advanced ability to intuitively skip and ignore "documents they don't need to read right now." However, AI agents cannot perform such implicit context truncation. Any text thrown into the context window—whether it's idle chatter or deep philosophy—physically affects the agent's reasoning and behavior (code generation). That is exactly why I define the documents an agent should read using a strict "Allowlist," and structurally place reading materials and background philosophy outside that context.
+As a project matures, documentation volume grows. The line between rules the system must obey and background reading blurs. Humans skip what they do not need right now. Agents cannot: anything in the context window—chatty notes or deep philosophy—shapes reasoning and code generation. So agent inputs are a strict allowlist, and reading material and philosophy sit outside that list by structure.
 
-However, "agents do not read reading materials" is not a physical access ban, but an architectural expectation. It means there is no need to load `research` as standard task input. The rich text (philosophy) written for humans to deeply understand the development ideology, and the operational contracts (constitution) that agents mechanically follow, have entirely different purposes and readers. If this distinction is blurred, we are forced to choose: either we write rich reading materials that bloat agent instructions and dull their reasoning, or we write strict agent instructions that make human-facing explanations thin and dry. Structural separation of documentation is an architecture designed to achieve both at the highest quality.
+However, "agents need not read reading materials as daily task input" is not a physical access ban, but an architectural expectation (see [../README.md](../README.md)). It means there is no need to load `research` as normal task input. The rich text (philosophy) written for humans to deeply understand the development ideology, and the operational contracts (constitution) that agents mechanically follow, have entirely different purposes and readers. If this distinction is blurred, we are forced to choose: either we write rich reading materials that bloat agent instructions and dull their reasoning, or we write strict agent instructions that make human-facing explanations thin and dry. Structural separation of documentation is an architecture designed to achieve both at the highest quality.
 
-"I want to manage investigation results as reports with Sources, separate from design documents and operational constraint documents—as reading material that agents do not need to read. The research folder is not copied when the template is rolled out to other repositories."
+"I want to manage investigation results as reports with Sources, separate from design documents and operational constraint documents—as reading material that agents need not read as daily task input. The research folder is not copied when the template is rolled out to other repositories."
 
 In this template, documents have three distinct tiers: Design Documents (Architecture), Operational Constraints (Collaboration), and Reading Materials (Research). The agent's context is always composed solely of the top two "Norms." However, investigation results and philosophy are not discarded. They are accumulated with their Sources for future human engineers. Only the conclusions that are debated, agreed upon, and codified into rules are extracted and "elevated" into ADRs, collaboration docs, or issues.
 
@@ -18,7 +18,7 @@ Editing `docs/research/` does not change the project's operational template (the
 
 ## Correspondence with Diátaxis: Information Architecture
 
-[Diátaxis](https://diataxis.fr/) categorizes software documentation into four quadrants by purpose (tutorials / how-to / reference / explanation) and boldly states that "mixing these together fatally degrades documentation quality." The design documents and operational constraints in this template correspond strongly to `reference` and `how-to` in Diátaxis. Conversely, `research` corresponds to pure `explanation`. Agents do not need to read `explanation`—this is exactly the implementation of the strict Diátaxis rule "do not mix explanation into reference," adapted for the AI agent era.
+[Diátaxis](https://diataxis.fr/) categorizes software documentation into four quadrants by purpose (tutorials / how-to / reference / explanation) and boldly states that "mixing these together fatally degrades documentation quality." The design documents and operational constraints in this template correspond strongly to `reference` and `how-to` in Diátaxis. Conversely, `research` corresponds to pure `explanation`. Agents need not read `explanation` as daily task input—this is exactly the implementation of the strict Diátaxis rule "do not mix explanation into reference," adapted for the AI agent era.
 
 The most important lesson of Diátaxis is that there is no hierarchy of superiority among documents, but rather a "difference in purpose." A reference prioritizes accuracy and searchability above all else. A how-to prioritizes the mechanical completion of steps. An explanation aids the reader's deep understanding and reflection. We can write rich research as explanation precisely because the references and how-tos that the agent must follow are isolated in different folders. Conversely, if we mix direct instructions (rules) into research, the explanation devolves into a preachy rulebook, and the reference becomes overloaded and ambiguous.
 
@@ -42,7 +42,7 @@ The fact that the elevation path is one-way does not mean that research is taken
 
 ## References
 
-1. **Project Internal Regulations**
+1. **Repository references**
    - `docs/research/README.md`
    - `docs/collaboration/privacy-context-budget-policy.md`
    - `docs/architecture/agent-quickstart.md`

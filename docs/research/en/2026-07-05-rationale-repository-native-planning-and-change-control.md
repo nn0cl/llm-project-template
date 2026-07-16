@@ -1,14 +1,14 @@
-# Keeping Plans in the Repository: The Ultimate Docs-as-Code
+# Keeping Plans in the Repository: Docs-as-Code Taken Seriously
 
 2026-07-05. Non-normative. Related: ADR 0005, ADR 0006.
 
-> Translated from [../2026-07-05-rationale-repository-native-planning-and-change-control.md](../2026-07-05-rationale-repository-native-planning-and-change-control.md) as of 2026-07-16. The Japanese original is authoritative.
+> Japanese original (authoritative): [../2026-07-05-rationale-repository-native-planning-and-change-control.md](../2026-07-05-rationale-repository-native-planning-and-change-control.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
 
 ---
 
-A chat window is not a project artifact. If the decisions made during an AI session, the plans laid out, and the context passed to the agent are left behind in chat history, they will be buried in massive logs and eventually vanish beyond the context window. An agent can move with astonishing freedom inside a sandbox, but the wiring necessary to integrate its work as a software project—plans, history, and approval flows—must be firmly placed outside the sandbox, in the repository, CI (Continuous Integration), and human approval processes ([The Agent Is a Sandbox](./2026-07-07-rationale-saas-agent-as-sandbox.md)).
+A chat window is not a project artifact. Decisions, plans, and payload context left only in chat history bury themselves in logs and fall off the context window. An agent may move freely inside a sandbox; the wiring that integrates its work—plans, history, approval flows—must live outside the sandbox: repository, CI, and human process ([The Agent is a Sandbox](./2026-07-07-rationale-saas-agent-as-sandbox.md)).
 
-I insist that all plans, instructions, and work histories be stored as plain text files within the repository, subjecting them to the exact same review, CI checks, and version control as source code. Any element that changes the behavior of the system can only be modified when accompanied by a reason, a trace of review, and a diff.
+Plans, instructions, and work histories belong in plain text in the repository, under the same review, CI, and version control as source. Anything that changes system behavior changes with a reason, a review trace, and a diff.
 
 This idea of "keeping decisions alongside code" was not newly invented for the AI era. Software development has long suffered from the problem of "implicit decisions evaporating and disappearing." Crucial architectural decisions are made in verbal meetings or buried deep in issue tracker comments, and months later only the "conclusion" remains while the "reason why" is lost. AI agents dramatically accelerate this information evaporation problem. Sessions are short, generation is fast, and the diffs that ripple outward from the conversation are massive. Therefore, placing plans in the repository is not a special workaround for AI; it is a stricter, unavoidable answer to the recording problem software engineering has always faced.
 
@@ -24,7 +24,7 @@ For lightweight tasks such as editing reading materials, the Adjudicator may exp
 
 The idea of placing architecture decisions in repository history traces back to Michael Nygard's proposal for ADRs (Architecture Decision Records) ([Cognitect](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)). For teams composed only of humans, ADRs might have functioned simply as "memos summarizing decisions and their context." However, in an environment where AI agents operate autonomously, **ADRs must be redefined not as mere records, but as "Legislation" in the system space.**
 
-In *Code and Other Laws of Cyberspace*, Lawrence Lessig argued that code—as an architecture—regulates human behavior much like law (the famous "Code is Law"). AI collaboration introduces a reversal of this relationship: **the rules (Law) written in the repository dictate the generated code (Code).** For an AI, which loses context with every new session and uses provided documents as initial conditions for inference, the rules in the repository serve as the supreme governing law. However, this is not physical enforcement ([The Agent Is a Sandbox](./2026-07-07-rationale-saas-agent-as-sandbox.md)). If ADRs are treated merely as "past memos," AI will gravitate toward its learned general best practices and casually violate them. Therefore, the normative documents must clearly declare that "ADRs are laws, and generating code contrary to them is strictly forbidden," and the execution of this law must be backed by the Adjudicator's review and CI.
+In *Code and Other Laws of Cyberspace*, Lawrence Lessig argued that code—as an architecture—regulates human behavior much like law (the famous "Code is Law"). AI collaboration introduces a reversal of this relationship: **the rules (Law) written in the repository dictate the generated code (Code).** For an AI, which loses context with every new session and uses provided documents as initial conditions for inference, the rules in the repository serve as the supreme governing law. However, this is not physical enforcement ([The Agent is a Sandbox](./2026-07-07-rationale-saas-agent-as-sandbox.md)). If ADRs are treated merely as "past memos," AI will gravitate toward its learned general best practices and casually violate them. Therefore, the normative documents must clearly declare that "ADRs are laws, and generating code contrary to them is strictly forbidden," and the execution of this law must be backed by the Adjudicator's review and CI.
 
 This template extends the philosophy of ADRs into a comprehensive legal system governing the entire project:
 - **ADRs** are the basic laws that must be obeyed.
@@ -49,7 +49,7 @@ Of course, Local-First does not deny remote collaboration (like GitHub Issues). 
 
 ## Observation Updates Norms: The Feedback Loop
 
-The risks listed as Negatives in ADR 0005 (drift between local files and GitHub metadata, over-reliance on human discipline for status updates) became a reality during adapter reviews in the second stage of development, manifesting as "parent issue staleness." This practical observation flowed back into a new issue, LISS-0005, triggering process improvements.
+The risks listed as Negatives in ADR 0005 (drift between local files and GitHub metadata, over-reliance on human discipline for status updates) became a reality during adoption-adapter-side reviews in the second stage of development, manifesting as "parent issue staleness." This practical observation flowed back into a new issue, LISS-0005, triggering process improvements.
 
 The operational rule derived from this lesson—**"Always update the status when an ISSUE is completed (mark it done or change state to Done)"**—is not merely the addition of trivial administrative paperwork. It is a "lifeline" rule designed to prevent the file-based dependency graph (`blocks` / `depends_on`) from collapsing, keeping the inference foundation sound for when the agent next resumes the session. Norms must not end as desk theories. The feedback loop discussed in [Evidence and Rules](./2026-07-06-rationale-evidence-based-process-design.md) is functioning exactly here.
 
@@ -57,13 +57,13 @@ What is decisively important here is not to directly mix field observations and 
 
 ## Does Recording Slow Things Down?
 
-The objection that "writing things down in text files slows development speed" is intuitively correct. Recording definitively carries a cognitive cost. However, the cost of not recording bounds back exponentially later. Reconstructing context upon session resumption, agents repeating the same mistakes, reviewing massive diffs with unclear intentions, drift in agent instructions, and drift in issue statuses. The faster AI generates code, the more this "debt of not recording" corrodes the project in unseen but certain ways.
+The objection that "writing things down in text files slows development" is intuitively fair. Recording has a cognitive cost. Not recording costs more later: reconstructing context on resume, agents repeating mistakes, reviewing large diffs with unclear intent, drift in agent instructions and issue status. The faster AI generates code, the more this "debt of not recording" corrodes the project—quietly, but surely.
 
 Therefore, our goal is not "record everything conceivable," but "reliably record the minimum required for human review and session resumption." A compact design note is sufficient for the Fast Path. Large tasks require detailed issues and traces. Changing project norms demands an ADR. The meticulous division of document types exists not to increase the total volume of recording, but as an economically rational choice to place necessary records only when and where they are needed.
 
 ## References
 
-1. **Project Internal Regulations**
+1. **Repository references**
    - ADR 0005, ADR 0006
    - `docs/collaboration/local-issue-planning.md`
    - `docs/collaboration/prompt-instruction-change-control.md`

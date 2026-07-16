@@ -2,13 +2,13 @@
 
 2026-07-05. Non-normative. Related: ADR 0001.
 
-> Translated from [../2026-07-05-rationale-design-first-minimal-context.md](../2026-07-05-rationale-design-first-minimal-context.md) as of 2026-07-16. The Japanese original is authoritative.
+> Japanese original (authoritative): [../2026-07-05-rationale-design-first-minimal-context.md](../2026-07-05-rationale-design-first-minimal-context.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
 
 ---
 
-When operating LLMs, the culture of competing over "clever prompts" overlooks the essence of software engineering. The true challenge is not the cleverness of phrasing, but "controlling boundaries," much like module design. What to pass, what not to pass, and which tool to entrust with which operation. The most reliable means to guide and control an autonomously acting coding agent is the design of its payload (input context). The choice of include/omit is the core of the architectural integration layer that tells the sandbox what to see and what not to guess ([The Agent is a Sandbox](./2026-07-07-rationale-saas-agent-as-sandbox.md)).
+When running LLMs, competing over "clever prompts" misses the engineering point. The hard work is boundary control, as in module design: what to pass, what to omit, which tool owns which operation. The most reliable control on an autonomous coding agent is the design of its payload. Include/omit choices are the integration layer that tells the sandbox what to see and what not to guess ([The Agent is a Sandbox](./2026-07-07-rationale-saas-agent-as-sandbox.md)).
 
-I elevate the selection of context from a "personal prompt engineering technique" to a "reviewable design artifact." Every request begins with a design step; testing and implementation follow.
+I treat context selection as a reviewable design artifact, not personal prompt craft. Every request starts with design; tests and implementation follow.
 
 In the Design Intake, the target behavior, VO/DTO candidates, Ports and Adapters boundaries, contexts to include and omit, model/tool routing, and "boundaries where guessing is prohibited" are decided upfront (ADR 0001). Design is not a mere ritual. It is a record of decision-making. An excellent design intake provides the agent not only with instructions on "what to do," but also guardrails on "what it must not proceed without knowing."
 
@@ -30,13 +30,13 @@ For example, if you include a discussion process containing an unresolved data s
 
 This is why `docs/collaboration/privacy-context-budget-policy.md` establishes a payload budget. Privacy protection and reasoning performance improvement are not contradictory; they are two sides of the same coin. Not passing unnecessary things reduces the surface area for information leaks, reduces reasoning noise, and narrows the scope of evidence humans must review.
 
-## The Capabilities Staircase: Demarcation of Responsibility and Cost Optimization
+## The Capability Ladder: Demarcation of Responsibility and Cost Optimization
 
 Mechanical formatting tasks go to deterministic tools. Simple completions go to small models. Boundary judgments, interpretations of ambiguous domain logic, and advanced decisions involving privacy go to strong reasoning models. The bottom-level principle is extremely simple: "Do not use a probabilistic LLM for something a deterministic tool can handle."
 
 The economics of model routing are backed by the FrugalGPT study by Chen, Zaharia, and Zou ([arXiv:2305.05176](https://arxiv.org/abs/2305.05176)), and the subsequent RouteLLM ([arXiv:2406.18665](https://arxiv.org/abs/2406.18665)) formulated the very act of assigning strong or weak models based on query difficulty as a learnable problem. Not calling a powerful model for tasks where a cheap model suffices is not merely about saving cloud costs. Abusing strong models creates an architectural risk where the locus of decision-making becomes ambiguous.
 
-If you ask an AI to decide what a code formatter or Linter should decide, the output reproducibility drops, and CI (Continuous Integration) becomes unstable. If you settle violation checks of dependency boundaries with human-persuasive prose, they will not remain in the codebase as mechanical constraints. The "Capabilities Staircase" is a design of the demarcation point of responsibility before it is a means of cost optimization.
+If you ask an AI to decide what a code formatter or Linter should decide, the output reproducibility drops, and CI becomes unstable. If you settle violation checks of dependency boundaries with human-persuasive prose, they will not remain in the codebase as mechanical constraints. The "capability ladder" is a design of the demarcation point of responsibility before it is a means of cost optimization.
 
 The "strong reasoning" referred to here is also not an omnipotent authority. Calling a strong reasoning agent in the Architecture Path is not to let it unilaterally adopt an ADR (Architecture Decision Record). It is to have it prepare the options and rationale for a human architect (Adjudicator) to judge. The higher the capabilities of the tools, the more explicitly we must design the boundary between what the tool may decide autonomously and what humans ultimately decide.
 
@@ -62,7 +62,7 @@ The Design First approach is not a wasteful ritual to slow down the AI's work sp
 
 ## References
 
-1. **Project Internal Regulations**
+1. **Repository references**
    - `docs/architecture/adr/0001-design-first-ai-request-routing.md`
    - `CLAUDE.md`
    - `docs/collaboration/privacy-context-budget-policy.md`

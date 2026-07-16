@@ -2,15 +2,15 @@
 
 2026-07-06 Research. Non-normative. Related: The problem of long-lived branches and integration latency.
 
-> Translated from [../2026-07-06-branching-strategies-develop-and-multi-target-releases.md](../2026-07-06-branching-strategies-develop-and-multi-target-releases.md) as of 2026-07-16. The Japanese original is authoritative.
+> Japanese original (authoritative): [../2026-07-06-branching-strategies-develop-and-multi-target-releases.md](../2026-07-06-branching-strategies-develop-and-multi-target-releases.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
 
 ---
 
-The speed at which AI agents generate code far exceeds human typing. However, if that overwhelming generative power is allowed to diverge into unchecked branches, the project will rapidly accumulate a massive technical debt known as "Integration Latency." In large enterprise products with multiple release targets, how should we safely integrate these high-speed artifacts into the mainstream architecture?
+AI agents generate code far faster than humans type. If that throughput diverges into unchecked branches, the project quickly piles up "integration latency" debt. In large products with multiple release targets, how do we fold high-speed artifacts into the mainline safely?
 
-This fundamental question arose from a practical failure during a development session (LISS-0005). During the second adapter development session, the agent innocently created a `develop` branch and postponed merging it into the mainstream. As a result, a stack of unintegrated changes continued to pile up on the feature branch. In response, the Adjudicator (the human designer) asked: "Should the template unconditionally ban the existence of `develop`?"
+That question came from a concrete failure (LISS-0005). During a development session by a second adoption adapter (adopting project; see [../README.md](../README.md)), the agent cheerfully created a `develop` branch and deferred merging to mainline. Unintegrated work stacked on the feature branch. The Adjudicator asked: "Should the template ban `develop` outright?"
 
-This document is an investigative and philosophical response to that question. I will state the conclusion first. What modern software engineering research fiercely condemns is not the "existence of long-lived branches" per se, but the malignant debt of "integration latency." And the only way to keep a multi-target environment healthy is not through bifurcating the source tree, but through upstream-first propagation and feature divergence at the architectural design level (Feature Toggles or Ports/Adapters).
+This essay answers that question. Conclusion first: what the evidence condemns is not the mere existence of long-lived branches, but integration latency. Healthy multi-target work does not fork the source tree forever; it uses upstream-first propagation and architectural divergence (feature toggles or Ports/Adapters).
 
 ## Is `develop` Acceptable? The True Meaning of DORA Metrics
 
@@ -63,7 +63,7 @@ This proposal does not alter the operational rules of `llm-project-template` sol
 
 ## References
 
-1. **Project Internal Regulations**
+1. **Repository references**
    - LISS-0005, `docs/collaboration/branch-commit-pr-discipline.md`
 2. **DevOps and Elite Performance Research**
    - DORA. *Trunk-based development*. https://dora.dev/capabilities/trunk-based-development/ (Retrieved 2026-07-07)

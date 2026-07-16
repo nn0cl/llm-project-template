@@ -2,21 +2,21 @@
 
 2026-07-05. Non-normative. Related: ADR 0002.
 
-> Translated from [../2026-07-05-rationale-ai-output-contracts.md](../2026-07-05-rationale-ai-output-contracts.md) as of 2026-07-16. The Japanese original is authoritative.
+> Japanese original (authoritative): [../2026-07-05-rationale-ai-output-contracts.md](../2026-07-05-rationale-ai-output-contracts.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
 
 ---
 
-In software engineering, the concept of a "Contract" carries a deep philosophy beyond mere interface definitions. "Design by Contract," advocated by Bertrand Meyer, sought to guarantee software reliability by strictly defining preconditions, postconditions, and invariants between callers and callees. This philosophy takes on a new dimension of importance in the AI era.
+In software engineering, a "contract" is more than an interface signature. Bertrand Meyer's Design by Contract makes reliability depend on preconditions, postconditions, and invariants between caller and callee. That idea gains force in the AI era.
 
-Fluent prose is not a guarantee of correctness. This is not merely an expression of distrust toward LLMs; it is a design principle of software boundaries. Humans make mistakes. Search results become outdated. Databases have missing data. When building a system, we are always combining imperfect components. The difference is that LLM output often takes the form of a "complete explanation," making even unverified guesses look like a finished product. That is exactly why we must not entrust the credibility of AI output to a "smarter model," but instead shift it to verifiable contracts as Meyer described.
+Fluent prose is not a guarantee of correctness. That is not mere distrust of LLMs; it is a boundary-design principle. Humans err, search ages, databases omit. Systems always compose imperfect parts. LLM output often arrives as a finished-looking explanation, so guesses look like facts. Credibility must not rest on a "smarter model"; it must rest on verifiable contracts of the kind Meyer described.
 
-## "We Do Not Break Userspace": The Absoluteness of Interfaces
+## "We Do Not Break Userspace": Interface Stability
 
-One of the most powerful historical lessons in practicing Design by Contract can be found in Linus Torvalds' absolute rule in the Linux kernel: "WE DO NOT BREAK USERSPACE!" No matter how beautifully you refactor the kernel's (provider's) implementation, any change that causes existing programs in userspace (consumers) to stop working is instantly rejected as a grave betrayal of the architecture.
+One of the most powerful historical lessons in practicing Design by Contract can be found in Linus Torvalds' absolute rule in the Linux kernel: "WE DO NOT BREAK USERSPACE!" No matter how beautifully you refactor the kernel's (provider's) implementation, any change that causes existing programs in userspace (consumers) to stop working is instantly rejected as a breach of the architecture contract.
 
-In AI collaboration, this concept of the "absoluteness of interfaces" is critically important. AI agents possess the ability to oversee an entire codebase and rewrite code at high speed. Therefore, they are vulnerable to the temptation of "while I'm cleaning up the internal implementation, let me just rewrite the function arguments or return types (the contract) too," and they execute it innocently. However, if the impact on other components depending on that interface (equivalent to userspace) cannot be accurately foreseen, the entire system breaks.
+In AI collaboration, this idea of interface stability is critically important. AI agents possess the ability to oversee an entire codebase and rewrite code at high speed. Therefore, they are vulnerable to the temptation of "while I'm cleaning up the internal implementation, let me just rewrite the function arguments or return types (the contract) too," and they execute it innocently. However, if the impact on other components depending on that interface (equivalent to userspace) cannot be accurately foreseen, the entire system breaks.
 
-When having AI generate or refactor code, we must consistently demand the same rigor as we do from "kernel developers." "You may optimize the internal implementation (e.g., Adapters) however you like, but you must never arbitrarily change the contract with the consumer (Interface) or the external calling conventions." A contract is not merely JSON Schema type checking. It is a robust boundary of trust between the provider and the consumer, and a bulwark to safely contain the generative power of AI.
+When having AI generate or refactor code, we must consistently demand the same rigor as we do from "kernel developers." "You may optimize the internal implementation (e.g., Clean Architecture Adapters) however you like, but you must never arbitrarily change the contract with the consumer (Interface) or the external calling conventions." A contract is not merely JSON Schema type checking. It is a robust boundary of trust between the provider and the consumer, and a bulwark to safely contain the generative power of AI.
 
 ## Separating Prose Fluency from Factuality
 
@@ -48,7 +48,7 @@ This must not end as mere ideals. Use cases that treat free-text AI prose as tru
 
 Schema-verifiable output is beginning to be offered as a first-class feature by major providers, such as OpenAI's Structured Outputs and Anthropic's Structured outputs. However, the provider's feature itself is not what's important. Even if a provider can return something akin to a JSON Schema, how that structure connects to the application's trust boundary is the project's responsibility.
 
-From a Clean Architecture perspective, provider SDK convenience features should remain inside the adapter. What the use case receives is not an SDK-specific response, but a DTO (Data Transfer Object) and validation result defined by the project. The model returning structured output aids in implementing the contract. But it is not the contract itself. The contract—what is mandatory, what causes rejection if missing, and what state triggers "human review required"—is decided by the project.
+From a Clean Architecture perspective, provider SDK convenience features should remain inside the adapter. What the use case receives is not an SDK-specific response, but a DTO and validation result defined by the project. The model returning structured output aids in implementing the contract. But it is not the contract itself. The contract—what is mandatory, what causes rejection if missing, and what state triggers "human review required"—is decided by the project.
 
 ## Persistence is a Declaration of Adoption
 
@@ -56,7 +56,7 @@ Temporarily displaying AI output on a screen and saving it to a trusted store ca
 
 Therefore, the output contract must be considered all the way to its storage destination. Information like `review_status`, `source_refs`, `confidence`, `warnings`, and `scope` are not UI decorations. They are control information that determines how downstream processes may handle that data.
 
-This is the exact same logic behind why `docs/architecture/external-resource-adoption-contract.md` places a lifecycle of `intake -> checked -> accepted | rejected | needs_recheck -> adopted` on external resources. Regardless of whether the origin is AI or human, bringing anything of external origin into the project's trust boundary requires strict records of adoption.
+This is the exact same logic behind why `docs/architecture/external-resource-adoption-contract.md` puts an adoption lifecycle on external **resources**. Check outcomes are `accepted | rejected | needs_recheck`; **passing a check (accepted) is not yet trusted use**. Entry into active trusted use is a separate transition, `accepted -> adopted` (see [../README.md](../README.md) / [README.md](./README.md) on accepted vs adopted). Regardless of whether the origin is AI or human, bringing anything of external origin into the project's trust boundary requires strict records of adoption.
 
 ## The Etiquette of This Folder Itself
 
@@ -66,7 +66,7 @@ However, `docs/research/` is not the place to unilaterally change the rules of t
 
 ## References
 
-1. **Project Internal Regulations**
+1. **Repository references**
    - `docs/architecture/adr/0002-input-output-reasoning-contracts.md`
    - `docs/architecture/io-reasoning-contracts.md`
    - `docs/architecture/external-resource-adoption-contract.md`

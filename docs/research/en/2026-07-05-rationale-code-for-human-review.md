@@ -2,15 +2,15 @@
 
 2026-07-05. Non-normative. Related: ADR 0004.
 
-> Translated from [../2026-07-05-rationale-code-for-human-review.md](../2026-07-05-rationale-code-for-human-review.md) as of 2026-07-16. The Japanese original is authoritative.
+> Japanese original (authoritative): [../2026-07-05-rationale-code-for-human-review.md](../2026-07-05-rationale-code-for-human-review.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
 
 ---
 
-When the cost of generating code approaches zero, the biggest bottleneck in software development irreversibly shifts from "the speed of writing" to "the speed of verifying." The systemic complexity that was naturally suppressed by "the physical and cognitive friction of writing code itself" is no longer automatically constrained.
+When generating code is nearly free, the bottleneck moves from writing speed to verification speed. Complexity that used to be limited by the friction of typing is no longer self-constrained.
 
-AI generates an 800-line file without hesitation. It creates three slightly different helper functions. It splices together local correct answers that pass the tests while leaving responsibility boundaries vague. There is no malice in this. It simply happens because the friction of generation is low, and the feedback loop for evaluating long-term maintainability does not kick in immediately. Frederick Brooks noted in *No Silver Bullet* that software complexity consists of "accidental complexity" and "essential complexity." AI effortlessly helps us generate massive amounts of accidental complexity.
+AI will write an 800-line file without pause, invent three near-duplicate helpers, and stitch local answers that pass tests while blurring ownership. There is no malice—only low generation friction and a delayed maintainability feedback loop. Frederick Brooks, in *No Silver Bullet*, split complexity into accidental and essential; AI is very good at producing accidental complexity.
 
-That is exactly why we restore the "value of readability" as a normative rule. The optimization target for generated code is not "the minimal working configuration that passes tests," but the minimization of human cognitive load (`CLAUDE.md`, ADR 0004). Dense Green code produced solely to pass tests is not a Green we accept. Choose readable redundancy over clever compression. "Do not compress implementation into dense code just to be minimal"—this constraint becomes paramount precisely because we have entered an era heavily skewed toward code-writing (the AI era).
+So we restore readability as a rule. Generated code optimizes for human cognitive load, not minimal passing size (`CLAUDE.md`, ADR 0004). Dense Green that only exists to satisfy tests is not an accepted Green. Prefer readable redundancy over clever compression. "Do not compress implementation into dense code just to be minimal" matters more, not less, when machines do the writing.
 
 ## Understanding is the Primary Battlefield of Review
 
@@ -26,15 +26,15 @@ Peter Naur's classic paper "Programming as Theory Building" ([PDF](https://pages
 
 Here lies the core danger of AI-generated code. AI can produce text at an astonishing speed, but it does not automatically produce the team's shared theory. In fact, generated artifacts integrated into a system without sufficient review exponentially increase the disconnections in the team's theory. Therefore, reviewability is not just about checking compliance with a style guide; it is about ensuring the team can reconstruct the theory behind the change and regain their understanding of the system.
 
-The strong demand in `docs/collaboration/source-code-quality.md` for small functions, explicit naming, thin adapters, and readable Given/When/Then is not a matter of aesthetics or preference. It is a survival strategy to ensure the next human (or agent) touching the code can easily reconstruct its underlying theory.
+The strong demand in `docs/collaboration/source-code-quality.md` for small functions, explicit naming, thin Clean Architecture Adapters, and readable Given/When/Then is not a matter of aesthetics or preference. It is a survival strategy to ensure the next human (or agent) touching the code can easily reconstruct its underlying theory.
 
 ## Dependency Direction is a Discipline to Localize Cognitive Load
 
-The domain must be readable without knowledge of the framework; business policy must not leak into adapters. Dependency disciplines, epitomized by Clean Architecture, are extremely practical means not only for decoupling systems but also for localizing the review scope to fit human cognitive limits.
+The domain must be readable without knowledge of the framework; business policy must not leak into Clean Architecture Adapters (not adoption adapters; see [../README.md](../README.md)). Dependency disciplines, epitomized by Clean Architecture, are extremely practical means not only for decoupling systems but also for localizing the review scope to fit human cognitive limits.
 
 Robert C. Martin's "The Clean Architecture" ([Clean Coder Blog](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)) provides a powerful policy where dependencies point inward from the outside (details) to the inside (abstractions). The reason for bringing this policy into the AI-TDD workflow is not to satisfy architectural purism. It is to shrink the unit of code a human must read in a single review.
 
-When business judgments hide inside adapters, reviewers must simultaneously decipher the provider SDK specifications, error-handling strategies, persistence formats, and business rules. If business policy leaks into a UI component, the display state lifecycle intertwines with domain judgments. If a use case directly knows the DB schema, it becomes impossible to tell whether a change was driven by technical database constraints or evolving business requirements. Dependency direction violations almost always manifest as lowered system cohesion, explosively increasing the reviewer's cognitive load.
+When business judgments hide inside Clean Architecture Adapters, reviewers must simultaneously decipher the provider SDK specifications, error-handling strategies, persistence formats, and business rules. If business policy leaks into a UI component, the display state lifecycle intertwines with domain judgments. If a use case directly knows the DB schema, it becomes impossible to tell whether a change was driven by technical database constraints or evolving business requirements. Dependency direction violations almost always manifest as lowered system cohesion, explosively increasing the reviewer's cognitive load.
 
 ## Tests are also for Readers
 
@@ -46,13 +46,13 @@ When tests are easy to read, reviewing the implementation becomes drastically li
 
 ## Future Agents are also Readers
 
-Readability is not exclusively for humans. It is also a prerequisite for continuous collaboration with AI across multiple sessions. "Future agents can resume work without rediscovering hidden intent" (ADR 0004). We do not tolerate code written by models relying on out-of-context implicit knowledge (such as chat history). Code must be self-contained and speak its intent clearly. In this respect, the philosophy of this document connects deeply with the discussion in [Design First and Minimal Context](./2026-07-05-rationale-design-first-minimal-context.md).
+Readability is not exclusively for humans. It is also a prerequisite for continuous collaboration with AI across multiple sessions. "Future agents can resume work without rediscovering hidden intent" (ADR 0004). We do not tolerate code written by models relying on out-of-context implicit knowledge (such as chat history). Code must be self-contained and speak its intent clearly. In this respect, the philosophy of this document connects deeply with the discussion in [Design First and Context](./2026-07-05-rationale-design-first-minimal-context.md).
 
-However, saying "future agents" here does not mean the agent should read this `docs/research/` folder to learn this philosophy. The strict rules an agent must follow reside in the enumerated project operational documents. This document is reading material for humans; it explains why those rules are fundamentally necessary in software development. If humans cannot uphold the rules with conviction, no matter how cleverly written an agent instruction is, it will eventually hollow out and degrade into an empty ritual. This philosophy exists to prevent that ritualization.
+However, saying "future agents" here does not mean the agent should load this `docs/research/` folder to learn this philosophy. Agents need not read research as daily task input (see [../README.md](../README.md)). The strict rules an agent must follow reside in the enumerated project operational documents. This document is reading material for humans; it explains why those rules are fundamentally necessary in software development. If humans cannot uphold the rules with conviction, no matter how cleverly written an agent instruction is, it will eventually hollow out and degrade into an empty ritual. This philosophy exists to prevent that ritualization.
 
 ## References
 
-1. **Project Internal Regulations**
+1. **Repository references**
    - `docs/architecture/adr/0004-human-readable-source-code-quality.md`
    - `docs/collaboration/source-code-quality.md`
    - `CLAUDE.md`

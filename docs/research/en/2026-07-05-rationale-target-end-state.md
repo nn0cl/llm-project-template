@@ -2,15 +2,15 @@
 
 2026-07-05. Non-normative. Gateway to detailed topics.
 
-> Translated from [../2026-07-05-rationale-target-end-state.md](../2026-07-05-rationale-target-end-state.md) as of 2026-07-16. The Japanese original is authoritative.
+> Japanese original (authoritative): [../2026-07-05-rationale-target-end-state.md](../2026-07-05-rationale-target-end-state.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
 
 ---
 
-Having AI write code is no longer a surprise or technical magic. What is truly surprising in modern development is how frequently "nothing remains" as a project after that tremendous generation speed. All that is left are scattered chat fragments and a sudden diff of several hundred lines. Who approved what and when, why that design was chosen over other options, and where the next developer should start deciphering the system—these contexts, which are the most valuable aspects of software engineering, all vanish into the mist. I do not call such non-reproducible generative work "software engineering."
+Having AI write code is no longer a surprise or technical magic. What is surprising in modern development is how often "nothing remains" of a project after that generation burst: scattered chat fragments and a sudden multi-hundred-line diff. Who approved what and when, why that design won over alternatives, and where the next developer should start reading—the most valuable contexts in software engineering—vanish into the mist. I do not call such non-reproducible generative work "software engineering."
 
-Coding agents move with surprising freedom inside their sandboxes. However, individual elements moving freely and those elements being integrated into a single project are problems on entirely different dimensions. For AI and humans to collaborate long-term, a **robust structural mechanism on the team's side** is indispensable: Operating Paths, operational contracts, the Adjudicator's (human arbitrator's) approval loop, and persisted artifacts. This fundamental premise is further expanded in [The Agent is a Sandbox](./2026-07-07-rationale-saas-agent-as-sandbox.md).
+Coding agents move with surprising freedom inside their sandboxes. Freedom of the parts and integration into one project are different problems. For AI and humans to collaborate long-term, the **team** needs structure: Operating Paths, operational contracts, the Adjudicator's approval loop, and persisted artifacts. That premise is expanded in [The Agent is a Sandbox](./2026-07-07-rationale-saas-agent-as-sandbox.md).
 
-What this template aims for is not to create a magic box where AI finishes everything on behalf of humans. It aims to provide robust "Scaffolding" for AI and humans to sustainably advance development by **collaborating**. It moves ad-hoc conversations into a collaborative process equipped with reproducibility and reviewability. This does not mean slowing down development speed to forcibly impose governance later. It means placing the roles of the trio—Adjudicator, Agent, and Deterministic Tool—and the contracts, artifacts, and approval points upfront as the premise of the system. Governance is not a penalty on speed; it is the very structure that transforms rapid generation into a sustainable product.
+This template does not aim to be a magic box where AI finishes everything for humans. It provides "Scaffolding" so AI and humans can **collaborate** sustainably—moving ad-hoc chat into a process that is reproducible and reviewable. That is not "slow down now and bolt governance on later." It places the trio—Adjudicator, Agent, and Deterministic Tool—plus contracts, artifacts, and approval points up front as system premises. Governance is not a tax on speed; it is how rapid generation becomes a sustainable product.
 
 ## The Center of the Target End State: Three Questions
 
@@ -40,7 +40,7 @@ Michael Nygard's ADR proposal ([Cognitect](https://cognitect.com/blog/2011/11/15
 
 ## The Template Does Not Dictate the Domain: The Humility of Boundaries
 
-The technology stack, data store selection, external providers, and the core domain logic—this template does not involve itself whatsoever in these project-specific areas. What it provides is strictly "Scaffolding" for processes and collaboration. Undecided architecture is not a blank for the agent to guess and fill in appropriately; it is explicitly marked as "undecided for now" under `Current Non-Decisions`. We never tell the agent "just figure it out." We command it: "If there are undecided items, request the human Adjudicator to create an ADR."
+The technology stack, data store selection, external providers, and the core domain logic—this template does not involve itself in these project-specific areas. What it provides is strictly "Scaffolding" for processes and collaboration. Undecided architecture is not a blank for the agent to guess and fill in appropriately; it is explicitly marked as "undecided for now" under `Current Non-Decisions`. We never tell the agent "just figure it out." We command it: "If there are undecided items, request the human Adjudicator to create an ADR."
 
 This is a manifestation of "humility" as a template. An operational template must not pretend to know the adopting project's business domain or technical constraints. It can provide a process for collaboration. However, which datastore is optimal, which provider to trust, or which business concept to call an entity belongs entirely to the adopting project's context and the Adjudicator's design judgment. The moment it crosses this boundary, the template becomes an invasion of the project, not development support.
 
@@ -64,7 +64,7 @@ As Bainbridge's irony of automation ([ScienceDirect](https://www.sciencedirect.c
 
 ## Do Not Mix Reading Materials and Norms
 
-The contents of the `docs/research/` folder, including this text, are explanations for humans to decipher the philosophy of software development. We do not prohibit AI agents from reading this, but there is absolutely no need to read it as input context for daily tasks. Furthermore, the discourses and references here do not alter the actual rules of the practical project operational template provided by `llm-project-template`.
+The contents of the `docs/research/` folder, including this text, are explanations for humans to decipher the philosophy of software development. Agents need not read this folder as daily task input (not a physical ban; excluded from the normal allowlist — see [../README.md](../README.md)). Furthermore, the discourses and references here do not alter the actual rules of the practical project operational template provided by `llm-project-template`.
 
 This separation of "norms" and "explanations" is architecturally critical. The absolute operational rules agents must follow are strictly defined in documents like `AGENTS.md`, ADRs, `architecture/`, and `collaboration/`. `research/` is the place to write in-depth the Rationale behind why those rules are necessary. It is fertile ground for humans to deeply understand the ideology, maintain the rules without letting them become dead letters, and, if necessary, elevate them to another artifact through discussion. It is not, in itself, a direct document of commands to the agent.
 
@@ -85,7 +85,7 @@ The following discourses expand the fundamental philosophy stated in this manusc
 
 ## References
 
-1. **Project Internal Regulations**
+1. **Repository references**
    - `README.md`
    - `docs/collaboration/template-benefits.md`
    - `docs/collaboration/process-gap-register.md`

@@ -2,35 +2,35 @@
 
 2026-07-06. Non-normative. Related: ADR 0008, LISS-0001.
 
-> Translated from [../2026-07-06-rationale-template-as-pull-based-upstream.md](../2026-07-06-rationale-template-as-pull-based-upstream.md) as of 2026-07-16. The Japanese original is authoritative.
+> Japanese original (authoritative): [../2026-07-06-rationale-template-as-pull-based-upstream.md](../2026-07-06-rationale-template-as-pull-based-upstream.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
 
 ---
 
-No matter how excellent a template is, the moment it is cloned (copied) into a project, it inevitably begins to age and become obsolete. Obsolescence is not a design flaw of the template; it is an unavoidable structural consequence of the passage of time. However, the real problem is not simply "code and rules getting old." Tragedy occurs when the upstream (the template maintainer) ignores the local context of the downstream (individual adopting projects) and attempts to forcibly rewrite their code (Push-based updating).
+Even an excellent template starts aging the moment it is cloned into a project. Obsolescence is not a design bug; time guarantees it. The real failure mode is not "code and rules get old." It is upstream (template maintainers) ignoring downstream local context and forcing rewrites—push-based updating.
 
-That is why I adopt an architecture based not on forcible Push, but on proactive Pull from the downstream. When and at what timing to sync with upstream changes is entirely decided by the adapters (executors) of each project. The upstream holds absolutely no registry of downstream projects scattered worldwide, nor any access permissions (credentials) to write to them (ADR 0008).
+I therefore use pull from downstream, not push from upstream. Each adoption adapter (people running an adopting project; see [../README.md](../README.md)) chooses whether and when to sync. Upstream holds no global registry of adopters and no credentials to write into them (ADR 0008).
 
 Distributing and updating a template is far more troublesome than distributing standard software libraries (like NPM or PyPI packages). With a library, updates cross clear interface (API) boundaries and enter as a black box. A template, however, is copied directly into the file system of the adopting repository, where it is edited by human engineers and grows by taking on the "meaning" of the project's specific domain and architecture. Even if the files were exactly identical immediately after adoption, a few weeks later they will be deeply intertwined with the downstream's unique design decisions. Therefore, the true challenge of template updating is not "how to distribute the latest files," but "how to safely merge the universal improvements provided by the upstream with the project-specific sovereignty won by the downstream."
 
 ## Protecting Sovereignty by Default: The Philosophy of 3-Way Merge
 
-To address this complex challenge, this template employs a 3-way merge. Portions changed only by the upstream template are straightforwardly updated; portions uniquely changed by the deployment destination (downstream) are absolutely preserved; if both changed the same portion differently, it is treated as a conflict requiring human resolution; and if the downstream intentionally deleted a portion, the upstream will not silently resurrect it during an update (ADR 0008 Decision 3). A naive, simple overwrite would instantly destroy the customizations meticulously built by the downstream. This risk of destruction is documented as a heavy cost by the Adjudicator in the ADR.
+To address this complex challenge, this template employs a 3-way merge. Portions changed only by the upstream template are straightforwardly updated; portions uniquely changed by the adopting project (downstream) are absolutely preserved; if both changed the same portion differently, it is treated as a conflict requiring human resolution; and if the downstream intentionally deleted a portion, the upstream will not silently resurrect it during an update (ADR 0008 Decision 3). A naive, simple overwrite would instantly destroy the customizations meticulously built by the downstream. This risk of destruction is documented as a heavy cost by the Adjudicator in the ADR.
 
-In particular, the behavior of "respecting deletions" is architecturally critical. From the template provider's perspective, a deleted file might simply look like a "missing file" or an "error." However, from the adopting project's perspective, that deletion is highly likely an explicit and advanced Architectural Decision meaning: "Our project does not need this rule." If the upstream automatically resurrects it, the template becomes a mechanism that unilaterally overwrites the downstream's local design decisions. A 3-way merge is not merely Git's technical merge algorithm; it is a powerful philosophical declaration to "respect the sovereignty and self-determination of each project."
+In particular, the behavior of "respecting deletions" is architecturally critical. From the template provider's perspective, a deleted file might simply look like a "missing file" or an "error." However, from the adopting project's perspective, that deletion is highly likely an explicit and advanced Architectural Decision meaning: "Our project does not need this rule." If the upstream automatically resurrects it, the template becomes a mechanism that unilaterally overwrites the downstream's local design decisions. A 3-way merge is not merely Git's technical merge algorithm; it is a clear philosophical declaration to "respect the sovereignty and self-determination of each project."
 
 [cruft](https://github.com/cruft/cruft) and [Copier](https://copier.readthedocs.io/en/stable/updating/) are great toolsets that have spent years tackling this exact thorny problem of "boilerplate drift" (the divergence between a template and an actual project). While deeply resonating with their philosophy, this template chose to implement an isomorphic structure using pure `git merge-file` to avoid forcing additional tool dependencies (like Python packages) onto the project.
 
-## Synchronization is Also a Normal Change: Complete Docs-as-Code
+## Synchronization is Also a Normal Change: Docs-as-Code End to End
 
 Updating a template via an update script must never commit directly to the project's trunk (main branch). It must always create a dedicated branch, issue a Pull Request (PR), and pass standard CI (ADR 0008 Decision 4, ADR 0007). There is absolutely no special treatment along the lines of "It's safe unconditionally because it comes from the official upstream template." This is the template version of the robust pattern popularized in the industry by [Renovate](https://docs.renovatebot.com/) and Dependabot: "External updates are automatically proposed as PRs, and are only integrated after passing human review and all CI tests."
 
 It is important to note here that "A clean merge is not the same guarantee as 'nothing needs review'" (ADR 0008 Consequences). Syntactical success (merging mechanically without conflict) and semantic correctness (whether the change is right in the context of the project) are entirely different dimensions.
 
-A PR is not a mere bureaucratic rubber stamp; it is the venue for "Semantic Review." A template update might look like a trivial Markdown phrasing diff, but it could severely impact agent behavior, phase approval gates, privacy budgets, or branching disciplines. CI can mechanically detect leftover Git conflict markers or broken Markdown formatting. But only a human Adjudicator, who understands the local context, can judge whether the change "contradicts our adopting culture or the existing ADRs we have built up."
+A PR is not a mere bureaucratic rubber stamp; it is the venue for "Semantic Review." A template update might look like a trivial Markdown phrasing diff, but it could severely impact agent behavior, phase approval gates, privacy budgets, or branching disciplines. CI can mechanically detect leftover Git conflict markers or broken Markdown formatting. But only a human Adjudicator, who understands the local context, can judge whether the change "contradicts our adopter culture or the existing ADRs we have built up."
 
 ## Improvements Flow Back from Downstream: Ecosystem Circulation
 
-The gritty, real-world operational feedback from adapters (project executors) flows back (returns) upstream as Issues like LISS-0002 and LISS-0005. [GitLab Flow's upstream first](https://about.gitlab.com/topics/version-control/what-are-gitlab-flow-best-practices/) preaches the grand principle of integrating bug fixes and shared improvements into the upstream (main) first. This template's operation of "abstracting field feedback into LISS and redistributing it globally from there" is isomorphic to this Upstream-First architecture.
+The gritty, real-world operational feedback from adoption adapters (採用アダプター; see [../README.md](../README.md)) flows back upstream as Issues like LISS-0002 and LISS-0005. [GitLab Flow's upstream first](https://about.gitlab.com/topics/version-control/what-are-gitlab-flow-best-practices/) preaches the grand principle of integrating bug fixes and shared improvements into the upstream (main) first. This template's operation of "abstracting field feedback into LISS and redistributing it globally from there" is isomorphic to this Upstream-First architecture.
 
 ## The Lineage of Delegation and Self-Determination: The Limits of Central Control
 
@@ -52,7 +52,7 @@ The decision to exclude the `research` folder from synchronization ([Normative v
 
 ## References
 
-1. **Project Internal Regulations**
+1. **Repository references**
    - ADR 0007, ADR 0008
    - LISS-0001, LISS-0002
 2. **Organizational Theory, Decentralization, and Agile**

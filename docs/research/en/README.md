@@ -7,18 +7,23 @@ points, why work is phase-gated, why plans and decisions live in the
 repository, and why agent context is deliberately minimized.
 
 **The Japanese originals in [`docs/research/`](../README.md) are
-authoritative.** This file is the English entry point: it summarizes each
-essay so English-speaking readers can decide what to have translated or
-read with machine assistance. If full translations are added later, they
-live in this `en/` directory under the same filenames as the originals,
-each opening with a note stating which commit of the original it was
-translated from.
+authoritative.** Full English translations live in this `en/` directory under
+the same filenames as the originals. For terminology and the agent-read
+policy, follow the Japanese [README](../README.md) sections
+「エージェントと research」and「用語（本フォルダ内）」; this file mirrors them
+for English readers. If a translation has not kept up with the original,
+treat the translation as stale and prefer the Japanese text.
+
+This README is a table of contents: short abstracts so readers can choose
+which essays to open in full. It does not replace the translations.
 
 These documents are non-normative reading material for humans:
 
-- Agents never read this folder. Operating paths in
-  `docs/architecture/agent-quickstart.md` enumerate agent inputs as an
-  allowlist, and `docs/research/` is outside it.
+- **Agents need not read this folder as daily task input.** That is not a
+  physical access ban. Operating paths in
+  `docs/architecture/agent-quickstart.md` enumerate normal task inputs as an
+  allowlist; `docs/research/` is outside it. See Japanese
+  [README — エージェントと research](../README.md).
 - This folder is not distributed to adopting projects.
   `scripts/lib/collaboration-template-paths.sh` excludes it.
 - Nothing here defines rules. Conclusions get promoted to ADRs or
@@ -29,9 +34,42 @@ Citation conventions (retrieval-dated sources, explicit "unverified"
 markers, evidence-grade annotations, ACM-style quotations) are defined in
 the Japanese [README](../README.md).
 
+## Glossary (mirrors Japanese README)
+
+Canonical definitions live in Japanese
+[README — 用語](../README.md). English gloss:
+
+| Term | Meaning in these essays |
+|------|-------------------------|
+| **Adjudicator** | The human designer who owns decision points (phase gates, ADR acceptance, ambiguity resolution). Not an AI role. JA: Adjudicator. |
+| **Adoption adapter** | A person or team on an *adopting project* who runs template sync, operations, and feedback. **Not** a Clean Architecture `Adapter`. JA: **採用アダプター**. Older phrasing “adapter (executor)” means this. |
+| **Clean Architecture Adapter** | An outer-layer component that implements a port (DB, SDK, file I/O). Distinct from adoption adapter. JA: Adapter（Clean Architecture）. |
+| **Capability ladder** | Route work to deterministic tools, small models, or strong models by task difficulty and risk. JA: **能力の階段**. |
+| **Non-normative** | Reading material only. Does not change project rules until promoted via ADR / collaboration docs. JA: **非規範**. |
+| **Adoption lifecycle** | State machine for external **resources** in `docs/architecture/external-resource-adoption-contract.md` (below). Software dependencies use `dependency-policy.md` instead. JA: **採用ライフサイクル**. |
+| **accepted** (check verdict) | Lifecycle **check result**: the check passed. Goes in the check record’s `verdict`. **Not yet** active trusted use. |
+| **adopted** (trusted use) | Lifecycle **operational state**: the resource is in active trusted use. Only after `accepted`. Never from `intake` directly. |
+| **rejected / needs_recheck** | Check verdicts. Failed or must re-check; neither proceeds directly to `adopted`. |
+
+### Do not confuse accepted and adopted
+
+The normative diagram is two stages (`external-resource-adoption-contract.md` / ADR 0011):
+
+```text
+intake -> checked -> accepted | rejected | needs_recheck   ← check result
+accepted -> adopted                                         ← entry into trusted use
+```
+
+- **accepted ≠ adopted.** Passing a check is not the same event as putting the resource into trusted store / production scope.
+- When these essays say “adopted,” they usually mean this **lifecycle end state**.
+- An ADR file’s `## Status` / **Accepted** (MADR: the decision record was accepted by the project) is a **different namespace** from resource `accepted` / `adopted`. Do not mix them.
+
+These English pages track Japanese originals as of commit `d1b86c8` (terminology and accepted/adopted clarification). If Japanese has moved on, prefer Japanese.
+
 ## The essays
 
-Read the first one before the rest; it is the entry point.
+Read the first one before the rest; it is the entry point. Links go to the
+full English translations in this directory.
 
 ### [The target end state: why AI collaboration needs structure](2026-07-05-rationale-target-end-state.md)
 
@@ -74,7 +112,7 @@ Context is a scarce resource. Irrelevant context measurably degrades LLM
 reasoning (Shi et al.), long contexts have U-shaped recall (Lost in the
 Middle), so include/omit decisions are reviewable design artifacts, not
 prompt-engineering folklore. Omission is an active boundary against
-guessing. The "capability ladder" routes work to deterministic tools,
+guessing. The capability ladder routes work to deterministic tools,
 small models, or strong reasoning models (FrugalGPT, RouteLLM), and
 undecided items are managed as explicit non-decisions that agents must
 not fill in.

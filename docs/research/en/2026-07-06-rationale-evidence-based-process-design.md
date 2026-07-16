@@ -2,17 +2,17 @@
 
 2026-07-06. Non-normative. Related: LISS-0002, LISS-0005, `process-gap-register.md`.
 
-> Translated from [../2026-07-06-rationale-evidence-based-process-design.md](../2026-07-06-rationale-evidence-based-process-design.md) as of 2026-07-16. The Japanese original is authoritative.
+> Japanese original (authoritative): [../2026-07-06-rationale-evidence-based-process-design.md](../2026-07-06-rationale-evidence-based-process-design.md), terminology as of commit `d1b86c8`. Agent-read policy and terms: [../README.md](../README.md) (「エージェントと research」「用語」; accepted vs adopted) and [README.md](./README.md) (Glossary). If English lags Japanese, prefer Japanese.
 
 ---
 
-"Rules" in software development processes are often decided arbitrarily—driven by industry fads, case studies from loud tech giants, or the extreme success stories of a few senior engineers. The habit of calmly asking the question, "Will this best practice truly be effective in our *specific context* of team size, product phase, and technical debt?" has not yet firmly taken root in this industry. I adopt the practice of investigating before rigidifying rules, checking them against the context of our own project, and having a human Adjudicator take responsibility for the final decision.
+Process "rules" are often set by fashion: industry fads, loud mega-tech case studies, or a few seniors' success stories. The quieter question—"Will this practice work in *our* team size, product phase, and debt?"—is still rare. I investigate before freezing rules, check them against our project context, and leave final responsibility with a human Adjudicator.
 
-When designing collaboration processes with AI, the temptation to jump on fads is particularly strong. New agent features, new prompt engineering techniques, and new "AI-Native best practices" appear almost weekly. While highly topical, no one knows what side effects they might bring in our exact operational context. If we elevate them to normative rules without objective evidence, the template will quickly become a sediment of trends or a Frankenstein of contradictory rules. That is exactly why I strictly separate "research" from "norms." The things we investigated and the processes of discussion remain as `research`, and only those that survive rigorous evaluation and are actually adopted by the project are elevated to "norms (ADRs)."
+When designing collaboration processes with AI, the temptation to jump on fads is particularly strong. New agent features, new prompt engineering techniques, and new "AI-Native best practices" appear almost weekly. While highly topical, no one knows what side effects they might bring in our exact operational context. If we elevate them to normative rules without objective evidence, the template will quickly become a sediment of trends or a Frankenstein of contradictory rules. That is why I strictly separate "research" from "norms." The things we investigated and the processes of discussion remain as `research`, and only those that survive rigorous evaluation and are actually adopted by the project are elevated to "norms (ADRs)."
 
 "Investigate prior research, empirical studies, precedents of existing services, and best practices. Analyze them, and give me a consultation."
 
-These were the words born from a desperate demand on the ground: *do not decide how to handle the `develop` branch based on intuition or mood*. However, this was not a one-off request, but rather an elevation into three robust behavioral patterns as a general rule. First, investigate before setting rules. Second, make failure feedback from agents and adapters the primary input for revision. Third, separate research and norms, keeping records of both.
+These were the words born from a desperate demand on the ground: *do not decide how to handle the `develop` branch based on intuition or mood*. However, this was not a one-off request, but rather an elevation into three robust behavioral patterns as a general rule. First, investigate before setting rules. Second, make failure feedback from agents and adoption adapters (adopting projects) the primary input for revision. Third, separate research and norms, keeping records of both.
 
 ## The Lineage of EBSE (Evidence-Based Software Engineering)
 
@@ -32,7 +32,7 @@ However, that attitude must always be paired with a strong caveat: "Correlation 
 
 ## Feedback Drives Norms: The Process Gap
 
-"Reports from adapters (executors) -> Gap analysis -> Norm revision." This template's `process-gap-register.md` strictly dictates that if a gap is found between the ideal and reality, you must not silently ignore it, but write a document and record it in the register. LISS-0002 (Session 1) and LISS-0005 (Session 2) are testaments to this. The system repairs itself not only through top-down rules but through bottom-up observations from the field.
+"Reports from adoption adapters → gap analysis → norm revision." This template's `process-gap-register.md` strictly dictates that if a gap is found between the ideal and reality, you must not silently ignore it, but write a document and record it in the register. LISS-0002 (Session 1) and LISS-0005 (Session 2) are testaments to this. The system repairs itself not only through top-down rules but through bottom-up observations from the field.
 
 ## The "Evidence" and "Context" Required by ISSUEs and ADRs
 
@@ -46,7 +46,7 @@ In AI collaboration, this constraint carries a dual meaning. Agents can instanta
 
 The EBSE philosophy of integration into context manifests most intensely in the adoption process for external resources (libraries, external APIs, frameworks, etc.). An AI agent might innocently suggest from its general knowledge, "Library X is standard for this feature." However, the AI cannot judge whether it fits our team's security requirements, dependency conflicts, or maintenance structure (Context).
 
-Therefore, this template establishes an operational rule called `docs/architecture/external-resource-adoption-contract.md`, demanding that external code or services pass through a strict adoption lifecycle (`intake -> checked -> accepted | rejected -> adopted`) before entering the project's trust boundary. We do not adopt external software "because it seems convenient," but rather we gather evidence that it is "safe and appropriate in the context of this project," verify it, and the Adjudicator explicitly approves the adoption. This, too, is a practical defense line of EBSE.
+Therefore, this template establishes an operational rule called `docs/architecture/external-resource-adoption-contract.md`, requiring a strict adoption lifecycle before external **resources** (AI-generated artifacts, brought-in data, and similar—not software dependencies, which use `dependency-policy.md`) enter the trust boundary. Check verdicts (`accepted | rejected | needs_recheck`) and entry into trusted use (`accepted -> adopted`) are separate; accepted alone is not adopted (see [../README.md](../README.md) / [README.md](./README.md)). We do not adopt because something "seems convenient," but gather evidence that it is safe and appropriate in this project's context, verify it, and have the Adjudicator explicitly approve adoption. This, too, is a practical defense line of EBSE.
 
 ## "Investigated" Does Not Mean "Correct": Awareness of Limits
 
@@ -58,7 +58,7 @@ Finally, this reading material itself is not normative. Whether the EBSE stance 
 
 ## References
 
-1. **Project Internal Regulations**
+1. **Repository references**
    - LISS-0002, LISS-0005
    - `docs/collaboration/process-gap-register.md`
 2. **Evidence-Based Software Engineering (EBSE)**
