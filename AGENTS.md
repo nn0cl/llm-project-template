@@ -115,9 +115,53 @@ route subtasks to an appropriate model, code assistant, or deterministic tool.
 When AI or model output is involved, define input, output, and reasoning
 evidence contracts before implementation.
 
-Use the full `[THOUGHT]` scaffold only for Feature Path and Architecture Path
-work. For Fast Path work, use a compact design note that states scope, omitted
-context, deterministic checks, and why the full scaffold is unnecessary.
+Use the `[DESIGN CHECK]` scaffold only for Feature Path and Architecture Path
+work. It reports observable requirements, inspected context, boundaries,
+assumptions, routing, and verification; it must not request hidden
+chain-of-thought. For Fast Path work, use a compact design note that states
+scope, omitted context, deterministic checks, and why the full scaffold is
+unnecessary.
+
+The common scaffold is:
+
+```markdown
+[DESIGN CHECK]
+- Scope and expected behavior:
+- Specifications and files inspected:
+- Component boundaries, ports/adapters, and VO/DTO candidates when applicable:
+- Applicable constraints:
+- Decisions, assumptions, and unresolved ambiguities:
+- Included and omitted AI context:
+- Task routing (model/assistant/tool):
+- Input/output evidence contract when AI output is involved:
+- Verification plan:
+```
+
+## Approval Model
+
+Treat these approvals as distinct and never infer a later approval from an
+earlier one:
+
+- `Scope approval`: permission to investigate or design the named scope.
+- `Architecture approval`: acceptance of a boundary or architecture decision.
+- `Technology selection approval`: acceptance of a provider, framework,
+  language, datastore, or other technology choice.
+- `Phase approval`: permission to execute the named AT-TDD or process phase.
+- `Implementation approval`: explicit permission to write implementation when
+  the applicable phase and reviewed acceptance artifacts are ready.
+
+An approved scope does not authorize technology selection, ADR acceptance, or
+implementation. Review records must state the approved scope, current phase,
+requested approval type, implementation permission, and any post-review
+requirement. A proposed ADR is a design artifact, not implementation approval.
+
+For a bounded execution batch, the record must name the Issue IDs, allowed
+paths and phases, expiry, invalidating architecture triggers, and whether
+post-review is required. Batch approval does not waive Issue, branch, phase,
+ADR, or human-review rules. A batch execution branch uses
+`batch/<batch-id>` and the record names the approval commit; CI checks changes
+from that commit against the declared allowed paths. CI success is not
+Adjudicator approval.
 
 When handing off or stopping before completion, use
 `docs/templates/agent-handoff.md`. When asking the Adjudicator for approval, use the

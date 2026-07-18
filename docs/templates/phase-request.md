@@ -11,7 +11,7 @@ Use this prompt when asking an agent to work on a feature.
 
 制約:
 - フェーズを飛び越えないこと。
-- Feature Path として最初に [THOUGHT] を出力すること。
+- Feature Path として最初に [DESIGN CHECK] を出力すること。
 - 外部リソースは必ずPort/Interface経由にすること。
 - 仕様にない挙動を推測して追加しないこと。
 

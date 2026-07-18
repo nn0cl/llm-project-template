@@ -17,6 +17,11 @@ A task is not done unless:
 - changed files are listed in the final response or handoff.
 - assumptions and open decisions are visible.
 - deterministic verification was run or explicitly marked not applicable.
+- the approval type, approved scope, current phase, implementation permission,
+  and post-review requirement are explicit when review or phase work is
+  involved.
+- automated checks are not treated as a substitute for explicit Adjudicator
+  approval.
 - issue status, phase, applicable work-plan row, and completion evidence are synchronized in the same reviewable unit when issue work changes status.
 - no unrelated context, secrets, or full private data exports were used
   without Adjudicator approval.
