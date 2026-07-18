@@ -4,6 +4,11 @@
 
 Proposed | Accepted | Superseded by ADR <NNNN>
 
+`Proposed` records a design candidate only. It does not authorize
+implementation. An `Accepted` status requires the applicable Adjudicator
+architecture or technology-selection approval and should link its follow-up
+Issue(s) when implementation is required.
+
 ## Context
 
 <What forces or requirements make this decision necessary? What is currently

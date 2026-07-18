@@ -26,6 +26,7 @@ collaboration_template_paths=(
   "scripts/copy-ai-collaboration-files.sh"
   "scripts/update-ai-collaboration-files.sh"
   "scripts/init-llm-context.sh"
+  "scripts/check-execution-batch-reviews.py"
   "scripts/lib/collaboration-template-paths.sh"
 )
 

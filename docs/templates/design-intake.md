@@ -8,6 +8,10 @@ Use this before tests, implementation, migrations, UI, or provider work.
 - Requested phase:
 - Proposed next phase:
 - Adjudicator decision needed:
+- Requested approval type:
+- Approved scope, if already granted:
+- Implementation allowed: yes | no | not yet decided
+- Post-review required: yes | no | not applicable
 
 ## Context Ledger
 
@@ -33,3 +37,4 @@ Use this before tests, implementation, migrations, UI, or provider work.
 
 - Conditions that require Adjudicator decision:
 - Conditions that require ADR:
+- Conditions that invalidate a bounded execution approval:

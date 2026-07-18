@@ -11,10 +11,10 @@ domain>`**.
 The selected implementation stack is `<FILL IN: e.g. backend language,
 frontend framework, package manager>`.
 
-## Mandatory Thought Output
+## Mandatory Design Check
 
 Before generating Feature Path or Architecture Path markdown, tests, production
-code, or review summaries, output a `[THOUGHT]` section containing:
+code, or review summaries, output a `[DESIGN CHECK]` section containing:
 
 1. Specification extraction: preconditions, triggers, and expected results from
    EARS or Gherkin.
@@ -33,6 +33,15 @@ Every user request starts with design intake sized to the task. Before tests or
 implementation, identify target behavior, relevant context, omitted context,
 lightweight VO/DTO candidates when applicable, involved ports/adapters when
 applicable, and task routing.
+
+Use concise, auditable decision metadata only; do not expose hidden
+chain-of-thought. The common `[DESIGN CHECK]` shape is defined in `AGENTS.md`.
+
+Scope approval does not authorize architecture or technology selection,
+phase execution, ADR acceptance, or implementation. Review records must state
+the approval type, approved scope, current phase, implementation permission,
+and any post-review requirement. A proposed ADR is not implementation
+authorization.
 
 ## Session Entry
 

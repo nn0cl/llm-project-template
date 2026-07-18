@@ -71,7 +71,7 @@ Before implementing anything:
 5. Read docs/architecture/io-reasoning-contracts.md when AI or model output is involved.
 6. Check docs/architecture/implementation-readiness.md before Phase 1, 2, or 3.
 
-Use a compact design note for Fast Path work. Use the full [THOUGHT] scaffold
+Use a compact design note for Fast Path work. Use the full [DESIGN CHECK] scaffold
 for Feature Path and Architecture Path work.
 Execute only the phase explicitly requested by the human Adjudicator.
 Do not introduce target-project domain behavior, datastore choices, provider

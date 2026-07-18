@@ -11,7 +11,7 @@ alwaysApply: true
 Root `AGENTS.md` is auto-applied by Cursor independently of this file
 ([Rules](https://cursor.com/docs/rules.md); Help: "Cursor picks it up
 automatically"). It holds ADR capture, design intake, AI payload/routing
-selection, and `[THOUGHT]`-scaffold-vs-compact-note usage. Do not duplicate
+selection, and `[DESIGN CHECK]`-scaffold-vs-compact-note usage. Do not duplicate
 those paragraphs here, and do not `@`-reference `AGENTS.md` from
 `.cursor/rules` (see ADR 0006 Cursor evidence). Decision Gates and
 Handoff/Completion below are Cursor-side complements kept in this file.

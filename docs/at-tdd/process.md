@@ -76,7 +76,7 @@ Rules:
   dependency checks, migration ordering checks, and test execution.
 - Phase transitions require Adjudicator approval.
 
-## Mandatory `[THOUGHT]`
+## Mandatory `[DESIGN CHECK]`
 
 Before Feature Path or Architecture Path work, agents must output:
 
@@ -88,7 +88,12 @@ Before Feature Path or Architecture Path work, agents must output:
 6. Input, output, and reasoning evidence contract for AI-assisted tasks.
 
 For Fast Path work, agents may output a compact design note instead of the full
-`[THOUGHT]` scaffold.
+`[DESIGN CHECK]` scaffold.
+
+The design check is concise, auditable decision metadata. It must not expose
+hidden chain-of-thought. Scope approval, architecture approval, technology
+selection approval, phase approval, and implementation approval remain
+separate decisions. A proposed ADR does not authorize implementation.
 
 ## Phase 1: Red
 

@@ -11,37 +11,48 @@ Your mission is to generate code and documents with minimal hallucination,
 strict phase control, and clear dependency boundaries for
 **<PROJECT_NAME: one-line description of the product and its domain>**.
 
-## Required First Output
+## Claude Code Design Check
 
-Every substantive Feature Path or Architecture Path response must begin with:
+For substantive Feature Path or Architecture Path requests, begin with this
+compact, auditable design check. It preserves the required design intake from
+`AGENTS.md` without asking Claude Code to expose hidden chain-of-thought.
 
 ```markdown
-[THOUGHT]
-1. Specification extraction:
-   - Preconditions:
-   - Triggers:
-   - Expected results:
-2. Component identification:
-   - Interfaces/Ports:
-   - Domain:
-   - UseCases:
-   - Adapters:
-3. Ambiguity boundaries:
-   - Must not guess:
-4. AI payload selection:
-   - Include:
-   - Omit:
-5. Task routing:
-   - Model/assistant/tool:
-6. Input/output/reasoning contract:
-   - Input:
-   - Output:
-   - Reasoning evidence:
+[DESIGN CHECK]
+- Scope and expected behavior:
+- Specifications and files inspected:
+- Component boundaries, ports/adapters, and VO/DTO candidates when applicable:
+- Applicable constraints:
+- Decisions, assumptions, and unresolved ambiguities:
+- Included and omitted AI context:
+- Task routing (model/assistant/tool):
+- Input/output evidence contract when AI output is involved:
+- Verification plan:
 ```
 
-Fast Path responses may use a compact design note instead of the full scaffold
-when the task is mechanical, local, and does not change behavior,
-architecture, tests, or agent instructions.
+Fast Path responses may use a one- to three-line design note when the task is
+mechanical, local, and does not change behavior, architecture, tests, or agent
+instructions. Report concise, auditable decision or verification evidence only;
+do not provide hidden chain-of-thought.
+
+## Claude Code Reading Sequence
+
+At the start of a task, follow this order:
+
+1. Read `AGENTS.md`.
+2. Read `docs/architecture/agent-quickstart.md`.
+3. Select Fast Path, Feature Path, or Architecture Path.
+4. For Fast Path, read only the directly touched files and the Definition of
+   Done before reporting.
+5. For Feature Path, read only the documents required by the selected path,
+   including the target specification and relevant architecture document.
+6. For Architecture Path, read only the collaboration, routing, privacy,
+   contract, ADR, and instruction files relevant to the requested decision.
+7. Before Phase 1, 2, or 3, read
+   `docs/architecture/implementation-readiness.md` and confirm the requested
+   phase.
+8. Stop after design intake when the path, phase, authoritative specification,
+   or required decision is missing.
 
 Every user request starts with a design step sized to the task. Do not write
 tests, implementation, migrations, or UI before identifying the target

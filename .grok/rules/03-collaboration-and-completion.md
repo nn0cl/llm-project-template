@@ -12,7 +12,7 @@ route subtasks to an appropriate model, code assistant, or deterministic
 tool. When AI or model output is involved, define input, output, and
 reasoning evidence contracts before implementation.
 
-Use the full `[THOUGHT]` scaffold only for Feature Path and Architecture
+Use the full `[DESIGN CHECK]` scaffold only for Feature Path and Architecture
 Path work. For Fast Path work, use a compact design note that states scope,
 omitted context, deterministic checks, and why the full scaffold is
 unnecessary.

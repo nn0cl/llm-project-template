@@ -8,6 +8,11 @@ set, or architecture decision.
 - Artifact:
 - Current phase:
 - Requested approval:
+- Approval type: scope | architecture | technology-selection | phase | implementation | bounded-batch
+- Approved scope:
+- Implementation allowed: yes | no
+- Post-review required: yes | no
+- Execution batch ID (if applicable):
 
 ## What Changed
 
@@ -25,6 +30,9 @@ set, or architecture decision.
 - [ ] Assumptions are visible.
 - [ ] Open decisions are either answered or intentionally deferred.
 - [ ] Deterministic verification is adequate for this step.
+- [ ] The approval type and scope are explicit.
+- [ ] Implementation permission is explicit and is not inferred from scope approval.
+- [ ] Any post-review requirement and execution batch are recorded.
 
 ## Decision
 

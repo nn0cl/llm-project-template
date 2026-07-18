@@ -60,6 +60,30 @@ User request
 The loop can stop at any point when the Adjudicator asks for clarification, changes
 scope, rejects an assumption, or requests a new ADR.
 
+## Approval Model
+
+Approval is typed and scoped. The following are distinct decisions:
+
+- `Scope approval`: investigate or design the named scope.
+- `Architecture approval`: accept a boundary or architecture decision.
+- `Technology selection approval`: accept a provider, framework, language,
+  datastore, or other technology choice.
+- `Phase approval`: execute the named AT-TDD or process phase.
+- `Implementation approval`: write implementation when reviewed acceptance
+  artifacts and the applicable phase are ready.
+
+An approved scope does not imply the other approvals. A proposed ADR is not an
+accepted ADR and does not authorize implementation.
+
+For low-risk work, an Adjudicator may approve a bounded execution batch. The
+record must name its Issue IDs, scope, allowed paths and phases, expiry,
+invalidating architecture triggers, and post-review requirement. A batch does
+not waive Issue, branch, phase, ADR, or human-review rules. The agent may mark
+work as awaiting post-review; only the Adjudicator may mark it post-reviewed.
+The batch branch uses `batch/<batch-id>` and records the approval commit; CI
+checks changes from that commit against the declared allowed paths. CI verifies
+record consistency but is not human approval.
+
 ## Required Artifacts
 
 Every task should leave enough evidence for another human or agent to continue.

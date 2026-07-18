@@ -54,7 +54,7 @@ Read:
 8. `docs/architecture/io-reasoning-contracts.md` only when AI/model output is
    involved.
 
-Output the full `[THOUGHT]` scaffold and execute only the requested phase.
+Output the full `[DESIGN CHECK]` scaffold and execute only the requested phase.
 
 ### Architecture Path
 
@@ -72,7 +72,7 @@ Read:
 7. `docs/architecture/io-reasoning-contracts.md` when AI/model output is
    involved.
 
-Output the full `[THOUGHT]` scaffold and stop for Adjudicator approval when a new
+Output the full `[DESIGN CHECK]` scaffold and stop for Adjudicator approval when a new
 architecture or process decision is required.
 
 ## Design First
@@ -105,6 +105,15 @@ Only execute the phase explicitly requested by the Adjudicator.
 
 Phase transitions require Adjudicator approval. Do not start Phase 2 from
 unreviewed Phase 1 tests.
+
+Approval is typed and scoped. Scope approval authorizes investigation or
+design only; architecture, technology selection, phase, and implementation
+approval must be explicit. A proposed ADR is not implementation authorization.
+
+Return to Architecture Path when a change introduces a subsystem, language,
+framework, datastore, concurrency or transaction boundary, authentication or
+authorization boundary, deployment boundary, or changes the premise of an
+accepted ADR or approved logic.
 
 ## Bug Triage
 

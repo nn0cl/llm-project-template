@@ -74,6 +74,7 @@ jobs:
             "docs/templates/gherkin-feature.md"
             "docs/templates/adr.md"
             "docs/templates/contract-file-sync-prompt.md"
+            "docs/templates/execution-batch-review.md"
             "docs/collaboration/traces/.gitkeep"
             "docs/issues/.gitkeep"
             "docs/work-plans/.gitkeep"
@@ -82,6 +83,7 @@ jobs:
             "scripts/copy-ai-collaboration-files.sh"
             "scripts/update-ai-collaboration-files.sh"
             "scripts/init-llm-context.sh"
+            "scripts/check-execution-batch-reviews.py"
             "scripts/lib/collaboration-template-paths.sh"
           )
 
@@ -106,6 +108,13 @@ jobs:
             scripts/update-ai-collaboration-files.sh \
             scripts/init-llm-context.sh \
             scripts/lib/collaboration-template-paths.sh
+
+      - name: Check bounded execution-batch review records
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/check-execution-batch-reviews.py \
+            --branch "${GITHUB_HEAD_REF:-}"
 
       - name: Check unresolved conflict markers
         shell: bash
