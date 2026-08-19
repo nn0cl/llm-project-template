@@ -35,13 +35,28 @@ This script never commits to the target's trunk branch. It creates a
 dedicated branch, commits the result there, and (when possible) opens a pull
 request, per docs/collaboration/branch-commit-pr-discipline.md.
 
+The delivery route can be selected interactively or explicitly. GitHub mode
+pushes the branch and opens a pull request; --merge-pr additionally requests
+GitHub auto-merge after required checks pass. Local mode creates and commits a
+local branch without pushing it. The base branch can be selected with
+--base-branch. The provider-neutral --subagent option records whether a
+subagent handoff is requested; this script does not choose or invoke an LLM
+provider.
+
 Options:
   --target PATH        Target repository directory. Required.
   --source PATH         Local checkout of the template repository to pull
                         updates from. Defaults to this script's own repo.
   --branch-prefix TEXT  Branch name prefix. Default: process/update-collab-template
-  --no-pr               Create the branch and commit locally; skip pushing
-                        and opening a PR even if `gh` is available.
+  --delivery MODE       github or local. If omitted in a TTY, ask; otherwise
+                        default to local. Legacy --no-pr selects local.
+  --base-branch BRANCH  Branch to branch from. If omitted in a TTY, ask from
+                        local branches; otherwise use the current branch.
+  --merge-pr            In github mode, request auto-merge after CI passes.
+                        Never merges without this explicit option.
+  --subagent MODE       ask, yes, or no. In a TTY, ask is interactive;
+                        otherwise ask defaults to no.
+  --no-pr               Legacy alias for --delivery local.
   --non-interactive     Never prompt for locally-deleted-but-upstream-changed
                         files; always take the default (restore).
   --dry-run             Report planned actions without changing anything.
@@ -56,6 +71,10 @@ target=""
 source_repo="$repo_root"
 branch_prefix="process/update-collab-template"
 no_pr=false
+delivery_mode=""
+base_branch=""
+merge_pr=false
+subagent_mode="ask"
 dry_run=false
 non_interactive=false
 
@@ -75,7 +94,27 @@ while [ "$#" -gt 0 ]; do
       ;;
     --no-pr)
       no_pr=true
+      delivery_mode="local"
       shift
+      ;;
+    --delivery)
+      delivery_mode="${2:-}"
+      shift 2
+      ;;
+    --base-branch)
+      base_branch="${2:-}"
+      shift 2
+      ;;
+    --merge-pr)
+      merge_pr=true
+      if [ -z "$delivery_mode" ]; then
+        delivery_mode="github"
+      fi
+      shift
+      ;;
+    --subagent)
+      subagent_mode="${2:-}"
+      shift 2
       ;;
     --non-interactive)
       non_interactive=true
@@ -96,6 +135,26 @@ while [ "$#" -gt 0 ]; do
       ;;
   esac
 done
+
+case "$delivery_mode" in
+  ""|github|local) ;;
+  *) echo "--delivery must be github or local: $delivery_mode" >&2; exit 2 ;;
+esac
+
+case "$subagent_mode" in
+  ask|yes|no) ;;
+  *) echo "--subagent must be ask, yes, or no: $subagent_mode" >&2; exit 2 ;;
+esac
+
+if [ "$no_pr" = true ] && [ "$delivery_mode" = "github" ]; then
+  echo "--no-pr conflicts with --delivery github." >&2
+  exit 2
+fi
+
+if [ "$merge_pr" = true ] && [ "$delivery_mode" = "local" ]; then
+  echo "--merge-pr requires --delivery github." >&2
+  exit 2
+fi
 
 if [ -z "$target" ]; then
   echo "--target is required." >&2
@@ -126,6 +185,89 @@ if [ "$dry_run" != true ] && [ -n "$(git -C "$target" status --porcelain)" ]; th
   exit 1
 fi
 
+is_interactive_setup() {
+  [ "$non_interactive" != true ] && [ -t 0 ] && [ -t 1 ]
+}
+
+prompt_choice() {
+  local prompt="$1" default_value="$2" answer=""
+  if ! is_interactive_setup; then
+    printf '%s\n' "$default_value"
+    return
+  fi
+  read -r -p "$prompt" answer || true
+  printf '%s\n' "${answer:-$default_value}"
+}
+
+select_delivery_mode() {
+  if [ -n "$delivery_mode" ]; then
+    return
+  fi
+  if is_interactive_setup; then
+    echo "Select delivery route:" >&2
+    echo "  1) github - push, create PR, and optionally auto-merge" >&2
+    echo "  2) local  - create a local branch for review; do not push" >&2
+    case "$(prompt_choice 'Choice [2]: ' '2')" in
+      1|github) delivery_mode="github" ;;
+      2|local|"") delivery_mode="local" ;;
+      *) echo "Invalid delivery choice." >&2; exit 2 ;;
+    esac
+  else
+    delivery_mode="local"
+  fi
+}
+
+select_subagent_mode() {
+  if [ "$subagent_mode" != ask ]; then
+    return
+  fi
+  if is_interactive_setup; then
+    echo "Create a provider-neutral subagent handoff request?" >&2
+    echo "  1) yes - record a subagent request in the output and PR body" >&2
+    echo "  2) no  - continue with one agent" >&2
+    case "$(prompt_choice 'Choice [2]: ' '2')" in
+      1|yes) subagent_mode="yes" ;;
+      2|no|"") subagent_mode="no" ;;
+      *) echo "Invalid subagent choice." >&2; exit 2 ;;
+    esac
+  else
+    subagent_mode="no"
+  fi
+}
+
+select_base_branch() {
+  local current_branch branch_choice branches index
+  current_branch="$(git -C "$target" branch --show-current)"
+  if [ -n "$base_branch" ]; then
+    git -C "$target" show-ref --verify --quiet "refs/heads/$base_branch" || {
+      echo "Base branch does not exist locally: $base_branch" >&2
+      exit 1
+    }
+  elif is_interactive_setup; then
+    branches=()
+    while IFS= read -r branch; do
+      branches+=("$branch")
+    done < <(git -C "$target" for-each-ref --format='%(refname:short)' refs/heads/)
+    echo "Select the local base branch (current: $current_branch):" >&2
+    for index in "${!branches[@]}"; do
+      echo "  $((index + 1))) ${branches[$index]}" >&2
+    done
+    branch_choice="$(prompt_choice "Choice [$(( ${#branches[@]} ))]: " "$(( ${#branches[@]} ))")"
+    if [[ "$branch_choice" =~ ^[0-9]+$ ]] && [ "$branch_choice" -ge 1 ] && [ "$branch_choice" -le "${#branches[@]}" ]; then
+      base_branch="${branches[$((branch_choice - 1))]}"
+    else
+      echo "Invalid base branch choice." >&2
+      exit 2
+    fi
+  else
+    base_branch="$current_branch"
+  fi
+
+  if [ "$dry_run" != true ] && [ "$current_branch" != "$base_branch" ]; then
+    git -C "$target" switch "$base_branch"
+  fi
+}
+
 marker="$target/.collaboration-template-version"
 if [ ! -f "$marker" ]; then
   echo "Missing $marker." >&2
@@ -150,6 +292,17 @@ new_ref="$(git -C "$source_repo" rev-parse HEAD)"
 if [ "$old_ref" = "$new_ref" ]; then
   echo "Target is already synced to $new_ref. Nothing to do."
   exit 0
+fi
+
+select_delivery_mode
+select_subagent_mode
+select_base_branch
+
+if [ "$delivery_mode" = "local" ]; then
+  no_pr=true
+elif [ "$merge_pr" = true ] && [ "$delivery_mode" != "github" ]; then
+  echo "--merge-pr requires github delivery." >&2
+  exit 2
 fi
 
 ignore_file="$target/.collaboration-template-ignore"
@@ -429,6 +582,12 @@ print_list() {
 
 echo "Source: $source_repo ($old_ref -> $new_ref)"
 echo "Target: $target"
+echo "Delivery: $delivery_mode (base branch: $base_branch)"
+echo "Subagent handoff: $subagent_mode"
+if [ "$subagent_mode" = "yes" ]; then
+  echo "Subagent request: prepare a provider-neutral handoff for branch review;"
+  echo "  the host agent must choose and launch any actual subagent separately."
+fi
 echo
 print_list "Added (new upstream files):" "${added[@]+"${added[@]}"}"
 print_list "Updated (Tier 1 or 2, target had not diverged from the template):" "${updated[@]+"${updated[@]}"}"
@@ -489,7 +648,8 @@ if [ "${#needs_ai_merge[@]}" -gt 0 ] || [ "${#collisions[@]}" -gt 0 ]; then
 fi
 
 if [ "$no_pr" = true ]; then
-  echo "Skipping PR creation (--no-pr). Push and open a PR manually per docs/collaboration/branch-commit-pr-discipline.md."
+  echo "Local review mode: branch $branch_name was committed locally and not pushed."
+  echo "Review it against base branch $base_branch, then choose the branch for the next local action."
   exit 0
 fi
 
@@ -509,6 +669,9 @@ git -C "$target" push -u origin "$branch_name"
 pr_body="$(cat <<BODY
 Sync from collaboration template ${old_ref:0:8} -> ${new_ref:0:8}.
 
+- Delivery route: github PR
+- Base branch: $base_branch
+- Subagent handoff requested: $subagent_mode
 - Added: ${#added[@]}
 - Updated (Tier 1/2, target had not diverged): ${#updated[@]}
 - Overwritten (Tier 1, template authoritative): ${#overwritten[@]}
@@ -526,4 +689,10 @@ agent (old ref ${old_ref}, new ref ${new_ref}) before merging.
 BODY
 )"
 
-(cd "$target" && gh pr create --title "chore: sync collaboration template to ${new_ref:0:8}" --body "$pr_body")
+pr_url="$(cd "$target" && gh pr create --title "chore: sync collaboration template to ${new_ref:0:8}" --body "$pr_body")"
+echo "Created pull request: $pr_url"
+
+if [ "$merge_pr" = true ]; then
+  echo "Requesting GitHub auto-merge after required checks pass..."
+  (cd "$target" && gh pr merge "$pr_url" --auto --squash --delete-branch)
+fi

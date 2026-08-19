@@ -113,6 +113,20 @@ PRs should identify:
 - CI status (must be passing before merge; see Continuous Integration Gate
   above).
 
+## Sync Script Delivery Choices
+
+`scripts/update-ai-collaboration-files.sh` supports two explicit routes:
+
+- `--delivery github` pushes the maintenance branch and opens a PR. Add
+  `--merge-pr` only when GitHub auto-merge after required checks is intended.
+- `--delivery local` creates and commits a local review branch without pushing.
+  Use `--base-branch` to choose the local branch from which it is created.
+
+The script keeps `--no-pr` as a local-delivery compatibility alias. The
+`--subagent ask|yes|no` choice records whether a provider-neutral handoff is
+requested; it does not bypass the existing issue, phase, review, or approval
+rules and does not select an LLM provider.
+
 ## Feature-Unit Branch Creation
 
 When starting a new feature:
