@@ -96,6 +96,7 @@ APIs)?>`
 - `adr/0011-external-resource-adoption-contract.md`
 - `adr/0012-rename-referee-to-adjudicator.md`
 - `adr/0013-document-lifecycle-and-canonical-register.md`
+- `adr/0014-delivery-and-subagent-selection.md`
 
 ## Remaining Technology Evaluation
 

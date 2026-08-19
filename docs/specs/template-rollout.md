@@ -79,3 +79,28 @@ When template files are copied
 Then only generic placeholders for those fields are replaced
 And unspecified architectural choices remain placeholders for the target
 project to decide.
+
+### Scenario: Choose a delivery route for a template update
+
+Given a target repository has adopted the collaboration template
+When the maintainer runs `scripts/update-ai-collaboration-files.sh`
+Then a TTY may ask whether to use GitHub PR delivery or local branch review
+And `--delivery github` pushes the maintenance branch and opens a PR
+And `--delivery local` creates and commits a local review branch without pushing
+And `--base-branch` or the interactive branch menu selects the branch from
+which the maintenance branch is created.
+
+### Scenario: Choose whether a subagent handoff is requested
+
+Given a template update has a reviewable branch
+When the maintainer supplies `--subagent ask|yes|no` or answers the TTY prompt
+Then the selected value is recorded in the output and GitHub PR body when used
+And the template remains provider-neutral
+And no subagent provider is invoked implicitly.
+
+### Scenario: Opt in to GitHub auto-merge
+
+Given GitHub delivery is selected and required checks are configured
+When the maintainer supplies `--merge-pr`
+Then the script requests GitHub auto-merge after required checks pass
+And without `--merge-pr` the script never requests or performs a merge.
