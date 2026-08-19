@@ -94,6 +94,8 @@ APIs)?>`
 - `adr/0009-bug-planning-and-ai-usage-records.md`
 - `adr/0010-ai-failure-recovery-and-runner-cli-contract.md`
 - `adr/0011-external-resource-adoption-contract.md`
+- `adr/0012-rename-referee-to-adjudicator.md`
+- `adr/0013-document-lifecycle-and-canonical-register.md`
 
 ## Remaining Technology Evaluation
 

@@ -82,6 +82,23 @@ with their own empty issue, trace, and spec ledgers.
    existed will not get it added automatically, and imported docs that
    reference an unused concept are worse than no docs.
 
+### Document ownership and lifecycle after adoption
+
+Keep template-owned collaboration rules separate from target-owned
+specifications, domain decisions, technology choices, and deprecated-term
+maps. Copy `docs/templates/canonical-document-register.md` to
+`docs/collaboration/canonical-document-register.md` and populate it with the
+target project's Entry and Canonical documents. This register is only a
+navigation/consistency aid; it is not a new approval artifact and does not
+replace the existing accepted specification, ADR, Issue, or Work Plan.
+
+Use the standard document layers and read order from
+`docs/collaboration/document-lifecycle.md`. The register is a navigation entry;
+agents should read it before opening historical ADRs, closed Issues, completed
+Work Plans, or detailed Traces. Record intentional sync differences and
+consolidation moves in the appropriate ledger rather than editing
+template-owned rules with target-specific facts.
+
 When a file the target deleted was changed again upstream, the script asks
 `Restore '<path>'? [Y/n]` if it is running with a real terminal attached,
 defaulting to restore on an empty answer; with `--non-interactive`, or with

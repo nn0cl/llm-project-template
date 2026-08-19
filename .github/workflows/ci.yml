@@ -44,6 +44,7 @@ jobs:
             "docs/collaboration/ai-human-scheme.md"
             "docs/collaboration/source-code-quality.md"
             "docs/collaboration/definition-of-done.md"
+            "docs/collaboration/document-lifecycle.md"
             "docs/collaboration/adoption-guide.md"
             "docs/collaboration/template-benefits.md"
             "docs/collaboration/project-start-guide.md"
@@ -74,6 +75,8 @@ jobs:
             "docs/templates/gherkin-feature.md"
             "docs/templates/adr.md"
             "docs/templates/contract-file-sync-prompt.md"
+            "docs/templates/canonical-document-register.md"
+            "docs/templates/review-summary.md"
             "docs/templates/execution-batch-review.md"
             "docs/collaboration/traces/.gitkeep"
             "docs/issues/.gitkeep"
@@ -84,6 +87,7 @@ jobs:
             "scripts/update-ai-collaboration-files.sh"
             "scripts/init-llm-context.sh"
             "scripts/check-execution-batch-reviews.py"
+            "scripts/check-document-lifecycle.py"
             "scripts/lib/collaboration-template-paths.sh"
           )
 
@@ -95,7 +99,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for n in 0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011; do
+          for n in 0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013; do
             ls "docs/architecture/adr/${n}-"*.md >/dev/null
           done
 
@@ -115,6 +119,12 @@ jobs:
           set -euo pipefail
           python3 scripts/check-execution-batch-reviews.py \
             --branch "${GITHUB_HEAD_REF:-}"
+
+      - name: Check document lifecycle registers
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/check-document-lifecycle.py
 
       - name: Check unresolved conflict markers
         shell: bash

@@ -22,6 +22,18 @@ Continuity must come from repository artifacts:
 3. accepted specification under `docs/specs/`.
 4. feature branch, PR, or changed files on disk.
 
+For document state, use this order after the cited handoff or trace:
+
+1. `docs/collaboration/canonical-document-register.md` when present.
+2. The relevant Entry and Current Canonical document.
+3. Only the Evidence needed for the current decision or verification.
+4. Archive material only when the Register or Canonical document explicitly
+   points to it for historical context.
+
+Never use an Archive document as the initial authority for current behavior.
+When no target-owned register exists yet, record that as a design-intake gap;
+do not infer current requirements from the newest-looking historical file.
+
 Do not treat chat memory, an old session summary, or README prose as
 authoritative state.
 

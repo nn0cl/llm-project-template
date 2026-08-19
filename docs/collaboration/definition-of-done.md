@@ -26,6 +26,16 @@ A task is not done unless:
 - no unrelated context, secrets, or full private data exports were used
   without Adjudicator approval.
 - generated code, if any, is readable and appropriately split.
+- current project guidance has one Canonical source per topic, with the
+  Canonical Register and source evidence updated when the current rule changes.
+- completed or superseded records are marked Historical or linked through the
+  consolidation ledger; they are not used as the entry point for current work.
+- substantial review work has a Review Summary or equivalent reviewer-facing
+  packet linking its Canonical documents, findings, dispositions, blockers,
+  verification, and next approval.
+- the Canonical Register and Review Summary remain derived navigation/review
+  aids and do not replace the existing Issue, specification, ADR, Work Plan, or
+  Adjudicator approval as the agreement unit.
 
 ## Phase 0 Done: Design Intake
 
