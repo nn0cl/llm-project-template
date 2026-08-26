@@ -16,6 +16,7 @@ These files are the agent operating contract:
 - `.github/copilot-instructions.md`
 - `.grok/rules/*.md`
 - `.cursor/rules/*.mdc`
+- `.agents/skills/*/SKILL.md`
 - `docs/at-tdd/process.md`
 - `docs/collaboration/*.md` (except files under `docs/collaboration/traces/`)
 - `docs/templates/*.md`
@@ -33,8 +34,9 @@ A pull request that changes an agent operating contract file requires:
 - explicit Adjudicator review of the change, not only automated CI.
 - a stated reason for the change in the PR description.
 - confirmation that `AGENTS.md`, `CLAUDE.md`,
-  `.github/copilot-instructions.md`, `.grok/rules/*.md`, and
-  `.cursor/rules/*.mdc` still agree with each other in effective content
+  `.github/copilot-instructions.md`, `.grok/rules/*.md`,
+  `.cursor/rules/*.mdc`, and `.agents/skills/*/SKILL.md` still agree with
+  each other in effective content
   after the change, when the change touches shared phase, dependency, or
   read-order rules. Agreement means equivalent effective content, not a
   literal text match. `CLAUDE.md` is a full effective-content mirror and does
@@ -71,6 +73,7 @@ Code review should reject:
 - agent operating contract changes without a stated reason.
 - agent operating contract changes without an accompanying trace.
 - agent operating contract changes that leave `AGENTS.md`, `CLAUDE.md`,
-  `.github/copilot-instructions.md`, `.grok/rules/*.md`, and
-  `.cursor/rules/*.mdc` inconsistent with each other in effective content.
+  `.github/copilot-instructions.md`, `.grok/rules/*.md`,
+  `.cursor/rules/*.mdc`, and `.agents/skills/*/SKILL.md` inconsistent with
+  each other in effective content.
 - agent operating contract changes merged without Adjudicator review.

@@ -54,7 +54,7 @@ not add a new mandatory gate and does not replace the human Adjudicator.
 
 | Isolation | Meaning |
 | --- | --- |
-| `same_context` | The current agent reviews in this session using `docs/templates/same-context-review.md`. |
+| `same_context` | The current agent reviews in this session using `.agents/skills/same-context-review/SKILL.md`. |
 | `separate_context` | The host launches a subagent in a clean context. Pass artifacts, specifications, contract documents, deterministic output, and a handoff. Do not pass the parent's reasoning as justification. |
 | `ask` | Stop and ask the Adjudicator which isolation to use for this review. |
 

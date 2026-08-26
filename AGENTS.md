@@ -93,6 +93,8 @@ Relevant architecture documents:
   `docs/collaboration/process-lessons.md`.
 - Completion process review:
   `docs/collaboration/process-review.md`.
+- On-demand procedures (design intake, same-context review, handoff,
+  process review): `.agents/skills/`.
 - Stack-specific architecture documents listed in
   `docs/collaboration/project-conventions.md`.
 
@@ -128,33 +130,11 @@ concrete implementation. Do not add project ports to this file.
 When a decision affects architecture, capture it as an ADR. When a decision is
 unknown, list it in the path-appropriate design note as an ambiguity boundary.
 
-Every request starts from design intake. Select only the AI payload context
-needed for the task, define lightweight VO or DTO candidates when clear, and
-route subtasks to an appropriate model, code assistant, or deterministic tool.
-When AI or model output is involved, define input, output, and reasoning
-evidence contracts before implementation.
-
-Use the `[DESIGN CHECK]` scaffold only for Feature Path and Architecture Path
-work. It reports observable requirements, inspected context, boundaries,
-assumptions, routing, and verification; it must not request hidden
-chain-of-thought. For Fast Path work, use a compact design note that states
-scope, omitted context, deterministic checks, and why the full scaffold is
-unnecessary.
-
-The common scaffold is:
-
-```markdown
-[DESIGN CHECK]
-- Scope and expected behavior:
-- Specifications and files inspected:
-- Component boundaries, ports/adapters, and VO/DTO candidates when applicable:
-- Applicable constraints:
-- Decisions, assumptions, and unresolved ambiguities:
-- Included and omitted AI context:
-- Task routing (model/assistant/tool):
-- Input/output evidence contract when AI output is involved:
-- Verification plan:
-```
+Every request starts from design intake. Load
+`.agents/skills/design-intake/SKILL.md` and output its `[DESIGN CHECK]`
+scaffold for Feature Path and Architecture Path work. Fast Path uses the
+compact note in that skill. Do not skip this step when the host does not
+auto-discover the skill directory.
 
 ## Approval Model
 
@@ -182,9 +162,12 @@ ADR, or human-review rules. A batch execution branch uses
 from that commit against the declared allowed paths. CI success is not
 Adjudicator approval.
 
-When handing off or stopping before completion, use
-`docs/templates/agent-handoff.md`. When asking the Adjudicator for approval, use the
-review points from `docs/templates/adjudicator-review.md`.
+When handing off or stopping before completion, follow
+`.agents/skills/agent-handoff/SKILL.md`. When asking the Adjudicator for
+approval, use the review points from `docs/templates/adjudicator-review.md`.
+When an agent review packet is required and review isolation is
+`same_context` (or routing is missing), follow
+`.agents/skills/same-context-review/SKILL.md`.
 
 Generated source code must minimize human cognitive load. Prefer clear
 responsibility boundaries, small functions, straightforward names, and
@@ -202,8 +185,5 @@ meta-level lessons in `docs/collaboration/process-lessons-log.md` per
 `docs/collaboration/process-lessons.md`. Do not write a session incident
 narrative. Read that log at the next design intake and before implementation.
 
-When marking a local issue or work plan `done`, run the same-context process
-review in `docs/collaboration/process-review.md`. If a deviation or
-operational problem is found, agree the disposition with the Adjudicator and
-write template feedback under `docs/collaboration/template-feedback/` when
-they so decide.
+When marking a local issue or work plan `done`, follow
+`.agents/skills/process-review/SKILL.md`.

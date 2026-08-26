@@ -6,16 +6,10 @@ When a decision affects architecture, capture it as an ADR. When a decision
 is unknown, list it in the path-appropriate design note as an ambiguity
 boundary.
 
-Every request starts from design intake. Select only the AI payload context
-needed for the task, define lightweight VO or DTO candidates when clear, and
-route subtasks to an appropriate model, code assistant, or deterministic
-tool. When AI or model output is involved, define input, output, and
-reasoning evidence contracts before implementation.
-
-Use the full `[DESIGN CHECK]` scaffold only for Feature Path and Architecture
-Path work. For Fast Path work, use a compact design note that states scope,
-omitted context, deterministic checks, and why the full scaffold is
-unnecessary.
+Every request starts from design intake. Load
+`.agents/skills/design-intake/SKILL.md` and output its `[DESIGN CHECK]`
+scaffold for Feature Path and Architecture Path work. Fast Path uses the
+compact note in that skill.
 
 ## Decision Gates
 
@@ -42,15 +36,14 @@ allowed paths. CI success is not Adjudicator approval.
 
 ## Handoff and Completion
 
-When handing off or stopping before completion, use
-`docs/templates/agent-handoff.md`, stating current phase, completed
-artifacts, next safe action, blockers, files changed, and verification
-status. When asking the Adjudicator for approval, use the review points from
-`docs/templates/adjudicator-review.md`. When an agent review packet is
-already required, honor `docs/collaboration/runtime-routing.md`: use
-`docs/templates/same-context-review.md` for `same_context`, request a host
-subagent launch for `separate_context`, and ask the Adjudicator when the
-setting is `ask`.
+When handing off or stopping before completion, follow
+`.agents/skills/agent-handoff/SKILL.md`. When asking the Adjudicator for
+approval, use the review points from `docs/templates/adjudicator-review.md`.
+When an agent review packet is already required, honor
+`docs/collaboration/runtime-routing.md`: follow
+`.agents/skills/same-context-review/SKILL.md` for `same_context`, request a
+host subagent launch for `separate_context`, and ask the Adjudicator when
+the setting is `ask`.
 
 Generated source code must minimize human cognitive load. Prefer clear
 responsibility boundaries, small functions, straightforward names, and
@@ -72,8 +65,5 @@ meta-level lessons in `docs/collaboration/process-lessons-log.md` per
 `docs/collaboration/process-lessons.md`. Do not write a session incident
 narrative. Read that log at the next design intake and before implementation.
 
-When marking a local issue or work plan `done`, run the same-context process
-review in `docs/collaboration/process-review.md`. If a deviation or
-operational problem is found, agree the disposition with the Adjudicator and
-write template feedback under `docs/collaboration/template-feedback/` when
-they so decide.
+When marking a local issue or work plan `done`, follow
+`.agents/skills/process-review/SKILL.md`.

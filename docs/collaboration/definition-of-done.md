@@ -35,14 +35,14 @@ A task is not done unless:
   verification, and next approval.
 - agent-to-agent review, when already required, follows
   `docs/collaboration/runtime-routing.md` isolation (`same_context` uses
-  `docs/templates/same-context-review.md`; `separate_context` is a host
+  `.agents/skills/same-context-review/SKILL.md`; `separate_context` is a host
   launch request; `ask` stops for the Adjudicator) and does not replace
   Adjudicator approval.
 - review outcomes that should change later work are recorded as meta-level
   lessons per `docs/collaboration/process-lessons.md`, not as incident
   narratives, and are applied at the next design intake and implementation.
 - a local issue or work plan is not `done` until the same-context process
-  review in `docs/collaboration/process-review.md` has run.
+  review in `.agents/skills/process-review/SKILL.md` has run.
 - the Canonical Register and Review Summary remain derived navigation/review
   aids and do not replace the existing Issue, specification, ADR, Work Plan, or
   Adjudicator approval as the agreement unit.
@@ -116,7 +116,7 @@ or the handoff must explicitly identify the pending synchronization. A status is
 complete from code and tests alone.
 
 When the status becomes `done`, the same context also runs the completion
-process review in `docs/collaboration/process-review.md`. Record a
+process review in `.agents/skills/process-review/SKILL.md`. Record a
 meta-level lesson when the pattern should affect later work. If a deviation
 or operational problem is found, agree the disposition with the Adjudicator
 and write template feedback when they so decide.

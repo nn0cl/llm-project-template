@@ -41,8 +41,9 @@ Read:
 2. directly touched files.
 3. `docs/collaboration/definition-of-done.md` before final reporting.
 
-Output a compact design note with scope, omitted context, deterministic checks,
-and why Feature Path or Architecture Path is unnecessary.
+Load `.agents/skills/design-intake/SKILL.md` and output its compact design
+note with scope, omitted context, deterministic checks, and why Feature Path
+or Architecture Path is unnecessary.
 
 Do not use Fast Path when the task changes behavior, tests, architecture,
 agent instructions, collaboration rules, privacy policy, or accepted specs.
@@ -64,7 +65,8 @@ Read:
 8. `docs/architecture/io-reasoning-contracts.md` only when AI/model output is
    involved.
 
-Output the full `[DESIGN CHECK]` scaffold and execute only the requested phase.
+Load `.agents/skills/design-intake/SKILL.md` and output the full
+`[DESIGN CHECK]` scaffold. Execute only the requested phase.
 
 ### Architecture Path
 
@@ -88,7 +90,8 @@ Read:
 10. `docs/architecture/io-reasoning-contracts.md` when AI/model output is
    involved.
 
-Output the full `[DESIGN CHECK]` scaffold and stop for Adjudicator approval when a new
+Load `.agents/skills/design-intake/SKILL.md` and output the full
+`[DESIGN CHECK]` scaffold. Stop for Adjudicator approval when a new
 architecture or process decision is required.
 
 ## Design First

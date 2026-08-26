@@ -13,7 +13,8 @@ Root `AGENTS.md` is auto-applied by Cursor independently of this file
 automatically"). It holds ADR capture, design intake, AI payload/routing
 selection, and `[DESIGN CHECK]`-scaffold-vs-compact-note usage. Do not duplicate
 those paragraphs here, and do not `@`-reference `AGENTS.md` from
-`.cursor/rules`. Decision Gates and
+`.cursor/rules`. The `[DESIGN CHECK]` scaffold is in
+`.agents/skills/design-intake/SKILL.md`. Decision Gates and
 Handoff/Completion below are Cursor-side complements kept in this file.
 
 ## Decision Gates
@@ -33,15 +34,14 @@ Stop for Adjudicator decision when:
 
 ## Handoff and Completion
 
-When handing off or stopping before completion, use
-`docs/templates/agent-handoff.md`, stating current phase, completed
-artifacts, next safe action, blockers, files changed, and verification
-status. When asking the Adjudicator for approval, use the review points from
-`docs/templates/adjudicator-review.md`. When an agent review packet is
-already required, honor `docs/collaboration/runtime-routing.md`: use
-`docs/templates/same-context-review.md` for `same_context`, request a host
-subagent launch for `separate_context`, and ask the Adjudicator when the
-setting is `ask`. Root `AGENTS.md` already states the session-entry hook;
+When handing off or stopping before completion, follow
+`.agents/skills/agent-handoff/SKILL.md`. When asking the Adjudicator for
+approval, use the review points from `docs/templates/adjudicator-review.md`.
+When an agent review packet is already required, honor
+`docs/collaboration/runtime-routing.md`: follow
+`.agents/skills/same-context-review/SKILL.md` for `same_context`, request a
+host subagent launch for `separate_context`, and ask the Adjudicator when
+the setting is `ask`. Root `AGENTS.md` already states the session-entry hook;
 do not duplicate it here.
 
 Generated source code must minimize human cognitive load. Prefer clear
@@ -62,6 +62,5 @@ issue dependencies before creating the branch, per
 When an agent review packet is produced, record reusable outcomes as
 meta-level lessons per `docs/collaboration/process-lessons.md`. Do not write
 a session incident narrative. When marking a local issue or work plan `done`,
-run the same-context process review in
-`docs/collaboration/process-review.md`. Root `AGENTS.md` already states the
-placeholder and session-entry rules; do not duplicate them here.
+follow `.agents/skills/process-review/SKILL.md`. Root `AGENTS.md` already
+states the placeholder and session-entry rules; do not duplicate them here.
