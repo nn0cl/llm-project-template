@@ -38,7 +38,11 @@ When handing off or stopping before completion, use
 `docs/templates/agent-handoff.md`, stating current phase, completed
 artifacts, next safe action, blockers, files changed, and verification
 status. When asking the Adjudicator for approval, use the review points from
-`docs/templates/adjudicator-review.md`.
+`docs/templates/adjudicator-review.md`. When an agent review packet is
+already required, honor `docs/collaboration/runtime-routing.md`: use
+`docs/templates/same-context-review.md` for `same_context`, request a host
+subagent launch for `separate_context`, and ask the Adjudicator when the
+setting is `ask`.
 
 Generated source code must minimize human cognitive load. Prefer clear
 responsibility boundaries, small functions, straightforward names, and

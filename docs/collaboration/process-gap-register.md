@@ -179,6 +179,23 @@ Resolution:
 - Use the Issue Status Synchronization section in `docs/collaboration/definition-of-done.md`.
 - Include the issue and work-plan updates in the same reviewable unit as the implementation status change.
 
+### 12. Runtime routing for review and implementation
+
+Status: resolved.
+
+Why it matters:
+
+- Adopters need to choose same-context review versus a separate-context
+  subagent, and optional host-displayed models, without editing the shared
+  contract or invoking a provider from a setup script.
+
+Resolution:
+
+- Use `docs/collaboration/runtime-routing.md`.
+- Store live choices in `docs/collaboration/runtime-routing.toml`.
+- Create or refresh that file with `scripts/configure-ai-collaboration.sh`.
+- See `docs/architecture/adr/0015-runtime-routing-setup.md`.
+
 ## Current Assessment
 
 Ready enough to start design intake and Phase 1 work once the project's

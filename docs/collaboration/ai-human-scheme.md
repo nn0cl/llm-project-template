@@ -112,7 +112,9 @@ Required for Phase 3:
 
 - refactor summary.
 - verification output summary.
-- reviewer empathy summary.
+- reviewer empathy summary, using the review isolation in
+  `docs/collaboration/runtime-routing.md` when an agent review packet is
+  required.
 
 ## Decision Gates
 

@@ -33,6 +33,11 @@ A task is not done unless:
 - substantial review work has a Review Summary or equivalent reviewer-facing
   packet linking its Canonical documents, findings, dispositions, blockers,
   verification, and next approval.
+- agent-to-agent review, when already required, follows
+  `docs/collaboration/runtime-routing.md` isolation (`same_context` uses
+  `docs/templates/same-context-review.md`; `separate_context` is a host
+  launch request; `ask` stops for the Adjudicator) and does not replace
+  Adjudicator approval.
 - the Canonical Register and Review Summary remain derived navigation/review
   aids and do not replace the existing Issue, specification, ADR, Work Plan, or
   Adjudicator approval as the agreement unit.

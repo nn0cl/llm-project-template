@@ -41,7 +41,9 @@ GitHub auto-merge after required checks pass. Local mode creates and commits a
 local branch without pushing it. The base branch can be selected with
 --base-branch. The provider-neutral --subagent option records whether a
 subagent handoff is requested; this script does not choose or invoke an LLM
-provider.
+provider. Day-to-day review and implementation routing lives in the
+target-owned docs/collaboration/runtime-routing.toml created by
+scripts/configure-ai-collaboration.sh; this sync never overwrites that file.
 
 Options:
   --target PATH        Target repository directory. Required.

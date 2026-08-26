@@ -97,6 +97,22 @@ scripts/copy-ai-collaboration-files.sh \
 Use `--dry-run` to preview actions. Use `--force` only when you intentionally
 want to replace files that are part of this template.
 
+## Configure review and implementation routing
+
+After copying, record how agent-to-agent review and implementation should be
+isolated, and optional host-displayed model identifiers:
+
+```bash
+scripts/configure-ai-collaboration.sh --target /path/to/target-repo
+```
+
+A TTY asks; `--non-interactive` writes the defaults (review `same_context`,
+implementation `host`, empty model fields). The live file
+`docs/collaboration/runtime-routing.toml` is target-owned and is not
+overwritten by later template sync. See
+`docs/collaboration/runtime-routing.md`. This does not replace Adjudicator
+approval and does not call a model.
+
 ## Initialize an LLM session
 
 After copying the template into the target repository, run:
@@ -143,7 +159,7 @@ architecture layers. Before using it on a real project:
    stack-specific jobs (lint, test, dependency policy) once those tools
    exist.
 6. Renumber/extend `docs/architecture/adr/` as real architecture decisions are
-   made. The eleven ADRs included here (0001-0011) describe the collaboration
+   made. The fifteen ADRs included here (0001-0015) describe the collaboration
    process itself and normally do not need to change.
 
 ## Introduce into an existing repository
@@ -192,7 +208,7 @@ target project's accepted architecture or feature specifications.
     ├── templates/                  # design intake, handoff, trace, issue, work-plan, ADR, Gherkin
     │   └── examples/               # filled-in stack-specific examples, for reference only
     ├── architecture/               # Clean Architecture rules, quickstart, readiness checklist
-    │   └── adr/                    # architecture decision records (0001-0011 = process ADRs)
+    │   └── adr/                    # architecture decision records (0001-0015 = process ADRs)
     ├── specs/                      # EARS/Gherkin feature specifications
     ├── issues/                     # local issue files (LISS-0000 style)
     ├── work-plans/                 # multi-issue work plans
@@ -200,6 +216,7 @@ target project's accepted architecture or feature specifications.
 └── scripts/
     ├── copy-ai-collaboration-files.sh
     ├── update-ai-collaboration-files.sh
+    ├── configure-ai-collaboration.sh
     ├── init-llm-context.sh
     └── lib/collaboration-template-paths.sh
 ```

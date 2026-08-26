@@ -204,6 +204,7 @@ Existing files were $([ "$force" = true ] && echo "overwritten when matched" || 
 Recorded sync point in .collaboration-template-version for future updates.
 
 Next:
+  scripts/configure-ai-collaboration.sh --target "$target"
   cd "$target"
   scripts/init-llm-context.sh .
 

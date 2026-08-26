@@ -111,6 +111,17 @@ scripts/copy-ai-collaboration-files.sh \
   --stack "backend language, frontend framework, package manager"
 ```
 
+導入後、レビューと実装のルーティングを記録します。TTY では対話。
+`--non-interactive` は既定値を書き込みます。
+
+```bash
+scripts/configure-ai-collaboration.sh --target /path/to/target-repo
+```
+
+live ファイル `docs/collaboration/runtime-routing.toml` は導入先所有で、
+後続のテンプレート同期では上書きしません。詳しくは
+`docs/collaboration/runtime-routing.md`。
+
 導入後、target repo で初回 LLM session 用 prompt を作ります。
 
 ```bash

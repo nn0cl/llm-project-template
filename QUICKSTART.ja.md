@@ -83,6 +83,13 @@ scripts/copy-ai-collaboration-files.sh --target ~/dev/my-target-project
 的に上書きしたいとき」だけに使ってください。導入先プロジェクト自身の
 README、仕様、architecture document を上書きする目的では絶対に使いません。
 
+続けて、レビューと実装のルーティングを記録します（TTY では対話。
+`--non-interactive` は既定値を書き込みます）。
+
+```bash
+scripts/configure-ai-collaboration.sh --target ~/dev/my-target-project
+```
+
 続けて、導入先リポジトリ側で実行します。
 
 ```bash
@@ -110,7 +117,7 @@ scaffolding として導入されたファイルの中には、その後プロ�
 以下のリストは
 [`scripts/lib/collaboration-template-paths.sh`](scripts/lib/collaboration-template-paths.sh)
 ——copy/update script が使っているのと同じリスト——を、削除の安全度で分類
-したものです。ただしこれは 2026-07-16 時点の手作業によるスナップショット
+したものです。ただしこれは 2026-08-26 時点の手作業によるスナップショット
 であり、自動生成ではありません。その後テンプレートが変更されている場合、
 正は常にテンプレートリポジトリのパスリストと `ci.yml` の `required_files`
 であり、この節はそれらより遅れている可能性があります。
@@ -124,6 +131,7 @@ scaffolding として導入されたファイルの中には、その後プロ�
 
 - `scripts/copy-ai-collaboration-files.sh`
 - `scripts/update-ai-collaboration-files.sh`
+- `scripts/configure-ai-collaboration.sh`
 - `scripts/init-llm-context.sh`
 - `scripts/lib/collaboration-template-paths.sh`
 - `.collaboration-template-version`（導入先リポジトリ直下の同期マーカー）
@@ -147,9 +155,9 @@ scaffolding として導入されたファイルの中には、その後プロ�
 これらは `rm -rf` しないでください。フォルダ内のテンプレート由来ファイル
 だけを取り除き、プロジェクトが追加したものは残します。
 
-- `docs/architecture/adr/0001-*.md` から `0011-*.md` までは、このテンプレー
-  トが同梱する process ADR です。この 11 件だけを削除し、プロジェクトが
-  その後採番した ADR（0012 以降）は残します。
+- `docs/architecture/adr/0001-*.md` から `0015-*.md` までは、このテンプレー
+  トが同梱する process ADR です。この 15 件だけを削除し、プロジェクトが
+  その後採番した ADR（0016 以降）は残します。
 - `docs/architecture/` はそれ以外にも、テンプレート提供ファイル
   （`agent-quickstart.md`、`implementation-readiness.md`、
   `ai-request-routing.md`、`io-reasoning-contracts.md`、
@@ -158,7 +166,8 @@ scaffolding として導入されたファイルの中には、その後プロ�
   architecture document が混在します。テンプレート提供ファイルだけを個別
   に削除し、残りは保持します。
 - `docs/collaboration/` はほぼ全体がテンプレート提供の process 文書です
-  が、`docs/collaboration/traces/` や、実際の決定を記録するために
+  が、`docs/collaboration/traces/`、作成していれば
+  `docs/collaboration/runtime-routing.toml`、実際の決定を記録するために
   プロジェクトが編集したファイルは、プロジェクト自身の監査履歴です。
   あとで参照したくなる可能性があるなら、削除ではなく archive を検討して
   ください。
@@ -174,7 +183,7 @@ scaffolding として導入されたファイルの中には、その後プロ�
   「Check required project documents」step は、上の「そのまま削除して
   よい」節に挙げたスクリプト・テンプレート・process 文書を含む、この
   テンプレートが導入するほぼすべてのファイルの存在を検査し、
-  「Check architecture decision records」step は ADR 0001〜0011 を検査
+  「Check architecture decision records」step は ADR 0001〜0015 を検査
   します。リストを削る前に何かを削除すると、次の push で CI が落ちます。
   実際に残す内容に合わせて step を書き換えるか削除してください。
 

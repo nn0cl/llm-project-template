@@ -80,6 +80,13 @@ you want to preview without writing anything, and only use `--force` when you
 intend to overwrite files that belong to this template — never to overwrite
 your project's own README, specs, or architecture docs.
 
+Then record review and implementation routing (interactive on a TTY;
+`--non-interactive` writes the defaults):
+
+```bash
+scripts/configure-ai-collaboration.sh --target ~/dev/my-target-project
+```
+
 Then, from the target repository:
 
 ```bash
@@ -106,7 +113,7 @@ recorded under this template's own rules.
 The list below follows
 [`scripts/lib/collaboration-template-paths.sh`](scripts/lib/collaboration-template-paths.sh) —
 the same list the copy/update scripts use — split by how safe each item is to
-delete outright. It is a hand-maintained snapshot (as of 2026-07-16), not
+delete outright. It is a hand-maintained snapshot (as of 2026-08-26), not
 generated from those files: if the template has changed since, the paths
 list and `ci.yml`'s `required_files` in the template repository are the
 authority, and this section may lag behind them.
@@ -120,6 +127,7 @@ section.
 
 - `scripts/copy-ai-collaboration-files.sh`
 - `scripts/update-ai-collaboration-files.sh`
+- `scripts/configure-ai-collaboration.sh`
 - `scripts/init-llm-context.sh`
 - `scripts/lib/collaboration-template-paths.sh`
 - `.collaboration-template-version` (the sync marker at your repo root)
@@ -142,9 +150,9 @@ want — versus, say, relaxing one rule — before removing:
 Do not `rm -rf` these. Remove only the template-authored files inside them
 and keep anything your project added:
 
-- `docs/architecture/adr/0001-*.md` through `0011-*.md` are the process ADRs
-  this template ships with; remove only those eleven, and keep any ADR your
-  project numbered afterward (0012 and up).
+- `docs/architecture/adr/0001-*.md` through `0015-*.md` are the process ADRs
+  this template ships with; remove only those fifteen, and keep any ADR your
+  project numbered afterward (0016 and up).
 - `docs/architecture/` otherwise holds a mix of template-provided files
   (`agent-quickstart.md`, `implementation-readiness.md`,
   `ai-request-routing.md`, `io-reasoning-contracts.md`,
@@ -152,9 +160,10 @@ and keep anything your project added:
   `README.md`) and the stack-specific documents your project wrote inside the
   same folder. Remove the template files individually; keep the rest.
 - `docs/collaboration/` is almost entirely template-provided process docs,
-  but `docs/collaboration/traces/` and any file your project edited to
-  record real decisions are your project's audit history. Consider archiving
-  instead of deleting if you might want that history later.
+  but `docs/collaboration/traces/`, `docs/collaboration/runtime-routing.toml`
+  if you created it, and any file your project edited to record real
+  decisions are your project's audit history. Consider archiving instead of
+  deleting if you might want that history later.
 - `docs/issues/`, `docs/work-plans/`, `docs/specs/`, `docs/evaluation/` are
   scaffolding directories the template ships empty (`.gitkeep` only). By the
   time you are uninstalling, they almost certainly hold real project
@@ -167,7 +176,7 @@ and keep anything your project added:
   project documents" step asserts the existence of nearly every file this
   template installs — including the scripts, templates, and process docs
   listed as safe to delete above — and "Check architecture decision
-  records" asserts ADRs 0001–0011. Deleting anything before trimming those
+  records" asserts ADRs 0001–0015. Deleting anything before trimming those
   lists makes CI fail on the next push. Rewrite or remove those steps to
   match what you actually keep.
 

@@ -145,7 +145,8 @@ verification status, blockers, and the next safe action.
 
 | Situation | Aid |
 |-----------|-----|
-| First session after adoption | `scripts/init-llm-context.sh` |
+| First session after adoption | `scripts/configure-ai-collaboration.sh`, then `scripts/init-llm-context.sh` |
+| Review / implementation routing | `docs/collaboration/runtime-routing.md` and the live toml when present |
 | Deeper first assessment | `docs/templates/examples/adoption-prompts.md` |
 | Daily resume or new task | This guide plus a short Adjudicator message |
 | Contract reload only | No script required; contract files load per tool |

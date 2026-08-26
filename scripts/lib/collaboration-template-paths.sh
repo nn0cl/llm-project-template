@@ -25,8 +25,10 @@ collaboration_template_paths=(
   "docs/work-plans"
   "scripts/copy-ai-collaboration-files.sh"
   "scripts/update-ai-collaboration-files.sh"
+  "scripts/configure-ai-collaboration.sh"
   "scripts/init-llm-context.sh"
   "scripts/check-execution-batch-reviews.py"
+  "scripts/check-document-lifecycle.py"
   "scripts/lib/collaboration-template-paths.sh"
 )
 
@@ -34,6 +36,7 @@ collaboration_template_paths=(
 # copied into adopting projects as target-owned planning history.
 collaboration_template_exclude_paths=(
   "docs/collaboration/traces/*.md"
+  "docs/collaboration/runtime-routing.toml"
   "docs/issues/LISS-*.md"
   "docs/specs/template-rollout.md"
 )

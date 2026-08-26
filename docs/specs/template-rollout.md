@@ -24,7 +24,9 @@ external APIs, or feature specifications of a target repository.
 - Creating target project domain specifications.
 - Creating target project application code.
 - Selecting concrete LLM providers, model names, databases, or third-party
-  services for a target project.
+  services for a target project. The template may record adopter-supplied
+  host-displayed model identifiers in a target-owned settings file; it does
+  not choose those identifiers itself.
 
 ## Scenarios
 
@@ -97,6 +99,16 @@ When the maintainer supplies `--subagent ask|yes|no` or answers the TTY prompt
 Then the selected value is recorded in the output and GitHub PR body when used
 And the template remains provider-neutral
 And no subagent provider is invoked implicitly.
+
+### Scenario: Configure review and implementation routing after copy
+
+Given the collaboration template files exist in a target repository
+When the maintainer runs `scripts/configure-ai-collaboration.sh --target <repo>`
+Then a TTY may ask for review isolation, review model, implementation
+isolation, and implementation model
+And the script writes `docs/collaboration/runtime-routing.toml`
+And the script does not call a model, store secrets, or invoke a subagent
+And later template sync does not overwrite that live file.
 
 ### Scenario: Opt in to GitHub auto-merge
 

@@ -35,6 +35,9 @@ Task:
 - Do not implement, refactor, delete, or overwrite existing project behavior.
 - Do not infer the target domain model, datastore, provider, external API, or
   LLM model without an accepted specification, ADR, or Adjudicator decision.
+- If `docs/collaboration/runtime-routing.toml` is missing, recommend
+  `scripts/configure-ai-collaboration.sh` rather than inventing isolation or
+  model names.
 
 Output:
 
