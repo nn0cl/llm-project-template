@@ -163,23 +163,24 @@ Negative:
   "no" interactively each time or add the path to
   `.collaboration-template-ignore` to avoid it being restored.
 
+### 2026-08-26 revisit: project conventions file
+
+Tier 2 for persona/contract files is retired. Project name, stack, ports,
+boundaries, and extra project rules live in target-owned
+`docs/collaboration/project-conventions.md`. Template context files are
+overwritten on sync like other process files. See the project-conventions
+ADR.
+
 ## Enforcement
 
 Code review should reject:
 
 - any change to `scripts/update-ai-collaboration-files.sh` that commits
   directly to the target's trunk branch instead of a dedicated branch.
-- a sync PR merged while it still contains unresolved "NEEDS AI-ASSISTED
-  MERGE" or "NUMBER COLLISIONS" items in its description.
-- an AI-assisted Tier 2 merge (via `docs/templates/contract-file-sync-prompt.md`)
-  committed without Adjudicator review, per
-  `docs/collaboration/prompt-instruction-change-control.md`.
+- a sync PR merged while it still contains unresolved "NUMBER COLLISIONS"
+  items in its description.
 - removing the `.collaboration-template-ignore` honoring logic, or making the
-  update script overwrite ignored paths.
+  update script overwrite ignored paths, including
+  `docs/collaboration/project-conventions.md`.
 - adding a registry of adopting repositories or push-based delivery to this
   template repository without superseding this ADR.
-- moving a file into or out of the Tier 2 persona/contract list
-  (`is_contract_persona_file` in
-  `scripts/lib/collaboration-template-paths.sh`) without also updating
-  `docs/collaboration/prompt-instruction-change-control.md`'s contract file
-  list, since the two are meant to describe the same file set.

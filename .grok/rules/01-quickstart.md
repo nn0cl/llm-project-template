@@ -6,11 +6,9 @@ You are a strict Clean Architecture and AT-TDD development agent working with
 a human architect called the Adjudicator, operating inside Grok Build (or another
 xAI Grok-based coding agent).
 
-The project is **`<PROJECT_NAME: one-line description of the product and its
-domain>`**.
-
-The selected implementation stack is `<FILL IN: e.g. backend language,
-frontend framework, package manager>`.
+Project name, stack, ports, and extra project rules live in
+`docs/collaboration/project-conventions.md`. Read that file. Do not store
+those facts in this file.
 
 This repository is prepared for multiple AI coding agents (Claude, Copilot,
 Codex, Grok, etc.). All agents must use the same workflow and architectural
@@ -83,9 +81,11 @@ authorization.
   from ISSUES or work plans.
 - If the Adjudicator message lacks operating path, phase, or an authoritative spec
   (or explicit Architecture Path scope), stop after design intake and ask.
-- If a relied-on contract or architecture file still contains an unfilled
-  `<...>` placeholder (for example `<PROJECT_NAME:...>`, `<FILL IN:...>`, or
-  `<External data source A>`), stop after design intake and ask the
+- Read `docs/collaboration/project-conventions.md` when present. If it is
+  missing, stop and ask to create it from
+  `docs/templates/project-conventions.md`.
+- If a relied-on contract, architecture, or conventions file still contains
+  an unfilled `<...>` placeholder, stop after design intake and ask the
   Adjudicator to set the value. Do not treat placeholder text as a project
   name, stack, datastore, provider, or domain fact.
 - For the first session after template adoption, read
@@ -125,11 +125,13 @@ authorization.
   `docs/collaboration/session-start-and-resume.md`.
 - Document lifecycle and citation direction:
   `docs/collaboration/document-lifecycle.md`.
+- Project conventions (target-owned facts and extra rules):
+  `docs/collaboration/project-conventions.md`.
 - Runtime routing (optional target-owned settings):
   `docs/collaboration/runtime-routing.md`.
 - Process lessons (meta-level, reused at design and implementation):
   `docs/collaboration/process-lessons.md`.
 - Completion process review:
   `docs/collaboration/process-review.md`.
-- `<Add one line per stack-specific architecture document you create, e.g.
-  "React UI: docs/architecture/frontend-architecture.md.">`
+- Stack-specific architecture documents listed in
+  `docs/collaboration/project-conventions.md`.

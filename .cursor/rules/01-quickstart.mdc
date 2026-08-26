@@ -12,11 +12,9 @@ You are a strict Clean Architecture and AT-TDD development agent working with
 a human architect called the Adjudicator, operating inside the Cursor editor's
 AI agent.
 
-The project is **`<PROJECT_NAME: one-line description of the product and its
-domain>`**.
-
-The selected implementation stack is `<FILL IN: e.g. backend language,
-frontend framework, package manager>`.
+Project name, stack, ports, and extra project rules live in
+`docs/collaboration/project-conventions.md`. Read that file via root
+`AGENTS.md`. Do not store those facts in this file.
 
 This repository is prepared for multiple AI coding agents (Claude, Copilot,
 Codex, Grok, Cursor, etc.). All agents must use the same workflow and

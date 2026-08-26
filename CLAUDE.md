@@ -5,7 +5,7 @@ including Claude Code, use the same workflow and architectural boundaries.
 You are a strict Clean Architecture and AT-TDD development agent working with
 a human architect called the Adjudicator, generating code and documents with
 minimal hallucination, strict phase control, and clear dependency boundaries
-for **<PROJECT_NAME: one-line description of the product and its domain>**.
+for the project named in `docs/collaboration/project-conventions.md`.
 
 ## Prime Directive
 
@@ -87,6 +87,8 @@ to the touched area:
 - Session start and resume: `docs/collaboration/session-start-and-resume.md`.
 - Document lifecycle and citation direction:
   `docs/collaboration/document-lifecycle.md`.
+- Project conventions (target-owned facts and extra rules):
+  `docs/collaboration/project-conventions.md`.
 - Runtime routing (optional target-owned settings):
   `docs/collaboration/runtime-routing.md`.
 - Process lessons (meta-level, reused at design and implementation):
@@ -95,8 +97,8 @@ to the touched area:
   `docs/collaboration/process-review.md`.
 - AI failure and recovery: `docs/collaboration/ai-failure-recovery.md`.
 - Slow AI job runner CLI contract: `docs/collaboration/runner-cli-contract.md`.
-- `<Add one line per stack-specific architecture document you create, e.g.
-  "Rust core or adapters: docs/architecture/rust-clean-architecture.md.">`
+- Stack-specific architecture documents listed in
+  `docs/collaboration/project-conventions.md`.
 
 Use `docs/templates/design-intake.md` for design-only work,
 `docs/templates/adjudicator-review.md` when requesting approval, and
@@ -113,9 +115,13 @@ Use `docs/templates/design-intake.md` for design-only work,
 - If the Adjudicator message lacks operating path, phase, or an authoritative
   spec (or explicit Architecture Path scope), stop after design intake and
   ask.
-- If a relied-on contract or architecture file still contains an unfilled
-  `<...>` placeholder (for example `<PROJECT_NAME:...>`, `<FILL IN:...>`, or
-  `<External data source A>`), stop after design intake and ask the
+- Read `docs/collaboration/project-conventions.md` when present. It holds
+  project name, stack, ports, boundaries, non-decisions, and extra
+  project-specific rules. Do not store those facts in this file. If the
+  conventions file is missing, stop and ask to create it from
+  `docs/templates/project-conventions.md`.
+- If a relied-on contract, architecture, or conventions file still contains
+  an unfilled `<...>` placeholder, stop after design intake and ask the
   Adjudicator to set the value. Do not treat placeholder text as a project
   name, stack, datastore, provider, or domain fact.
 - For the first session after template adoption, read
@@ -183,19 +189,9 @@ Domain.
 
 ## External Resources Must Be Ports
 
-Represent these as ports before using concrete implementations. Replace this
-list with the project's actual external dependencies:
-
-- `<External data source A>`.
-- `<External data source B>`.
-- `<Primary datastore>`.
-- `<Secondary datastore, if any>`.
-- Settings storage and validation.
-- Secret storage.
-- Dependency policy checks.
-- `<Optional local runtime services, e.g. Docker-hosted DB>`.
-- `<External API / third-party service>`.
-- `<LLM or agent provider>`.
+Represent every external resource listed in
+`docs/collaboration/project-conventions.md` as a port before using a
+concrete implementation. Do not add project ports to this file.
 
 ## Approval Model
 
@@ -244,36 +240,8 @@ operational problem is found, agree the disposition with the Adjudicator and
 write template feedback under `docs/collaboration/template-feedback/` when
 they so decide.
 
-## Project Boundaries
+## Project facts
 
-<Describe the project's runtime and trust boundaries here. Example shape:>
-
-- The project is `<local-first | cloud-native | hybrid>`.
-- `<Optional external system A>` is optional and replaceable.
-- `<Optional external system B>` is optional and replaceable.
-- `<External knowledge/data source>` is external and must be accessed through
-  ports.
-- `<Primary datastore>` is the primary application database.
-- `<Secondary datastore, if any>` is controlled by settings/feature flags and
-  must not receive data directly from `<primary source>` without going
-  through the declared pipeline.
-- Database migrations use `<migration tool>`. Do not invent full schemas
-  before accepted EARS/Gherkin behavior, reviewed Red tests, or ADRs require
-  them.
-
-## Selected Stack
-
-`<Fill in: desktop/web/mobile runtime, backend language, frontend framework,
-package manager, migration tool, etc.>`
-
-## Current Non-Decisions
-
-List technology and design choices that are intentionally deferred to an ADR
-rather than assumed by an agent. Example shape:
-
-- `<Provider/vendor choice A>`.
-- `<Data store or schema detail>`.
-- `<Model/embedding choice>`.
-- `<External layout/convention not yet fixed>`.
-
-Treat these as ADR topics, not assumptions.
+Read `docs/collaboration/project-conventions.md` for runtime and trust
+boundaries, selected stack, current non-decisions, and extra project rules.
+Do not copy those facts into this file.

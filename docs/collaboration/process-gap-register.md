@@ -231,6 +231,22 @@ Resolution:
 - Copy/update exclude this template's `LISS-*.md`, `WP-*.md`, traces, and
   reviews.
 
+### 15. Project conventions file
+
+Status: resolved.
+
+Why it matters:
+
+- Project facts stored in template context files block template-authoritative
+  updates of those files.
+
+Resolution:
+
+- Keep facts and extra project rules in
+  `docs/collaboration/project-conventions.md`.
+- Template context files are overwritten on sync and instruct agents to read
+  the conventions file.
+
 ## Current Assessment
 
 Ready enough to start design intake and Phase 1 work once the project's

@@ -12,11 +12,14 @@ Each new LLM session starts without prior chat context.
 3. Recover progress from repository artifacts, not from assumed chat history.
    Current rules come from policy documents, ADRs, and specifications, not
    from ISSUES or work plans.
-4. If `docs/collaboration/runtime-routing.toml` exists, apply it when routing
+4. Read `docs/collaboration/project-conventions.md` when present. If it is
+   missing, stop and ask to create it from
+   `docs/templates/project-conventions.md`.
+5. If `docs/collaboration/runtime-routing.toml` exists, apply it when routing
    review or implementation. If it is missing, keep capability-class routing
    on the host agent and do not invent model names. See
    `docs/collaboration/runtime-routing.md`.
-5. If path, phase, or authoritative scope is missing, stop after design intake
+6. If path, phase, or authoritative scope is missing, stop after design intake
    and ask the Adjudicator.
 
 For Adjudicator checklists and resume examples, see
@@ -150,9 +153,7 @@ plan before continuing.
 - Adapters implement ports.
 - Delivery handlers (UI components, HTTP/RPC handlers, CLI entry points) are
   thin and call use cases only.
-- `<Add your project's primary datastore and any settings-gated secondary
-  store rules here, e.g. "Postgres is the primary application database" or
-  "Analytics writes are gated by a feature flag".>`
+- Datastore and runtime facts: `docs/collaboration/project-conventions.md`.
 
 ## Required Area Documents
 
@@ -161,16 +162,12 @@ plan before continuing.
 - Dependency policy: `docs/architecture/dependency-policy.md`
 - AI input/output/reasoning: `docs/architecture/io-reasoning-contracts.md`
 - AI-human collaboration: `docs/collaboration/ai-human-scheme.md`
-- `<Add one line per stack-specific architecture document you create, e.g.
-  "Backend core: docs/architecture/backend-architecture.md.">`
+- Project conventions: `docs/collaboration/project-conventions.md`
+- Stack-specific architecture documents listed in that conventions file
 
 ## Stop Conditions
 
 Stop and ask for Adjudicator decision or ADR when the task requires choosing:
 
-- `<Persistence engine or schema details beyond the accepted baseline>`.
-- `<Vector DB / embedding model or dimensions>`.
-- `<External vault/layout convention>`.
-- `<Provider API or SDK>`.
-- `<Any other technology choice listed as a "Current Non-Decision" in
-  CLAUDE.md>`.
+- a current non-decision listed in `docs/collaboration/project-conventions.md`.
+- a new technology, provider, datastore, or schema beyond that file.

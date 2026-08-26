@@ -1,17 +1,13 @@
 # Architecture Overview
 
-The project uses Clean Architecture with `<FILL IN: local-first / cloud /
-hybrid>` runtime assumptions.
-
-The selected stack is `<FILL IN: e.g. Tauri + Rust + React, or Node + Next.js,
-or Django + HTMX>`. State which part of the stack owns the application core
-and which owns UI presentation.
+The project uses Clean Architecture. Runtime, stack, domain summary, ports,
+and non-decisions live in `docs/collaboration/project-conventions.md`.
 
 ## Layers
 
 ### Domain
 
-Pure `<FILL IN: your core domain concepts>` behavior.
+Pure domain behavior named in `docs/collaboration/project-conventions.md`.
 
 Must not depend on:
 
@@ -23,17 +19,15 @@ Must not depend on:
 
 Coordinates domain behavior through ports.
 
-Examples (replace with your project's actual use cases):
-
-- `<Example use case A>`.
-- `<Example use case B>`.
+Examples belong in the target's specifications and stack-specific
+architecture documents, not in this file.
 
 ### Ports
 
 Interfaces owned by the application core.
 
-Ports isolate every external resource named in `CLAUDE.md` / `AGENTS.md`
-under "External Resources Must Be Ports".
+Ports isolate every external resource named in
+`docs/collaboration/project-conventions.md`.
 
 ### Adapters
 
@@ -57,17 +51,11 @@ It must not own:
 
 ## Runtime Direction
 
-`<FILL IN: where does this run — local device, server, browser, hybrid — and
-which parts are optional/replaceable providers (e.g. cloud AI, external
-APIs)?>`
+See `docs/collaboration/project-conventions.md`.
 
 ## Selected Technology
 
-- `<Runtime/shell>`.
-- `<Application language>`.
-- `<UI framework>`.
-- `<Package manager>`.
-- `<Distribution goal, if relevant>`.
+See `docs/collaboration/project-conventions.md`.
 
 ## Detailed Rules
 
@@ -79,7 +67,8 @@ APIs)?>`
 - `io-reasoning-contracts.md`: AI input/output/reasoning contracts.
 - `external-resource-adoption-contract.md`: optional contract for adopting
   AI-generated or human-sourced external content/data resources.
-- `<Add one line per stack-specific architecture document you create.>`
+- Stack-specific architecture documents listed in
+  `docs/collaboration/project-conventions.md`.
 
 ## Accepted Decisions
 
@@ -99,12 +88,8 @@ APIs)?>`
 - `adr/0014-delivery-and-subagent-selection.md`
 - `adr/0015-runtime-routing-setup.md`
 - `adr/0016-process-lessons-and-completion-review.md`
+- `adr/0017-project-conventions-file.md`
 
 ## Remaining Technology Evaluation
 
-List technology choices still open for ADR decision, e.g.:
-
-- `<Persistence choice>`.
-- `<Vector DB / search choice>`.
-- `<Embedding model choice>`.
-- `<External provider choice>`.
+See Current non-decisions in `docs/collaboration/project-conventions.md`.

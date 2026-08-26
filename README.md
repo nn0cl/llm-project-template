@@ -136,14 +136,9 @@ Target-local onboarding lives in
 This template deliberately avoids naming a stack, a domain, or concrete
 architecture layers. Before using it on a real project:
 
-1. Fill target-specific placeholders in `AGENTS.md`, `CLAUDE.md`,
-   `.github/copilot-instructions.md`, `.grok/rules/*.md`,
-   `.cursor/rules/*.mdc`, and `docs/architecture/README.md`. The copy
-   script can fill the project name, domain summary, and stack placeholders
-   when `--project-name`, `--domain-summary`, and `--stack` are provided;
-   runtime boundaries, datastore, migration tool, external resources, and
-   stack-specific architecture documents still need Adjudicator-approved
-   target facts.
+1. Fill `docs/collaboration/project-conventions.md`. The copy script
+   creates it and can fill name, domain, and stack. Extra project rules go
+   there, not in `AGENTS.md` or other template context files.
 2. Add one architecture document per architectural area you actually have
    (e.g. `backend-architecture.md`, `frontend-architecture.md`,
    `persistence.md`). Use `docs/architecture/project-structure.md` and
@@ -159,7 +154,7 @@ architecture layers. Before using it on a real project:
    stack-specific jobs (lint, test, dependency policy) once those tools
    exist.
 6. Renumber/extend `docs/architecture/adr/` as real architecture decisions are
-   made. The sixteen ADRs included here (0001-0016) describe the collaboration
+   made. The seventeen ADRs included here (0001-0017) describe the collaboration
    process itself and normally do not need to change.
 
 ## Introduce into an existing repository
@@ -208,7 +203,7 @@ target project's accepted architecture or feature specifications.
     ├── templates/                  # design intake, handoff, trace, issue, work-plan, ADR, Gherkin
     │   └── examples/               # filled-in stack-specific examples, for reference only
     ├── architecture/               # Clean Architecture rules, quickstart, readiness checklist
-    │   └── adr/                    # architecture decision records (0001-0016 = process ADRs)
+    │   └── adr/                    # architecture decision records (0001-0017 = process ADRs)
     ├── specs/                      # EARS/Gherkin feature specifications
     ├── issues/                     # local issue files (LISS-0000 style)
     ├── work-plans/                 # multi-issue work plans
