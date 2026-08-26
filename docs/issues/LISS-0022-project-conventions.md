@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0022
 - GitHub issue:
-- Status: in_progress
+- Status: done
 - Phase: process-only
 - Type: process/tooling
 - Priority: high
@@ -81,3 +81,5 @@ every agent to read the conventions file.
   passed.
 - Second copy does not overwrite an existing conventions file: passed.
 - `bash -n` and `git diff --check`: passed.
+
+Process review: no operating-contract deviation or operational problem found.
