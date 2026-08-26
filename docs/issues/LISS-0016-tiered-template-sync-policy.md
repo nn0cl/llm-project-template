@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0016
 - GitHub issue:
-- Status: review
+- Status: done
 - Phase: process-only
 - Type: process/tooling
 - Priority: medium
@@ -114,7 +114,7 @@
 - Related: LISS-0001 (original pull-based sync), ADR 0008 (the decision this
   extends).
 
-## Referee Decision Points
+## Adjudicator Decision Points
 
 - Tier 2 mechanism: resolved via `AskUserQuestion` (2026-07-16) — templated
   prompt + `git show` references, not generated throwaway prompt files.
@@ -256,3 +256,8 @@
   default branch, and correctly skipped PR creation under `--no-pr`.
 - Not verified: a real interactive terminal answering "n" to the restore
   prompt (see Work Notes).
+- 2026-08-26: Status synchronized to `done` during LISS-0024 ledger hygiene
+  after the work had already merged.
+
+Process review: no remaining open acceptance notes in the merged
+implementation. Status was stale after merge and was corrected later.

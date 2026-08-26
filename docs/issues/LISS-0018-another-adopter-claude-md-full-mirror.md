@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0018
 - GitHub issue:
-- Status: review
+- Status: done
 - Phase: process-only
 - Type: process/docs
 - Priority: high
@@ -169,3 +169,8 @@
 - `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`,
   `.grok/rules/*.md`, `.cursor/rules/*.mdc` still agree in effective content
   after the change.
+- 2026-08-26: Status synchronized to `done` during LISS-0024 ledger hygiene
+  after the work had already merged.
+
+Process review: no remaining open acceptance notes in the merged
+implementation. Status was stale after merge and was corrected later.

@@ -229,7 +229,7 @@ specs.
 - No hidden business logic in adapters, UI components, or framework handlers.
 - Every external resource is represented as a port before it is used.
 - Every task starts with path-appropriate design intake: compact note for Fast
-  Path, full `[THOUGHT]` for Feature Path or Architecture Path.
+  Path, full `[DESIGN CHECK]` for Feature Path or Architecture Path.
 - Changing an agent operating contract file requires a stated reason, Adjudicator
   review, and a trace under `docs/collaboration/traces/` (CI enforced).
 

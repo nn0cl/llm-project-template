@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0007
 - GitHub issue:
-- Status: review
+- Status: done
 - Phase: process-only
 - Type: process/docs
 - Priority: medium
@@ -92,6 +92,11 @@
 
 - Architecture Path scope and the three policy decisions were approved by the
   Adjudicator on 2026-07-10.
+- 2026-08-26: Status synchronized to `done` during LISS-0024 ledger hygiene
+  after the work had already merged.
+
+Process review: no remaining open acceptance notes in the merged
+implementation. Status was stale after merge and was corrected later.
 
 ## Verification
 

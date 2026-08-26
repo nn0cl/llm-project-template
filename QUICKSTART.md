@@ -45,7 +45,7 @@ Reasons this matters:
 ## 2. Let an agent do the introduction
 
 You can run the shell commands below yourself, but this template is built so
-an AI coding agent can safely perform the introduction under Referee
+an AI coding agent can safely perform the introduction under Adjudicator
 supervision. Ready-to-paste prompts are in
 [`docs/templates/examples/adoption-prompts.md`](docs/templates/examples/adoption-prompts.md).
 The short version:
@@ -58,14 +58,14 @@ The short version:
    `~/dev/llm-project-template/scripts/copy-ai-collaboration-files.sh --target .`),
    report what it skipped versus copied, and stop before filling in any
    target-specific fact (stack, datastore, provider, domain model) that has
-   not been Referee-approved.
+   not been Adjudicator-approved.
 3. Review the diff yourself before the agent fills placeholders or starts any
    Feature Path work. The agent should stop and ask, per `AGENTS.md`'s Prime
    Directive, rather than guess.
 
 This mirrors the ordinary Fast Path / Architecture Path discipline the
 template applies to every other task. Adoption is not a special case that
-skips Referee review.
+skips Adjudicator review.
 
 ## 3. Install
 

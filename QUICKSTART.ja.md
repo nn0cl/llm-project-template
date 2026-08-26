@@ -48,7 +48,7 @@ git clone <このリポジトリの URL> llm-project-template
 ## 2. エージェントに導入作業を任せる
 
 以下の shell コマンドを自分で実行しても構いませんが、このテンプレートは
-Referee の監督下でエージェントが安全に導入作業を代行できるように設計され
+Adjudicator の監督下でエージェントが安全に導入作業を代行できるように設計され
 ています。そのまま貼り付けられる prompt は
 [`docs/templates/examples/adoption-prompts.md`](docs/templates/examples/adoption-prompts.md)
 にあります。要点は次のとおりです。
@@ -59,7 +59,7 @@ Referee の監督下でエージェントが安全に導入作業を代行でき
    は**テンプレート checkout 側のフルパスで**実行させます（コピー前の
    導入先には `scripts/` がまだ存在しないため。例:
    `~/dev/llm-project-template/scripts/copy-ai-collaboration-files.sh --target .`）。
-   何をコピーし何をスキップしたかを報告すること、そして Referee が承認して
+   何をコピーし何をスキップしたかを報告すること、そして Adjudicator が承認して
    いない導入先固有の事実（スタック、データストア、provider、ドメイン
    モデル）は推測せずに止まること。
 3. エージェントが placeholder を埋めたり Feature Path の作業を始めたりする
@@ -68,7 +68,7 @@ Referee の監督下でエージェントが安全に導入作業を代行でき
 
 これは、このテンプレートが他のあらゆるタスクに課している通常の Fast Path /
 Architecture Path の規律をそのまま踏襲したものです。導入作業だからといって
-Referee レビューを省略してよい特例にはなりません。
+Adjudicator レビューを省略してよい特例にはなりません。
 
 ## 3. 導入する
 
