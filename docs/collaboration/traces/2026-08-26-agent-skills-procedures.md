@@ -88,5 +88,4 @@
 
 ## Next Safe Action
 
-Adjudicator review and merge of `process/liss-0025-agent-skills`. After
-merge, mark LISS-0025 `done` and run the process-review skill.
+None. Merged as PR #35. LISS-0025 marked `done` after merge.
