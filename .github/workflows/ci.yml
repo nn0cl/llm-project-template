@@ -61,6 +61,7 @@ jobs:
             "docs/collaboration/runtime-routing.md"
             "docs/collaboration/process-lessons.md"
             "docs/collaboration/process-review.md"
+            "docs/collaboration/project-conventions.md"
             "docs/collaboration/reviews/.gitkeep"
             "docs/collaboration/template-feedback/.gitkeep"
             "docs/architecture/README.md"
@@ -88,6 +89,7 @@ jobs:
             "docs/templates/process-lesson.md"
             "docs/templates/process-review-record.md"
             "docs/templates/template-feedback.md"
+            "docs/templates/project-conventions.md"
             "docs/collaboration/traces/.gitkeep"
             "docs/issues/.gitkeep"
             "docs/work-plans/.gitkeep"
@@ -110,7 +112,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for n in 0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015 0016; do
+          for n in 0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015 0016 0017; do
             ls "docs/architecture/adr/${n}-"*.md >/dev/null
           done
 
@@ -175,6 +177,10 @@ jobs:
           ! ls "$tmp/target/docs/collaboration/reviews/"*.md >/dev/null 2>&1
           test ! -f "$tmp/target/docs/specs/template-rollout.md"
           test ! -f "$tmp/target/docs/collaboration/process-lessons-log.md"
+          test -f "$tmp/target/docs/collaboration/project-conventions.md"
+          grep -q 'Smoke App' "$tmp/target/docs/collaboration/project-conventions.md"
+          grep -q 'template smoke test' "$tmp/target/docs/collaboration/project-conventions.md"
+          grep -q 'test stack' "$tmp/target/docs/collaboration/project-conventions.md"
           if grep -R -n -E 'LISS-[0-9]{4}|WP-[0-9]{4}' \
             "$tmp/target/docs/collaboration" \
             "$tmp/target/docs/at-tdd" \
@@ -217,7 +223,12 @@ jobs:
             "$tmp/target/.github/copilot-instructions.md" \
             "$tmp/target/.grok/rules" \
             "$tmp/target/.cursor/rules"; then
-            echo "Copy script left basic project placeholders unfilled." >&2
+            echo "Template context files still contain project placeholders." >&2
+            exit 1
+          fi
+          if grep -n -E '<PROJECT_NAME>|<one-line domain summary>|<FILL IN: e\.g\. backend' \
+            "$tmp/target/docs/collaboration/project-conventions.md"; then
+            echo "Copy did not fill project-conventions.md from flags." >&2
             exit 1
           fi
 

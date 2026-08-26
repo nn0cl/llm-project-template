@@ -147,6 +147,7 @@ verification status, blockers, and the next safe action.
 | Situation | Aid |
 |-----------|-----|
 | First session after adoption | `scripts/configure-ai-collaboration.sh`, then `scripts/init-llm-context.sh` |
+| Project facts and extra rules | `docs/collaboration/project-conventions.md` |
 | Review / implementation routing | `docs/collaboration/runtime-routing.md` and the live toml when present |
 | Process lessons | `docs/collaboration/process-lessons.md` and the live log when present |
 | Closing an issue or work plan | `docs/collaboration/process-review.md` |

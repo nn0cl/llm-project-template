@@ -13,8 +13,8 @@ Generate tests only.
 
 - Do not write production implementation.
 - Depend on ports or interfaces for all external resources.
-- Mock every external resource listed below under "External Resources Must
-  Be Ports".
+- Mock every external resource listed in
+  `docs/collaboration/project-conventions.md`.
 - Assertions must match the Gherkin `Then` clauses exactly.
 - Red is acceptable as compile failure when interfaces or use cases do not
   yet exist, or as test failure when skeletons exist.
@@ -68,20 +68,9 @@ Forbidden dependencies:
 
 ## External Resources Must Be Ports
 
-Represent these as ports before using concrete implementations. Replace this
-list with the project's actual external dependencies (see `AGENTS.md` and
-`CLAUDE.md` for the same list kept in sync):
-
-- `<External data source A>`.
-- `<External data source B>`.
-- `<Primary datastore>`.
-- `<Secondary datastore, if any>`.
-- Settings storage and validation.
-- Secret storage.
-- Dependency policy checks.
-- `<Optional local runtime services, e.g. Docker-hosted DB>`.
-- `<External API / third-party service>`.
-- `<LLM or agent provider>`.
+Represent every external resource listed in
+`docs/collaboration/project-conventions.md` as a port before using a
+concrete implementation. Do not add project ports to this file.
 
 ## Anti-Hallucination Rules
 

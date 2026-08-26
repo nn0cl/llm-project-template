@@ -11,7 +11,8 @@ not a place to add a target project's domain decisions.
 
 `Target-owned` documents define the adopted project's specifications, domain
 model, ADR choices, implementation boundaries, technology selections,
-runtime routing choices (`docs/collaboration/runtime-routing.toml`), and
+runtime routing choices (`docs/collaboration/runtime-routing.toml`),
+project conventions (`docs/collaboration/project-conventions.md`), and
 deprecated-term mappings. They are authoritative for that project and should
 be linked from the template entry documents rather than copied into them.
 

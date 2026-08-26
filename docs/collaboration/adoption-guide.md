@@ -16,13 +16,11 @@ For the benefits and tradeoffs of using the template, see
    `same_context`, implementation `host`, empty model fields). The live
    file is target-owned and is not overwritten by later template sync. See
    `docs/collaboration/runtime-routing.md`.
-3. Fill target-specific placeholders in `AGENTS.md`, `CLAUDE.md`,
-   `.github/copilot-instructions.md`, `.grok/rules/*.md`,
-   `.cursor/rules/*.mdc`, and `docs/architecture/README.md`. The copy
-   script can fill project name, domain summary, and stack placeholders;
-   runtime boundaries, datastore, migration tool, external resources, and
-   stack-specific architecture documents still require Adjudicator-approved
-   target facts.
+3. Fill `docs/collaboration/project-conventions.md` (copy creates it and can
+   fill name, domain, and stack). Put extra project-specific rules there.
+   Do not edit template context files to store those facts; they are
+   overwritten on later template sync. Unfilled `<...>` placeholders that a
+   task relies on must still be set.
 4. Add the first target feature specification under `docs/specs/`.
 5. Add only the stack-specific architecture documents that the project already
    needs.
@@ -64,31 +62,20 @@ with their own empty issue, trace, and spec ledgers.
 3. Run `scripts/update-ai-collaboration-files.sh --target <repo>` (add
    `--non-interactive` for unattended/CI runs; see below for what that
    changes).
-4. Review the reported summary. Template files are split into two tiers:
-   **Tier 1** (most files -- process docs, templates, shipped
-   ADRs, CI/scripts) is fully template-authoritative, so a differing file is
-   reported as **Overwritten** with no merge attempt. **Tier 2** (the five
-   agent persona/contract files: `AGENTS.md`, `CLAUDE.md`,
-   `.github/copilot-instructions.md`, `.grok/rules/*.md`,
-   `.cursor/rules/*.mdc`) is never mechanically merged or overwritten; a
-   conflicting Tier 2 file is reported as **NEEDS AI-ASSISTED MERGE** and left
-   untouched. Other categories: **Added** (new upstream files), **Updated**
-   (either tier, target had not diverged), **Restored** / **Kept deleted**
-   (the target had deleted a file the template changed again), and **NUMBER
-   COLLISIONS** (a newly added ADR or local issue shares a number with an
-   existing target file under a different name).
-5. For every file under NEEDS AI-ASSISTED MERGE, run
-   `docs/templates/contract-file-sync-prompt.md` with an agent (the script's
-   output names the old ref, new ref, and file path to use) before merging.
-   Resolve any NUMBER COLLISIONS by renumbering. Never merge a sync PR with
-   unresolved NEEDS AI-ASSISTED MERGE or NUMBER COLLISIONS items.
-6. If the sync introduces new cross-cutting process vocabulary (for example,
-   a new operating-path or phase concept), check whether the target's own
-   `CLAUDE.md`/`AGENTS.md` needs a matching, reviewed update so the newly
-   imported docs describe a concept the target's agent contract actually
-   uses. A project that customized `CLAUDE.md` before that vocabulary
-   existed will not get it added automatically, and imported docs that
-   reference an unused concept are worse than no docs.
+4. Review the reported summary. Shipped template files, including context
+   files (`AGENTS.md`, `CLAUDE.md`, Copilot, Grok, Cursor rules), are
+   template-authoritative: a differing file is **Overwritten**. Project
+   facts stay in `docs/collaboration/project-conventions.md`, which is never
+   overwritten. Other categories: **Added**, **Updated** (target had not
+   diverged), **Restored** / **Kept deleted**, and **NUMBER COLLISIONS**.
+5. Before merging a sync that overwrites customized context files, move
+   remaining project facts into `docs/collaboration/project-conventions.md`
+   using `docs/templates/contract-file-sync-prompt.md` if needed. Resolve
+   NUMBER COLLISIONS by renumbering. Never merge a sync PR with unresolved
+   NUMBER COLLISIONS.
+6. If the project added extra operating rules, they belong in
+   `docs/collaboration/project-conventions.md`, not in overwritten context
+   files. After overwrite, confirm those extra rules are still present there.
 
 ### Document ownership and lifecycle after adoption
 

@@ -33,9 +33,13 @@ No hidden business logic in adapters.
   from ISSUES or work plans.
 - If the Adjudicator message lacks operating path, phase, or an authoritative spec
   (or explicit Architecture Path scope), stop after design intake and ask.
-- If a relied-on contract or architecture file still contains an unfilled
-  `<...>` placeholder (for example `<PROJECT_NAME:...>`, `<FILL IN:...>`, or
-  `<External data source A>`), stop after design intake and ask the
+- Read `docs/collaboration/project-conventions.md` when present. It holds
+  project name, stack, ports, boundaries, non-decisions, and extra
+  project-specific rules. Do not store those facts in this file. If the
+  conventions file is missing, stop and ask to create it from
+  `docs/templates/project-conventions.md`.
+- If a relied-on contract, architecture, or conventions file still contains
+  an unfilled `<...>` placeholder, stop after design intake and ask the
   Adjudicator to set the value. Do not treat placeholder text as a project
   name, stack, datastore, provider, or domain fact.
 - For the first session after template adoption, read
@@ -81,14 +85,16 @@ Relevant architecture documents:
   `docs/collaboration/session-start-and-resume.md`.
 - Document lifecycle and citation direction:
   `docs/collaboration/document-lifecycle.md`.
+- Project conventions (target-owned facts and extra rules):
+  `docs/collaboration/project-conventions.md`.
 - Runtime routing (optional target-owned settings):
   `docs/collaboration/runtime-routing.md`.
 - Process lessons (meta-level, reused at design and implementation):
   `docs/collaboration/process-lessons.md`.
 - Completion process review:
   `docs/collaboration/process-review.md`.
-- `<Add one line per stack-specific architecture document you create, e.g.
-  "React UI: docs/architecture/frontend-architecture.md.">`
+- Stack-specific architecture documents listed in
+  `docs/collaboration/project-conventions.md`.
 
 ## Clean Architecture Dependency Rule
 
@@ -113,19 +119,9 @@ Forbidden dependencies:
 
 ## External Resources Must Be Ports
 
-Represent these as ports before using concrete implementations. Replace this
-list with the project's actual external dependencies:
-
-- `<External data source A>`.
-- `<External data source B>`.
-- `<Primary datastore>`.
-- `<Secondary datastore, if any>`.
-- Settings storage and validation.
-- Secret storage.
-- Dependency policy checks.
-- `<Optional local runtime services, e.g. Docker-hosted DB>`.
-- `<External API / third-party service>`.
-- `<LLM or agent provider>`.
+Represent every external resource listed in
+`docs/collaboration/project-conventions.md` as a port before using a
+concrete implementation. Do not add project ports to this file.
 
 ## Adjudicator Interaction
 

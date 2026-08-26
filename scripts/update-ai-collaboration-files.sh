@@ -9,19 +9,13 @@ Usage:
 Pulls later AI-human collaboration template updates into a repository that
 already adopted the template (via copy-ai-collaboration-files.sh).
 
-Template files are split into two tiers:
-  Tier 1 (most files): pure process/methodology documents and tooling with no
-    adopter-filled placeholders. The template is fully authoritative -- if
-    the target's copy differs from the template's current copy, the
-    template's version wins, unconditionally.
-  Tier 2 (AGENTS.md, CLAUDE.md, .github/copilot-instructions.md,
-    .grok/rules/*.md, .cursor/rules/*.mdc): agent persona/contract files that
-    carry adopter-filled placeholders (project name, stack, domain
-    boundaries, external resources). When both the target and the template
-    changed one of these since the last sync, the file is left untouched and
-    flagged for AI-assisted reconciliation using
-    docs/templates/contract-file-sync-prompt.md, rather than mechanically
-    merged or overwritten.
+Template process and context files are template-authoritative: if the
+target's copy differs from the template's current copy, the template's
+version wins. Project facts and extra rules live in the target-owned
+docs/collaboration/project-conventions.md, which this script never
+overwrites. Before the first overwrite of customized AGENTS.md / CLAUDE.md
+after this policy, move those facts into project-conventions.md (see
+docs/templates/contract-file-sync-prompt.md).
 
 A file the target deleted since the last sync, where the template changed it
 again afterward, is not silently resolved either way: with an interactive
@@ -336,7 +330,7 @@ source "$script_dir/lib/collaboration-template-paths.sh"
 added=()
 updated=()
 overwritten=()
-needs_ai_merge=()
+
 restored=()
 kept_deleted=()
 collisions=()
@@ -548,15 +542,8 @@ process_file() {
   fi
 
   # Both sides changed since the marker commit.
-  if is_contract_persona_file "$rel"; then
-    # Tier 2: never mechanically merge or overwrite a file that can carry
-    # adopter-filled placeholders. Leave the target's current file in place
-    # and flag it for AI-assisted reconciliation.
-    needs_ai_merge+=("$rel")
-    return
-  fi
-
-  # Tier 1: the template is fully authoritative. No merge is attempted.
+  # Template is fully authoritative for shipped files. Project facts belong
+  # in docs/collaboration/project-conventions.md, which is excluded.
   overwritten+=("$rel")
   if [ "$dry_run" != true ]; then
     mkdir -p "$(dirname "$ours_file")"
@@ -592,14 +579,8 @@ if [ "$subagent_mode" = "yes" ]; then
 fi
 echo
 print_list "Added (new upstream files):" "${added[@]+"${added[@]}"}"
-print_list "Updated (Tier 1 or 2, target had not diverged from the template):" "${updated[@]+"${updated[@]}"}"
-print_list "Overwritten (Tier 1, template is authoritative -- target had diverged):" "${overwritten[@]+"${overwritten[@]}"}"
-print_list "NEEDS AI-ASSISTED MERGE (Tier 2 persona/contract file, both sides changed):" "${needs_ai_merge[@]+"${needs_ai_merge[@]}"}"
-if [ "${#needs_ai_merge[@]}" -gt 0 ]; then
-  echo "  Left untouched. Run docs/templates/contract-file-sync-prompt.md with an"
-  echo "  agent for each file above, using old ref $old_ref and new ref $new_ref in"
-  echo "  $source_repo, before merging this branch."
-fi
+print_list "Updated (target had not diverged from the template):" "${updated[@]+"${updated[@]}"}"
+print_list "Overwritten (template is authoritative -- target had diverged):" "${overwritten[@]+"${overwritten[@]}"}"
 print_list "Restored (was deleted locally; template changed it since last sync):" "${restored[@]+"${restored[@]}"}"
 print_list "Kept deleted (operator decision):" "${kept_deleted[@]+"${kept_deleted[@]}"}"
 print_list "NUMBER COLLISIONS (manual renumbering required):" "${collisions[@]+"${collisions[@]}"}"
@@ -639,14 +620,14 @@ MARKER
 git -C "$target" add -A
 git -C "$target" commit -m "chore: sync collaboration template to ${new_ref:0:8}
 
-Added: ${#added[@]}, updated: ${#updated[@]}, overwritten: ${#overwritten[@]}, needs AI-assisted merge: ${#needs_ai_merge[@]}, restored: ${#restored[@]}, kept deleted: ${#kept_deleted[@]}, number collisions: ${#collisions[@]}.
+Added: ${#added[@]}, updated: ${#updated[@]}, overwritten: ${#overwritten[@]}, restored: ${#restored[@]}, kept deleted: ${#kept_deleted[@]}, number collisions: ${#collisions[@]}.
 See PR description or this commit's file list for details." >/dev/null
 
 echo
 echo "Committed sync on branch $branch_name."
 
-if [ "${#needs_ai_merge[@]}" -gt 0 ] || [ "${#collisions[@]}" -gt 0 ]; then
-  echo "Manual resolution needed before merging (see NEEDS AI-ASSISTED MERGE / NUMBER COLLISIONS above)."
+if [ "${#collisions[@]}" -gt 0 ]; then
+  echo "Manual resolution needed before merging (see NUMBER COLLISIONS above)."
 fi
 
 if [ "$no_pr" = true ]; then
@@ -675,19 +656,20 @@ Sync from collaboration template ${old_ref:0:8} -> ${new_ref:0:8}.
 - Base branch: $base_branch
 - Subagent handoff requested: $subagent_mode
 - Added: ${#added[@]}
-- Updated (Tier 1/2, target had not diverged): ${#updated[@]}
-- Overwritten (Tier 1, template authoritative): ${#overwritten[@]}
-- Needs AI-assisted merge (Tier 2 persona/contract files): ${#needs_ai_merge[@]}
+- Updated (target had not diverged): ${#updated[@]}
+- Overwritten (template authoritative): ${#overwritten[@]}
 - Restored (was deleted locally, template changed since): ${#restored[@]}
 - Kept deleted (operator decision): ${#kept_deleted[@]}
 - Number collisions needing manual renumbering: ${#collisions[@]}
 - Ignored: ${#ignored[@]}
 
+Project facts belong in docs/collaboration/project-conventions.md (never
+overwritten). Move any remaining facts out of AGENTS.md / CLAUDE.md before
+merging this overwrite.
+
 This branch follows docs/collaboration/branch-commit-pr-discipline.md: it
-must pass CI before merge and should not be merged with unresolved NEEDS
-AI-ASSISTED MERGE or NUMBER COLLISIONS items. For each file needing
-AI-assisted merge, run docs/templates/contract-file-sync-prompt.md with an
-agent (old ref ${old_ref}, new ref ${new_ref}) before merging.
+must pass CI before merge and should not be merged with unresolved NUMBER
+COLLISIONS items.
 BODY
 )"
 

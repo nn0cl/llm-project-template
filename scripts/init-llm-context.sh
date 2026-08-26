@@ -42,6 +42,8 @@ required_files=(
   "docs/architecture/io-reasoning-contracts.md"
   "docs/architecture/implementation-readiness.md"
   "docs/collaboration/runtime-routing.md"
+  "docs/collaboration/project-conventions.md"
+  "docs/templates/project-conventions.md"
   "docs/collaboration/process-lessons.md"
   "docs/collaboration/process-review.md"
   "docs/templates/runtime-routing.toml"
@@ -80,13 +82,17 @@ Before implementing anything:
    keep capability-class routing on the host agent and do not invent model
    names. After first adoption, recommend scripts/configure-ai-collaboration.sh
    rather than guessing. These settings do not replace Adjudicator approval.
-8. If a relied-on contract or architecture file still contains an unfilled
-   <...> placeholder, stop and ask the Adjudicator to set it. Do not treat
-   placeholder text as a fact.
-9. Read docs/collaboration/process-lessons.md and, when present, the live
+8. Read docs/collaboration/project-conventions.md when present. It holds
+   project facts and extra project rules. Do not store those in AGENTS.md.
+   If it is missing, stop and ask to create it from
+   docs/templates/project-conventions.md.
+9. If a relied-on contract, architecture, or conventions file still contains
+   an unfilled <...> placeholder, stop and ask the Adjudicator to set it.
+   Do not treat placeholder text as a fact.
+10. Read docs/collaboration/process-lessons.md and, when present, the live
    lessons log before design or implementation. Record review outcomes as
    meta-level lessons, not incident narratives.
-10. When marking an issue or work plan done, run the same-context process
+11. When marking an issue or work plan done, run the same-context process
    review in docs/collaboration/process-review.md.
 
 Use a compact design note for Fast Path work. Use the full [DESIGN CHECK] scaffold
