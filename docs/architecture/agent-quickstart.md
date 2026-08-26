@@ -10,7 +10,11 @@ Each new LLM session starts without prior chat context.
    and branch.
 2. If resuming, read the cited handoff or trace before other documents.
 3. Recover progress from repository artifacts, not from assumed chat history.
-4. If path, phase, or authoritative scope is missing, stop after design intake
+4. If `docs/collaboration/runtime-routing.toml` exists, apply it when routing
+   review or implementation. If it is missing, keep capability-class routing
+   on the host agent and do not invent model names. See
+   `docs/collaboration/runtime-routing.md`.
+5. If path, phase, or authoritative scope is missing, stop after design intake
    and ask the Adjudicator.
 
 For Adjudicator checklists and resume examples, see
@@ -67,9 +71,11 @@ Read:
 2. `docs/collaboration/ai-human-scheme.md`.
 3. `docs/architecture/ai-request-routing.md`.
 4. `docs/collaboration/model-tool-capability-matrix.md`.
-5. `docs/collaboration/privacy-context-budget-policy.md`.
-6. relevant ADRs and touched contract files.
-7. `docs/architecture/io-reasoning-contracts.md` when AI/model output is
+5. `docs/collaboration/runtime-routing.md` when review or implementation
+   routing is involved.
+6. `docs/collaboration/privacy-context-budget-policy.md`.
+7. relevant ADRs and touched contract files.
+8. `docs/architecture/io-reasoning-contracts.md` when AI/model output is
    involved.
 
 Output the full `[DESIGN CHECK]` scaffold and stop for Adjudicator approval when a new

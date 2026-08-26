@@ -10,21 +10,27 @@ For the benefits and tradeoffs of using the template, see
 ## New Repository Adoption
 
 1. Run `scripts/copy-ai-collaboration-files.sh --target <repo>`.
-2. Fill target-specific placeholders in `AGENTS.md`, `CLAUDE.md`,
+2. Run `scripts/configure-ai-collaboration.sh --target <repo>` to record
+   review and implementation isolation and optional host-displayed model
+   identifiers. Use `--non-interactive` to accept the defaults (review
+   `same_context`, implementation `host`, empty model fields). The live
+   file is target-owned and is not overwritten by later template sync. See
+   `docs/collaboration/runtime-routing.md`.
+3. Fill target-specific placeholders in `AGENTS.md`, `CLAUDE.md`,
    `.github/copilot-instructions.md`, `.grok/rules/*.md`,
    `.cursor/rules/*.mdc`, and `docs/architecture/README.md`. The copy
    script can fill project name, domain summary, and stack placeholders;
    runtime boundaries, datastore, migration tool, external resources, and
    stack-specific architecture documents still require Adjudicator-approved
    target facts.
-3. Add the first target feature specification under `docs/specs/`.
-4. Add only the stack-specific architecture documents that the project already
+4. Add the first target feature specification under `docs/specs/`.
+5. Add only the stack-specific architecture documents that the project already
    needs.
-5. Read `docs/collaboration/project-start-guide.md` for the first development
+6. Read `docs/collaboration/project-start-guide.md` for the first development
    loop.
-6. Run `scripts/init-llm-context.sh <repo>` and paste the generated prompt into
+7. Run `scripts/init-llm-context.sh <repo>` and paste the generated prompt into
    the first agent session.
-7. Read `docs/collaboration/session-start-and-resume.md` for ongoing session
+8. Read `docs/collaboration/session-start-and-resume.md` for ongoing session
    start and resume patterns after adoption.
 
 ## Midway Adoption
@@ -34,7 +40,9 @@ For the benefits and tradeoffs of using the template, see
 3. Review skipped files and decide manually whether any target-owned document
    should adopt collaboration wording.
 4. Keep accepted target architecture and feature specifications authoritative.
-5. Use Fast Path for mechanical adoption cleanup, Feature Path for accepted
+5. Run `scripts/configure-ai-collaboration.sh --target <repo>` if runtime
+   routing has not been recorded yet.
+6. Use Fast Path for mechanical adoption cleanup, Feature Path for accepted
    feature work, and Architecture Path for process or boundary decisions.
 
 ## Receiving Later Template Updates
@@ -144,6 +152,11 @@ not track which projects have adopted it.
 
 ## LLM Session Setup
 
+Use `scripts/configure-ai-collaboration.sh --target <repo>` once after copy
+(or later with `--force`) to write `docs/collaboration/runtime-routing.toml`.
+Agents read that file when present and otherwise keep capability-class
+routing on the host agent.
+
 Use `scripts/init-llm-context.sh <repo>` once to print a compact first prompt
 after adoption. For daily new sessions and resuming work, see
 `docs/collaboration/session-start-and-resume.md` instead of rerunning the
@@ -190,9 +203,10 @@ template file.
 
 Claude Code supports `@path/to/file` imports (expanded inline into context at
 launch) and its own `.claude/rules/*.md` directory with `paths:`
-frontmatter, equivalent to Cursor's `globs`. `CLAUDE.md` uses `@AGENTS.md` to
-avoid duplicating `AGENTS.md`'s content, per Anthropic's own documented
-recommendation for this exact purpose — see ADR 0006.
+frontmatter, equivalent to Cursor's `globs`. `CLAUDE.md` is a full
+effective-content mirror of the shared contract plus a Claude-specific
+preamble (LISS-0018). It does not import `@AGENTS.md`; keep the bodies
+aligned when shared rules change. See ADR 0006.
 
 ## Adding Stack-Specific Scoped Rules
 

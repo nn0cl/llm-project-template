@@ -85,6 +85,8 @@ to the touched area:
 - Prompt/instruction change control:
   `docs/collaboration/prompt-instruction-change-control.md`.
 - Session start and resume: `docs/collaboration/session-start-and-resume.md`.
+- Runtime routing (optional target-owned settings):
+  `docs/collaboration/runtime-routing.md`.
 - AI failure and recovery: `docs/collaboration/ai-failure-recovery.md`.
 - Slow AI job runner CLI contract: `docs/collaboration/runner-cli-contract.md`.
 - `<Add one line per stack-specific architecture document you create, e.g.
@@ -107,6 +109,14 @@ Use `docs/templates/design-intake.md` for design-only work,
   `docs/collaboration/adoption-guide.md` before changing target-owned files.
 - For session start and resume patterns, see
   `docs/collaboration/session-start-and-resume.md`.
+- After selecting an operating path, if
+  `docs/collaboration/runtime-routing.toml` exists, apply its review and
+  implementation isolation and optional model identifiers. If it is missing,
+  keep capability-class routing on the host agent and do not invent model
+  names. After first adoption, recommend
+  `scripts/configure-ai-collaboration.sh` rather than guessing. These
+  settings do not replace Adjudicator approval. See
+  `docs/collaboration/runtime-routing.md`.
 
 ## Phase Discipline
 

@@ -58,6 +58,7 @@ jobs:
             "docs/collaboration/local-issue-planning.md"
             "docs/collaboration/prompt-instruction-change-control.md"
             "docs/collaboration/session-start-and-resume.md"
+            "docs/collaboration/runtime-routing.md"
             "docs/architecture/README.md"
             "docs/architecture/project-structure.md"
             "docs/architecture/testing-strategy.md"
@@ -78,6 +79,8 @@ jobs:
             "docs/templates/canonical-document-register.md"
             "docs/templates/review-summary.md"
             "docs/templates/execution-batch-review.md"
+            "docs/templates/runtime-routing.toml"
+            "docs/templates/same-context-review.md"
             "docs/collaboration/traces/.gitkeep"
             "docs/issues/.gitkeep"
             "docs/work-plans/.gitkeep"
@@ -85,6 +88,7 @@ jobs:
             "docs/evaluation/criteria/.gitkeep"
             "scripts/copy-ai-collaboration-files.sh"
             "scripts/update-ai-collaboration-files.sh"
+            "scripts/configure-ai-collaboration.sh"
             "scripts/init-llm-context.sh"
             "scripts/check-execution-batch-reviews.py"
             "scripts/check-document-lifecycle.py"
@@ -99,7 +103,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for n in 0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014; do
+          for n in 0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015; do
             ls "docs/architecture/adr/${n}-"*.md >/dev/null
           done
 
@@ -110,6 +114,7 @@ jobs:
           bash -n \
             scripts/copy-ai-collaboration-files.sh \
             scripts/update-ai-collaboration-files.sh \
+            scripts/configure-ai-collaboration.sh \
             scripts/init-llm-context.sh \
             scripts/lib/collaboration-template-paths.sh
 
@@ -153,9 +158,35 @@ jobs:
           test -f "$tmp/target/docs/issues/.gitkeep"
           test -f "$tmp/target/docs/collaboration/traces/.gitkeep"
           test -f "$tmp/target/docs/specs/.gitkeep"
+          test -f "$tmp/target/docs/templates/runtime-routing.toml"
+          test -f "$tmp/target/scripts/configure-ai-collaboration.sh"
+          test -f "$tmp/target/scripts/check-document-lifecycle.py"
+          test ! -f "$tmp/target/docs/collaboration/runtime-routing.toml"
           ! ls "$tmp/target/docs/issues/"LISS-*.md >/dev/null 2>&1
           ! ls "$tmp/target/docs/collaboration/traces/"*.md >/dev/null 2>&1
           test ! -f "$tmp/target/docs/specs/template-rollout.md"
+          scripts/configure-ai-collaboration.sh \
+            --target "$tmp/target" \
+            --non-interactive
+          test -f "$tmp/target/docs/collaboration/runtime-routing.toml"
+          grep -q 'isolation = "same_context"' "$tmp/target/docs/collaboration/runtime-routing.toml"
+          grep -q 'isolation = "host"' "$tmp/target/docs/collaboration/runtime-routing.toml"
+          if scripts/configure-ai-collaboration.sh \
+            --target "$tmp/target" \
+            --non-interactive; then
+            echo "configure should refuse to overwrite without --force." >&2
+            exit 1
+          fi
+          scripts/configure-ai-collaboration.sh \
+            --target "$tmp/target" \
+            --non-interactive \
+            --review-isolation separate_context \
+            --review-model "host-review-model" \
+            --implementation-isolation ask \
+            --force
+          grep -q 'isolation = "separate_context"' "$tmp/target/docs/collaboration/runtime-routing.toml"
+          grep -q 'model = "host-review-model"' "$tmp/target/docs/collaboration/runtime-routing.toml"
+          grep -q 'isolation = "ask"' "$tmp/target/docs/collaboration/runtime-routing.toml"
           if grep -R -n -E '<PROJECT_NAME: one-line description|<FILL IN: e\.g\. backend' \
             "$tmp/target/AGENTS.md" \
             "$tmp/target/CLAUDE.md" \

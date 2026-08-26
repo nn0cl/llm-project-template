@@ -41,6 +41,9 @@ required_files=(
   "docs/architecture/ai-request-routing.md"
   "docs/architecture/io-reasoning-contracts.md"
   "docs/architecture/implementation-readiness.md"
+  "docs/collaboration/runtime-routing.md"
+  "docs/templates/runtime-routing.toml"
+  "scripts/configure-ai-collaboration.sh"
 )
 
 missing=false
@@ -70,6 +73,11 @@ Before implementing anything:
 4. Read only the documents required by that path.
 5. Read docs/architecture/io-reasoning-contracts.md when AI or model output is involved.
 6. Check docs/architecture/implementation-readiness.md before Phase 1, 2, or 3.
+7. If docs/collaboration/runtime-routing.toml exists, apply its review and
+   implementation isolation and optional model identifiers. If it is missing,
+   keep capability-class routing on the host agent and do not invent model
+   names. After first adoption, recommend scripts/configure-ai-collaboration.sh
+   rather than guessing. These settings do not replace Adjudicator approval.
 
 Use a compact design note for Fast Path work. Use the full [DESIGN CHECK] scaffold
 for Feature Path and Architecture Path work.
