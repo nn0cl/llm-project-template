@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0019
 - GitHub issue:
-- Status: in_progress
+- Status: done
 - Phase: process-only
 - Type: process/tooling
 - Priority: medium
@@ -89,6 +89,11 @@ choose whether a provider-neutral subagent handoff is requested.
   --subagent yes --non-interactive`.
 - GitHub delivery dry-run and invalid `--delivery local --merge-pr` validation
   passed without external publication.
+- 2026-08-26: Status synchronized to `done` during LISS-0024 ledger hygiene
+  after the work had already merged.
+
+Process review: no remaining open acceptance notes in the merged
+implementation. Status was stale after merge and was corrected later.
 
 ## Verification
 

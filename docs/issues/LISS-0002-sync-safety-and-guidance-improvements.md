@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0002
 - GitHub issue:
-- Status: in_progress
+- Status: done
 - Phase: docs-only
 - Type: process/tooling
 - Priority: high
@@ -82,6 +82,11 @@
 - Extended `docs/collaboration/adoption-guide.md` with a manual-adoption
   recovery recipe and a CLAUDE.md/AGENTS.md vocabulary-drift callout.
 - Extended ADR 0008 Decision and Consequences sections.
+- 2026-08-26: Status synchronized to `done` during LISS-0024 ledger hygiene
+  after the work had already merged.
+
+Process review: no remaining open acceptance notes in the merged
+implementation. Status was stale after merge and was corrected later.
 
 ## Verification
 

@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0017
 - GitHub issue:
-- Status: in_progress
+- Status: done
 - Phase: process-only
 - Type: process/docs
 - Priority: high
@@ -166,16 +166,22 @@ These are proposals for review, not accepted requirements.
   proposed first implementation slice.
 - No template contract or CI workflow has been changed as part of this intake;
   the CI-only validator remains a proposed implementation slice.
+- Later implemented and merged (PR #22). 2026-08-26: Status synchronized to
+  `done` during LISS-0024 ledger hygiene. Document-lifecycle work that
+  collided on this ID was moved to LISS-0023.
+
+Process review: no remaining open acceptance notes in the merged
+implementation. Status was stale after merge and was corrected later.
 
 ## Verification
 
 - Intake verification: confirm the candidate changes map to existing template
   documents and do not assume the adopter's unprovided repository artifacts.
-- Implementation verification: in progress on
-  `process/architecture-approval-gates`; Hook and application changes remain
-  out of scope.
+- Implementation verification: completed on
+  `process/architecture-approval-gates` and merged; Hook and application
+  changes remain out of scope.
 
 ## Next Safe Action
 
-- Adjudicator reviews the implementation branch and its CI/documentation
-  changes before merge. Any unaccepted follow-up remains proposed.
+- None. Follow-up remains only where already recorded as a separate proposed
+  issue (LISS-0005).

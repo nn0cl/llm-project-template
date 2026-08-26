@@ -35,11 +35,29 @@ applicable, and task routing.
 Use concise, auditable decision metadata only; do not expose hidden
 chain-of-thought. The common `[DESIGN CHECK]` shape is defined in `AGENTS.md`.
 
-Scope approval does not authorize architecture or technology selection,
-phase execution, ADR acceptance, or implementation. Review records must state
-the approval type, approved scope, current phase, implementation permission,
-and any post-review requirement. A proposed ADR is not implementation
-authorization.
+Treat these approvals as distinct and never infer a later approval from an
+earlier one:
+
+- `Scope approval`: permission to investigate or design the named scope.
+- `Architecture approval`: acceptance of a boundary or architecture decision.
+- `Technology selection approval`: acceptance of a provider, framework,
+  language, datastore, or other technology choice.
+- `Phase approval`: permission to execute the named AT-TDD or process phase.
+- `Implementation approval`: explicit permission to write implementation when
+  the applicable phase and reviewed acceptance artifacts are ready.
+
+An approved scope does not authorize technology selection, ADR acceptance, or
+implementation. Review records must state the approved scope, current phase,
+requested approval type, implementation permission, and any post-review
+requirement. A proposed ADR is a design artifact, not implementation approval.
+
+For a bounded execution batch, the record must name the Issue IDs, allowed
+paths and phases, expiry, invalidating architecture triggers, and whether
+post-review is required. Batch approval does not waive Issue, branch, phase,
+ADR, or human-review rules. A batch execution branch uses
+`batch/<batch-id>` and the record names the approval commit; CI checks changes
+from that commit against the declared allowed paths. CI success is not
+Adjudicator approval.
 
 ## Session Entry
 

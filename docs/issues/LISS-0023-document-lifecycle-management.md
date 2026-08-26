@@ -1,8 +1,10 @@
-# LISS-0017: Document and trace lifecycle management
+# LISS-0023: Document and trace lifecycle management
 
 ## Metadata
 
-- Local issue ID: LISS-0017
+- Local issue ID: LISS-0023
+- Former local issue ID: LISS-0017 (number collision with architecture
+  approval gates; renumbered 2026-08-26, ID not reused going forward)
 - GitHub issue:
 - Status: done
 - Phase: process-only
@@ -68,7 +70,7 @@ template-owned rules separate from target-owned specifications and decisions.
 
 ## AI Planning Records
 
-### AIP-0017-001
+### AIP-0023-001
 
 - Status: accepted
 - Created by:
@@ -98,6 +100,12 @@ template-owned rules separate from target-owned specifications and decisions.
   2026-08-19.
 - Final Adjudicator approval received 2026-08-19. Implementation and
   deterministic verification are complete.
+- 2026-08-26: Renumbered from LISS-0017 / AIP-0017-001 to LISS-0023 /
+  AIP-0023-001 so the architecture-approval issue can keep LISS-0017.
+  Historical traces keep their original narrative and point at this path.
+
+Process review: no remaining open acceptance notes in the merged
+implementation. Status stayed `done` through the ID correction.
 
 ## Verification
 

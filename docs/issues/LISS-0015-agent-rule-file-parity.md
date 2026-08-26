@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0015
 - GitHub issue:
-- Status: review
+- Status: done
 - Phase: process-only
 - Type: process/docs
 - Priority: medium
@@ -333,3 +333,8 @@
 - AI work traces:
   `docs/collaboration/traces/2026-07-16-agent-rule-file-parity.md`,
   `docs/collaboration/traces/2026-07-16-cursor-mdc-drop-agents-ref.md`.
+- 2026-08-26: Status synchronized to `done` during LISS-0024 ledger hygiene
+  after the work had already merged.
+
+Process review: no remaining open acceptance notes in the merged
+implementation. Status was stale after merge and was corrected later.

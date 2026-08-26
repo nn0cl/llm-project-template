@@ -31,6 +31,14 @@ Stop for Adjudicator decision when:
   chosen.
 - a change would alter accepted tests.
 - deterministic verification contradicts AI assumptions.
+- a bounded execution batch is missing named Issue IDs, allowed paths and
+  phases, expiry, or invalidating architecture triggers.
+- CI success is treated as Adjudicator approval.
+
+Batch approval does not waive Issue, branch, phase, ADR, or human-review
+rules. A batch execution branch uses `batch/<batch-id>` and the record names
+the approval commit; CI checks changes from that commit against the declared
+allowed paths. CI success is not Adjudicator approval.
 
 ## Handoff and Completion
 

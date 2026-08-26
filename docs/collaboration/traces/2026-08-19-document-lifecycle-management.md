@@ -7,8 +7,11 @@
   document and Trace lifecycle rules in `llm-project-template`.
 - Current phase: process-only, Architecture Path implementation after approval.
 - Canonical issue or work plan:
-  `docs/issues/LISS-0017-document-lifecycle-management.md`.
-- AI planning record: AIP-0017-001 in the issue above.
+  `docs/issues/LISS-0023-document-lifecycle-management.md`
+  (issued as LISS-0017 on 2026-08-19; renumbered 2026-08-26 to resolve an
+  ID collision with architecture-approval LISS-0017).
+- AI planning record: AIP-0023-001 in the issue above (originally recorded
+  as AIP-0017-001).
 
 ## Context Ledger
 
@@ -68,7 +71,7 @@
 - `docs/collaboration/definition-of-done.md`
 - `docs/collaboration/document-lifecycle.md`
 - `docs/collaboration/session-start-and-resume.md`
-- `docs/issues/LISS-0017-document-lifecycle-management.md`
+- `docs/issues/LISS-0023-document-lifecycle-management.md`
 - `docs/templates/canonical-document-register.md`
 - `docs/templates/review-summary.md`
 - `scripts/check-document-lifecycle.py`

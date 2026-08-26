@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0006
 - GitHub issue:
-- Status: review
+- Status: done
 - Phase: docs-only
 - Type: process/docs
 - Priority: medium
@@ -134,6 +134,11 @@
 - Not yet committed/branched: currently sitting as uncommitted changes on
   `docs/research-rationale-essays`, which has unrelated pending work. Needs
   its own `process/grok-agent-entry-point` branch before a PR.
+- Later merged to `main`; 2026-08-26 status synchronized to `done` during
+  LISS-0024 ledger hygiene.
+
+Process review: no remaining open acceptance notes in the merged
+implementation. Status was stale after merge and was corrected later.
 
 ## Verification
 

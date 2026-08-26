@@ -74,7 +74,7 @@ review 可能な engineering workflow に寄せることです。
 - ファイルコピーの dry-run。
 - formatter、linter、search、test など deterministic tool で確認できる作業。
 
-Fast Path では full `[THOUGHT]` は不要です。compact design note で、scope、
+Fast Path では full `[DESIGN CHECK]` は不要です。compact design note で、scope、
 読んだ context、省いた context、実行する deterministic check を示します。
 
 ### Feature Path
@@ -86,7 +86,7 @@ AT-TDD の Phase 1/2/3 に使います。
 - Phase 3: Refactor。挙動を変えずに読みやすさと境界を整える。
 
 Feature Path では target spec、phase rule、関連 architecture document を読み、
-full `[THOUGHT]` を出します。
+full `[DESIGN CHECK]` を出します。
 
 ### Architecture Path
 
