@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0026
 - GitHub issue:
-- Status: in_progress
+- Status: done
 - Phase: process-only
 - Type: process/docs
 - Priority: medium
@@ -69,4 +69,6 @@ files.
 - Copy smoke includes the eight skills.
 - No fenced `[DESIGN CHECK]` scaffold returned to AGENTS.md or CLAUDE.md.
 - Approval Model still states CI is not Adjudicator approval.
-- `git diff --check` and repository CI.
+- `git diff --check` and repository CI (PR #37).
+
+Process review: no operating-contract deviation or operational problem found.
