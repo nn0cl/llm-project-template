@@ -93,8 +93,7 @@ Relevant architecture documents:
   `docs/collaboration/process-lessons.md`.
 - Completion process review:
   `docs/collaboration/process-review.md`.
-- On-demand procedures (design intake, same-context review, handoff,
-  process review): `.agents/skills/`.
+- On-demand procedures: `.agents/skills/`.
 - Stack-specific architecture documents listed in
   `docs/collaboration/project-conventions.md`.
 
@@ -154,20 +153,17 @@ implementation. Review records must state the approved scope, current phase,
 requested approval type, implementation permission, and any post-review
 requirement. A proposed ADR is a design artifact, not implementation approval.
 
-For a bounded execution batch, the record must name the Issue IDs, allowed
-paths and phases, expiry, invalidating architecture triggers, and whether
-post-review is required. Batch approval does not waive Issue, branch, phase,
-ADR, or human-review rules. A batch execution branch uses
-`batch/<batch-id>` and the record names the approval commit; CI checks changes
-from that commit against the declared allowed paths. CI success is not
-Adjudicator approval.
+Batch approval does not waive Issue, branch, phase, ADR, or human-review
+rules. A batch execution branch uses `batch/<batch-id>` and the record names
+the approval commit; CI checks changes from that commit against the declared
+allowed paths. CI success is not Adjudicator approval. When writing or
+executing a bounded batch, follow `.agents/skills/execution-batch/SKILL.md`.
 
 When handing off or stopping before completion, follow
 `.agents/skills/agent-handoff/SKILL.md`. When asking the Adjudicator for
-approval, use the review points from `docs/templates/adjudicator-review.md`.
-When an agent review packet is required and review isolation is
-`same_context` (or routing is missing), follow
-`.agents/skills/same-context-review/SKILL.md`.
+approval, follow `.agents/skills/adjudicator-review/SKILL.md`. When an agent
+review packet is required and review isolation is `same_context` (or routing
+is missing), follow `.agents/skills/same-context-review/SKILL.md`.
 
 Generated source code must minimize human cognitive load. Prefer clear
 responsibility boundaries, small functions, straightforward names, and
@@ -175,15 +171,12 @@ reviewable tests. Do not compress implementation into dense code just to be
 minimal.
 
 Before reporting completion, check `docs/collaboration/definition-of-done.md`.
-Create AI work traces under `docs/collaboration/traces/` when the trace policy
-requires it. Use feature-unit branches for feature work.
-For feature work, identify local issue or GitHub issue dependencies before
-creating the branch.
+When the trace policy requires a trace, follow
+`.agents/skills/ai-work-trace/SKILL.md`. Use feature-unit branches for feature
+work. For feature work, identify local issue or GitHub issue dependencies
+before creating the branch.
 
-When an agent review packet is produced, record reusable outcomes as
-meta-level lessons in `docs/collaboration/process-lessons-log.md` per
-`docs/collaboration/process-lessons.md`. Do not write a session incident
-narrative. Read that log at the next design intake and before implementation.
-
+When an agent review packet is produced, or at the next design intake and
+before implementation, follow `.agents/skills/process-lessons/SKILL.md`.
 When marking a local issue or work plan `done`, follow
 `.agents/skills/process-review/SKILL.md`.

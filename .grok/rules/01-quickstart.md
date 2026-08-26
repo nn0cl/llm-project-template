@@ -51,13 +51,11 @@ implementation. Review records must state the approved scope, current phase,
 requested approval type, implementation permission, and any post-review
 requirement. A proposed ADR is a design artifact, not implementation approval.
 
-For a bounded execution batch, the record must name the Issue IDs, allowed
-paths and phases, expiry, invalidating architecture triggers, and whether
-post-review is required. Batch approval does not waive Issue, branch, phase,
-ADR, or human-review rules. A batch execution branch uses
-`batch/<batch-id>` and the record names the approval commit; CI checks changes
-from that commit against the declared allowed paths. CI success is not
-Adjudicator approval.
+Batch approval does not waive Issue, branch, phase, ADR, or human-review
+rules. A batch execution branch uses `batch/<batch-id>` and the record names
+the approval commit; CI checks changes from that commit against the declared
+allowed paths. CI success is not Adjudicator approval. When writing or
+executing a bounded batch, follow `.agents/skills/execution-batch/SKILL.md`.
 
 ## Expected Workflow
 
@@ -133,7 +131,6 @@ Adjudicator approval.
   `docs/collaboration/process-lessons.md`.
 - Completion process review:
   `docs/collaboration/process-review.md`.
-- On-demand procedures (design intake, same-context review, handoff,
-  process review): `.agents/skills/`.
+- On-demand procedures: `.agents/skills/`.
 - Stack-specific architecture documents listed in
   `docs/collaboration/project-conventions.md`.

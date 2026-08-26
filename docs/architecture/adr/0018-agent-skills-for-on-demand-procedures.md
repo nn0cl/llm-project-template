@@ -30,9 +30,10 @@ always-loaded contract even if the scaffold body moves.
 1. On-demand procedures live in `.agents/skills/<name>/SKILL.md`. Frontmatter
    uses only the Agent Skills fields `name` and `description`. Do not add
    vendor-only frontmatter.
-2. The first four skills are `design-intake`, `process-review`,
-   `same-context-review`, and `agent-handoff`. They wrap existing Canonical
-   documents and templates; they do not replace them.
+2. Skills wrap existing Canonical documents and templates; they do not
+   replace them. The set is `design-intake`, `process-review`,
+   `same-context-review`, `agent-handoff`, `process-lessons`,
+   `adjudicator-review`, `ai-work-trace`, and `execution-batch`.
 3. The `[DESIGN CHECK]` scaffold body moves to the design-intake skill.
    Contract files keep the requirement to output that scaffold for Feature
    Path and Architecture Path work, and name the skill path.
@@ -45,7 +46,8 @@ always-loaded contract even if the scaffold body moves.
 6. These skill files are agent operating contract files. Changes require
    Adjudicator review and a trace, same as other contract files.
 
-Follow-up work: `docs/issues/LISS-0025-agent-skills-procedures.md`.
+Follow-up work: `docs/issues/LISS-0025-agent-skills-procedures.md`,
+`docs/issues/LISS-0026-more-agent-skills.md`.
 
 ## Consequences
 
@@ -79,5 +81,6 @@ Negative:
 ## References
 
 - `docs/issues/LISS-0025-agent-skills-procedures.md`
+- `docs/issues/LISS-0026-more-agent-skills.md`
 - `docs/architecture/adr/0006-prompt-instruction-change-control.md`
 - Agent Skills specification: https://agentskills.io/specification

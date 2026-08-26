@@ -28,6 +28,4 @@ Contract-file changes still require Adjudicator review under
 Switch to reviewer. Re-read artifacts from disk. Do not use prior author
 reasoning as evidence. Do not continue implementing while reviewing.
 
-After the packet, record reusable outcomes as meta-level lessons in
-`docs/collaboration/process-lessons-log.md` per
-`docs/collaboration/process-lessons.md`.
+After the packet, follow `.agents/skills/process-lessons/SKILL.md`.

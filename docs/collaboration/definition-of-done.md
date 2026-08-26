@@ -39,7 +39,7 @@ A task is not done unless:
   launch request; `ask` stops for the Adjudicator) and does not replace
   Adjudicator approval.
 - review outcomes that should change later work are recorded as meta-level
-  lessons per `docs/collaboration/process-lessons.md`, not as incident
+  lessons per `.agents/skills/process-lessons/SKILL.md`, not as incident
   narratives, and are applied at the next design intake and implementation.
 - a local issue or work plan is not `done` until the same-context process
   review in `.agents/skills/process-review/SKILL.md` has run.

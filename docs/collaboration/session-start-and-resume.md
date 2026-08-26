@@ -149,10 +149,13 @@ verification status, blockers, and the next safe action.
 | First session after adoption | `scripts/configure-ai-collaboration.sh`, then `scripts/init-llm-context.sh` |
 | Project facts and extra rules | `docs/collaboration/project-conventions.md` |
 | Review / implementation routing | `docs/collaboration/runtime-routing.md` and the live toml when present |
-| Process lessons | `docs/collaboration/process-lessons.md` and the live log when present |
+| Process lessons | `.agents/skills/process-lessons/SKILL.md` |
 | Closing an issue or work plan | `.agents/skills/process-review/SKILL.md` |
 | Design intake | `.agents/skills/design-intake/SKILL.md` |
 | Same-context agent review | `.agents/skills/same-context-review/SKILL.md` |
+| Adjudicator approval request | `.agents/skills/adjudicator-review/SKILL.md` |
+| AI work trace | `.agents/skills/ai-work-trace/SKILL.md` |
+| Bounded execution batch | `.agents/skills/execution-batch/SKILL.md` |
 | Deeper first assessment | `docs/templates/examples/adoption-prompts.md` |
 | Daily resume or new task | This guide plus a short Adjudicator message |
 | Contract reload only | No script required; contract files load per tool |

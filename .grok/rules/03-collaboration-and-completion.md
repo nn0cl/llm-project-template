@@ -32,13 +32,14 @@ Stop for Adjudicator decision when:
 Batch approval does not waive Issue, branch, phase, ADR, or human-review
 rules. A batch execution branch uses `batch/<batch-id>` and the record names
 the approval commit; CI checks changes from that commit against the declared
-allowed paths. CI success is not Adjudicator approval.
+allowed paths. CI success is not Adjudicator approval. When writing or
+executing a bounded batch, follow `.agents/skills/execution-batch/SKILL.md`.
 
 ## Handoff and Completion
 
 When handing off or stopping before completion, follow
 `.agents/skills/agent-handoff/SKILL.md`. When asking the Adjudicator for
-approval, use the review points from `docs/templates/adjudicator-review.md`.
+approval, follow `.agents/skills/adjudicator-review/SKILL.md`.
 When an agent review packet is already required, honor
 `docs/collaboration/runtime-routing.md`: follow
 `.agents/skills/same-context-review/SKILL.md` for `same_context`, request a
@@ -51,19 +52,16 @@ reviewable tests. Do not compress implementation into dense code just to be
 minimal.
 
 Before reporting completion, check `docs/collaboration/definition-of-done.md`.
-Create AI work traces under `docs/collaboration/traces/` when the trace
-policy requires it. Use feature-unit branches for feature work; do not
-implement issue work directly on `main` or the trunk branch, per
+When the trace policy requires a trace, follow
+`.agents/skills/ai-work-trace/SKILL.md`. Use feature-unit branches for feature
+work; do not implement issue work directly on `main` or the trunk branch, per
 `docs/collaboration/branch-commit-pr-discipline.md`.
 
 For feature work, identify local issue (`docs/issues/LISS-*`) or GitHub
 issue dependencies before creating the branch, per
 `docs/collaboration/local-issue-planning.md`.
 
-When an agent review packet is produced, record reusable outcomes as
-meta-level lessons in `docs/collaboration/process-lessons-log.md` per
-`docs/collaboration/process-lessons.md`. Do not write a session incident
-narrative. Read that log at the next design intake and before implementation.
-
+When an agent review packet is produced, or at the next design intake and
+before implementation, follow `.agents/skills/process-lessons/SKILL.md`.
 When marking a local issue or work plan `done`, follow
 `.agents/skills/process-review/SKILL.md`.

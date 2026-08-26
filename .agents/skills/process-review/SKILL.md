@@ -26,6 +26,6 @@ second product-code review or a session incident log.
 - No deviation: write the Canonical one-line process-review record in the
   issue or work plan.
 - Deviation or operational problem: stop, agree disposition with the
-  Adjudicator, write a meta-level lesson when reusable, and write template
-  feedback under `docs/collaboration/template-feedback/` only when they so
-  decide.
+  Adjudicator, follow `.agents/skills/process-lessons/SKILL.md` when
+  reusable, and write template feedback under
+  `docs/collaboration/template-feedback/` only when they so decide.

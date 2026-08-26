@@ -9,8 +9,8 @@ Load this skill before generating Feature Path or Architecture Path markdown,
 tests, production code, or review summaries. Standing rules in `AGENTS.md`
 still apply.
 
-Read `docs/collaboration/process-lessons-log.md` when it exists. Honor matching
-lessons. Do not expose hidden chain-of-thought.
+Follow `.agents/skills/process-lessons/SKILL.md` to apply matching lessons.
+Do not expose hidden chain-of-thought.
 
 ## Feature Path and Architecture Path
 
