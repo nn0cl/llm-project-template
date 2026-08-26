@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0024
 - GitHub issue:
-- Status: in_progress
+- Status: done
 - Phase: process-only
 - Type: process/docs
 - Priority: high
@@ -90,4 +90,10 @@ merged. Do not thin session-start document lists.
 - `ls docs/issues/LISS-0017*` is a single architecture file; lifecycle is
   `LISS-0023`.
 - Stale merged issues are `done`; `0003`/`0004`/`0005` remain `proposed`.
-- `git diff --check` and repository CI.
+- `git diff --check` and repository CI (PR #33).
+
+Process review: found status-drift and a colliding LISS ID in the existing
+ledger; both were corrected in this issue. Live Referee/`[THOUGHT]` wording
+and missing Copilot/Grok batch rules were alignment defects, not a new path
+or phase skip. Lessons recorded in
+`docs/collaboration/process-lessons-log.md`.
