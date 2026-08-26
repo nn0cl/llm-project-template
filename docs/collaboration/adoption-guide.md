@@ -64,8 +64,8 @@ with their own empty issue, trace, and spec ledgers.
 3. Run `scripts/update-ai-collaboration-files.sh --target <repo>` (add
    `--non-interactive` for unattended/CI runs; see below for what that
    changes).
-4. Review the reported summary. Template files are split into two tiers (see
-   ADR 0008): **Tier 1** (most files -- process docs, templates, shipped
+4. Review the reported summary. Template files are split into two tiers:
+   **Tier 1** (most files -- process docs, templates, shipped
    ADRs, CI/scripts) is fully template-authoritative, so a differing file is
    reported as **Overwritten** with no merge attempt. **Tier 2** (the five
    agent persona/contract files: `AGENTS.md`, `CLAUDE.md`,
@@ -184,18 +184,16 @@ Cursor discovers `.cursor/rules/*.mdc` (files must use the `.mdc` extension
 with frontmatter — a plain `.md` file in `.cursor/rules/` is ignored by
 Cursor's rules system) as its primary, most powerful rules mechanism; this
 template sets `alwaysApply: true` on each file so the rules apply to every
-request regardless of which files are open. As of LISS-0015 (2026-07-16,
-Adjudicator-approved after live verification the same day), `.cursor/rules/*.mdc`
+request regardless of which files are open. As of 2026-07-16
+(Adjudicator-approved after live verification the same day), `.cursor/rules/*.mdc`
 holds Cursor-complementary rules only and does not `@`-reference or
 full-mirror shared sections from `AGENTS.md`. Grounds: Cursor lists
 `AGENTS.md` as its own Rules type and "picks it up automatically"
 ([Rules](https://cursor.com/docs/rules.md);
 [Help: Rules](https://cursor.com/help/customization/rules.md)); live session
 confirmed separate injection of root `AGENTS.md` alongside always-apply
-`.mdc` files — see ADR 0006 and
-`docs/collaboration/traces/2026-07-16-cursor-mdc-drop-agents-ref.md`. Keep
-the `.mdc` set for phase-gate detail, Decision Gates, and other Cursor-side
-complements rather than relying on `AGENTS.md` alone.
+`.mdc` files. Keep the `.mdc` set for phase-gate detail, Decision Gates, and
+other Cursor-side complements rather than relying on `AGENTS.md` alone.
 
 Codex reads `AGENTS.md` directly (its own `~/.codex/rules/` is a user-home
 setting, not a project-distributable one), so it needs no dedicated
@@ -205,8 +203,8 @@ Claude Code supports `@path/to/file` imports (expanded inline into context at
 launch) and its own `.claude/rules/*.md` directory with `paths:`
 frontmatter, equivalent to Cursor's `globs`. `CLAUDE.md` is a full
 effective-content mirror of the shared contract plus a Claude-specific
-preamble (LISS-0018). It does not import `@AGENTS.md`; keep the bodies
-aligned when shared rules change. See ADR 0006.
+preamble. It does not import `@AGENTS.md`; keep the bodies aligned when
+shared rules change.
 
 ## Adding Stack-Specific Scoped Rules
 

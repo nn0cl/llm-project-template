@@ -38,6 +38,11 @@ A task is not done unless:
   `docs/templates/same-context-review.md`; `separate_context` is a host
   launch request; `ask` stops for the Adjudicator) and does not replace
   Adjudicator approval.
+- review outcomes that should change later work are recorded as meta-level
+  lessons per `docs/collaboration/process-lessons.md`, not as incident
+  narratives, and are applied at the next design intake and implementation.
+- a local issue or work plan is not `done` until the same-context process
+  review in `docs/collaboration/process-review.md` has run.
 - the Canonical Register and Review Summary remain derived navigation/review
   aids and do not replace the existing Issue, specification, ADR, Work Plan, or
   Adjudicator approval as the agreement unit.
@@ -109,6 +114,12 @@ Issue status drift is a process failure, not an optional documentation task. Whe
 The implementation commit and the status/documentation update should be the same reviewable unit,
 or the handoff must explicitly identify the pending synchronization. A status is not considered
 complete from code and tests alone.
+
+When the status becomes `done`, the same context also runs the completion
+process review in `docs/collaboration/process-review.md`. Record a
+meta-level lesson when the pattern should affect later work. If a deviation
+or operational problem is found, agree the disposition with the Adjudicator
+and write template feedback when they so decide.
 
 ## Handoff Done
 

@@ -76,6 +76,8 @@ and **Adjudicator-approved** same day after live verification + cited grounds):
 
 - `CLAUDE.md` now imports `AGENTS.md` (`@AGENTS.md`) instead of duplicating
   its body, keeping only genuinely Claude Code-specific sections.
+  **Superseded 2026-07-25:** `CLAUDE.md` is a full effective-content mirror
+  and does not import `@AGENTS.md`. See the 2026-07-25 revisit below.
 - `.cursor/rules/*.mdc` keeps only Cursor-complementary content (phase gate
   detail, anti-hallucination, Decision Gates, handoff/completion). Shared
   sections formerly duplicated from `AGENTS.md` are omitted — not

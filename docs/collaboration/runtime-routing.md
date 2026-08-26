@@ -76,7 +76,7 @@ for the host agent or a human.
 `model` is an optional host-displayed identifier. Empty means capability-class
 routing.
 
-## Relation to ADR 0014
+## Relation to template-sync handoff
 
 `scripts/update-ai-collaboration-files.sh --subagent` records whether a
 template-sync change requests a provider-neutral handoff. That flag is not

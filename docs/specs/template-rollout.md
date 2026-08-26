@@ -110,6 +110,15 @@ And the script writes `docs/collaboration/runtime-routing.toml`
 And the script does not call a model, store secrets, or invoke a subagent
 And later template sync does not overwrite that live file.
 
+### Scenario: Template issue identifiers are not copied
+
+Given a target repository receives the collaboration template
+When the maintainer runs the copy script
+Then the target does not receive this template's `LISS-*.md`, `WP-*.md`,
+traces, or review records
+And agent context files do not send the agent to those planning documents
+for current rules.
+
 ### Scenario: Opt in to GitHub auto-merge
 
 Given GitHub delivery is selected and required checks are configured

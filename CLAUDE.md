@@ -85,8 +85,14 @@ to the touched area:
 - Prompt/instruction change control:
   `docs/collaboration/prompt-instruction-change-control.md`.
 - Session start and resume: `docs/collaboration/session-start-and-resume.md`.
+- Document lifecycle and citation direction:
+  `docs/collaboration/document-lifecycle.md`.
 - Runtime routing (optional target-owned settings):
   `docs/collaboration/runtime-routing.md`.
+- Process lessons (meta-level, reused at design and implementation):
+  `docs/collaboration/process-lessons.md`.
+- Completion process review:
+  `docs/collaboration/process-review.md`.
 - AI failure and recovery: `docs/collaboration/ai-failure-recovery.md`.
 - Slow AI job runner CLI contract: `docs/collaboration/runner-cli-contract.md`.
 - `<Add one line per stack-specific architecture document you create, e.g.
@@ -100,11 +106,18 @@ Use `docs/templates/design-intake.md` for design-only work,
 
 - Treat each new session as having no prior chat context.
 - Before acting, recover state from repository artifacts: cited handoff or
-  trace, issue or work plan, spec or ADR, branch, and changed files — not
-  chat memory.
+  trace, spec or ADR, branch, and changed files — not chat memory. Read an
+  ISSUE or work plan only when resuming that work or updating the ledger.
+  Current rules come from policy documents, ADRs, and specifications, not
+  from ISSUES or work plans.
 - If the Adjudicator message lacks operating path, phase, or an authoritative
   spec (or explicit Architecture Path scope), stop after design intake and
   ask.
+- If a relied-on contract or architecture file still contains an unfilled
+  `<...>` placeholder (for example `<PROJECT_NAME:...>`, `<FILL IN:...>`, or
+  `<External data source A>`), stop after design intake and ask the
+  Adjudicator to set the value. Do not treat placeholder text as a project
+  name, stack, datastore, provider, or domain fact.
 - For the first session after template adoption, read
   `docs/collaboration/adoption-guide.md` before changing target-owned files.
 - For session start and resume patterns, see
@@ -219,6 +232,17 @@ policy requires it (always for agent operating contract file changes; see
 `docs/collaboration/prompt-instruction-change-control.md`). Use feature-unit
 branches for feature work and identify local issue or GitHub issue
 dependencies before creating the branch.
+
+When an agent review packet is produced, record reusable outcomes as
+meta-level lessons in `docs/collaboration/process-lessons-log.md` per
+`docs/collaboration/process-lessons.md`. Do not write a session incident
+narrative. Read that log at the next design intake and before implementation.
+
+When marking a local issue or work plan `done`, run the same-context process
+review in `docs/collaboration/process-review.md`. If a deviation or
+operational problem is found, agree the disposition with the Adjudicator and
+write template feedback under `docs/collaboration/template-feedback/` when
+they so decide.
 
 ## Project Boundaries
 

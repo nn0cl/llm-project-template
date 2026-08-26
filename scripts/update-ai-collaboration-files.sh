@@ -351,7 +351,7 @@ is_interactive_tty() {
 
 # Asks whether to restore a target-deleted, template-since-changed file.
 # Defaults to "restore" on empty input, non-interactive mode, or no TTY, per
-# the Adjudicator's 2026-07-16 decision (LISS-0016).
+# the 2026-07-16 restore default.
 ask_restore_or_keep_deleted() {
   local rel="$1"
   if is_interactive_tty; then

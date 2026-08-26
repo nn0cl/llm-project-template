@@ -59,6 +59,10 @@ jobs:
             "docs/collaboration/prompt-instruction-change-control.md"
             "docs/collaboration/session-start-and-resume.md"
             "docs/collaboration/runtime-routing.md"
+            "docs/collaboration/process-lessons.md"
+            "docs/collaboration/process-review.md"
+            "docs/collaboration/reviews/.gitkeep"
+            "docs/collaboration/template-feedback/.gitkeep"
             "docs/architecture/README.md"
             "docs/architecture/project-structure.md"
             "docs/architecture/testing-strategy.md"
@@ -81,6 +85,9 @@ jobs:
             "docs/templates/execution-batch-review.md"
             "docs/templates/runtime-routing.toml"
             "docs/templates/same-context-review.md"
+            "docs/templates/process-lesson.md"
+            "docs/templates/process-review-record.md"
+            "docs/templates/template-feedback.md"
             "docs/collaboration/traces/.gitkeep"
             "docs/issues/.gitkeep"
             "docs/work-plans/.gitkeep"
@@ -103,7 +110,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for n in 0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015; do
+          for n in 0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015 0016; do
             ls "docs/architecture/adr/${n}-"*.md >/dev/null
           done
 
@@ -164,7 +171,24 @@ jobs:
           test ! -f "$tmp/target/docs/collaboration/runtime-routing.toml"
           ! ls "$tmp/target/docs/issues/"LISS-*.md >/dev/null 2>&1
           ! ls "$tmp/target/docs/collaboration/traces/"*.md >/dev/null 2>&1
+          ! ls "$tmp/target/docs/work-plans/"WP-*.md >/dev/null 2>&1
+          ! ls "$tmp/target/docs/collaboration/reviews/"*.md >/dev/null 2>&1
           test ! -f "$tmp/target/docs/specs/template-rollout.md"
+          test ! -f "$tmp/target/docs/collaboration/process-lessons-log.md"
+          if grep -R -n -E 'LISS-[0-9]{4}|WP-[0-9]{4}' \
+            "$tmp/target/docs/collaboration" \
+            "$tmp/target/docs/at-tdd" \
+            "$tmp/target/docs/templates" \
+            "$tmp/target/AGENTS.md" \
+            "$tmp/target/CLAUDE.md" \
+            "$tmp/target/.github/copilot-instructions.md" \
+            "$tmp/target/.grok/rules" \
+            "$tmp/target/.cursor/rules" \
+            "$tmp/target/scripts" \
+            | grep -v -E 'LISS-0000|LISS-\*|LISS-0001-short-title|LISS-0002-short-title|AIP-0000'; then
+            echo "Context files cite ISSUE or work-plan IDs." >&2
+            exit 1
+          fi
           scripts/configure-ai-collaboration.sh \
             --target "$tmp/target" \
             --non-interactive

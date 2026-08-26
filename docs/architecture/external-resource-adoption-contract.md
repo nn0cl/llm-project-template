@@ -11,11 +11,10 @@ tools, or test helpers — those go through
 `docs/architecture/dependency-policy.md`'s adoption checklist instead. If a
 resource is a software dependency, use that document, not this one.
 
-This document extends `docs/architecture/adr/
-0002-input-output-reasoning-contracts.md` for the resources it covers. It
-does not modify ADR 0002 for any other AI-assisted task type. See
-`docs/architecture/adr/0011-external-resource-adoption-contract.md` for the
-full decision record.
+This document extends
+`docs/architecture/io-reasoning-contracts.md` for the resources it covers.
+It does not change the general input, output, and reasoning contract for any
+other AI-assisted task type.
 
 ## Core Rule
 
@@ -57,12 +56,12 @@ skips `checked`.
 
 ## Check Record
 
-Every check produces a record. Reuse ADR 0002's source-reference and
-review-status shape rather than inventing a new schema:
+Every check produces a record. Reuse the source-reference and review-status
+shape from `docs/architecture/io-reasoning-contracts.md` rather than
+inventing a new schema:
 
-- `source`: where the resource came from (matches ADR 0002's source
-  reference shape: `source_id`, `source_type`, `uri_or_path`, `captured_at`
-  when safe to expose).
+- `source`: where the resource came from (`source_id`, `source_type`,
+  `uri_or_path`, `captured_at` when safe to expose).
 - `what_was_checked`: the specific criteria evaluated.
 - `check_method`: a deterministic tool (name and version) and/or a human
   reviewer plus the criteria they applied.

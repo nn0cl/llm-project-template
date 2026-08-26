@@ -122,8 +122,9 @@ Before sending the first message in any session, confirm:
 When the Adjudicator message references ongoing work, read in this order:
 
 1. cited handoff note or trace under `docs/collaboration/traces/`.
-2. cited issue or work plan.
-3. cited specification or ADR.
+2. cited specification or ADR.
+3. cited issue or work plan only when resuming that work or updating the
+   ledger. Do not open ISSUES or work plans as the source of current rules.
 4. branch diff or changed files if needed to confirm current state.
 5. documents required by the selected operating path in agent-quickstart.
 
@@ -147,6 +148,8 @@ verification status, blockers, and the next safe action.
 |-----------|-----|
 | First session after adoption | `scripts/configure-ai-collaboration.sh`, then `scripts/init-llm-context.sh` |
 | Review / implementation routing | `docs/collaboration/runtime-routing.md` and the live toml when present |
+| Process lessons | `docs/collaboration/process-lessons.md` and the live log when present |
+| Closing an issue or work plan | `docs/collaboration/process-review.md` |
 | Deeper first assessment | `docs/templates/examples/adoption-prompts.md` |
 | Daily resume or new task | This guide plus a short Adjudicator message |
 | Contract reload only | No script required; contract files load per tool |

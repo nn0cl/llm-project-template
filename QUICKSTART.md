@@ -150,9 +150,9 @@ want — versus, say, relaxing one rule — before removing:
 Do not `rm -rf` these. Remove only the template-authored files inside them
 and keep anything your project added:
 
-- `docs/architecture/adr/0001-*.md` through `0015-*.md` are the process ADRs
-  this template ships with; remove only those fifteen, and keep any ADR your
-  project numbered afterward (0016 and up).
+- `docs/architecture/adr/0001-*.md` through `0016-*.md` are the process ADRs
+  this template ships with; remove only those sixteen, and keep any ADR your
+  project numbered afterward (0017 and up).
 - `docs/architecture/` otherwise holds a mix of template-provided files
   (`agent-quickstart.md`, `implementation-readiness.md`,
   `ai-request-routing.md`, `io-reasoning-contracts.md`,
@@ -176,7 +176,7 @@ and keep anything your project added:
   project documents" step asserts the existence of nearly every file this
   template installs — including the scripts, templates, and process docs
   listed as safe to delete above — and "Check architecture decision
-  records" asserts ADRs 0001–0015. Deleting anything before trimming those
+  records" asserts ADRs 0001–0016. Deleting anything before trimming those
   lists makes CI fail on the next push. Rewrite or remove those steps to
   match what you actually keep.
 

@@ -77,10 +77,17 @@ authorization.
 
 - Treat each new session as having no prior chat context.
 - Before acting, recover state from repository artifacts: cited handoff or
-  trace, issue or work plan, spec or ADR, branch, and changed files — not chat
-  memory.
+  trace, spec or ADR, branch, and changed files — not chat memory. Read an
+  ISSUE or work plan only when resuming that work or updating the ledger.
+  Current rules come from policy documents, ADRs, and specifications, not
+  from ISSUES or work plans.
 - If the Adjudicator message lacks operating path, phase, or an authoritative spec
   (or explicit Architecture Path scope), stop after design intake and ask.
+- If a relied-on contract or architecture file still contains an unfilled
+  `<...>` placeholder (for example `<PROJECT_NAME:...>`, `<FILL IN:...>`, or
+  `<External data source A>`), stop after design intake and ask the
+  Adjudicator to set the value. Do not treat placeholder text as a project
+  name, stack, datastore, provider, or domain fact.
 - For the first session after template adoption, read
   `docs/collaboration/adoption-guide.md` before changing target-owned files.
 - For session start and resume patterns, see
@@ -116,7 +123,13 @@ authorization.
   `docs/collaboration/prompt-instruction-change-control.md`.
 - Session start and resume:
   `docs/collaboration/session-start-and-resume.md`.
+- Document lifecycle and citation direction:
+  `docs/collaboration/document-lifecycle.md`.
 - Runtime routing (optional target-owned settings):
   `docs/collaboration/runtime-routing.md`.
+- Process lessons (meta-level, reused at design and implementation):
+  `docs/collaboration/process-lessons.md`.
+- Completion process review:
+  `docs/collaboration/process-review.md`.
 - `<Add one line per stack-specific architecture document you create, e.g.
   "React UI: docs/architecture/frontend-architecture.md.">`

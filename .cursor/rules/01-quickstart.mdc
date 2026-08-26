@@ -71,9 +71,9 @@ authorization.
 
 Root `AGENTS.md` is auto-applied by Cursor independently of this file
 ([Rules](https://cursor.com/docs/rules.md); Help: "Cursor picks it up
-automatically"). It holds Expected Workflow, Session Entry, and the Relevant
-Architecture Documents list. Do not duplicate those sections here, and do not
-`@`-reference `AGENTS.md` from `.cursor/rules` — that would redundantly
-re-attach what Cursor already loads as its own Rules type (see ADR 0006
-Cursor evidence). Stack-specific architecture documents (added once a stack
-ADR is accepted) apply here too.
+automatically"). It holds Expected Workflow, Session Entry, unfilled
+placeholder stop rules, and the Relevant Architecture Documents list. Do not
+duplicate those sections here, and do not `@`-reference `AGENTS.md` from
+`.cursor/rules` — that would redundantly re-attach what Cursor already loads
+as its own Rules type. Stack-specific
+architecture documents (added once a stack ADR is accepted) apply here too.

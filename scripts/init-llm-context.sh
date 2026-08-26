@@ -42,6 +42,8 @@ required_files=(
   "docs/architecture/io-reasoning-contracts.md"
   "docs/architecture/implementation-readiness.md"
   "docs/collaboration/runtime-routing.md"
+  "docs/collaboration/process-lessons.md"
+  "docs/collaboration/process-review.md"
   "docs/templates/runtime-routing.toml"
   "scripts/configure-ai-collaboration.sh"
 )
@@ -78,6 +80,14 @@ Before implementing anything:
    keep capability-class routing on the host agent and do not invent model
    names. After first adoption, recommend scripts/configure-ai-collaboration.sh
    rather than guessing. These settings do not replace Adjudicator approval.
+8. If a relied-on contract or architecture file still contains an unfilled
+   <...> placeholder, stop and ask the Adjudicator to set it. Do not treat
+   placeholder text as a fact.
+9. Read docs/collaboration/process-lessons.md and, when present, the live
+   lessons log before design or implementation. Record review outcomes as
+   meta-level lessons, not incident narratives.
+10. When marking an issue or work plan done, run the same-context process
+   review in docs/collaboration/process-review.md.
 
 Use a compact design note for Fast Path work. Use the full [DESIGN CHECK] scaffold
 for Feature Path and Architecture Path work.

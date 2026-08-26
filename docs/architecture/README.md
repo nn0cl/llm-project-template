@@ -98,6 +98,7 @@ APIs)?>`
 - `adr/0013-document-lifecycle-and-canonical-register.md`
 - `adr/0014-delivery-and-subagent-selection.md`
 - `adr/0015-runtime-routing-setup.md`
+- `adr/0016-process-lessons-and-completion-review.md`
 
 ## Remaining Technology Evaluation
 
