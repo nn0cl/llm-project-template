@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0025
 - GitHub issue:
-- Status: in_progress
+- Status: done
 - Phase: process-only
 - Type: process/docs
 - Priority: high
@@ -71,4 +71,6 @@ and standing rules in place. Contract files keep the obligation and a path.
 - Copy smoke includes the four skills and excludes LISS/WP traces.
 - CI required-files and ADR 0018 existence.
 - `rg` shows no `[DESIGN CHECK]` fenced scaffold in AGENTS.md or CLAUDE.md.
-- `git diff --check`.
+- `git diff --check` and repository CI (PR #35).
+
+Process review: no operating-contract deviation or operational problem found.
