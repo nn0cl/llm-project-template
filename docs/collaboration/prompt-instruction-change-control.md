@@ -58,7 +58,7 @@ AI work trace under `docs/collaboration/traces/` explaining:
 - why the change was needed.
 - what agent behavior is expected to change as a result.
 
-Use `docs/templates/ai-work-trace.md`. This trace is required even for small
+Follow `.agents/skills/ai-work-trace/SKILL.md`. This trace is required even for small
 wording changes to a contract file; the "tiny documentation-only change"
 exception in `docs/collaboration/ai-work-trace-log.md` does not apply to
 files in this list.

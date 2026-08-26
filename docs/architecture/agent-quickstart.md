@@ -81,8 +81,8 @@ Read:
 4. `docs/collaboration/model-tool-capability-matrix.md`.
 5. `docs/collaboration/runtime-routing.md` when review or implementation
    routing is involved.
-6. `docs/collaboration/process-lessons.md` and, when present, the live
-   lessons log, when design or implementation routing is involved.
+6. `.agents/skills/process-lessons/SKILL.md` when design or implementation
+   routing is involved.
 7. `docs/collaboration/process-review.md` when closing an issue or work plan.
 8. `docs/collaboration/privacy-context-budget-policy.md`.
 9. relevant ADRs and touched contract files. ADRs may cite ISSUES or work
