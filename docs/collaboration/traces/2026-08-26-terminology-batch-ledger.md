@@ -89,6 +89,4 @@
 
 ## Next Safe Action
 
-Adjudicator review and merge of `process/liss-0024-terminology-batch-ledger`.
-After merge, mark LISS-0024 `done` and run completion process review on that
-issue.
+None. Merged as PR #33. LISS-0024 marked `done` after merge.
