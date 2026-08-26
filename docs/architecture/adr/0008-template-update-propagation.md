@@ -79,7 +79,7 @@ service is introduced.
 5. The template repository does not maintain a registry of adopting
    repositories and does not push updates to them.
 
-## Tiered Sync Policy (2026-07-16)
+## Tiered Sync Policy (LISS-0016, 2026-07-16)
 
 The original per-file 3-way merge treated every template file the same way.
 In practice, most template files are pure process/methodology documentation

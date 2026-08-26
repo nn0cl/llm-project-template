@@ -74,9 +74,24 @@ just to reduce the current reading set.
 
 1. Entry document and the Canonical Register.
 2. The relevant current Canonical document.
-3. Only the Evidence needed to verify the decision or continue the task.
-4. Archive material only when the Register or a Canonical document points to it
+3. For decided content, the relevant ADR or specification.
+4. Only the Evidence needed to verify that decision (ISSUE, work plan, trace)
+   when the ADR or specification cites it, or when resuming that work.
+5. Archive material only when the Register or a Canonical document points to it
    for historical context.
+
+Do not open ISSUE or work-plan files as the source of current rules.
+
+## Citation direction
+
+- ADRs and specifications may reference ISSUES and work plans.
+- ISSUES and work plans list the context files, ADRs, and specifications they
+  changed.
+- Context files (agent contracts, current collaboration policy, quickstart)
+  state the current rule. They do not link to an ADR or ISSUE as the reason
+  that context file was edited.
+- Agents looking up why a context file changed start from the ADR or ISSUE,
+  not from a reverse link in the context file.
 
 The register and review summary are navigation aids, not substitutes for the
 underlying evidence or for the existing agreement artifacts. A Review Summary

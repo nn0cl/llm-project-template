@@ -116,7 +116,8 @@ Given a target repository receives the collaboration template
 When the maintainer runs the copy script
 Then the target does not receive this template's `LISS-*.md`, `WP-*.md`,
 traces, or review records
-And shipped Canonical process documents do not cite those template-local IDs.
+And agent context files do not send the agent to those planning documents
+for current rules.
 
 ### Scenario: Opt in to GitHub auto-merge
 

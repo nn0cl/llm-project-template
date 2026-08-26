@@ -21,10 +21,9 @@ rule surface: Cursor documents `AGENTS.md` as a "simple alternative to
 `<cwd>/AGENTS.md`) plus `CLAUDE.md` "for compatibility" (verified via live
 web search, 2026-07-14; see the accompanying trace).
 
-The Grok and Cursor entry-point rounds originally resolved this with one
-blanket rule: full mirror across all five files, no thin pointers, so every
-tool gets the same explicit, strongly-bound entry point. The 2026-07-16
-Cursor complement round revisited that
+LISS-0006 and LISS-0010 originally resolved this with one blanket rule: full
+mirror across all five files, no thin pointers, so every tool gets the same
+explicit, strongly-bound entry point. LISS-0015 (2026-07-16) revisited that
 blanket rule on Adjudicator instruction, on the grounds that "we decided this
 once before" is not itself evidence, and found the picture differs per
 vendor:
@@ -69,8 +68,8 @@ vendor:
   Conclusion: omitting shared sections from `.mdc` (and omitting `@AGENTS.md`
   there) does not drop them from Cursor Agent context while root `AGENTS.md`
   auto-apply remains in force. Keep `.mdc` for Cursor-only complements.
-- **Grok**'s `.grok/rules/` stronger-binding finding (the 2026-07-08 live
-  `grok inspect` test) was not re-examined this round.
+- **Grok**'s `.grok/rules/` stronger-binding finding (LISS-0006's live `grok
+  inspect` test, 2026-07-08) was not re-examined this round.
 
 Decision, per vendor (Adjudicator-confirmed 2026-07-16; Cursor policy refined
 and **Adjudicator-approved** same day after live verification + cited grounds):
@@ -78,7 +77,7 @@ and **Adjudicator-approved** same day after live verification + cited grounds):
 - `CLAUDE.md` now imports `AGENTS.md` (`@AGENTS.md`) instead of duplicating
   its body, keeping only genuinely Claude Code-specific sections.
   **Superseded 2026-07-25:** `CLAUDE.md` is a full effective-content mirror
-  and does not import `@AGENTS.md`. See the revisit section below.
+  and does not import `@AGENTS.md`. See the 2026-07-25 revisit below.
 - `.cursor/rules/*.mdc` keeps only Cursor-complementary content (phase gate
   detail, anti-hallucination, Decision Gates, handoff/completion). Shared
   sections formerly duplicated from `AGENTS.md` are omitted — not
@@ -98,12 +97,12 @@ require Adjudicator review specifically, or get enforced by CI.
 
 This gap is tracked in `docs/collaboration/process-gap-register.md`.
 
-### 2026-07-25 revisit: Claude Code's `@AGENTS.md` import
+### 2026-07-25 revisit: Claude Code's `@AGENTS.md` import (LISS-0018)
 
 The Claude Code branch of the decision above (2026-07-16) reasoned that
 `@path` imports are "a guaranteed content-inlining mechanism, not a
 hope-based pointer," and that this "removes the... objection" that justified
-Copilot's full mirror. Another adopter reported a concrete
+Copilot's full mirror. Another adopter (qpex, LISS-0018) reported a concrete
 incident that contradicts the practical conclusion, even though it does not
 contradict the technical premise:
 
@@ -145,7 +144,7 @@ complicates the fix this finding motivates:
   ([hooks-guide](https://code.claude.com/docs/en/hooks-guide)) A hook could
   plausibly gate failure mode B, but requires reshaping local-issue
   "Adjudicator Decision Points" into a machine-checkable format first; not
-  built in that round. Failure mode A is not naturally hook-gatable by the
+  built in LISS-0018. Failure mode A is not naturally hook-gatable by the
   same mechanism.
 
 Decision: given the uncertainty above, and on Adjudicator instruction not to
@@ -156,8 +155,7 @@ documented "read-and-apply, not strict enforcement" risk was already handled
 rather than waiting for a confirmed mechanism. Whether to pursue
 `PreToolUse`-hook enforcement, and whether recurrence should prompt
 reconsidering Claude Code's status among this template's supported agents,
-are both left open as unresolved Adjudicator questions from that round and
-not decided here.
+are both left open in LISS-0018 and not decided here.
 
 ## Decision
 
@@ -172,8 +170,7 @@ canonical definition of the agent operating contract file set.
   contract change, including small wording changes.
 - Enforce the trace requirement in CI: a pull request that changes a
   contract file must also add a trace file.
-- Per the 2026-07-16 Cursor complement round and the 2026-07-25 Claude Code
-  round: the
+- Per LISS-0015 (Cursor) and LISS-0018 (Claude Code, 2026-07-25): the
   consistency check means the five files resolve to equivalent effective
   content, not that they are literal duplicates. `CLAUDE.md`,
   `copilot-instructions.md`, and `.grok/rules/*.md` are each independently
@@ -200,7 +197,7 @@ Positive:
   auto-apply.
 - `CLAUDE.md` as a full mirror removes the open question of whether an
   imported instruction binds Claude Code's behavior as strongly as text
-  physically present in the file it treats as its own contract.
+  physically present in the file it treats as its own contract (LISS-0018).
 
 Negative:
 
@@ -217,7 +214,7 @@ Negative:
   to `AGENTS.md` needs a matching manual edit in `CLAUDE.md`, the same
   maintenance cost already accepted for Copilot and Grok.
 - The causal mechanism behind the qpex incident that motivated this reversal
-  is not confirmed; if line count
+  is not confirmed (see LISS-0018 Adjudicator Decision Points); if line count
   and specificity are the real adherence drivers, as Anthropic's own
   documentation suggests, this change may not address the root cause by
   itself.

@@ -177,7 +177,6 @@ jobs:
           test ! -f "$tmp/target/docs/collaboration/process-lessons-log.md"
           if grep -R -n -E 'LISS-[0-9]{4}|WP-[0-9]{4}' \
             "$tmp/target/docs/collaboration" \
-            "$tmp/target/docs/architecture" \
             "$tmp/target/docs/at-tdd" \
             "$tmp/target/docs/templates" \
             "$tmp/target/AGENTS.md" \
@@ -187,7 +186,7 @@ jobs:
             "$tmp/target/.cursor/rules" \
             "$tmp/target/scripts" \
             | grep -v -E 'LISS-0000|LISS-\*|LISS-0001-short-title|LISS-0002-short-title|AIP-0000'; then
-            echo "Shipped Canonical files cite template-local issue or work-plan IDs." >&2
+            echo "Context files cite ISSUE or work-plan IDs." >&2
             exit 1
           fi
           scripts/configure-ai-collaboration.sh \

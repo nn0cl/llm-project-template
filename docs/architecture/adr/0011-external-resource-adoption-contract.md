@@ -70,7 +70,7 @@ a media-specific one.
    actually works as expected is itself a capability-matrix concern (see ADR
    0010's verified/inferred/unknown compatibility state).
 7. ADR 0010's rule that a candidate record already carrying a human verdict
-   is never deleted or overwritten on resume (ADR 0010) is one
+   is never deleted or overwritten on resume (LISS-0008) is one
    domain-specific instance of this ADR's general adoption-check rule,
    applied to AI generation job outputs. It does not duplicate this ADR's
    schema.

@@ -6,10 +6,12 @@ Use this as the first short entry point before coding.
 
 Each new LLM session starts without prior chat context.
 
-1. Read the Adjudicator message for operating path, phase, spec or ADR, issue,
-   and branch.
+1. Read the Adjudicator message for operating path, phase, spec or ADR, and
+   branch. Read a cited ISSUE or work plan only when resuming that work.
 2. If resuming, read the cited handoff or trace before other documents.
 3. Recover progress from repository artifacts, not from assumed chat history.
+   Current rules come from policy documents, ADRs, and specifications, not
+   from ISSUES or work plans.
 4. If `docs/collaboration/runtime-routing.toml` exists, apply it when routing
    review or implementation. If it is missing, keep capability-class routing
    on the host agent and do not invent model names. See
@@ -52,7 +54,8 @@ Read:
 2. `docs/at-tdd/process.md`.
 3. `docs/collaboration/ai-human-scheme.md`.
 4. `docs/architecture/ai-request-routing.md`.
-5. target specification under `docs/specs/`.
+5. target specification under `docs/specs/`. Do not start from an ISSUE or
+   work plan unless the Adjudicator cited it for resume.
 6. area-specific architecture document.
 7. `docs/architecture/implementation-readiness.md`.
 8. `docs/architecture/io-reasoning-contracts.md` only when AI/model output is
@@ -77,7 +80,8 @@ Read:
    lessons log, when design or implementation routing is involved.
 7. `docs/collaboration/process-review.md` when closing an issue or work plan.
 8. `docs/collaboration/privacy-context-budget-policy.md`.
-9. relevant ADRs and touched contract files.
+9. relevant ADRs and touched contract files. ADRs may cite ISSUES or work
+   plans as evidence; do not treat those citations as the next required read.
 10. `docs/architecture/io-reasoning-contracts.md` when AI/model output is
    involved.
 

@@ -44,7 +44,6 @@ Why it matters:
 Resolution:
 
 - Use `docs/collaboration/prompt-instruction-change-control.md`.
-- See `docs/architecture/adr/0006-prompt-instruction-change-control.md`.
 - CI enforces that a pull request changing a contract file also adds a trace
   under `docs/collaboration/traces/`.
 
@@ -115,7 +114,7 @@ Why it matters:
 Resolution:
 
 - Use `docs/collaboration/ai-failure-recovery.md`.
-- See `docs/architecture/adr/0010-ai-failure-recovery-and-runner-cli-contract.md`.
+
 - Optional runner CLI contract for slow external AI jobs:
   `docs/collaboration/runner-cli-contract.md`.
 
@@ -163,7 +162,7 @@ Resolution:
 
 - Use `docs/collaboration/local-issue-planning.md`.
 - Use `docs/collaboration/ai-work-trace-log.md`.
-- See `docs/architecture/adr/0009-bug-planning-and-ai-usage-records.md`.
+
 
 ### 11. Issue Completion Document Synchronization
 
@@ -194,7 +193,7 @@ Resolution:
 - Use `docs/collaboration/runtime-routing.md`.
 - Store live choices in `docs/collaboration/runtime-routing.toml`.
 - Create or refresh that file with `scripts/configure-ai-collaboration.sh`.
-- See `docs/architecture/adr/0015-runtime-routing-setup.md`.
+
 
 ### 13. Meta-level process lessons and completion process review
 
@@ -210,23 +209,27 @@ Resolution:
 
 - Use `docs/collaboration/process-lessons.md`.
 - Use `docs/collaboration/process-review.md`.
-- See `docs/architecture/adr/0016-process-lessons-and-completion-review.md`.
 
-### 14. Adopter-safe identifiers in shipped Canonical documents
+
+### 14. Citation direction for context, ADRs, and work-management files
 
 Status: resolved.
 
 Why it matters:
 
-- Copied process documents that cite this template's issue or work-plan IDs
-  send agents looking for files that copy excludes.
+- Agents that load ISSUE or work-plan IDs from context files treat planning
+  history as current rules.
+- Context files that justify their own edits by linking to an ADR or ISSUE
+  invert the evidence graph.
 
 Resolution:
 
-- Shipped Canonical documents cite ADRs and policy paths, not this
-  template's `LISS-NNNN` or `WP-NNNN` identifiers.
-- Copy/update exclude `docs/work-plans/WP-*.md` and
-  `docs/collaboration/reviews/*.md`.
+- Agents read current policy, ADRs, and specifications. They do not open
+  ISSUES or work plans as the source of current rules.
+- ADRs and specifications may cite ISSUES and work plans.
+- Context files do not link to an ADR or ISSUE as the reason they changed.
+- Copy/update exclude this template's `LISS-*.md`, `WP-*.md`, traces, and
+  reviews.
 
 ## Current Assessment
 

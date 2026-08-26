@@ -19,8 +19,8 @@
   agent contracts, DoD, issue/work-plan templates.
 - Omitted: application source, provider SDKs, historical traces (remain
   uncopied).
-- Assumptions: process ADR numbers stay; only template-local issue and
-  work-plan IDs are removed from shipped Canonical text.
+- Assumptions: ADRs and specs may cite ISSUES/WPs; context files do not
+  cite ADR/ISSUE as their own change rationale.
 
 ## Routing
 

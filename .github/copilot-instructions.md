@@ -47,8 +47,10 @@ authorization.
 
 - Treat each new session as having no prior chat context.
 - Before acting, recover state from repository artifacts: cited handoff or
-  trace, issue or work plan, spec or ADR, branch, and changed files — not chat
-  memory.
+  trace, spec or ADR, branch, and changed files — not chat memory. Read an
+  ISSUE or work plan only when resuming that work or updating the ledger.
+  Current rules come from policy documents, ADRs, and specifications, not
+  from ISSUES or work plans.
 - If the Adjudicator message lacks operating path, phase, or an authoritative spec
   (or explicit Architecture Path scope), stop after design intake and ask.
 - If a relied-on contract or architecture file still contains an unfilled
@@ -163,6 +165,8 @@ Before writing implementation, read the relevant architecture document:
 - Local issue planning: `docs/collaboration/local-issue-planning.md`.
 - Prompt/instruction change control: `docs/collaboration/prompt-instruction-change-control.md`.
 - Session start and resume: `docs/collaboration/session-start-and-resume.md`.
+- Document lifecycle and citation direction:
+  `docs/collaboration/document-lifecycle.md`.
 - Runtime routing (optional target-owned settings):
   `docs/collaboration/runtime-routing.md`.
 - Process lessons (meta-level, reused at design and implementation):

@@ -28,10 +28,13 @@ agreed problems, leave template-feedback records.
 1. Copy and update exclude `docs/work-plans/WP-*.md` and
    `docs/collaboration/reviews/*.md`. CI smoke asserts they are absent in a
    fresh target.
-2. Shipped Canonical process documents (collaboration policy, process ADRs,
-   scripts, agent contracts) do not cite this template's `LISS-NNNN` or
-   `WP-NNNN` identifiers. Naming-format examples such as `LISS-0000` remain.
-   Template-only issues, traces, work plans, and research may keep IDs.
+2. Citation direction: agents do not open ISSUE or work-plan files as current
+   rules; they read policy documents, ADRs, and specifications. ADRs and
+   specifications may cite ISSUES and work plans. Context files do not link
+   to an ADR or ISSUE as the reason those context files changed. The reverse
+   (ADR/ISSUE lists changed files) remains. Copy still excludes this
+   template's planning ledger. Naming-format examples such as `LISS-0000`
+   remain.
 3. Agent contracts require unfilled `<...>` placeholders in relied-on
    contract or architecture files to be set before implementation; agents
    stop and ask rather than treating placeholder text as a fact.

@@ -122,8 +122,9 @@ Before sending the first message in any session, confirm:
 When the Adjudicator message references ongoing work, read in this order:
 
 1. cited handoff note or trace under `docs/collaboration/traces/`.
-2. cited issue or work plan.
-3. cited specification or ADR.
+2. cited specification or ADR.
+3. cited issue or work plan only when resuming that work or updating the
+   ledger. Do not open ISSUES or work plans as the source of current rules.
 4. branch diff or changed files if needed to confirm current state.
 5. documents required by the selected operating path in agent-quickstart.
 

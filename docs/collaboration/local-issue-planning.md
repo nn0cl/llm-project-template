@@ -39,9 +39,12 @@ LISS-0002-short-title.md
 ```
 
 `LISS` means local issue. Do not reuse IDs. The examples above are the
-naming format for the adopting repository's own issues. Shipped template
-process documents do not cite this template's own issue or work-plan
-identifiers; those files are not copied into adopting repositories.
+naming format for the adopting repository's own issues.
+
+Agents do not open ISSUE or work-plan files as the source of current rules.
+Decided content lives in ADRs and specifications, which may cite ISSUES and
+work plans. Context files do not link to an ADR or ISSUE as the reason those
+context files changed.
 
 When a GitHub Issue exists, add its number or URL in the local issue metadata.
 
