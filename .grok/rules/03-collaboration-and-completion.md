@@ -58,3 +58,14 @@ implement issue work directly on `main` or the trunk branch, per
 For feature work, identify local issue (`docs/issues/LISS-*`) or GitHub
 issue dependencies before creating the branch, per
 `docs/collaboration/local-issue-planning.md`.
+
+When an agent review packet is produced, record reusable outcomes as
+meta-level lessons in `docs/collaboration/process-lessons-log.md` per
+`docs/collaboration/process-lessons.md`. Do not write a session incident
+narrative. Read that log at the next design intake and before implementation.
+
+When marking a local issue or work plan `done`, run the same-context process
+review in `docs/collaboration/process-review.md`. If a deviation or
+operational problem is found, agree the disposition with the Adjudicator and
+write template feedback under `docs/collaboration/template-feedback/` when
+they so decide.

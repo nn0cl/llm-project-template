@@ -21,7 +21,7 @@ Required JSON shape:
   "expires_at": "2026-07-25T00:00:00Z",
   "execution_branch": "batch/BATCH-0001",
   "approval_commit": "<40-character git commit SHA>",
-  "issue_ids": ["LISS-0001"],
+  "issue_ids": ["LISS-0000"],
   "approved_scope": "Named low-risk documentation work only",
   "allowed_paths": ["docs/collaboration/**"],
   "allowed_phases": ["docs-only", "process-only"],

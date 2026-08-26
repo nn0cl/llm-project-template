@@ -37,7 +37,11 @@ collaboration_template_paths=(
 collaboration_template_exclude_paths=(
   "docs/collaboration/traces/*.md"
   "docs/collaboration/runtime-routing.toml"
+  "docs/collaboration/process-lessons-log.md"
+  "docs/collaboration/reviews/*.md"
+  "docs/collaboration/template-feedback/*.md"
   "docs/issues/LISS-*.md"
+  "docs/work-plans/WP-*.md"
   "docs/specs/template-rollout.md"
 )
 

@@ -38,7 +38,10 @@ LISS-0001-short-title.md
 LISS-0002-short-title.md
 ```
 
-`LISS` means local issue. Do not reuse IDs.
+`LISS` means local issue. Do not reuse IDs. The examples above are the
+naming format for the adopting repository's own issues. Shipped template
+process documents do not cite this template's own issue or work-plan
+identifiers; those files are not copied into adopting repositories.
 
 When a GitHub Issue exists, add its number or URL in the local issue metadata.
 
@@ -62,6 +65,8 @@ Each local issue should record:
 - acceptance notes.
 - Adjudicator decision points.
 - an AI planning record when the current planning size is `M` or larger.
+- a same-context process review when status becomes `done` (see
+  `docs/collaboration/process-review.md`).
 
 ## Bug Planning
 

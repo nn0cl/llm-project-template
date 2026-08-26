@@ -58,3 +58,10 @@ implement issue work directly on `main` or the trunk branch, per
 For feature work, identify local issue (`docs/issues/LISS-*`) or GitHub
 issue dependencies before creating the branch, per
 `docs/collaboration/local-issue-planning.md`.
+
+When an agent review packet is produced, record reusable outcomes as
+meta-level lessons per `docs/collaboration/process-lessons.md`. Do not write
+a session incident narrative. When marking a local issue or work plan `done`,
+run the same-context process review in
+`docs/collaboration/process-review.md`. Root `AGENTS.md` already states the
+placeholder and session-entry rules; do not duplicate them here.

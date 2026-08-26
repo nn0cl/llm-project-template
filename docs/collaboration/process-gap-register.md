@@ -196,6 +196,38 @@ Resolution:
 - Create or refresh that file with `scripts/configure-ai-collaboration.sh`.
 - See `docs/architecture/adr/0015-runtime-routing-setup.md`.
 
+### 13. Meta-level process lessons and completion process review
+
+Status: resolved.
+
+Why it matters:
+
+- Review write-ups that replay one session do not transfer to the next task.
+- Completing an issue without checking operating-contract deviations hides
+  process debt.
+
+Resolution:
+
+- Use `docs/collaboration/process-lessons.md`.
+- Use `docs/collaboration/process-review.md`.
+- See `docs/architecture/adr/0016-process-lessons-and-completion-review.md`.
+
+### 14. Adopter-safe identifiers in shipped Canonical documents
+
+Status: resolved.
+
+Why it matters:
+
+- Copied process documents that cite this template's issue or work-plan IDs
+  send agents looking for files that copy excludes.
+
+Resolution:
+
+- Shipped Canonical documents cite ADRs and policy paths, not this
+  template's `LISS-NNNN` or `WP-NNNN` identifiers.
+- Copy/update exclude `docs/work-plans/WP-*.md` and
+  `docs/collaboration/reviews/*.md`.
+
 ## Current Assessment
 
 Ready enough to start design intake and Phase 1 work once the project's
