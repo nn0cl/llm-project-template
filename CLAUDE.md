@@ -17,28 +17,12 @@ No hidden business logic in adapters.
 
 ## Mandatory Design Check
 
-For substantive Feature Path or Architecture Path requests, begin with this
-compact, auditable design check before writing tests, implementation,
-migrations, or UI. It preserves required design intake without exposing
-hidden chain-of-thought:
-
-```markdown
-[DESIGN CHECK]
-- Scope and expected behavior:
-- Specifications and files inspected:
-- Component boundaries, ports/adapters, and VO/DTO candidates when applicable:
-- Applicable constraints:
-- Decisions, assumptions, and unresolved ambiguities:
-- Included and omitted AI context:
-- Task routing (model/assistant/tool):
-- Input/output evidence contract when AI output is involved:
-- Verification plan:
-```
-
-Fast Path responses may use a one- to three-line design note instead, when
-the task is mechanical, local, and does not change behavior, architecture,
-tests, or agent instructions. Report concise, auditable decision or
-verification evidence only.
+For Feature Path or Architecture Path work, load
+`.agents/skills/design-intake/SKILL.md` and output its `[DESIGN CHECK]`
+scaffold before tests, implementation, migrations, UI, or review summaries.
+Do not skip this step when the host does not auto-discover the skill
+directory. Fast Path uses the compact note in that skill. Do not expose
+hidden chain-of-thought.
 
 ## Reading Sequence and Operating Path
 
@@ -95,14 +79,16 @@ to the touched area:
   `docs/collaboration/process-lessons.md`.
 - Completion process review:
   `docs/collaboration/process-review.md`.
+- On-demand procedures (design intake, same-context review, handoff,
+  process review): `.agents/skills/`.
 - AI failure and recovery: `docs/collaboration/ai-failure-recovery.md`.
 - Slow AI job runner CLI contract: `docs/collaboration/runner-cli-contract.md`.
 - Stack-specific architecture documents listed in
   `docs/collaboration/project-conventions.md`.
 
-Use `docs/templates/design-intake.md` for design-only work,
+Use `.agents/skills/design-intake/SKILL.md` for design intake,
 `docs/templates/adjudicator-review.md` when requesting approval, and
-`docs/templates/agent-handoff.md` when stopping before completion.
+`.agents/skills/agent-handoff/SKILL.md` when stopping before completion.
 
 ## Session Entry
 
@@ -234,11 +220,10 @@ meta-level lessons in `docs/collaboration/process-lessons-log.md` per
 `docs/collaboration/process-lessons.md`. Do not write a session incident
 narrative. Read that log at the next design intake and before implementation.
 
-When marking a local issue or work plan `done`, run the same-context process
-review in `docs/collaboration/process-review.md`. If a deviation or
-operational problem is found, agree the disposition with the Adjudicator and
-write template feedback under `docs/collaboration/template-feedback/` when
-they so decide.
+When an agent review packet is required and review isolation is
+`same_context` (or routing is missing), follow
+`.agents/skills/same-context-review/SKILL.md`. When marking a local issue or
+work plan `done`, follow `.agents/skills/process-review/SKILL.md`.
 
 ## Project facts
 

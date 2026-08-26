@@ -160,6 +160,13 @@ The first-session prompt instructs the agent to:
   without an accepted specification or ADR.
 - stop when the target specification or requested phase is missing.
 
+On-demand procedures live in `.agents/skills/<name>/SKILL.md` (Agent Skills
+standard). Codex, Cursor, Copilot, Gemini CLI, and Grok Build auto-discover
+that directory. Claude Code's documented project path is `.claude/skills/`;
+this template does not duplicate the tree there. Contract files name the
+skill path so every agent still loads it. Copy and update treat
+`.agents/skills/` as template-authoritative.
+
 Grok Build discovers `.grok/rules/*.md` as a distinct, stronger-binding rules
 surface (visible via `grok inspect`) separate from generic context loading;
 keep it in sync with `AGENTS.md`/`CLAUDE.md` like any other contract file.
@@ -211,6 +218,9 @@ contract files:
 - **Grok / Codex**: no confirmed path-scoped rule mechanism as of 2026-07-16;
   keep stack-specific rules for these tools inside the existing full-mirror
   files, scoped by a heading that states which area they apply to.
+- **Cross-agent procedures**: a new `.agents/skills/<name>/SKILL.md` using
+  only Agent Skills `name` and `description` frontmatter. Do not add a second
+  copy under `.claude/skills/` or `.cursor/skills/`.
 
 Add each new scoped-rule file to
 `docs/collaboration/prompt-instruction-change-control.md`'s contract file

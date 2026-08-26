@@ -89,6 +89,7 @@ See `docs/collaboration/project-conventions.md`.
 - `adr/0015-runtime-routing-setup.md`
 - `adr/0016-process-lessons-and-completion-review.md`
 - `adr/0017-project-conventions-file.md`
+- `adr/0018-agent-skills-for-on-demand-procedures.md`
 
 ## Remaining Technology Evaluation
 

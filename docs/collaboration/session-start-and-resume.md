@@ -135,7 +135,7 @@ default.
 
 When work pauses before completion, leave resumable evidence:
 
-- use `docs/templates/agent-handoff.md` in the final response, or
+- follow `.agents/skills/agent-handoff/SKILL.md` in the final response, or
 - add or update a trace under `docs/collaboration/traces/` when the trace
   policy requires it.
 
@@ -150,7 +150,9 @@ verification status, blockers, and the next safe action.
 | Project facts and extra rules | `docs/collaboration/project-conventions.md` |
 | Review / implementation routing | `docs/collaboration/runtime-routing.md` and the live toml when present |
 | Process lessons | `docs/collaboration/process-lessons.md` and the live log when present |
-| Closing an issue or work plan | `docs/collaboration/process-review.md` |
+| Closing an issue or work plan | `.agents/skills/process-review/SKILL.md` |
+| Design intake | `.agents/skills/design-intake/SKILL.md` |
+| Same-context agent review | `.agents/skills/same-context-review/SKILL.md` |
 | Deeper first assessment | `docs/templates/examples/adoption-prompts.md` |
 | Daily resume or new task | This guide plus a short Adjudicator message |
 | Contract reload only | No script required; contract files load per tool |
@@ -163,6 +165,6 @@ first message.
 
 - Adoption: `docs/collaboration/adoption-guide.md`
 - Project startup: `docs/collaboration/project-start-guide.md`
-- Handoff template: `docs/templates/agent-handoff.md`
+- Handoff: `.agents/skills/agent-handoff/SKILL.md`
 - Collaboration loop: `docs/collaboration/ai-human-scheme.md`
 - Agent entry: `docs/architecture/agent-quickstart.md`

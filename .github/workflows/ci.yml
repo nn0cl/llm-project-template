@@ -40,6 +40,10 @@ jobs:
             ".cursor/rules/01-quickstart.mdc"
             ".cursor/rules/02-architecture-boundaries.mdc"
             ".cursor/rules/03-collaboration-and-completion.mdc"
+            ".agents/skills/design-intake/SKILL.md"
+            ".agents/skills/process-review/SKILL.md"
+            ".agents/skills/same-context-review/SKILL.md"
+            ".agents/skills/agent-handoff/SKILL.md"
             "docs/at-tdd/process.md"
             "docs/collaboration/ai-human-scheme.md"
             "docs/collaboration/source-code-quality.md"
@@ -112,7 +116,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for n in 0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015 0016 0017; do
+          for n in 0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015 0016 0017 0018; do
             ls "docs/architecture/adr/${n}-"*.md >/dev/null
           done
 
@@ -169,6 +173,10 @@ jobs:
           test -f "$tmp/target/docs/specs/.gitkeep"
           test -f "$tmp/target/docs/templates/runtime-routing.toml"
           test -f "$tmp/target/scripts/configure-ai-collaboration.sh"
+          test -f "$tmp/target/.agents/skills/design-intake/SKILL.md"
+          test -f "$tmp/target/.agents/skills/process-review/SKILL.md"
+          test -f "$tmp/target/.agents/skills/same-context-review/SKILL.md"
+          test -f "$tmp/target/.agents/skills/agent-handoff/SKILL.md"
           test -f "$tmp/target/scripts/check-document-lifecycle.py"
           test ! -f "$tmp/target/docs/collaboration/runtime-routing.toml"
           ! ls "$tmp/target/docs/issues/"LISS-*.md >/dev/null 2>&1
@@ -190,6 +198,7 @@ jobs:
             "$tmp/target/.github/copilot-instructions.md" \
             "$tmp/target/.grok/rules" \
             "$tmp/target/.cursor/rules" \
+            "$tmp/target/.agents/skills" \
             "$tmp/target/scripts" \
             | grep -v -E 'LISS-0000|LISS-\*|LISS-0001-short-title|LISS-0002-short-title|AIP-0000'; then
             echo "Context files cite ISSUE or work-plan IDs." >&2
@@ -222,7 +231,8 @@ jobs:
             "$tmp/target/CLAUDE.md" \
             "$tmp/target/.github/copilot-instructions.md" \
             "$tmp/target/.grok/rules" \
-            "$tmp/target/.cursor/rules"; then
+            "$tmp/target/.cursor/rules" \
+            "$tmp/target/.agents/skills"; then
             echo "Template context files still contain project placeholders." >&2
             exit 1
           fi
@@ -249,7 +259,7 @@ jobs:
               docs/collaboration/traces/*.md)
                 trace_added=true
                 ;;
-              AGENTS.md|CLAUDE.md|.github/copilot-instructions.md|.grok/rules/*.md|.cursor/rules/*.mdc|docs/at-tdd/process.md|docs/collaboration/*.md|docs/templates/*.md)
+              AGENTS.md|CLAUDE.md|.github/copilot-instructions.md|.grok/rules/*.md|.cursor/rules/*.mdc|.agents/skills/*/SKILL.md|docs/at-tdd/process.md|docs/collaboration/*.md|docs/templates/*.md)
                 contract_changed=true
                 ;;
             esac

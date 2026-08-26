@@ -6,8 +6,11 @@ specifications while preserving decisions and evidence.
 ## Ownership
 
 `Template-owned` documents define common paths, phases, approvals, reviews,
-sync behavior, and logging rules. They may be updated by this template and are
-not a place to add a target project's domain decisions.
+sync behavior, logging rules, and on-demand procedures
+(`.agents/skills/*/SKILL.md`). They may be updated by this template and are
+not a place to add a target project's domain decisions. Skills are procedure
+Entry documents; they point at Canonical policy and templates rather than
+replacing them.
 
 `Target-owned` documents define the adopted project's specifications, domain
 model, ADR choices, implementation boundaries, technology selections,

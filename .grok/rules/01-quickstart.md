@@ -28,30 +28,12 @@ No hidden business logic in adapters.
 
 ## Mandatory Design Check
 
-Before generating Feature Path or Architecture Path markdown, tests,
-production code, or review summaries, output a `[DESIGN CHECK]` section
-containing:
-
-1. Specification extraction: preconditions, triggers, and expected results
-   from EARS or Gherkin.
-2. Component identification: target interfaces, domain objects, use cases,
-   and adapters to create or modify.
-3. Ambiguity boundaries: items the AI must not guess.
-4. AI payload context to include and omit.
-5. Suggested model, assistant, or deterministic tool routing.
-6. Input, output, and reasoning evidence contract for AI-assisted tasks.
-
-Fast Path work may use a compact design note instead of the full scaffold
-when the task is mechanical, local, and does not change behavior,
-architecture, tests, or agent instructions.
-
-Every user request starts with design intake sized to the task. Before tests
-or implementation, identify target behavior, relevant context, omitted
-context, lightweight VO/DTO candidates when applicable, involved
-ports/adapters when applicable, and task routing.
-
-Use concise, auditable decision metadata only; do not expose hidden
-chain-of-thought. The common `[DESIGN CHECK]` shape is defined in `AGENTS.md`.
+Every request starts with design intake sized to the task. Load
+`.agents/skills/design-intake/SKILL.md` and output its `[DESIGN CHECK]`
+scaffold for Feature Path and Architecture Path work, before markdown,
+tests, production code, or review summaries. Fast Path uses the compact
+note in that skill. Do not skip this step when the host does not
+auto-discover the skill directory. Do not expose hidden chain-of-thought.
 
 Treat these approvals as distinct and never infer a later approval from an
 earlier one:
@@ -151,5 +133,7 @@ Adjudicator approval.
   `docs/collaboration/process-lessons.md`.
 - Completion process review:
   `docs/collaboration/process-review.md`.
+- On-demand procedures (design intake, same-context review, handoff,
+  process review): `.agents/skills/`.
 - Stack-specific architecture documents listed in
   `docs/collaboration/project-conventions.md`.
