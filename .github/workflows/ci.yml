@@ -52,6 +52,7 @@ jobs:
             "docs/collaboration/ai-human-scheme.md"
             "docs/collaboration/source-code-quality.md"
             "docs/collaboration/definition-of-done.md"
+            "docs/collaboration/verification-policy.md"
             "docs/collaboration/document-lifecycle.md"
             "docs/collaboration/adoption-guide.md"
             "docs/collaboration/template-benefits.md"
@@ -82,6 +83,7 @@ jobs:
             "docs/architecture/implementation-readiness.md"
             "docs/templates/design-intake.md"
             "docs/templates/agent-handoff.md"
+            "docs/templates/verification-record.md"
             "docs/templates/ai-work-trace.md"
             "docs/templates/local-issue.md"
             "docs/templates/work-plan.md"
@@ -109,6 +111,11 @@ jobs:
             "scripts/init-llm-context.sh"
             "scripts/check-execution-batch-reviews.py"
             "scripts/check-document-lifecycle.py"
+            "scripts/review-change.py"
+            "scripts/run-regression-tests.py"
+            "scripts/lib/source-clean.sh"
+            "scripts/lib/review_policy.py"
+            "scripts/lib/change_metrics.py"
             "scripts/lib/collaboration-template-paths.sh"
           )
 
@@ -120,7 +127,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for n in 0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015 0016 0017 0018; do
+          for n in 0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015 0016 0017 0018 0019; do
             ls "docs/architecture/adr/${n}-"*.md >/dev/null
           done
 
@@ -133,7 +140,14 @@ jobs:
             scripts/update-ai-collaboration-files.sh \
             scripts/configure-ai-collaboration.sh \
             scripts/init-llm-context.sh \
-            scripts/lib/collaboration-template-paths.sh
+            scripts/lib/collaboration-template-paths.sh \
+            scripts/lib/source-clean.sh
+
+      - name: Run template regression suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 scripts/run-regression-tests.py
 
       - name: Check bounded execution-batch review records
         shell: bash
@@ -197,7 +211,7 @@ jobs:
           grep -q 'Smoke App' "$tmp/target/docs/collaboration/project-conventions.md"
           grep -q 'template smoke test' "$tmp/target/docs/collaboration/project-conventions.md"
           grep -q 'test stack' "$tmp/target/docs/collaboration/project-conventions.md"
-          if grep -R -n -E 'LISS-[0-9]{4}|WP-[0-9]{4}' \
+          if grep -R -n --exclude-dir=tests -E 'LISS-[0-9]{4}|WP-[0-9]{4}' \
             "$tmp/target/docs/collaboration" \
             "$tmp/target/docs/at-tdd" \
             "$tmp/target/docs/templates" \
@@ -267,7 +281,7 @@ jobs:
               docs/collaboration/traces/*.md)
                 trace_added=true
                 ;;
-              AGENTS.md|CLAUDE.md|.github/copilot-instructions.md|.grok/rules/*.md|.cursor/rules/*.mdc|.agents/skills/*/SKILL.md|docs/at-tdd/process.md|docs/collaboration/*.md|docs/templates/*.md)
+              AGENTS.md|CLAUDE.md|.github/copilot-instructions.md|.grok/rules/*.md|.cursor/rules/*.mdc|.agents/skills/*/SKILL.md|docs/at-tdd/process.md|docs/collaboration/*.md|docs/templates/*.md|docs/templates/runtime-routing.toml)
                 contract_changed=true
                 ;;
             esac

@@ -2,6 +2,12 @@
 
 Testing follows AT-TDD phase gates.
 
+This file is template-owned. Actual test locations, selected frameworks,
+blocking commands, required environments and approved exclusions belong in
+target-owned `docs/collaboration/project-conventions.md` or documents linked
+there. Do not store adopter facts in this shared file. Evidence requirements
+are defined in `docs/collaboration/verification-policy.md`.
+
 ## Test Levels
 
 ### Acceptance Tests
@@ -13,9 +19,7 @@ Purpose:
 
 Placement:
 
-- `<FILL IN: where use-case/application acceptance tests live, e.g.
-  backend/tests/ or src/core/application/__tests__/>`.
-- `<FILL IN: where UI acceptance-style tests live, e.g. frontend/src/features/>`.
+- Use the project-conventions locations for application and UI acceptance tests.
 - E2E tests only after a runnable shell/deployment exists.
 
 ### Domain Unit Tests
@@ -73,8 +77,7 @@ Purpose:
 
 Rules:
 
-- `<FILL IN: your UI test framework, e.g. Vitest + Testing Library, Jest +
-  RTL, Playwright component tests>`.
+- Use the selected UI test framework recorded in project conventions.
 - mock the shared transport/API client boundary.
 - do not mock random request strings inside components.
 
@@ -86,8 +89,7 @@ Purpose:
 
 Rules:
 
-- `<FILL IN: your E2E framework, e.g. Playwright, Cypress>`, used after the
-  runnable shell/deployment exists.
+- Use the selected E2E framework after the runnable shell/deployment exists.
 - do not depend on real external providers unless the test is explicitly
   marked as manual or integration.
 
@@ -115,6 +117,6 @@ Mock ports, not concrete providers.
 
 Examples:
 
-- mock `<YourExternalServicePort>`, not the SDK client.
-- mock `<YourSearchPort>`, not a vector DB client.
-- mock `<YourExternalKnowledgePort>`, not an HTTP endpoint.
+- mock the external-service port, not the SDK client.
+- mock the search port, not a vector DB client.
+- mock the knowledge-source port, not an HTTP endpoint.

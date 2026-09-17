@@ -203,6 +203,13 @@ scripts/copy-ai-collaboration-files.sh --target /path/to/existing-repo --dry-run
 
 ## 迷ったら
 
+検証ではfocused成功と全blocking suiteのGreenを区別し、最終commitのSHAに証拠を
+紐づけます。[検証方針](docs/collaboration/verification-policy.md)と
+[ADR 0019](docs/architecture/adr/0019-verification-structure-and-review.md)を参照。
+構造予算と大規模変更reviewは導入先のruntime-routing.tomlで設定できます。
+Python 3.11+で`python3 scripts/review-change.py --base BASE`を実行すると、
+変更規模・構造・review方式をJSONで確認できます。
+
 - ただの局所作業なら Fast Path。
 - accepted spec に対する実装作業なら Feature Path。
 - 方針や境界を変えるなら Architecture Path。

@@ -154,7 +154,7 @@ architecture layers. Before using it on a real project:
    stack-specific jobs (lint, test, dependency policy) once those tools
    exist.
 6. Renumber/extend `docs/architecture/adr/` as real architecture decisions are
-   made. The seventeen ADRs included here (0001-0017) describe the collaboration
+   made. The process ADRs included here describe the collaboration
    process itself and normally do not need to change.
 
 ## Introduce into an existing repository
@@ -203,7 +203,7 @@ target project's accepted architecture or feature specifications.
     ├── templates/                  # design intake, handoff, trace, issue, work-plan, ADR, Gherkin
     │   └── examples/               # filled-in stack-specific examples, for reference only
     ├── architecture/               # Clean Architecture rules, quickstart, readiness checklist
-    │   └── adr/                    # architecture decision records (0001-0017 = process ADRs)
+    │   └── adr/                    # collaboration process architecture decisions
     ├── specs/                      # EARS/Gherkin feature specifications
     ├── issues/                     # local issue files (LISS-0000 style)
     ├── work-plans/                 # multi-issue work plans
@@ -223,6 +223,15 @@ empty `.gitkeep` folders and create their own local issues, traces, and
 specs.
 
 ## Core rules worth remembering
+
+Verification distinguishes focused tests from full blocking-suite Green and
+ties evidence to the final tested commit. See
+[verification policy](docs/collaboration/verification-policy.md) and
+[ADR 0019](docs/architecture/adr/0019-verification-structure-and-review.md).
+Optional structure budgets and large-change review routing live in the
+target-owned runtime-routing TOML. With Python 3.11+, run
+`python3 scripts/review-change.py --base BASE` for measured evidence;
+`python3 scripts/run-regression-tests.py` runs the template regression suite.
 
 - No implementation without a reviewed acceptance specification.
 - No phase skipping. Only the Adjudicator-selected phase runs.

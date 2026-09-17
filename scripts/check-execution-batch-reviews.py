@@ -129,6 +129,10 @@ def validate_record(
     if expires_at <= approved_at:
         fail(path, "expires_at must be after approved_at")
     execution_branch = require_string(path, data, "execution_branch")
+    if current_branch == execution_branch and status in {
+        "approved_for_execution", "in_progress", "awaiting_post_review",
+    } and expires_at <= datetime.now(timezone.utc):
+        fail(path, "active execution approval has expired")
     approval_commit = require_string(path, data, "approval_commit")
     if not COMMIT_PATTERN.fullmatch(approval_commit):
         fail(path, "approval_commit must be a 40-character git commit SHA")
@@ -156,8 +160,8 @@ def validate_record(
         if not ISSUE_PATTERN.fullmatch(issue_id):
             fail(path, f"invalid Issue ID: {issue_id}")
         matches = list((repository_root / "docs" / "issues").glob(f"{issue_id}-*.md"))
-        if not matches:
-            fail(path, f"Issue file not found for {issue_id}")
+        if len(matches) != 1:
+            fail(path, f"expected exactly one Issue file for {issue_id}")
 
     if not isinstance(data["post_review_required"], bool):
         fail(path, "post_review_required must be boolean")
@@ -168,11 +172,7 @@ def validate_record(
     if status == "awaiting_post_review" and not data["post_review_required"]:
         fail(path, "awaiting_post_review requires post_review_required=true")
 
-    if current_branch == execution_branch and status in {
-        "approved_for_execution",
-        "in_progress",
-        "awaiting_post_review",
-    }:
+    if current_branch == execution_branch:
         for changed_path in changed_files_since(repository_root, approval_commit):
             if not is_allowed_path(changed_path, allowed_paths):
                 fail(

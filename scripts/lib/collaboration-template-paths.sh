@@ -31,6 +31,12 @@ collaboration_template_paths=(
   "scripts/check-execution-batch-reviews.py"
   "scripts/check-document-lifecycle.py"
   "scripts/lib/collaboration-template-paths.sh"
+  "scripts/lib/source-clean.sh"
+  "scripts/lib/review_policy.py"
+  "scripts/lib/change_metrics.py"
+  "scripts/review-change.py"
+  "scripts/run-regression-tests.py"
+  "scripts/tests"
 )
 
 # Files that are useful inside this template repository but should not be
@@ -45,6 +51,9 @@ collaboration_template_exclude_paths=(
   "docs/issues/LISS-*.md"
   "docs/work-plans/WP-*.md"
   "docs/specs/template-rollout.md"
+  "docs/specs/quality-and-review.md"
+  "*/.DS_Store"
+  "*/__pycache__/*"
 )
 
 is_collaboration_template_excluded() {
