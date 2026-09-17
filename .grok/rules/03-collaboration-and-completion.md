@@ -1,5 +1,18 @@
 # Grok Agent Instructions: Collaboration and Completion
 
+## Verification and conditional review
+
+Before Phase 2/3 completion, follow `docs/collaboration/verification-policy.md`:
+report focused and all-blocking results separately, identify tested SHA and
+environment, compare failures, and rerun all blocking suites after the final
+commit. Splits must inventory actual consumers including private imports and
+run consumer smoke plus adjacent regression. Follow source-code-quality for
+structure-budget dispositions, including implementation bodies behind facades.
+Resolve effective review isolation using `docs/collaboration/runtime-routing.md`,
+including enabled large-change conditions. Unknown measurements and unavailable
+required review are gaps, not permission to downgrade. Human approval remains
+separate from routing and CI success.
+
 ## Adjudicator Interaction
 
 When a decision affects architecture, capture it as an ADR. When a decision
