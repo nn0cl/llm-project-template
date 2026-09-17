@@ -3,10 +3,24 @@
 ## Current execution state
 
 - 2026-09-17: ユーザーが統合計画での修正開始を指示。AIP-0027-001をacceptedへ更新。
-- Phase: 実装と回帰検証を進め、最終review準備。後述Attempt 1は初回調査の履歴。
+- Phase: 実装・契約変更の人間review承認済み、PR deliveryとCI確認。
+  後述Attempt 1/2は調査・実装時点の履歴。
 - Acceptance: docs/specs/quality-and-review.md / ADR 0019。
 - Current review: docs/collaboration/reviews/2026-09-17-quality-implementation.md。
-- Approval boundary: 修正着手は承認済み。最終人間review・push・mergeは未実施。
+- Approval boundary: 2026-09-17「承認。続けて」で`8b5ef6d`の最終人間reviewを承認。
+  PR公開とCI確認へ継続。mergeは未実施。
+
+### Attempt 3 — approval and delivery
+
+- Scope: Issue/review/traceの承認状態同期、branch push、PR作成、最新SHAの検証。
+- Model/environment: GPT-6 / Codex desktop / Darwin arm64。token計測値はN/A。
+- Approval evidence: ユーザー「承認。続けて」。実装内容は変更しない。
+- Prior verification: `8b5ef6d`でregression31件とlocal CI9チェック成功。
+  承認記録commit後は同じ検証を再実行し、過去結果を新HEADの証拠として代用しない。
+- Process check: 承認の範囲、branch、trace、対象外NotebookLMの保持を確認。
+  Issueはmerge前のreviewでありdoneへ移していない。
+- Changed files: Issue、実装review、本traceのみ。
+- Next action: PRの最新headとCI結果を確認。公開されたCIログを検証証拠とする。
 
 ### Attempt 2 — approved plan execution
 

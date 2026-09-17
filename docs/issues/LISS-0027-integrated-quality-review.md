@@ -41,8 +41,10 @@ P0/P1/P2/P3を統合して検討し、配布・更新・設定・CI・承認・�
 - 承認済み: P0–P3一括検討、全体レビュー、専用branchでの作業。
 - 追加承認: 上記計画に基づく修正着手。spec/ADR 0019に具体化し、回帰Red確認、
   実装、検証の順で実行。計画外の機能・外部送信・mergeは含まない。
-- 次の設計判断: blocking定義の所有者、例外、SHA証拠、規模判定条件、review不能時の扱い。
-- Post-review required: yes（現行契約を変更する後続作業）。
+- 最終承認: 2026-09-17「承認。続けて」により、`8b5ef6d`の実装・契約変更と
+  実装reviewに記載した制限事項の人間reviewを受領。PR公開とCI確認へ進む。
+- Post-review required: fulfilled for the reviewed implementation。追加の実装変更は別途評価。
+- Delivery: PR/CI確認中。merge済みとは扱わず、statusはreviewで保持する。
 
 ## Context
 
@@ -75,7 +77,9 @@ P0/P1/P2/P3を統合して検討し、配布・更新・設定・CI・承認・�
 - 2026-09-17: review成果物を作成。17件は未修正、Issueをdoneにしない。
 - 2026-09-17: F01–F17へ対応する実装・規則改訂・回帰テストを追加。
   [実装レビュー](../collaboration/reviews/2026-09-17-quality-implementation.md)に
-  disposition・検証・制限を記録。現在は最終人間review待ち。
+  disposition・検証・制限を記録。
+- 2026-09-17: 最終人間review承認を受領。承認記録更新後の新HEADで全チェックを再実行し、
+  PR上のCI証拠を確認する。mergeは未実施。
 
 ## Verification
 
@@ -86,6 +90,6 @@ Redを確認後、14件をGreenにした。routing7件もRed→Greenを確認。
 
 ## Process Review
 
-- Outcome: not yet（Issueは最終人間review待ち。doneへ移す際にprocess reviewを記録）
+- Outcome: not yet（人間review承認済み、PR delivery中。doneへ移す際にprocess reviewを記録）
 - Lesson written: yes（検証器の成功と不正入力の拒否能力の区別）
 - Template-feedback path: none（当テンプレートで直接受領したscope）

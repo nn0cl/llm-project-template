@@ -6,10 +6,11 @@
 - Architecture: [ADR 0019](../../architecture/adr/0019-verification-structure-and-review.md)
 - Initial evidence: [17 findings](2026-09-17-project-wide-quality-review.md)
 - Trace: [execution record](../traces/2026-09-17-integrated-quality-review.md)
-- Approved scope: 統合計画による修正開始。実装済み、最終人間reviewは未完了。
+- Approved scope: 2026-09-17「承認。続けて」により、`8b5ef6d`の実装・契約変更と
+  下記の制限事項の最終人間reviewを承認。PR公開とCI確認へ進む。
 - Review isolation: same_context（live設定なし）。独立reviewではない。
 - Current phase: phase-3-refactor / final verification and review。
-- Next approval type: final human review of contract/implementation; no merge authorization.
+- Next state: PR delivery / hosted CI verification。mergeは未実施。
 
 ## Disposition and verification mapping
 
@@ -56,7 +57,8 @@
 - 全agent入口の追加契約は同じ内容。process reviewと独立product reviewの役割を整理。
 - Lessons: 正常系Greenと検証網羅性の違いを恒久テストへ反映。
 
-## Remaining human review
+## Human review disposition
 
 契約変更とADR、large-changeの既定値/unknown挙動、source dirty拒否による運用変更、
-長大な既存CLIを維持する理由を確認する。Issueはreviewで保持し、done/mergeは主張しない。
+長大な既存CLIを維持する理由を含むreviewへ、ユーザーの承認を受領。
+独立agent reviewの実施を意味しない。IssueはPR delivery中のreviewで保持する。
