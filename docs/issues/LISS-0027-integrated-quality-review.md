@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0027
 - GitHub issue: none
-- Status: review
+- Status: done
 - Phase: phase-3-refactor
 - Type: process / review
 - Priority: P0（フィードバックの実施順）
@@ -44,7 +44,8 @@ P0/P1/P2/P3を統合して検討し、配布・更新・設定・CI・承認・�
 - 最終承認: 2026-09-17「承認。続けて」により、`8b5ef6d`の実装・契約変更と
   実装reviewに記載した制限事項の人間reviewを受領。PR公開とCI確認へ進む。
 - Post-review required: fulfilled for the reviewed implementation。追加の実装変更は別途評価。
-- Delivery: PR/CI確認中。merge済みとは扱わず、statusはreviewで保持する。
+- Delivery: PR #39としてmerge済み（2026-09-17、squash `b920990`）。PR上と`main`上の
+  CIはsuccess。merge後にstatusをdoneへ更新した。
 
 ## Context
 
@@ -86,10 +87,13 @@ P0/P1/P2/P3を統合して検討し、配布・更新・設定・CI・承認・�
 初回調査では既存7チェック成功と7不具合を再現。修正では最初の回帰14件中11件の
 Redを確認後、14件をGreenにした。routing7件もRed→Greenを確認。
 追加のGit計測・設定・拒否経路テストと全CI run blockを検証する。
-現在の証拠は実装reviewと最終HEAD実行ログを参照。
+現在の証拠は実装reviewと最終HEAD実行ログを参照。PR #39のCI（Repository sanity）と
+merge後の`main`のCIはsuccess。
 
 ## Process Review
 
-- Outcome: not yet（人間review承認済み、PR delivery中。doneへ移す際にprocess reviewを記録）
+- Outcome: no deviation
 - Lesson written: yes（検証器の成功と不正入力の拒否能力の区別）
 - Template-feedback path: none（当テンプレートで直接受領したscope）
+
+Process review: no operating-contract deviation or operational problem found.

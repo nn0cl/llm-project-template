@@ -8,7 +8,9 @@
 - Acceptance: docs/specs/quality-and-review.md / ADR 0019。
 - Current review: docs/collaboration/reviews/2026-09-17-quality-implementation.md。
 - Approval boundary: 2026-09-17「承認。続けて」で`8b5ef6d`の最終人間reviewを承認。
-  PR公開とCI確認へ継続。mergeは未実施。
+  PR公開とCI確認へ継続。
+- 2026-09-19: PR #39としてmerge済み（squash `b920990`）。CI success。
+  LISS-0027を`done`へ更新（process review: 逸脱なし）。
 
 ### Attempt 3 — approval and delivery
 
@@ -116,4 +118,6 @@
 - Blockers: 調査にはなし。後続phase/実装の承認はこのreviewから推測しない。
 - Next safe action: reviewのF01–F17と統合設計案から正式仕様を具体化する。
 - Branch: codex/feedback-verification-and-review-policy。
-- Commit/push: 未実施。未追跡NotebookLMフォルダはユーザー所有のまま保持。
+- Commit/push: PR #39でmerge済み。未追跡NotebookLMフォルダはユーザー所有のまま保持。
+- 更新（2026-09-19）: 上記Next safe action（正式仕様化）はAttempt 2で実施済みで、
+  PR #39でmerge済み。追加作業なし。LISS-0027はdone。
