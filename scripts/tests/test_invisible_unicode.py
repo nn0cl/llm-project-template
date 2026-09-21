@@ -39,21 +39,22 @@ class InvisibleUnicodeTests(unittest.TestCase):
         self.assertIn('1 text file', result.stdout)
 
     def test_zero_width_space_is_rejected_with_location(self):
-        self.assert_rejected('line one\nhidden​text\n',
+        self.assert_rejected('line one\nhidden' + chr(0x200B) + 'text\n',
                              'AGENTS.md:2:7: U+200B ZERO WIDTH SPACE')
 
     def test_bidirectional_override_is_rejected(self):
-        self.assert_rejected('a‮b\n', 'U+202E RIGHT-TO-LEFT OVERRIDE')
+        self.assert_rejected('a' + chr(0x202E) + 'b\n', 'U+202E RIGHT-TO-LEFT OVERRIDE')
 
     def test_tag_characters_are_rejected(self):
-        self.assert_rejected('ok' + ''.join(chr(0xE0000 + ord(c)) for c in 'run') + '\n',
+        tags = ''.join(chr(0xE0000 + ord(c)) for c in 'run')
+        self.assert_rejected('ok' + tags + '\n',
                              'U+E0072 TAG LATIN SMALL LETTER R')
 
     def test_variation_selector_is_rejected(self):
-        self.assert_rejected('x️\n', 'U+FE0F VARIATION SELECTOR-16')
+        self.assert_rejected('x' + chr(0xFE0F) + '\n', 'U+FE0F VARIATION SELECTOR-16')
 
     def test_byte_order_mark_is_rejected(self):
-        self.assert_rejected('﻿AGENTS\n', 'AGENTS.md:1:1: U+FEFF')
+        self.assert_rejected(chr(0xFEFF) + 'AGENTS\n', 'AGENTS.md:1:1: U+FEFF')
 
     def test_binary_file_is_skipped(self):
         self.track('image.bin', b'\x00\xe2\x80\x8b binary')
@@ -61,7 +62,7 @@ class InvisibleUnicodeTests(unittest.TestCase):
 
     def test_untracked_file_is_ignored(self):
         commit(self.root)
-        (self.root/'scratch.md').write_text('​', encoding='utf-8')
+        (self.root/'scratch.md').write_text(chr(0x200B), encoding='utf-8')
         self.assertEqual(self.check().returncode, 0)
 
 
