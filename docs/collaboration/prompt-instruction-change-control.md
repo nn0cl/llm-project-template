@@ -17,6 +17,7 @@ These files are the agent operating contract:
 - `.grok/rules/*.md`
 - `.cursor/rules/*.mdc`
 - `.agents/skills/*/SKILL.md`
+- `.claude/skills/*/SKILL.md` (byte-identical copy of `.agents/skills/`)
 - `docs/at-tdd/process.md`
 - `docs/collaboration/*.md` (except files under `docs/collaboration/traces/`)
 - `docs/templates/*.md`
@@ -45,7 +46,9 @@ A pull request that changes an agent operating contract file requires:
   `.cursor/rules/*.mdc` (Cursor complements only) and Cursor's native root
   `AGENTS.md` auto-apply (no `@AGENTS.md` inside `.mdc`).
   `.github/copilot-instructions.md` and `.grok/rules/*.md` remain
-  independently phrased full mirrors.
+  independently phrased full mirrors. `.claude/skills/` is the exception to
+  "not a literal match": it must equal `.agents/skills/` byte for byte, and
+  CI checks this.
 
 Do not merge an agent operating contract change based only on an AI agent's
 self-review.
@@ -67,7 +70,13 @@ files in this list.
 ## Enforcement
 
 CI checks that a pull request touching an agent operating contract file also
-adds a trace file under `docs/collaboration/traces/`.
+adds a trace file under `docs/collaboration/traces/`. CI also rejects any
+difference between `.claude/skills/` and `.agents/skills/`, and any invisible
+Unicode character (format characters such as zero-width, bidirectional
+controls and tag characters, plus variation selectors and Hangul fillers) in
+Git-tracked text files (`scripts/check-invisible-unicode.py`). Such
+characters can hide instructions from human review while agents still read
+them.
 
 Code review should reject:
 
