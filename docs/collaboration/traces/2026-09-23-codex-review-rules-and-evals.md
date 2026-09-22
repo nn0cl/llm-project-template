@@ -82,7 +82,12 @@
 - Distribution unit tests: passed 13 tests with the test support path set.
 - Distribution smoke: pre-commit attempt stopped because its source-clean
   guard requires committed files; rerun against the commit is pending.
-- Full blocking CI-equivalent checks and final-SHA rerun: pending commit.
+- Commit `6092f25bd860116fa521856e4d7fdd7b4e1160f1`, clean tree, macOS 27.0
+  arm64 / Python 3.14.6: regression passed 40 tests (0 failures/errors/skips);
+  required documents and ADRs, shell syntax, batch and lifecycle checks,
+  skills mirror, Unicode scan (240 text files), clean-target distribution
+  smoke, and PR traceability passed.
+- Post-status-sync commit rerun and hosted PR CI: pending.
 - Live Codex Code Review behavior: unassessed; this feature was not invoked.
 
 ## Changed Files
@@ -95,5 +100,5 @@
 
 ## Next Safe Action
 
-- Finish CI-equivalent checks, commit, rerun all blocking checks against the
-  final SHA, then create a PR for Adjudicator review. Do not merge.
+- PR #42 is open. Await hosted CI and Adjudicator implementation review; do not
+  merge without the required explicit approval.

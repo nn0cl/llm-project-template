@@ -4,7 +4,7 @@
 
 - Local issue ID: LISS-0029
 - GitHub issue: none
-- Status: in_progress
+- Status: review
 - Phase: process-only
 - Type: process / agent-instructions
 - Priority: medium
@@ -130,8 +130,18 @@ the enforcement gates; Code Review is advisory.
   `PYTHONPATH=scripts/tests python3 -m unittest test_distribution`.
 - Initial direct unittest module invocation failed because it omitted the
   test support import path; corrected invocation passed. No product failure.
-- Full CI-equivalent blocking suite and final-SHA rerun: pending commit.
+- Commit `6092f25bd860116fa521856e4d7fdd7b4e1160f1`, clean tree, macOS 27.0
+  arm64 / Python 3.14.6: regression passed (40 tests, 0 failures/errors/skips),
+  required documents and ADRs passed, scripts parsed, batch/lifecycle checks
+  passed, skills mirror passed, Unicode check passed (240 text files), clean
+  target distribution smoke passed, and PR traceability passed.
+- Hosted PR CI and rerun after this status synchronization: pending.
 - Live Codex Code Review evaluation: unassessed; no review run was invoked.
+
+## Review Status
+
+- PR: https://github.com/nn0cl/llm-project-template/pull/42
+- Adjudicator implementation review before merge: pending.
 
 ## Process Review
 
