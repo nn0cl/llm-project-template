@@ -87,7 +87,12 @@
   required documents and ADRs, shell syntax, batch and lifecycle checks,
   skills mirror, Unicode scan (240 text files), clean-target distribution
   smoke, and PR traceability passed.
-- Post-status-sync commit rerun and hosted PR CI: pending.
+- Commit `75a5aea11d710377f6da3c583e9d6746ea1b4e8c`, clean tree, macOS 27.0
+  arm64 / Python 3.14.6: regression passed 40 tests (0 failures/errors/skips);
+  CI-equivalent blocking checks and distribution smoke passed. Hosted
+  `Repository sanity` passed on the same PR head.
+- Final verification-record synchronization commit rerun: pending; report its
+  evidence from local output and hosted PR checks.
 - Live Codex Code Review behavior: unassessed; this feature was not invoked.
 
 ## Changed Files

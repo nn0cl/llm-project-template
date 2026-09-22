@@ -135,7 +135,12 @@ the enforcement gates; Code Review is advisory.
   required documents and ADRs passed, scripts parsed, batch/lifecycle checks
   passed, skills mirror passed, Unicode check passed (240 text files), clean
   target distribution smoke passed, and PR traceability passed.
-- Hosted PR CI and rerun after this status synchronization: pending.
+- Commit `75a5aea11d710377f6da3c583e9d6746ea1b4e8c`, clean tree, macOS 27.0
+  arm64 / Python 3.14.6: regression passed (40 tests, 0 failures/errors/skips),
+  CI-equivalent blocking checks and clean-target distribution smoke passed.
+  Hosted `Repository sanity` check passed on this PR head.
+- A verification-record synchronization commit follows; its final-SHA rerun
+  will be recorded in PR checks and the completion report.
 - Live Codex Code Review evaluation: unassessed; no review run was invoked.
 
 ## Review Status
