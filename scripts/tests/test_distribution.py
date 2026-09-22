@@ -11,6 +11,19 @@ class DistributionTests(Repositories):
         self.copy('--project-name', value)
         self.assertIn(value, (self.target/'docs/collaboration/project-conventions.md').read_text())
 
+    def test_copy_distributes_claude_skill_mirror(self):
+        self.copy()
+        shared = sorted(p.relative_to(self.target/'.agents/skills')
+                        for p in (self.target/'.agents/skills').rglob('SKILL.md'))
+        mirror = sorted(p.relative_to(self.target/'.claude/skills')
+                        for p in (self.target/'.claude/skills').rglob('SKILL.md'))
+        self.assertTrue(shared)
+        self.assertEqual(mirror, shared)
+        for rel in shared:
+            self.assertEqual((self.target/'.claude/skills'/rel).read_bytes(),
+                             (self.target/'.agents/skills'/rel).read_bytes())
+        self.assertFalse((self.target/'.claude/settings.local.json').exists())
+
     def test_copy_preserves_existing_marker(self):
         self.copy()
         marker = self.target/'.collaboration-template-version'

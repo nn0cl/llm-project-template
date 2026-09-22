@@ -242,3 +242,7 @@ CI should reject:
 - a pull request that changes a file listed in
   `docs/collaboration/prompt-instruction-change-control.md` without adding a
   trace file under `docs/collaboration/traces/`.
+- (2026-09-21) any invisible Unicode character in a Git-tracked text file.
+  Agents read these files as instructions or context, and invisible
+  characters can carry text a human reviewer cannot see. The check covers
+  all tracked text, not only contract files, and has no allowlist.

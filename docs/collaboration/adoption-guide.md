@@ -173,10 +173,11 @@ The first-session prompt instructs the agent to:
 
 On-demand procedures live in `.agents/skills/<name>/SKILL.md` (Agent Skills
 standard). Codex, Cursor, Copilot, Gemini CLI, and Grok Build auto-discover
-that directory. Claude Code's documented project path is `.claude/skills/`;
-this template does not duplicate the tree there. Contract files name the
-skill path so every agent still loads it. Copy and update treat
-`.agents/skills/` as template-authoritative.
+that directory. Claude Code discovers only `.claude/skills/`, so the template
+ships `.claude/skills/` as a byte-identical copy of `.agents/skills/`; CI
+rejects any difference. Edit `.agents/skills/` first, then copy the tree.
+Contract files still name the `.agents/skills/` path so every agent loads it.
+Copy and update treat both trees as template-authoritative.
 
 Grok Build discovers `.grok/rules/*.md` as a distinct, stronger-binding rules
 surface (visible via `grok inspect`) separate from generic context loading;
@@ -230,8 +231,9 @@ contract files:
   keep stack-specific rules for these tools inside the existing full-mirror
   files, scoped by a heading that states which area they apply to.
 - **Cross-agent procedures**: a new `.agents/skills/<name>/SKILL.md` using
-  only Agent Skills `name` and `description` frontmatter. Do not add a second
-  copy under `.claude/skills/` or `.cursor/skills/`.
+  only Agent Skills `name` and `description` frontmatter, plus the identical
+  copy under `.claude/skills/<name>/SKILL.md`. Do not add copies under
+  `.cursor/skills/` or other vendor directories.
 
 Add each new scoped-rule file to
 `docs/collaboration/prompt-instruction-change-control.md`'s contract file

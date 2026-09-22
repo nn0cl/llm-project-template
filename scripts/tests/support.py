@@ -49,7 +49,7 @@ class Repositories(unittest.TestCase):
         cls.snapshot.mkdir()
         # Include current maintenance edits, but never private/unrelated files.
         for item in ['AGENTS.md', 'CLAUDE.md', '.gitignore', '.github', '.agents',
-                     '.grok', '.cursor', 'docs', 'scripts']:
+                     '.claude/skills', '.grok', '.cursor', 'docs', 'scripts']:
             source, dest = ROOT/item, cls.snapshot/item
             if source.is_dir():
                 shutil.copytree(source, dest, ignore=shutil.ignore_patterns('__pycache__', '.DS_Store'))

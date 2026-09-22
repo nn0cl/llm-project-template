@@ -162,6 +162,22 @@ jobs:
           set -euo pipefail
           python3 scripts/check-document-lifecycle.py
 
+      - name: Check Claude Code skill mirror
+        shell: bash
+        run: |
+          set -euo pipefail
+          # .claude/skills is a byte-identical copy of .agents/skills.
+          if ! diff -r .agents/skills .claude/skills; then
+            echo ".claude/skills must match .agents/skills exactly." >&2
+            exit 1
+          fi
+
+      - name: Check invisible Unicode characters
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/check-invisible-unicode.py
+
       - name: Check unresolved conflict markers
         shell: bash
         run: |
@@ -199,6 +215,8 @@ jobs:
           test -f "$tmp/target/.agents/skills/adjudicator-review/SKILL.md"
           test -f "$tmp/target/.agents/skills/ai-work-trace/SKILL.md"
           test -f "$tmp/target/.agents/skills/execution-batch/SKILL.md"
+          diff -r "$tmp/target/.agents/skills" "$tmp/target/.claude/skills"
+          test ! -e "$tmp/target/.claude/settings.local.json"
           test -f "$tmp/target/scripts/check-document-lifecycle.py"
           test ! -f "$tmp/target/docs/collaboration/runtime-routing.toml"
           ! ls "$tmp/target/docs/issues/"LISS-*.md >/dev/null 2>&1
@@ -221,6 +239,7 @@ jobs:
             "$tmp/target/.grok/rules" \
             "$tmp/target/.cursor/rules" \
             "$tmp/target/.agents/skills" \
+            "$tmp/target/.claude/skills" \
             "$tmp/target/scripts" \
             | grep -v -E 'LISS-0000|LISS-\*|LISS-0001-short-title|LISS-0002-short-title|AIP-0000'; then
             echo "Context files cite ISSUE or work-plan IDs." >&2
@@ -254,7 +273,8 @@ jobs:
             "$tmp/target/.github/copilot-instructions.md" \
             "$tmp/target/.grok/rules" \
             "$tmp/target/.cursor/rules" \
-            "$tmp/target/.agents/skills"; then
+            "$tmp/target/.agents/skills" \
+            "$tmp/target/.claude/skills"; then
             echo "Template context files still contain project placeholders." >&2
             exit 1
           fi
@@ -281,7 +301,7 @@ jobs:
               docs/collaboration/traces/*.md)
                 trace_added=true
                 ;;
-              AGENTS.md|CLAUDE.md|.github/copilot-instructions.md|.grok/rules/*.md|.cursor/rules/*.mdc|.agents/skills/*/SKILL.md|docs/at-tdd/process.md|docs/collaboration/*.md|docs/templates/*.md|docs/templates/runtime-routing.toml)
+              AGENTS.md|CLAUDE.md|.github/copilot-instructions.md|.grok/rules/*.md|.cursor/rules/*.mdc|.agents/skills/*/SKILL.md|.claude/skills/*/SKILL.md|docs/at-tdd/process.md|docs/collaboration/*.md|docs/templates/*.md|docs/templates/runtime-routing.toml)
                 contract_changed=true
                 ;;
             esac
