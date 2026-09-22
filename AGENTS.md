@@ -13,6 +13,19 @@ including enabled large-change conditions. Unknown measurements and unavailable
 required review are gaps, not permission to downgrade. Human approval remains
 separate from routing and CI success.
 
+## Codex Code Review rules
+
+Codex Code Review is advisory; CI and required human approval remain the gates.
+When reviewing implementation or process changes, flag behavior that exceeds
+the reviewed specification or approved phase; ask for a spec-based disposition
+or removal, and do not infer approval from the diff. See
+`docs/architecture/implementation-readiness.md` and
+`docs/collaboration/ai-human-scheme.md`.
+When reviewing verification claims, flag a claim of full Green unsupported by
+all blocking suites on the final commit SHA; request the missing evidence or
+correct the claim, without treating a focused pass as full Green. See
+`docs/collaboration/verification-policy.md`.
+
 This repository is prepared for multiple AI coding agents. All agents must use
 the same workflow and architectural boundaries.
 
